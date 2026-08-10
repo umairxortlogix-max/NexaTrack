@@ -791,7 +791,7 @@
             <div class="row g-3">
               <div class="col-md-6">
                 <label class="form-label">Provider</label>
-                <select class="form-select" id="advanceEmployee">
+                <select class="form-select" id="advanceStaff">
                   <option>Dr. Heider</option>
                   <option>Dr. Vanessa</option>
                   <option>Dr. Nancy</option>
@@ -893,7 +893,7 @@
     }
 
     document.getElementById('saveAdvanceBtn')?.addEventListener('click', () => {
-      const employee = document.getElementById('advanceEmployee').value;
+      const staff = document.getElementById('advanceStaff').value;
       const location = document.getElementById('advanceLocation').value;
       const date = document.getElementById('advanceDate').value;
       const amount = parseFloat(document.getElementById('advanceAmount').value) || 0;
@@ -909,7 +909,7 @@
       row.innerHTML = `
         <td>
           <div class="d-flex align-items-center gap-2"><div class="avatar-sm"></div>
-            <div><span class="emp-name">${employee}</span><small class="emp-id">PROV-NEW</small></div>
+            <div><span class="emp-name">${staff}</span><small class="emp-id">PROV-NEW</small></div>
           </div>
         </td>
         <td><span class="badge-dept">${location}</span></td>

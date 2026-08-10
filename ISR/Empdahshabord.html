@@ -595,7 +595,6 @@
         document.getElementById('cdUnits').textContent = c.units;
         document.getElementById('cdMethod').textContent = c.method;
         document.getElementById('cdQuoted').textContent = '$' + c.quoted.toLocaleString();
-        document.getElementById('cdCollected').textContent = '$' + c.collected.toLocaleString();
         document.getElementById('cdRate').textContent = c.rate + '%';
         document.getElementById('cdCommission').textContent = '$' + commission.toLocaleString(undefined, { minimumFractionDigits: 2 });
         document.getElementById('cdTreatment').textContent = '$' + c.treatment.toLocaleString();
@@ -629,7 +628,6 @@
           <div class="detail-label mb-2">Commission</div>
           <div class="detail-breakdown-box">
             <div class="detail-breakdown-row"><span>Quoted Amount</span><span class="fw-semibold" id="cdQuoted">—</span></div>
-            <div class="detail-breakdown-row"><span>Collected Amount</span><span class="fw-semibold" id="cdCollected">—</span></div>
             <div class="detail-breakdown-row"><span>Commission Rate</span><span class="fw-semibold" id="cdRate">—</span></div>
             <div class="detail-breakdown-row total"><span>Commission Earned</span><span id="cdCommission">—</span></div>
           </div>

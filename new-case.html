@@ -1156,18 +1156,18 @@
             <div class="row g-3">
               <div class="col-md-6"><label class="form-label">Treatment Value</label>
                 <div class="input-group"><span class="input-group-text">$</span><input type="number"
-                    class="form-control" id="treatmentValue" value="12500" oninput="updateSummary()"></div>
+                    class="form-control" id="treatmentValue" value="" oninput="updateSummary()"></div>
               </div>
-              <div class="col-md-6"><label class="form-label">Base Case Pay <i class="fa-solid fa-circle-info text-muted" title="Auto-calculated from material and units in the Treatment step. Override here if needed."></i></label>
+              <!-- <div class="col-md-6"><label class="form-label">Base Case Pay <i class="fa-solid fa-circle-info text-muted" title="Auto-calculated from material and units in the Treatment step. Override here if needed."></i></label>
                 <div class="input-group"><span class="input-group-text">$</span><input type="number"
                     class="form-control" id="baseCasePay" value="0" oninput="onBaseCasePayOverride()"></div>
                 <div class="rate-note mb-0" id="baseCasePaySource">Auto-calculated from Treatment step</div>
-              </div>
+              </div> -->
 
               <div class="col-12">
                 <label class="form-label d-block">Quoted Amount</label>
                 <div class="input-group mb-2"><span class="input-group-text">$</span>
-                  <input type="number" class="form-control" id="quotedAmount" value="12500" oninput="updateSummary()">
+                  <input type="number" class="form-control" id="quotedAmount" value="" oninput="updateSummary()">
                 </div>
               </div>
 
@@ -1223,7 +1223,7 @@
               <div class="impact-row"><span>Dr. Heider — Deep Cleaning</span><span class="impact-amt">+$280.00</span>
               </div>
               <div class="section-label mt-3">ISR Commission</div>
-              <div class="impact-row"><span>Jeremiah Smith</span><span class="impact-amt">+$960.00</span></div>
+              <div class="impact-row"><span>Jeremiah Smith</span><span class="impact-amt" id="reviewIsrComm"></span></div>
               <!-- <div class="section-label mt-3">Flat ISR</div>
               <div class="impact-row"><span>Joshua Lee</span><span class="impact-amt">+$200.00</span></div> -->
             </div>
@@ -1262,8 +1262,8 @@
           <div class="payroll-row"><span>Prep Pay</span><span id="sPrepPay">$0.00</span></div>
           <div class="payroll-row"><span>Cement Pay</span><span id="sCementPay">$0.00</span></div>
           <div class="payroll-row"><span>General Dentistry Pay</span><span id="sGenPay">$0.00</span></div>
-          <div class="payroll-row"><span>ISR Commission</span><span id="sIsrComm">$960.00</span></div>
-          <!-- <div class="payroll-row"><span>Flat ISR Pay</span><span id="sFlatIsr">$200.00</span></div> -->
+          <div class="payroll-row"><span>ISR Commission</span><span id="sIsrComm"></span></div>
+          <!-- <div class="payroll-row"><span>Flat ISR Pay</span><span id="sFlatIsr"></span></div> -->
 
           <div class="section-label mt-3">Financial Summary</div>
           <div class="payroll-row"><span>Treatment Value</span><span id="sTreatVal">$12,500.00</span></div>
@@ -1312,10 +1312,10 @@
      * within flatRange (inclusive).
      */
     const MATERIAL_RATES = {
-      composite: { label: 'Composite', perUnit: 150, flat: 2500, flatRange: [16, 20] },
-      ceramic: { label: 'Ceramic', perUnit: 200, flat: 3400, flatRange: [16, 20] },
-      porcelain: { label: 'Porcelain / Zirconia', perUnit: 250, flat: 4400, flatRange: [16, 20] },
-      crown: { label: 'Full Crown Case', perUnit: 300, flat: 5400, flatRange: [16, 20] }
+      composite: { label: 'Composite', perUnit: 35, flat: 700, flatRange: [16, 20] },
+      ceramic: { label: 'Ceramic', perUnit: 40, flat: 800, flatRange: [16, 20] },
+      porcelain: { label: 'Porcelain / Zirconia', perUnit: 50, flat: 1000, flatRange: [16, 20] },
+      crown: { label: 'Full Crown Case', perUnit: 60, flat: 1200, flatRange: [16, 20] }
     };
 
     function goToStep(n) {
@@ -1488,8 +1488,12 @@
     }
 
     /** Get the current Base Case Pay value (auto-calculated, unless manually overridden) */
-    function getBaseCasePay() {
-      return parseFloat(document.getElementById('baseCasePay').value) || 0;
+    function getBaseCasePay(autoValue = 0) {
+      const baseCasePayInput = document.getElementById('baseCasePay');
+      if (baseCasePayInput) {
+        return parseFloat(baseCasePayInput.value) || autoValue;
+      }
+      return autoValue;
     }
 
     /** Get the selected doctor role */
@@ -1517,11 +1521,14 @@
      */
     function updateCompensation() {
       const autoBasePay = computeBaseCasePayFromTreatment();
+      const basePay = getBaseCasePay(autoBasePay);
       if (!baseCasePayOverridden) {
-        document.getElementById('baseCasePay').value = autoBasePay.toFixed(2);
-        document.getElementById('baseCasePaySource').textContent = 'Auto-calculated from Treatment step';
+        const baseCasePayInput = document.getElementById('baseCasePay');
+        if (baseCasePayInput) {
+          baseCasePayInput.value = autoBasePay.toFixed(2);
+          document.getElementById('baseCasePaySource').textContent = 'Auto-calculated from Treatment step';
+        }
       }
-      const basePay = getBaseCasePay();
       const role = getSelectedRole();
 
       // ── Provider (main doctor) ──
@@ -1612,10 +1619,18 @@
             ? 'Collected exceeds the quoted amount (over-collection).'
             : 'Fully collected — no outstanding balance.';
       }
+      const commissionRate = 0.08; // default ISR commission percentage
+      const isrCommission = quotedAmt > 0 ? quotedAmt * commissionRate : null;
+
       document.getElementById('sLabCost').textContent = '$' + lab.toLocaleString(undefined, { minimumFractionDigits: 2 });
       document.getElementById('sMerchFee').textContent = '$' + totalFees.toLocaleString(undefined, { minimumFractionDigits: 2 });
       document.getElementById('sGross').textContent = '$' + gross.toLocaleString(undefined, { minimumFractionDigits: 2 });
       document.getElementById('sNet').textContent = '$' + net.toLocaleString(undefined, { minimumFractionDigits: 2 });
+      document.getElementById('sIsrComm').textContent = isrCommission !== null ? '$' + isrCommission.toLocaleString(undefined, { minimumFractionDigits: 2 }) : '';
+      const reviewIsrCommEl = document.getElementById('reviewIsrComm');
+      if (reviewIsrCommEl) {
+        reviewIsrCommEl.textContent = isrCommission !== null ? '+$' + isrCommission.toLocaleString(undefined, { minimumFractionDigits: 2 }) : '';
+      }
 
       // ── Production Summary ──
       // Cosmetic Production = Treatment Value (the main cosmetic case value)
@@ -1644,11 +1659,10 @@
 
       // Seed one payment type row and one fee row by default
       addPaymentType();
-      document.querySelector('#paymentTypeList .payment-amount-input').value = 9600;
       addFeeEntry();
 
-      // Initial calculation
-      updateCompensation();
+      // Initial calculation is deferred until Treatment selections appear
+      updateSummary();
     });
 
     goToStep(1);

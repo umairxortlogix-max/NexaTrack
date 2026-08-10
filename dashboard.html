@@ -292,8 +292,6 @@
           <div class="col-9">
             <div class="kpi-label">Total Production</div>
             <div class="kpi-value">$412,500</div>
-            <div class="kpi-delta text-muted"><span class="staff-count-link"
-                style="cursor:pointer;text-decoration:underline;color:#1e40af;">20 Staff</span></div>
             <div class="kpi-delta text-success"><i class="fa-solid fa-arrow-up"></i> 9% vs Feb</div>
           </div>
         </div>
@@ -885,6 +883,48 @@
     </div>
   </div>
 
+  <!-- AR Edit / Record Payment Modal -->
+  <div class="modal fade" id="arEditModal" tabindex="-1" aria-labelledby="arEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="arEditModalLabel"><i class="fa-solid fa-pen me-2 text-primary"></i>Record Payment</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="ar-modal-summary mb-3">
+            <div class="ar-modal-stat">
+              <span class="ar-modal-label">Patient</span>
+              <span class="ar-modal-value" id="arEditPatient">—</span>
+            </div>
+            <div class="ar-modal-stat">
+              <span class="ar-modal-label">Quoted</span>
+              <span class="ar-modal-value" id="arEditQuoted">—</span>
+            </div>
+            <div class="ar-modal-stat">
+              <span class="ar-modal-label">Outstanding</span>
+              <span class="ar-modal-value text-danger" id="arEditOutstanding">—</span>
+            </div>
+          </div>
+          <form id="arEditForm">
+            <div class="mb-3">
+              <label for="arEditCollected" class="form-label">Amount Collected</label>
+              <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control" id="arEditCollected" min="0" step="0.01" value="0">
+              </div>
+              <div class="form-text">Enter the payment received. The outstanding balance will update automatically. If it reaches $0, the balance is marked as paid.</div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-navy" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-success" onclick="saveArPayment()"><i class="fa-solid fa-check me-1"></i>Save Payment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="modal fade" id="caseEditModal" tabindex="-1" aria-labelledby="caseEditModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -1026,14 +1066,14 @@
     </div>
   </div>
 
-  <!-- Employee Production Detail Modal -->
+  <!-- Staff Production Detail Modal -->
   <div class="modal fade" id="employeeProductionModal" tabindex="-1" aria-labelledby="employeeProductionModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="employeeProductionModalLabel"><i
-              class="fa-solid fa-chart-column me-2 text-success"></i>Employee Production</h5>
+              class="fa-solid fa-chart-column me-2 text-success"></i>Staff Production</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -1090,26 +1130,26 @@
     </div>
   </div>
 
-  <!-- Staff Breakdown Modal -->
-  <!-- <div class="modal fade" id="staffBreakdownModal" tabindex="-1" aria-labelledby="staffBreakdownModalLabel" aria-hidden="true">
+  <!-- Team Payroll Staff Modal -->
+  <div class="modal fade" id="teamStaffModal" tabindex="-1" aria-labelledby="teamStaffModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staffBreakdownModalLabel"><i class="fa-solid fa-users me-2 text-primary"></i>Pending Payroll Staff</h5>
+          <h5 class="modal-title" id="teamStaffModalLabel"><i class="fa-solid fa-users me-2 text-primary"></i>Team Payroll Staff</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-0">
           <div class="table-responsive">
-            <table class="nexa-table mb-0" id="staffBreakdownTable">
+            <table class="nexa-table mb-0" id="teamStaffTable">
               <thead>
                 <tr>
                   <th>Team Member</th>
                   <th>Department</th>
                   <th>Status</th>
-                  <th>Amount</th>
+                  <th class="text-end">Pay</th>
                 </tr>
               </thead>
-              <tbody id="staffBreakdownBody"></tbody>
+              <tbody id="teamStaffBody"></tbody>
             </table>
           </div>
         </div>
@@ -1118,7 +1158,7 @@
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -1265,15 +1305,14 @@
 
     const kpiDetailModalTableData = {
       'total production': {
-        title: 'Production by Team',
-        headers: ['Team Name', 'Amount'],
+        title: 'Production by Product',
+        headers: ['Product', 'Amount'],
         rows: [
-          { label: 'Providers', value: '$196,250' },
-          { label: 'ISR (Commission)', value: '$124,500' },
-          { label: 'ISR (Flat)', value: '$60,000' },
-          { label: 'SDR', value: '$24,000' },
-          { label: 'CE', value: '$20,000' },
-          { label: 'Other Departments', value: '$48,500' }
+          { label: 'Composite Veneers', value: '$98,000' },
+          { label: 'Ceramic Veneers', value: '$112,500' },
+          { label: 'Porcelain / Zirconia Veneers', value: '$92,250' },
+          { label: 'Full Crown Cases', value: '$79,500' },
+          { label: 'General Dentistry', value: '$30,250' }
         ]
       },
       'total payroll': {
@@ -1371,8 +1410,8 @@
         const paid = pendingPayrollStaff.filter(s => s.paid);
         document.getElementById('kpiDetailModalDescription').textContent =
           paid.length > 0
-            ? 'Team-wise payroll breakdown below. Staff who have been paid are marked with a checkmark.'
-            : 'Team-wise payroll breakdown for the current period.';
+            ? 'Click a team to see its staff members and their pay.'
+            : 'Click a team to see its staff members and their pay.';
         tableTitle.textContent = detailData ? detailData.title : 'Payroll by Team';
         tableHeader.innerHTML = '<th>Team Name</th><th>Amount</th>';
 
@@ -1384,14 +1423,14 @@
         }
         detailBody.innerHTML = allRows.map((row) => `
           <tr>
-            <td>${row.label}</td>
+            <td><a href="javascript:void(0)" class="team-payroll-link" style="color:#1e40af;font-weight:600;text-decoration:underline;cursor:pointer;" onclick="openTeamStaffModal('${row.label.replace(/'/g, "\\'")}')">${row.label}</a></td>
             <td class="text-end">${row.value}</td>
           </tr>
         `).join('');
         detailContainer.classList.remove('d-none');
       } else if (detailData) {
-        document.getElementById('kpiDetailModalDescription').textContent = detailData.title === 'Production by Team'
-          ? 'Production amounts broken down by team for the current period.'
+        document.getElementById('kpiDetailModalDescription').textContent = detailData.title === 'Production by Product'
+          ? 'Production amounts broken down by product type for the current period.'
           : detailData.title === 'Advances by Team Member'
             ? 'Advance amounts broken down by team member for this period.'
             : 'Payroll and completion data broken down by team for the current period.';
@@ -1418,7 +1457,7 @@
       card.addEventListener('click', () => openKpiCardModal(card));
     });
 
-    // ---- Employee production data for Compensation Summary clicks ----
+    // ---- Staff production data for Compensation Summary clicks ----
     const employeeProductionData = [
       {
         id: 'DH', name: 'Dr. Heider', role: 'Provider', dept: 'Providers',
@@ -1506,7 +1545,7 @@
       }
     ];
 
-    // ---- Employee Production Modal Logic ----
+    // ---- Staff Production Modal Logic ----
     const empProdModalEl = document.getElementById('employeeProductionModal');
     const empProdModal = empProdModalEl ? new bootstrap.Modal(empProdModalEl) : null;
 
@@ -1524,7 +1563,7 @@
       const tableHeader = document.getElementById('empTableHeader');
 
       if (emp.isHourly) {
-        // ---- Hourly employee rendering ----
+        // ---- Hourly staff rendering ----
         document.getElementById('empStatLabel1').textContent = 'Total Earnings';
         document.getElementById('empStatValue1').textContent = emp.totalEarned;
         document.getElementById('empStatLabel2').textContent = 'Hours Worked';
@@ -1545,9 +1584,9 @@
           </tr>
         `).join('');
 
-        document.getElementById('employeeProductionModalLabel').innerHTML = '<i class="fa-regular fa-clock me-2 text-success"></i>Employee Time &amp; Earnings &mdash; ' + emp.name;
+        document.getElementById('employeeProductionModalLabel').innerHTML = '<i class="fa-regular fa-clock me-2 text-success"></i>Staff Time &amp; Earnings &mdash; ' + emp.name;
       } else {
-        // ---- Production-based employee rendering ----
+        // ---- Production-based staff rendering ----
         document.getElementById('empStatLabel1').textContent = 'Total Production';
         document.getElementById('empStatValue1').textContent = emp.totalProduction;
         document.getElementById('empStatLabel2').textContent = 'Cases Completed';
@@ -1568,7 +1607,7 @@
           </tr>
         `).join('');
 
-        document.getElementById('employeeProductionModalLabel').innerHTML = '<i class="fa-solid fa-chart-column me-2 text-success"></i>Employee Production &mdash; ' + emp.name;
+        document.getElementById('employeeProductionModalLabel').innerHTML = '<i class="fa-solid fa-chart-column me-2 text-success"></i>Staff Production &mdash; ' + emp.name;
       }
 
       empProdModal.show();
@@ -1596,14 +1635,44 @@
       { id: 8, name: 'Joshua', dept: 'ISR', status: 'Pending Review', amount: '$1,000.00', paid: false }
     ];
 
-    const staffBreakdownModalEl = document.getElementById('staffBreakdownModal');
-    if (staffBreakdownModalEl) {
-      const staffBreakdownModal = new bootstrap.Modal(staffBreakdownModalEl);
-      const staffBreakdownBody = document.getElementById('staffBreakdownBody');
+    // Team → staff payroll breakdown for the Total Payroll popup
+    const teamPayrollStaff = {
+      'Providers': [
+        { name: 'Dr. Heider', pay: '$32,500' },
+        { name: 'Dr. Vanessa', pay: '$28,400' },
+        { name: 'Dr. Nancy', pay: '$17,750' }
+      ],
+      'ISR (Commission)': [
+        { name: 'Jeremiah', pay: '$7,200' },
+        { name: 'Joshua', pay: '$5,250' }
+      ],
+      'ISR (Flat)': [
+        { name: 'M. Zafar', pay: '$6,000' }
+      ],
+      'SDR': [
+        { name: 'Bianca', pay: '$2,400' }
+      ],
+      'CE': [
+        { name: 'Nancy', pay: '$2,000' }
+      ],
+      'Marketing': [
+        { name: 'Carlos', pay: '$3,000' }
+      ],
+      'Lab': [
+        { name: 'Lab Tech Team', pay: '$1,850' }
+      ]
+    };
 
-      document.querySelector('.staff-count-link')?.addEventListener('click', function (e) {
-        e.stopPropagation();
-        staffBreakdownBody.innerHTML = pendingPayrollStaff.map(s => `
+    const teamStaffModalEl = document.getElementById('teamStaffModal');
+    if (teamStaffModalEl) {
+      const teamStaffModal = new bootstrap.Modal(teamStaffModalEl);
+      const teamStaffBody = document.getElementById('teamStaffBody');
+
+      window.openTeamStaffModal = function (teamName) {
+        const members = teamPayrollStaff[teamName] || [];
+        document.getElementById('teamStaffModalLabel').innerHTML =
+          '<i class="fa-solid fa-users me-2 text-primary"></i>' + teamName + ' &mdash; Payroll';
+        teamStaffBody.innerHTML = members.map(s => `
           <tr>
             <td>
               <div class="d-flex align-items-center gap-2">
@@ -1613,13 +1682,15 @@
                 <span class="member-name" style="font-size:13px;">${s.name}</span>
               </div>
             </td>
-            <td><span class="badge-dept badge">${s.dept}</span></td>
-            <td><span class="badge-status ${s.status === 'Missed' ? 'danger' : s.status === 'Cases Pending' || s.status === 'Pending Review' || s.status === 'Pending Approval' ? 'warn' : 'active'}">${s.status}</span></td>
-            <td class="fw-semibold">${s.amount}</td>
+            <td><span class="badge-dept badge">${teamName}</span></td>
+            <td><span class="badge-status active">Paid</span></td>
+            <td class="fw-semibold text-end">${s.pay}</td>
           </tr>
         `).join('');
-        staffBreakdownModal.show();
-      });
+        // Close the payroll modal first so the team modal opens on top
+        if (typeof kpiDetailModal !== 'undefined') kpiDetailModal.hide();
+        teamStaffModal.show();
+      };
     }
 
     function confirmPayment(staffId) {
@@ -1659,7 +1730,8 @@
     }
 
     function arOutstanding(b) {
-      return Math.max(0, b.quoted - b.collected);
+      const collected = b.collected + (b.paid ? b.paidAmount : 0);
+      return Math.max(0, b.quoted - collected);
     }
 
     function arTotalOutstanding() {
@@ -1673,7 +1745,7 @@
     function renderArTable() {
       const tbody = document.getElementById('arTableBody');
       const openCount = arBalances.filter(b => !b.paid).length;
-      const collectedTotal = arBalances.filter(b => b.paid).reduce((s, b) => s + b.paidAmount, 0);
+      const collectedTotal = arBalances.reduce((s, b) => s + (b.collected + (b.paid ? b.paidAmount : 0)), 0);
       const outstandingTotal = arTotalOutstanding();
 
       document.getElementById('arOpenCount').textContent = openCount;
@@ -1698,7 +1770,7 @@
             <td class="text-center"><span class="badge-status ${b.paid ? 'active' : 'danger'}">${b.paid ? 'Paid' : 'Open'}</span></td>
             <td class="text-end">${b.paid
             ? '<span class="text-success small"><i class="fa-solid fa-circle-check me-1"></i>Collected</span>'
-            : `<button class="btn btn-sm btn-success" onclick="markArPaid(${b.id})"><i class="fa-solid fa-check me-1"></i>Mark as Paid</button>`}</td>
+            : `<button class="btn btn-sm btn-success me-1" onclick="markArPaid(${b.id})"><i class="fa-solid fa-check me-1"></i>Mark as Paid</button><button class="btn btn-sm btn-outline-navy" onclick="openArEdit(${b.id})"><i class="fa-solid fa-pen me-1"></i>Edit</button>`}</td>
           </tr>`;
       }).join('');
     }
@@ -1710,6 +1782,46 @@
       b.paidAmount = arOutstanding(b);
       renderArTable();
       updateArBanner();
+    }
+
+    let arEditTargetId = null;
+
+    function openArEdit(id) {
+      const b = arBalances.find(x => x.id === id);
+      if (!b) return;
+      arEditTargetId = id;
+      document.getElementById('arEditPatient').textContent = b.patient;
+      document.getElementById('arEditQuoted').textContent = fmtMoney(b.quoted);
+      document.getElementById('arEditOutstanding').textContent = fmtMoney(arOutstanding(b));
+      document.getElementById('arEditCollected').value = 0;
+      // Close the AR collection modal so the edit modal opens on top
+      arCollectionModal.hide();
+      const arEditModal = new bootstrap.Modal(document.getElementById('arEditModal'));
+      arEditModal.show();
+    }
+
+    function saveArPayment() {
+      const b = arBalances.find(x => x.id === arEditTargetId);
+      if (!b) return;
+      const amount = parseFloat(document.getElementById('arEditCollected').value) || 0;
+      if (amount <= 0) {
+        alert('Please enter a payment amount greater than $0.');
+        return;
+      }
+      // Record the payment against the outstanding balance
+      b.collected += amount;
+      // If fully paid, mark as paid
+      if (arOutstanding(b) <= 0) {
+        b.paid = true;
+        b.paidAmount = b.collected;
+      }
+      renderArTable();
+      updateArBanner();
+      // Close the edit modal and reopen the AR collection modal
+      const arEditModalEl = document.getElementById('arEditModal');
+      const arEditModal = bootstrap.Modal.getInstance(arEditModalEl) || new bootstrap.Modal(arEditModalEl);
+      arEditModal.hide();
+      arCollectionModal.show();
     }
 
     function updateArBanner() {

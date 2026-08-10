@@ -153,13 +153,13 @@ window.addEventListener('resize', () => {
         data: {
           labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
           datasets: [{
-            label: 'Production',
-            data: [18000, 21000, 24650, 22800, 25200],
+            label: 'Hours',
+            data: [160, 152, 158, 165, 160],
             backgroundColor: '#0d9488',
             borderRadius: 6
           }, {
-            label: 'Net Pay',
-            data: [5200, 6100, 7125, 6800, 7400],
+            label: 'Pay',
+            data: [2880, 2736, 2844, 2970, 2880],
             backgroundColor: '#4338ca',
             borderRadius: 6
           }]
@@ -168,13 +168,13 @@ window.addEventListener('resize', () => {
           responsive: true,
           plugins: {
             legend: { display: true },
-            tooltip: { callbacks: { label: (c) => c.dataset.label + ': $' + c.parsed.y.toLocaleString() } }
+            tooltip: { callbacks: { label: (c) => c.dataset.label + ': ' + c.parsed.y.toLocaleString() + (c.dataset.label === 'Hours' ? ' hrs' : '') } }
           },
           scales: {
             x: { grid: { display: false } },
             y: {
               beginAtZero: true,
-              ticks: { callback: (value) => '$' + (value / 1000) + 'K' }
+              ticks: { callback: (value) => value.toLocaleString() }
             }
           }
         }

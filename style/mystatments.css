@@ -62,15 +62,15 @@
             border-bottom-color: var(--green-500);
         }
 
-        /* Employee card */
-        .employee-card {
+        /* Staff card */
+        .staff-card {
             background: #fff;
             border: 1px solid var(--gray-200);
             border-radius: var(--radius);
             padding: 20px;
         }
 
-        .employee-avatar {
+        .staff-avatar {
             width: 76px;
             height: 76px;
             border-radius: 50%;
