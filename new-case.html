@@ -1158,12 +1158,6 @@
                 <div class="input-group"><span class="input-group-text">$</span><input type="number"
                     class="form-control" id="treatmentValue" value="" oninput="updateSummary()"></div>
               </div>
-              <!-- <div class="col-md-6"><label class="form-label">Base Case Pay <i class="fa-solid fa-circle-info text-muted" title="Auto-calculated from material and units in the Treatment step. Override here if needed."></i></label>
-                <div class="input-group"><span class="input-group-text">$</span><input type="number"
-                    class="form-control" id="baseCasePay" value="0" oninput="onBaseCasePayOverride()"></div>
-                <div class="rate-note mb-0" id="baseCasePaySource">Auto-calculated from Treatment step</div>
-              </div> -->
-
               <div class="col-12">
                 <label class="form-label d-block">Quoted Amount</label>
                 <div class="input-group mb-2"><span class="input-group-text">$</span>
@@ -1512,7 +1506,6 @@
       document.getElementById('baseCasePaySource').textContent = 'Manually overridden';
       updateCompensation();
     }
-
     /**
      * Calculate and update ALL doctor compensation fields.
      * Base Case Pay is auto-derived from the material/units picked in the
@@ -1530,17 +1523,14 @@
         }
       }
       const role = getSelectedRole();
-
       // ── Provider (main doctor) ──
       const providerPay = CompensationService.calculateDoctorPay(basePay, role);
       const rolePct = CompensationService.getRolePercentage(role);
-
       // ── Prep Doctor (always 60% of Base Case Pay) ──
       const prepPct = CompensationService.getRolePercentage('Prep Doctor');
       const prepPay = basePay * (prepPct / 100);
       document.getElementById('prepPayDisplay').textContent =
         '$' + prepPay.toLocaleString(undefined, { minimumFractionDigits: 2 });
-
       // ── Cement Doctor (always 40% of Base Case Pay) ──
       const cementPct = CompensationService.getRolePercentage('Cement Doctor');
       const cementPay = basePay * (cementPct / 100);
@@ -1567,7 +1557,6 @@
       // Also refresh financial summary
       updateSummary();
     }
-
     function updateSummary() {
       const tv = parseFloat(document.getElementById('treatmentValue').value) || 0;
       const lab = parseFloat(document.getElementById('labCost').value) || 0;
@@ -1577,13 +1566,11 @@
       document.querySelectorAll('.payment-amount-input').forEach(el => {
         collected += parseFloat(el.value) || 0;
       });
-
       // ── Fees = sum of all Fee entries (Merchant Fee + Financing Fee) ──
       let totalFees = 0;
       document.querySelectorAll('.fee-amount-input').forEach(el => {
         totalFees += parseFloat(el.value) || 0;
       });
-
       const gross = collected - lab;
       const net = gross - totalFees;
 

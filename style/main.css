@@ -25,8 +25,6 @@
     font-family: 'Inter', sans-serif;
 }
 
-
-
 body {
     background: var(--gray-50);
     color: var(--gray-900);
@@ -572,8 +570,6 @@ canvas {
         border-left: none;
         border-top: 1px solid var(--gray-200)
     }
-
-    /* KPI card columns: uses Bootstrap grid (col-md-4, col-sm-6) */
 
     /* Any fixed-pixel-width control (search boxes, selects, date pickers) never exceeds its row */
     .panel-header input[style*="width"],
