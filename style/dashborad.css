@@ -671,6 +671,12 @@ table.nexa-table {
     min-width: 700px; /* Force scroll instead of squish */
 }
 
+/* Override for compact calculation panels */
+table.nexa-table.system-calculations-table {
+    min-width: 0 !important;
+    width: 100% !important;
+}
+
 /* ============================================
    DONUT CHART CONTAINER FIX
    ============================================ */

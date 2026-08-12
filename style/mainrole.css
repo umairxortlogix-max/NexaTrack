@@ -562,6 +562,11 @@ btn-green:hover {
     font-size: 13px;
 }
 
+.system-calculations-table {
+    min-width: 0 !important;
+    width: 100% !important;
+}
+
 .nexa-table th {
     text-align: left;
     padding: 10px 12px;
