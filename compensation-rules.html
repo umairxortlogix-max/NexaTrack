@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NexaTrack — Comp</title>
+  <title>NexaTrack — Compensation Rules</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,22 +12,109 @@
   <input type="checkbox" id="sidebarToggle" class="sidebar-toggle-checkbox">
   <link rel="stylesheet" href="style/compensation-rules.css">
   <link rel="stylesheet" href="style/main.css">
+  <style>
+    .kpi-card[role="button"] {
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .kpi-card[role="button"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.10);
+    }
+
+    .detail-breakdown-box {
+      border: 1px solid #eef2f6;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .detail-breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      border-bottom: 1px solid #f3f5f9;
+      font-size: 14px;
+    }
+
+    .detail-breakdown-row:last-child {
+      border-bottom: none;
+    }
+
+    .detail-breakdown-row span {
+      color: #6b7280;
+    }
+
+    /* Component card styling matching NexaTrack palette */
+    .comp-item-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px 14px;
+      background: #ffffff;
+      margin-bottom: 10px;
+      transition: border-color 0.15s ease;
+    }
+
+    .comp-item-card:hover {
+      border-color: #cbd5e1;
+    }
+
+    .comp-type-badge {
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 5px;
+      background: #f1f5f9;
+      color: #334155;
+      display: inline-block;
+    }
+
+    .comp-rate-val {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #059669;
+    }
+
+    .calc-formula-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 3px 8px;
+      color: #334155;
+    }
+
+    .builder-comp-block {
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background: #ffffff;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 
 <body>
 
+  <!-- SIDEBAR -->
   <div class="sidebar">
     <div class="brand">
       <div class="brand-mark">N</div>
       <div class="brand-text">NEXA<small>TRACK</small></div>
     </div>
     <div class="nav-section">
-      <a class="nav-link-item " href="dashboard.html"><i class="fa-solid fa-grip"></i> Dashboard</a>
+      <a class="nav-link-item" href="dashboard.html"><i class="fa-solid fa-grip"></i> Dashboard</a>
       <a class="nav-link-item" href="team-members.html"><i class="fa-solid fa-users"></i> Team Members</a>
       <a class="nav-link-item active" href="compensation-rules.html"><i class="fa-solid fa-sliders"></i> Compensation
         Rules</a>
       <a class="nav-link-item" href="production.html"><i class="fa-solid fa-chart-column"></i> Production</a>
-      <a class="nav-link-item " href="cases.html"><i class="fa-solid fa-briefcase-medical"></i> Cases</a>
+      <a class="nav-link-item" href="cases.html"><i class="fa-solid fa-briefcase-medical"></i> Cases</a>
+      <a class="nav-link-item" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i> Accounts
+        Receivable</a>
       <a class="nav-link-item" href="advances.html"><i class="fa-solid fa-hand-holding-dollar"></i> Advances</a>
       <a class="nav-link-item" href="statements.html"><i class="fa-solid fa-file-invoice"></i> Statements</a>
       <a class="nav-link-item" href="payroll-runs.html"><i class="fa-solid fa-money-check-dollar"></i> Payroll Runs</a>
@@ -52,19 +139,20 @@
       </div>
       <div class="nav-section">
         <a class="nav-link-item" href="dashboard.html"><i class="fa-solid fa-grip"></i> Dashboard</a>
-        <a class="nav-link-item " href="team-members.html"><i class="fa-solid fa-users"></i> Team Members</a>
+        <a class="nav-link-item" href="team-members.html"><i class="fa-solid fa-users"></i> Team Members</a>
         <a class="nav-link-item active" href="compensation-rules.html"><i class="fa-solid fa-sliders"></i> Compensation
           Rules</a>
         <a class="nav-link-item" href="production.html"><i class="fa-solid fa-chart-column"></i> Production</a>
-        <a class="nav-link-item " href="cases.html"><i class="fa-solid fa-briefcase-medical"></i> Cases</a>
+        <a class="nav-link-item" href="cases.html"><i class="fa-solid fa-briefcase-medical"></i> Cases</a>
+        <a class="nav-link-item" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i>
+          Accounts Receivable</a>
         <a class="nav-link-item" href="advances.html"><i class="fa-solid fa-hand-holding-dollar"></i> Advances</a>
         <a class="nav-link-item" href="statements.html"><i class="fa-solid fa-file-invoice"></i> Statements</a>
-        <a class="nav-link-item" href="index.html"><i class="fa-solid fa-file-invoice"></i> Logout</a>
         <a class="nav-link-item" href="payroll-runs.html"><i class="fa-solid fa-money-check-dollar"></i> Payroll
           Runs</a>
         <a class="nav-link-item" href="reports.html"><i class="fa-solid fa-chart-line"></i> Reports</a>
         <a class="nav-link-item" href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
-
+        <a class="nav-link-item" href="index.html"><i class="fa-solid fa-file-invoice"></i> Logout</a>
       </div>
       <div class="sidebar-footer">
         <div class="user-chip">
@@ -76,6 +164,8 @@
       </div>
     </div>
   </div>
+
+  <!-- MAIN VIEW -->
   <div class="main">
     <div class="topbar">
       <div>
@@ -84,7 +174,6 @@
       </div>
       <button class="btn btn-outline-navy mobile-menu-btn" type="button" aria-label="Open navigation"
         onclick="document.getElementById('sidebarToggle').checked = !document.getElementById('sidebarToggle').checked">
-
         <i class="fa-solid fa-bars"></i>
       </button>
       <div class="d-flex gap-2 topbar-actions">
@@ -99,19 +188,14 @@
           <i class="fa-solid fa-chevron-down text-muted" style="font-size:10px;"></i>
         </div>
         <button class="btn btn-outline-navy"><i class="fa-regular fa-file-pdf me-1"></i>Export PDF</button>
-        <button class="btn btn-green" data-bs-toggle="modal" data-bs-target="#newRuleModal"><i
-            class="fa-solid fa-plus me-1"></i>New Comp Rule</button>
+        <button class="btn btn-green" data-bs-toggle="modal" data-bs-target="#newRuleModal"
+          onclick="openCreateNewPlanModal()">
+          <i class="fa-solid fa-plus me-1"></i>New Comp Rule
+        </button>
       </div>
     </div>
 
-    <style>
-      .kpi-card[role="button"] { cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }
-      .kpi-card[role="button"]:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.10); }
-      .detail-breakdown-box { border:1px solid #eef2f6; border-radius:10px; overflow:hidden; }
-      .detail-breakdown-row { display:flex; justify-content:space-between; align-items:center; padding:10px 14px; border-bottom:1px solid #f3f5f9; font-size:14px; }
-      .detail-breakdown-row:last-child { border-bottom:none; }
-      .detail-breakdown-row span { color:#6b7280; }
-    </style>
+    <!-- KPI CARDS -->
     <div class="row g-3 mb-3">
       <div class="col-6 col-md-3 col-12">
         <div class="kpi-card" role="button" tabindex="0" onclick="openCompKpiDetail(0)">
@@ -119,8 +203,8 @@
               class="fa-solid fa-clipboard-list"></i></div>
           <div>
             <div class="kpi-label">Active Comp Plans</div>
-            <div class="kpi-value">7</div>
-            <div class="kpi-delta">Click a plan to edit</div>
+            <div class="kpi-value" id="kpiActivePlans">8</div>
+            <div class="kpi-delta">Click a plan to inspect components</div>
           </div>
         </div>
       </div>
@@ -128,9 +212,9 @@
         <div class="kpi-card" role="button" tabindex="0" onclick="window.location.href='team-members.html'">
           <div class="kpi-icon" style="background:#f3e8ff;color:#7e22ce;"><i class="fa-solid fa-user-group"></i></div>
           <div>
-            <div class="kpi-label">Total Team Members</div>
-            <div class="kpi-value">37</div>
-            <div class="kpi-delta">Click to view all members →</div>
+            <div class="kpi-label">Total Staff Members</div>
+            <div class="kpi-value" id="kpiTotalStaff">37</div>
+            <div class="kpi-delta">Across all compensation engines →</div>
           </div>
         </div>
       </div>
@@ -139,8 +223,8 @@
           <div class="kpi-icon" style="background:#fef3c7;color:#92400e;"><i class="fa-solid fa-sack-dollar"></i></div>
           <div>
             <div class="kpi-label">Monthly Payout (Est.)</div>
-            <div class="kpi-value">$186,450</div>
-            <div class="kpi-delta">Based on current production</div>
+            <div class="kpi-value" id="kpiMonthlyPayout">$194,200</div>
+            <div class="kpi-delta">Includes hybrid booking incentives</div>
           </div>
         </div>
       </div>
@@ -148,17 +232,20 @@
         <div class="kpi-card" role="button" tabindex="0" onclick="openCompKpiDetail(3)">
           <div class="kpi-icon" style="background:#dbeafe;color:#1e40af;"><i class="fa-solid fa-chart-simple"></i></div>
           <div>
-            <div class="kpi-label">Avg Payout / Member</div>
-            <div class="kpi-value">$5,039</div>
-            <div class="kpi-delta">This month (est.)</div>
+            <div class="kpi-label">Avg Payout / Staff</div>
+            <div class="kpi-value" id="kpiAvgPayout">$5,248</div>
+            <div class="kpi-delta">This month (estimated)</div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- ROLE TABS -->
     <div class="role-tabs">
       <div class="role-tabs-scroll">
         <button class="role-tab-btn active" onclick="filterByRole('all',this)">All Roles</button>
+        <button class="role-tab-btn" onclick="filterByRole('hybrid',this)"><i
+            class="fa-solid fa-layer-group me-1 text-success"></i>Hybrid Plans</button>
         <button class="role-tab-btn" onclick="filterByRole('doctors',this)">Doctors</button>
         <button class="role-tab-btn" onclick="filterByRole('isr-commission',this)">ISR (Commission)</button>
         <button class="role-tab-btn" onclick="filterByRole('isr-flat',this)">ISR (Flat Pay)</button>
@@ -172,522 +259,2162 @@
       <button class="filter-btn"><i class="fa-solid fa-sliders me-1"></i>Filters</button>
     </div>
 
+    <!-- WORKSPACE ROW: LEFT PLANS LIST & RIGHT PLAN DETAIL -->
     <div class="row g-3">
-      <div class="col-lg-3">
+      <div class="col-lg-4 col-xl-3">
         <div class="panel">
-          <div class="panel-header">
-            <h2 class="panel-title">Compensation Plans</h2>
+          <div class="panel-header d-flex justify-content-between align-items-center">
+            <h2 class="panel-title mb-0">Compensation Plans</h2>
+            <span class="badge bg-light text-muted border" id="planCountBadge">8 Plans</span>
           </div>
-          <div class="p-3 pb-0"><input type="text" class="form-control search-input"
-              placeholder="Search by role or plan name..." id="planSearch" onkeyup="searchPlans()"></div>
-          <div class="p-2" id="planList"><!-- injected by JS --></div>
-          <div class="text-center pb-3"><a href="#" class="text-decoration-none small fw-semibold"><i
-                class="fa-regular fa-eye me-1"></i>View Inactive Plans</a></div>
+          <div class="p-3 pb-0">
+            <input type="text" class="form-control search-input" placeholder="Search by role or plan name..."
+              id="planSearch" onkeyup="searchPlans()">
+          </div>
+          <div class="p-2" id="planList">
+            <!-- Injected dynamically by renderPlans() -->
+          </div>
+          <div class="text-center pb-3">
+            <a href="#" class="text-decoration-none small fw-semibold"
+              onclick="alert('All active plan versions are shown.')">
+              <i class="fa-regular fa-eye me-1"></i>View Inactive Plans
+            </a>
+          </div>
         </div>
       </div>
 
-      <div class="col-lg-8">
-        <div class="panel">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title" id="planTitle">Doctors (Cosmetic & General Dentistry) <span
-                  class="badge-status active ms-1">Active</span></h2>
-              <div class="panel-sub" id="planSubtitle">Production Based Compensation Plan</div>
-            </div>
-            <button class="btn btn-sm btn-outline-navy" data-bs-toggle="modal" data-bs-target="#editPlanModal"><i
-                class="fa-solid fa-pen me-1"></i>Edit Plan</button>
+      <div class="col-lg-8 col-xl-9" id="planDetailColumn">
+        <!-- Injected dynamically by renderPlanDetail() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       NEW PLAN MODAL (#newRuleModal) WITH DYNAMIC COMPONENT BUILDER
+       ========================================================= -->
+  <div class="modal fade" id="newRuleModal" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content" style="border-radius:12px;border:none;">
+        <div class="modal-header">
+          <div>
+            <h5 class="modal-title fw-bold mb-0">Create New Compensation Plan</h5>
+            <div class="text-muted small">Configure plan version, roles, timing, and dynamic earning components.</div>
           </div>
-          <div class="panel-body pb-0">
-            <div class="meta-row">
-              <div class="meta-item"><i class="fa-regular fa-calendar"></i>
-                <div>
-                  <div class="lbl">Effective Date</div>
-                  <div class="val">Mar 1, 2026</div>
-                </div>
-              </div>
-              <div class="meta-item"><i class="fa-solid fa-tags"></i>
-                <div>
-                  <div class="lbl">Plan Type</div>
-                  <div class="val">Production Based</div>
-                </div>
-              </div>
-              <div class="meta-item"><i class="fa-solid fa-user-group"></i>
-                <div>
-                  <div class="lbl">Members</div>
-                  <div class="val">8</div>
-                </div>
-              </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <!-- BASIC PLAN INFO -->
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Plan Name</label>
+              <input type="text" class="form-control" id="newPlanName"
+                placeholder="e.g. Senior Provider Production Plan">
             </div>
-            <div class="engine-tabs">
-              <button class="engine-tab-btn active" onclick="showPlanTab('overview',this)">Overview</button>
-              <button class="engine-tab-btn" onclick="showPlanTab('cosmetic',this)">Cosmetic Compensation</button>
-              <button class="engine-tab-btn" onclick="showPlanTab('general',this)">General Dentistry (35%)</button>
-              <button class="engine-tab-btn" onclick="showPlanTab('adjustments',this)">Adjustments &amp; Rules</button>
-              <button class="engine-tab-btn" onclick="showPlanTab('notes',this)">Notes</button>
+            <div class="col-md-3">
+              <label class="form-label">Plan Version</label>
+              <input type="text" class="form-control" id="newPlanVersion" value="v1.0" placeholder="v1.0">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Status</label>
+              <select class="form-select" id="newPlanStatus">
+                <option value="Active" selected>Active</option>
+                <option value="Draft">Draft</option>
+                <option value="Archived">Archived</option>
+              </select>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label">Eligible Role</label>
+              <select class="form-select" id="newPlanRole">
+                <option value="hybrid" selected>Hybrid</option>
+                <option value="doctors">Doctors (Providers)</option>
+                <option value="isr-commission">ISR (Commission)</option>
+                <option value="isr-flat">ISR (Flat Pay)</option>
+                <option value="sdr">SDR</option>
+                <option value="ce">CE</option>
+                <option value="lab">Lab Technicians</option>
+                <option value="marketing">Marketing</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Effective Start Date</label>
+              <input type="date" class="form-control" id="newPlanEffective" value="2026-04-01">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Payroll Run Frequency</label>
+              <select class="form-select" id="newPlanFrequency">
+                <option value="Bi-Weekly" selected>Bi-Weekly</option>
+                <option value="Monthly">Monthly</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Semi-Monthly">Semi-Monthly</option>
+              </select>
             </div>
           </div>
 
-          <!-- TAB: Overview -->
+          <!-- DYNAMIC COMPENSATION COMPONENTS SECTION -->
+          <div class="p-3 border rounded-3 bg-light mb-3">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <div>
+                <h6 class="fw-bold text-dark mb-0">Compensation Components</h6>
+                <div class="text-muted small">A plan can contain one or more earning components.</div>
+              </div>
+              <button type="button" class="btn btn-sm btn-green" onclick="addBuilderComponentRow()">
+                <i class="fa-solid fa-plus me-1"></i>Add Compensation Component
+              </button>
+            </div>
+
+            <div id="newComponentsList" class="d-flex flex-column gap-3 mb-2">
+              <!-- Injected dynamically by renderBuilderComponents() -->
+            </div>
+          </div>
+
+          <!-- QUALIFICATION & REVERSAL RULES -->
+          <div class="row g-3">
+            <div class="col-md-8">
+              <label class="form-label mb-1">Qualification &amp; Reversal Rules</label>
+              <textarea class="form-control" rows="2" id="newPlanQual"
+                placeholder="Enter qualification, cancellation, refund, reversal or clawback rules..."></textarea>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label mb-1">Authorizing Approver</label>
+              <input type="text" class="form-control" id="newPlanAuthor" value="James Johnson">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-navy" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-green" onclick="createNewPlan()"><i
+              class="fa-solid fa-check me-1"></i>Create &amp; Activate Plan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       GENERIC EDIT COMPONENT MODAL (#editComponentModal)
+       ========================================================= -->
+  <div class="modal fade" id="editComponentModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" style="border-radius:12px;border:none;">
+        <div class="modal-header">
+          <div>
+            <h5 class="modal-title fw-bold" id="editComponentModalTitle"><i
+                class="fa-solid fa-pen text-success me-2"></i>Edit Compensation Component</h5>
+            <div class="text-muted small">Configure calculation rates, basis, measurement, and qualification.</div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="editComponentBody">
+          <!-- Injected dynamically by openEditComponentModal() -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-navy" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-green" onclick="saveComponentEdit()"><i
+              class="fa-solid fa-check me-1"></i>Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       STAFF ASSIGNMENT MODAL (#assignStaffModal)
+       ========================================================= -->
+  <div class="modal fade" id="assignStaffModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content" style="border-radius:12px;border:none;">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold"><i class="fa-solid fa-user-plus text-success me-2"></i>Assign Compensation
+            Plan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted small mb-3">Assign a team member to this compensation plan version. The plan remains
+            reusable across all staff.</p>
+          <div class="mb-3">
+            <label class="form-label">Staff Member</label>
+            <select class="form-select" id="assignStaffSelect">
+              <option value="Elena Rostova">Elena Rostova</option>
+              <option value="Marcus Vance">Marcus Vance</option>
+              <option value="Sofia Alverez">Sofia Alverez</option>
+              <option value="David Cho">David Cho</option>
+              <option value="James Johnson">James Johnson</option>
+              <option value="Umair Khan">Umair Khan</option>
+              <option value="Jeremiah Smith">Jeremiah Smith</option>
+              <option value="Sarah Jenkins">Sarah Jenkins</option>
+              <option value="Robert Davis">Robert Davis</option>
+              <option value="Emily Chen">Emily Chen</option>
+            </select>
+          </div>
+          <div class="row g-2 mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Role</label>
+              <select class="form-select" id="assignStaffRole">
+                <option value="Provider">Provider / Doctor</option>
+                <option value="ISR (Commission)">ISR (Commission)</option>
+                <option value="ISR (Flat Pay)">ISR (Flat Pay)</option>
+                <option value="SDR">SDR</option>
+                <option value="CE">CE</option>
+                <option value="Lab">Lab</option>
+                <option value="Marketing">Marketing</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Plan Version</label>
+              <input type="text" class="form-control font-monospace" id="assignStaffVersion" readonly>
+            </div>
+          </div>
+          <div class="row g-2 mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Effective Date</label>
+              <input type="date" class="form-control" id="assignStaffDate" value="2026-04-01">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Status</label>
+              <select class="form-select" id="assignStaffStatus">
+                <option value="Active" selected>Active</option>
+                <option value="Pending">Pending</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-navy" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-green" onclick="saveStaffAssignment()"><i
+              class="fa-solid fa-check me-1"></i>Assign Plan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       KPI BREAKDOWN MODAL (#compDetailModal)
+       ========================================================= -->
+  <div class="modal fade" id="compDetailModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <h5 class="modal-title fw-bold">Compensation Detail</h5>
+            <p class="modal-subtitle text-muted small mb-0" style="margin-top:2px;">Detailed breakdown</p>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="compDetailModalBody">
+          <!-- Content inserted dynamically -->
+        </div>
+        <div class="modal-footer border-0 pt-0">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <script>
+    $(function () {
+      if ($('input[name="date"]').length) {
+        $('input[name="date"]').daterangepicker({
+          timePicker: true,
+          startDate: moment().startOf('month'),
+          endDate: moment().endOf('month'),
+          locale: { format: 'MM/DD/YYYY' }
+        });
+      }
+    });
+
+    /* ==========================================================
+       STRUCTURED COMPENSATION PLANS DATA (Data-Driven Architecture)
+       Preserves all 8 plans and includes assignments & structured tiers
+       ========================================================== */
+    const plans = [
+      {
+        id: "luxury-smile-agent",
+        icon: "fa-award",
+        color: "#b45309",
+        bg: "#fef3c7",
+        name: "Luxury Smile Agent (Hybrid Plan)",
+        sub: "Hourly + Monthly Tiers + Quarterly Bonus",
+        members: 4,
+        role: "hybrid",
+        version: "v2.1",
+        status: "Active",
+        effectiveStart: "Mar 1, 2026",
+        effectiveEnd: "Present (Open)",
+        type: "Hybrid Multi-Component",
+        providerType: "W-2 Staff Member",
+        paymentFrequency: "Bi-Weekly (Hourly) / Monthly (Tiers)",
+        reconciliation: "End of Calendar Month",
+        summary: "New hybrid compensation model for Luxury Smile Agents. Combines base service hourly pay with monthly qualified booking incentive tiers (highest tier achieved only, non-stacking) and a $1,500 consecutive-quarter excellence bonus.",
+        components: [
+          {
+            id: "lux-hourly",
+            name: "Base Hourly Pay",
+            type: "Hourly",
+            calculation: { hourlyRate: 18.00, regularHours: 80, overtimeMultiplier: "1.5x" },
+            measure: "Worked Hours in Timecard",
+            settlement: "Bi-Weekly Payroll Run",
+            rate: "$18.00 / hour",
+            qualification: "Approved service hours clocked and confirmed in timecard.",
+            reversal: "Hours adjustment logged on subsequent payroll run if audited.",
+            desc: "Approved service hours clocked and confirmed in timecard."
+          },
+          {
+            id: "lux-tier",
+            name: "Monthly Qualified Booking Incentive",
+            type: "Tiered Performance",
+            calculation: {
+              metric: "Qualified Bookings",
+              payoutMethod: "Highest Tier Only (Non-Stacking)",
+              tiers: [
+                { tier: "Tier 0", min: 0, max: 8, payout: 0, note: "Base service hourly rate only" },
+                { tier: "Tier 1", min: 9, max: 9, payout: 150, note: "Threshold reached (highest tier only)" },
+                { tier: "Tier 2", min: 10, max: 11, payout: 300, note: "Consecutive quarterly tracker qualification starts" },
+                { tier: "Tier 3", min: 12, max: 14, payout: 600, note: "Standard closer pace" },
+                { tier: "Tier 4", min: 15, max: 19, payout: 1050, note: "High performer tier" },
+                { tier: "Tier 5", min: 20, max: 24, payout: 1800, note: "Senior specialist pace" },
+                { tier: "Tier 6", min: 25, max: 999, payout: 2550, note: "Top tier ceiling" }
+              ]
+            },
+            measure: "Calendar Month (1st to Last Day)",
+            settlement: "First Payroll Run After Month-End",
+            rate: "Highest Tier Only ($150 – $2,550)",
+            qualification: "Qualifying deposit collected and cleared, CRM ownership validated.",
+            reversal: "Post-cutoff cancellation or refund generates compensating reversal entry on ledger.",
+            desc: "Highest tier achieved only — non-stacking. Full qualification criteria required."
+          },
+          {
+            id: "lux-bonus",
+            name: "Quarterly Excellence Bonus",
+            type: "Bonus / Spiff",
+            calculation: { bonusAmount: 1500, metric: "≥10 Qualified Bookings in each of 3 consecutive months", trigger: "End of Quarter" },
+            measure: "3 Consecutive Calendar Months",
+            settlement: "Quarterly Payroll Settlement",
+            rate: "$1,500.00 Flat Bonus",
+            qualification: "Requires ≥10 qualified bookings in each of 3 consecutive calendar months while in good standing.",
+            reversal: "Subsequent chargeback during quarter invalidates consecutive bonus qualification.",
+            desc: "Requires ≥10 qualified bookings in each of 3 consecutive calendar months while in good standing."
+          }
+        ],
+        tierSchedule: [
+          { tier: "Tier 0", range: "0 – 8 Bookings", payout: "Hourly Only ($0)", note: "Base service hourly rate only" },
+          { tier: "Tier 1", range: "9 Bookings", payout: "$150.00", note: "Threshold reached (highest tier only)" },
+          { tier: "Tier 2", range: "10 – 11 Bookings", payout: "$300.00", note: "Consecutive quarterly tracker qualification starts" },
+          { tier: "Tier 3", range: "12 – 14 Bookings", payout: "$600.00", note: "Standard closer pace" },
+          { tier: "Tier 4", range: "15 – 19 Bookings", payout: "$1,050.00", note: "High performer tier" },
+          { tier: "Tier 5", range: "20 – 24 Bookings", payout: "$1,800.00", note: "Senior specialist pace" },
+          { tier: "Tier 6", range: "25+ Bookings", payout: "$2,550.00", note: "Top tier ceiling" }
+        ],
+        qualificationRules: [
+          "Qualifying deposit must be successfully collected and cleared prior to pay period cutoff.",
+          "Correct CRM documentation, lead tracking stages, and staff ownership must be validated in Master Case Record.",
+          "Attribution must be explicitly recorded to the team member without open co-closer dispute.",
+          "Excluded Cases: Duplicate entries, internal transfers, cancellations, patient refunds, or chargebacks.",
+          "Canonical Ledger Reversals: Any subsequent refund or chargeback automatically logs a compensating reversal transaction against the ledger."
+        ],
+        operationalKpis: [
+          { metric: "Ramp Standard", rule: "Minimum 1 qualified booking in first 5 completed shifts", status: "Onboarding Gate", tracking: "Operational KPI (Not Direct Payroll)" },
+          { metric: "Early Pace Standard", rule: "Minimum pace of 2 qualified bookings per week beginning shift 6", status: "Weekly Minimum", tracking: "Operational KPI (Not Direct Payroll)" },
+          { metric: "Sustained Pace Target", rule: "Target ≥3 qualified bookings per week starting in week 5", status: "Target Pace", tracking: "Operational KPI (Not Direct Payroll)" }
+        ],
+        versions: [
+          { ver: "v2.1", date: "Mar 1, 2026", author: "James Johnson (Office Manager)", summary: "Integrated $1,500 Quarterly Excellence consecutive-month incentive & locked non-stacking tier schedule per GDG specification." },
+          { ver: "v2.0", date: "Jan 1, 2026", author: "Finance / Executive", summary: "Initial hybrid compensation structure rollout for Luxury Smile Agents." }
+        ],
+        assignments: [
+          { name: "Elena Rostova", role: "Luxury Smile Agent", version: "v2.1", effective: "Mar 1, 2026", status: "Active" },
+          { name: "Marcus Vance", role: "Closing Specialist", version: "v2.1", effective: "Mar 1, 2026", status: "Active" },
+          { name: "Sofia Alverez", role: "Luxury Smile Agent", version: "v2.1", effective: "Mar 1, 2026", status: "Active" },
+          { name: "David Cho", role: "Closing Specialist", version: "v2.1", effective: "Mar 1, 2026", status: "Active" }
+        ]
+      },
+      {
+        id: "doctors",
+        icon: "fa-tooth",
+        color: "#4338ca",
+        bg: "#eef2ff",
+        name: "Doctors (Cosmetic & Gen Dent)",
+        sub: "Production Based",
+        members: 8,
+        role: "doctors",
+        version: "v2.0",
+        status: "Active",
+        effectiveStart: "Mar 1, 2026",
+        effectiveEnd: "Present (Open)",
+        type: "Production Based & Floor",
+        providerType: "1099 Independent Contractor",
+        paymentFrequency: "Bi-Weekly",
+        reconciliation: "Monthly Reconciliation",
+        summary: "Doctors are compensated based on clinical production using tiered cosmetic case rates and general dentistry fee schedules. A daily floor of $650 is advanced bi-weekly and reconciled monthly.",
+        components: [
+          {
+            id: "doc-veneer",
+            name: "Cosmetic Veneer Production",
+            type: "Production Based",
+            calculation: { fullCase: { composite: 700, ceramic: 800, porcelainZirconia: 1000 }, halfCase: "50%", perUnit: { composite: 35, ceramic: 40, porcelainZirconia: 50 } },
+            measure: "Bi-Weekly Completed Cases",
+            settlement: "Bi-Weekly Run",
+            rate: "Full Case: $700–$1,000 · Half: 50% · Per-Unit: $35–$50",
+            qualification: "Clinical completion confirmed in Practice Management software with clinical notes signed.",
+            reversal: "Warranty remakes not paid twice; patient refunds reversed against gross production.",
+            desc: "Based on placed unit material (Composite, Ceramic, Porcelain/Zirconia)."
+          },
+          {
+            id: "doc-gen",
+            name: "General Dentistry",
+            type: "Percentage Commission",
+            calculation: { commissionPct: 35, basis: "Practice Fee Schedule" },
+            measure: "Bi-Weekly Procedures",
+            settlement: "Bi-Weekly Run",
+            rate: "35% of Practice Fee Schedule",
+            qualification: "Valid general dentistry procedures with signed treatment chart.",
+            reversal: "Insurance write-offs or uncollected balances reversed accordingly.",
+            desc: "Restorative, Endodontics, Extractions, and Specialty cleanings."
+          },
+          {
+            id: "doc-floor",
+            name: "Daily Guaranteed Floor",
+            type: "Production Floor",
+            calculation: { floorAmount: 650, eligibleDays: "Clinical Provider Days", reconciliation: "Earned Production - Floor Advance" },
+            measure: "Scheduled Provider Days",
+            settlement: "Bi-Weekly Advance",
+            rate: "$650.00 / Scheduled Day",
+            qualification: "Scheduled clinic hours attended; patient cancellations count toward floor requirement.",
+            reversal: "Reconciled monthly against earned gross production.",
+            desc: "Floor advance reconciled monthly against earned gross production."
+          }
+        ],
+        tierSchedule: [
+          { tier: "Full Veneer (16–20u)", range: "Composite: $700", payout: "Ceramic: $800", note: "Porcelain/Zirconia: $1,000" },
+          { tier: "Half Veneer (10u)", range: "50% of Full Case Rate", payout: "$350 – $500", note: "Exactly 10 units of same material" },
+          { tier: "Per-Unit (<16u)", range: "Composite: $35", payout: "Ceramic: $40", note: "Porcelain/Zirconia: $50 / unit" },
+          { tier: "Crowns (Per Unit)", range: "$80 / unit", payout: "$80 flat", note: "Any material" },
+          { tier: "Full Crown Case", range: "Any material outside veneer rules", payout: "$1,400 flat", note: "Single flat fee per qualified arch" }
+        ],
+        qualificationRules: [
+          "Clinical completion confirmed in Practice Management software with clinical notes signed.",
+          "Prep, cementation, and lab fees tracked by provider role and split accordingly.",
+          "Warranty repairs for original provider are not paid separately.",
+          "Cancellations and no-shows count toward daily floor requirement."
+        ],
+        operationalKpis: [
+          { metric: "Daily Production Target", rule: "Minimum $1,200 production value per clinical day", status: "Target Pace", tracking: "Clinical Quality Metric" },
+          { metric: "Remake Ratio", rule: "Remake rate under 2.5% of total units placed", status: "Quality Standard", tracking: "Operational KPI" }
+        ],
+        versions: [
+          { ver: "v2.0", date: "Mar 1, 2026", author: "James Johnson (Office Manager)", summary: "Updated full crown case flat rate to $1,400 and harmonized prep/cementation splits." },
+          { ver: "v1.0", date: "Jan 1, 2025", author: "Clinical Director", summary: "Initial production fee schedule." }
+        ],
+        assignments: [
+          { name: "James Johnson", role: "Lead Provider", version: "v2.0", effective: "Jan 1, 2026", status: "Active" },
+          { name: "Dr. Rachel Adams", role: "Cosmetic Dentist", version: "v2.0", effective: "Feb 1, 2026", status: "Active" }
+        ]
+      },
+      {
+        id: "isr-commission",
+        icon: "fa-percent",
+        color: "#92400e",
+        bg: "#fef3c7",
+        name: "ISR (Commission)",
+        sub: "6% + 2% Team Lead Override",
+        members: 14,
+        role: "isr-commission",
+        version: "v1.3",
+        status: "Active",
+        effectiveStart: "Feb 1, 2026",
+        effectiveEnd: "Present",
+        type: "Percentage Commission",
+        providerType: "W-2 Commissioned Staff",
+        paymentFrequency: "Bi-Weekly",
+        reconciliation: "Pay Period Cutoff",
+        summary: "Inside Sales Representatives paid on a percentage basis of collected treatment value, with an additional 2% override for Team Leads.",
+        components: [
+          {
+            id: "isr-comm-base",
+            name: "Direct Commission",
+            type: "Percentage Commission",
+            calculation: { commissionPct: 6.0, basis: "Cleared Collections Value" },
+            measure: "Bi-Weekly Collected Value",
+            settlement: "Bi-Weekly Run",
+            rate: "6.0% of Collected Value",
+            qualification: "Requires collected funds verified in Accounts Receivable ledger.",
+            reversal: "Refunded cases result in direct commission clawback entry.",
+            desc: "Calculated strictly on cleared collections, not uncollected bookings."
+          },
+          {
+            id: "isr-lead-override",
+            name: "Team Lead Override",
+            type: "Percentage Commission",
+            calculation: { commissionPct: 2.0, basis: "Team Collected Value" },
+            measure: "Team Collected Value",
+            settlement: "Bi-Weekly Run",
+            rate: "2.0% Override",
+            qualification: "Paid to authorized team leads across group closures.",
+            reversal: "Clawback applied if group closure is reversed or uncollected.",
+            desc: "Paid to authorized team leads across group closures."
+          }
+        ],
+        tierSchedule: [
+          { tier: "Standard Closing", range: "All qualified cases", payout: "6.0%", note: "Basis: Cash collected & cleared finance" },
+          { tier: "Team Lead Tier", range: "Team managed cases", payout: "2.0%", note: "Managerial supervision override" }
+        ],
+        qualificationRules: [
+          "Requires collected funds verified in Accounts Receivable ledger.",
+          "Uncollected balances do not accrue commission until patient payment clears.",
+          "Reversals: Refunded cases or chargebacks result in direct commission clawback entries."
+        ],
+        operationalKpis: [
+          { metric: "Close Rate", rule: "Minimum 28% consultation-to-close conversion", status: "Standard", tracking: "CRM Metric" }
+        ],
+        versions: [
+          { ver: "v1.3", date: "Feb 1, 2026", author: "Sales Director", summary: "Added collected-basis reconciliation rule." }
+        ],
+        assignments: [
+          { name: "Jeremiah Smith", role: "ISR Commission", version: "v1.3", effective: "Feb 1, 2026", status: "Active" }
+        ]
+      },
+      {
+        id: "isr-flat",
+        icon: "fa-file-invoice-dollar",
+        color: "#9d174d",
+        bg: "#fce7f3",
+        name: "ISR (Flat Pay)",
+        sub: "Flat Fee per Case",
+        members: 6,
+        role: "isr-flat",
+        version: "v1.2",
+        status: "Active",
+        effectiveStart: "Jan 1, 2026",
+        effectiveEnd: "Present",
+        type: "Flat Case Pay",
+        providerType: "W-2 Staff",
+        paymentFrequency: "Bi-Weekly",
+        reconciliation: "Pay Period Cutoff",
+        summary: "Flat rate compensation per qualifying closed case based on material package type.",
+        components: [
+          {
+            id: "isr-flat-comp",
+            name: "Flat Case Pay",
+            type: "Flat Case Pay",
+            calculation: { composite: 100, ceramic: 150, porcelain: 200, crown: 200 },
+            measure: "Bi-Weekly Closed Cases",
+            settlement: "Bi-Weekly Run",
+            rate: "Composite: $100 · Ceramic: $150 · Porcelain: $200 · Crown: $200",
+            qualification: "Case must have cleared deposit and signed treatment plan.",
+            reversal: "Unwound via reverse earning ledger event if case deposit refunded.",
+            desc: "Fixed compensation per qualifying case."
+          }
+        ],
+        tierSchedule: [
+          { tier: "Composite Case", range: "1+ Cases", payout: "$100.00 / case", note: "Cleared deposit required" },
+          { tier: "Ceramic Case", range: "1+ Cases", payout: "$150.00 / case", note: "Cleared deposit required" },
+          { tier: "Porcelain/Zirconia", range: "1+ Cases", payout: "$200.00 / case", note: "Cleared deposit required" },
+          { tier: "Full Crown Case", range: "1+ Cases", payout: "$200.00 / case", note: "Cleared deposit required" }
+        ],
+        qualificationRules: [
+          "Case must have cleared deposit and signed treatment plan.",
+          "Duplicate patient entries strictly prevented via CRM master patient record."
+        ],
+        operationalKpis: [
+          { metric: "Case Volume", rule: "Target 15+ flat cases per pay period", status: "Standard", tracking: "Operational KPI" }
+        ],
+        versions: [{ ver: "v1.2", date: "Jan 1, 2026", author: "HR", summary: "Standardized flat fee schedules." }],
+        assignments: []
+      },
+      {
+        id: "sdr",
+        icon: "fa-headset",
+        color: "#059669",
+        bg: "#ecfdf5",
+        name: "SDR",
+        sub: "$15 / Hour + Bonuses",
+        members: 5,
+        role: "sdr",
+        version: "v1.1",
+        status: "Active",
+        effectiveStart: "Jan 1, 2026",
+        effectiveEnd: "Present",
+        type: "Hourly + Appointment Spiff",
+        providerType: "Hourly Non-Exempt",
+        paymentFrequency: "Bi-Weekly",
+        reconciliation: "Pay Period Cutoff",
+        summary: "Sales Development Representatives receive guaranteed hourly pay plus appointment show spiffs.",
+        components: [
+          {
+            id: "sdr-hourly",
+            name: "Base Hourly",
+            type: "Hourly",
+            calculation: { hourlyRate: 15.00, regularHours: 80, overtimeMultiplier: "1.5x" },
+            measure: "Timecard Hours",
+            settlement: "Bi-Weekly Run",
+            rate: "$15.00 / hr",
+            qualification: "Timecard approved by shift supervisor.",
+            reversal: "Logged via hours correction on subsequent pay period.",
+            desc: "1.5x overtime multiplier."
+          },
+          {
+            id: "sdr-spiff",
+            name: "Consultation Show Spiff",
+            type: "Bonus / Spiff",
+            calculation: { bonusAmount: 25, metric: "Attended Patient Consultation" },
+            measure: "Pay Period Consults",
+            settlement: "Bi-Weekly Run",
+            rate: "$25.00 per Qualified Show",
+            qualification: "Patient must physically attend scheduled doctor consultation.",
+            reversal: "No-show or false check-in reversed from earning ledger.",
+            desc: "Patient must attend scheduled doctor consultation."
+          }
+        ],
+        tierSchedule: [{ tier: "Consultation Spiff", range: "Attended Visits", payout: "$25.00 / show", note: "Verified in clinic schedule" }],
+        qualificationRules: ["Timecard approved by shift lead.", "Consultation attendance verified by front desk check-in."],
+        operationalKpis: [{ metric: "Dials / Day", rule: "Minimum 80 outbound calls per shift", status: "Operational KPI", tracking: "Dialer KPI" }],
+        versions: [{ ver: "v1.1", date: "Jan 1, 2026", author: "Operations", summary: "Increased consultation spiff to $25." }],
+        assignments: [
+          { name: "Umair Khan", role: "SDR", version: "v1.1", effective: "Jan 1, 2026", status: "Active" }
+        ]
+      },
+      {
+        id: "ce",
+        icon: "fa-headset",
+        color: "#92400e",
+        bg: "#fef3c7",
+        name: "CE",
+        sub: "Hourly + Performance Bonuses",
+        members: 4,
+        role: "ce",
+        version: "v1.1",
+        status: "Active",
+        effectiveStart: "Jan 1, 2026",
+        effectiveEnd: "Present",
+        type: "Hourly + CSAT Bonus",
+        providerType: "Hourly Non-Exempt",
+        paymentFrequency: "Bi-Weekly",
+        reconciliation: "Monthly Review",
+        summary: "",
+        components: [
+          {
+            id: "ce-hourly",
+            name: "Base Hourly",
+            type: "Hourly",
+            calculation: { hourlyRate: 15.00, regularHours: 80 },
+            measure: "Timecard Hours",
+            settlement: "Bi-Weekly Run",
+            rate: "$15.00 / hr",
+            qualification: "Approved timecard entries.",
+            reversal: "Timecard correction applied to next payroll.",
+            desc: "Regular hours + overtime rules."
+          },
+          {
+            id: "ce-csat",
+            name: "Monthly CSAT Bonus",
+            type: "Bonus / Spiff",
+            calculation: { bonusAmount: 200, metric: "≥95% CSAT Score" },
+            measure: "Calendar Month CSAT",
+            settlement: "Monthly",
+            rate: "$200.00 / month",
+            qualification: "Requires ≥95% patient satisfaction rating across minimum 20 surveys.",
+            reversal: "Audited survey invalidation adjusts next monthly payout.",
+            desc: "Requires ≥95% patient satisfaction rating."
+          }
+        ],
+        tierSchedule: [{ tier: "CSAT Achievement", range: "≥95% CSAT", payout: "$200.00 / mo", note: "Survey minimum 20 reviews" }],
+        qualificationRules: ["Attendance compliance 98%+.", "Patient NPS score 9 or 10."],
+        operationalKpis: [{ metric: "Response Time", rule: "Under 5 minutes ticket response time", status: "Operational KPI", tracking: "Helpdesk KPI" }],
+        versions: [{ ver: "v1.1", date: "Jan 1, 2026", author: "Operations", summary: "CSAT qualification updated." }],
+        assignments: [
+          { name: "Sarah Jenkins", role: "CE Representative", version: "v1.1", effective: "Jan 1, 2026", status: "Active" }
+        ]
+      },
+      {
+        id: "lab",
+        icon: "fa-flask",
+        color: "#1e40af",
+        bg: "#dbeafe",
+        name: "Lab Technicians",
+        sub: "Hourly Activity Rate",
+        members: 4,
+        role: "lab",
+        version: "v1.0",
+        status: "Active",
+        effectiveStart: "Jan 1, 2026",
+        effectiveEnd: "Present",
+        type: "Hourly + Production Activity",
+        providerType: "Hourly Non-Exempt",
+        paymentFrequency: "Bi-Weekly",
+        reconciliation: "Pay Period Cutoff",
+        summary: "Dental lab technicians fabricating ceramic, zirconia, and composite restorations.",
+        components: [
+          {
+            id: "lab-hourly",
+            name: "Technician Hourly",
+            type: "Hourly",
+            calculation: { hourlyRate: 20.00, regularHours: 80, overtimeMultiplier: "1.5x" },
+            measure: "Timecard Hours",
+            settlement: "Bi-Weekly Run",
+            rate: "$20.00 / hr",
+            qualification: "Approved timecard clocked hours.",
+            reversal: "Standard time adjustments on subsequent pay runs.",
+            desc: "Standard lab technician hourly schedule."
+          }
+        ],
+        tierSchedule: [{ tier: "Lab Hourly Rate", range: "All Hours", payout: "$20.00 / hr", note: "Overtime 1.5x at $30/hr" }],
+        qualificationRules: ["Quality check sign-off required for all case outputs."],
+        operationalKpis: [{ metric: "Turnaround Time", rule: "48-hour turn for standard composite packages", status: "Standard", tracking: "Lab Queue" }],
+        versions: [{ ver: "v1.0", date: "Jan 1, 2026", author: "Lab Director", summary: "Initial lab compensation structure." }],
+        assignments: [
+          { name: "Robert Davis", role: "Lab Technician", version: "v1.0", effective: "Jan 1, 2026", status: "Active" }
+        ]
+      },
+      {
+        id: "marketing",
+        icon: "fa-bullhorn",
+        color: "#9d174d",
+        bg: "#fce7f3",
+        name: "Marketing",
+        sub: "Monthly Salary + Bonuses",
+        members: 1,
+        role: "marketing",
+        version: "v1.2",
+        status: "Active",
+        effectiveStart: "Feb 1, 2026",
+        effectiveEnd: "Present",
+        type: "Salary + KPI Spiffs",
+        providerType: "Exempt Salaried Staff",
+        paymentFrequency: "Monthly / Semi-Monthly",
+        reconciliation: "Monthly Review",
+        summary: "Marketing management compensated via fixed monthly salary plus lead acquisition bonuses.",
+        components: [
+          {
+            id: "mkt-salary",
+            name: "Base Salary",
+            type: "Salary",
+            calculation: { salaryAmount: 5200, period: "Monthly", settlement: "Semi-Monthly Split" },
+            measure: "Monthly Period",
+            settlement: "Semi-Monthly Split",
+            rate: "$5,200.00 / month",
+            qualification: "Exempt salaried status confirmed.",
+            reversal: "Unpaid leave deducted on subsequent pay cycle.",
+            desc: "Exempt salaried compensation."
+          },
+          {
+            id: "mkt-bonus",
+            name: "Qualified Lead Target Bonus",
+            type: "Bonus / Spiff",
+            calculation: { bonusAmount: 500, metric: "≥150 Marketing Qualified Leads" },
+            measure: "Calendar Month MQLs",
+            settlement: "Monthly",
+            rate: "$500.00 / month",
+            qualification: "CPL and lead volume audited through CRM attribution.",
+            reversal: "Non-attributable duplicate leads deducted prior to calculation.",
+            desc: "Requires ≥150 marketing qualified leads generated."
+          }
+        ],
+        tierSchedule: [{ tier: "Monthly Salary", range: "Standard", payout: "$5,200.00 / mo", note: "Semi-monthly $2,600" }],
+        qualificationRules: ["CPL and lead volume audited through CRM attribution."],
+        operationalKpis: [{ metric: "Cost Per Lead", rule: "Maintain CPL below $45", status: "Target Pace", tracking: "Ad Dashboard" }],
+        versions: [{ ver: "v1.2", date: "Feb 1, 2026", author: "Executive", summary: "Added MQL target bonus." }],
+        assignments: [
+          { name: "Emily Chen", role: "Marketing Director", version: "v1.2", effective: "Feb 1, 2026", status: "Active" }
+        ]
+      }
+    ];
+
+    let selectedPlanId = "luxury-smile-agent";
+    let currentRoleFilter = "all";
+
+    // Builder draft components for #newRuleModal
+    let builderComponents = [];
+
+    /* ==========================================================
+       INITIALIZATION & RENDERING
+       ========================================================== */
+    function updateKpis() {
+      const activeCount = plans.filter(p => p.status === 'Active').length;
+      let totalStaff = 0;
+      plans.forEach(p => {
+        totalStaff += (p.assignments && p.assignments.length) ? p.assignments.length : p.members;
+      });
+      // Fallback to 37 if demo assignments are fewer
+      const displayStaff = Math.max(totalStaff, 37);
+
+      const kpiActive = document.getElementById('kpiActivePlans');
+      if (kpiActive) kpiActive.textContent = activeCount;
+
+      const kpiStaff = document.getElementById('kpiTotalStaff');
+      if (kpiStaff) kpiStaff.textContent = displayStaff;
+
+      const planBadge = document.getElementById('planCountBadge');
+      if (planBadge) planBadge.textContent = plans.length + ' Plans';
+    }
+
+    function renderPlans(filterRole) {
+      if (filterRole !== undefined) currentRoleFilter = filterRole;
+      const list = document.getElementById('planList');
+      if (!list) return;
+
+      const filtered = (currentRoleFilter === 'all')
+        ? plans
+        : plans.filter(p => {
+          if (currentRoleFilter === 'hybrid') return p.role === 'hybrid';
+          return p.role === currentRoleFilter;
+        });
+
+      if (filtered.length === 0) {
+        list.innerHTML = '<div class="text-muted small text-center py-4">No plans match this role.</div>';
+        return;
+      }
+
+      list.innerHTML = filtered.map(p => `
+        <div class="plan-item ${p.id === selectedPlanId ? 'selected' : ''}" onclick="selectPlan('${p.id}', this)" id="plan_item_${p.id}">
+          <div class="plan-icon" style="background:${p.bg};color:${p.color};"><i class="fa-solid ${p.icon}"></i></div>
+          <div>
+            <div class="plan-item-name">${p.name}</div>
+            <div class="plan-item-sub">${p.sub}</div>
+          </div>
+          <div class="plan-item-right">
+            <span class="badge-status active">${p.version}</span>
+            <div class="members">${(p.assignments && p.assignments.length) ? p.assignments.length : p.members} Staff</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function selectPlan(id, el) {
+      selectedPlanId = id;
+      document.querySelectorAll('.plan-item').forEach(x => x.classList.remove('selected'));
+      if (el) el.classList.add('selected');
+      const activeItem = document.getElementById('plan_item_' + id);
+      if (activeItem) activeItem.classList.add('selected');
+
+      const p = plans.find(x => x.id === id) || plans[0];
+      renderPlanDetail(p);
+    }
+
+    /* ==========================================================
+       PLAN DETAIL RENDERING (5 Tabs preserved, Data-Driven)
+       ========================================================== */
+    function renderPlanDetail(p) {
+      const container = document.getElementById('planDetailColumn');
+      if (!container) return;
+
+      const staffCount = (p.assignments && p.assignments.length) ? p.assignments.length : p.members;
+
+      container.innerHTML = `
+        <div class="panel">
+          <div class="panel-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div>
+              <div class="d-flex align-items-center gap-2 mb-1">
+                <h2 class="panel-title mb-0" id="planTitle">${p.name}</h2>
+                <span class="badge bg-light text-primary border px-2 py-0.5 font-monospace fw-bold" style="font-size:11px;">${p.version}</span>
+                <span class="badge-status active ms-1">${p.status}</span>
+              </div>
+              <div class="panel-sub" id="planSubtitle">${p.sub} — ${p.type}</div>
+            </div>
+            <div class="d-flex gap-2">
+              <button class="btn btn-sm btn-outline-navy" onclick="createNewPlanVersion('${p.id}')">
+                <i class="fa-solid fa-code-branch me-1"></i>New Version
+              </button>
+              <button class="btn btn-sm btn-outline-navy" onclick="openAssignStaffModal('${p.id}')">
+                <i class="fa-solid fa-user-plus me-1"></i>Assign Staff
+              </button>
+            </div>
+          </div>
+
+          <div class="panel-body pb-0">
+            <div class="meta-row">
+              <div class="meta-item"><i class="fa-regular fa-calendar text-success"></i>
+                <div>
+                  <div class="lbl">Effective Start / End</div>
+                  <div class="val">${p.effectiveStart} – ${p.effectiveEnd}</div>
+                </div>
+              </div>
+              <div class="meta-item"><i class="fa-solid fa-tags text-success"></i>
+                <div>
+                  <div class="lbl">Plan Architecture</div>
+                  <div class="val">${p.type}</div>
+                </div>
+              </div>
+              <div class="meta-item"><i class="fa-solid fa-users text-success"></i>
+                <div>
+                  <div class="lbl">Assigned Staff</div>
+                  <div class="val">${staffCount} Staff Members</div>
+                </div>
+              </div>
+              <div class="meta-item"><i class="fa-solid fa-clock-rotate-left text-success"></i>
+                <div>
+                  <div class="lbl">Timing Separation</div>
+                  <div class="val">${p.paymentFrequency}</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Architecture Pipeline Banner (Point 2) -->
+            
+
+            <!-- Existing 5 Engine Tabs -->
+            <div class="engine-tabs">
+              <button class="engine-tab-btn active" onclick="showPlanTab('overview',this)">Overview &amp; Components</button>
+              <button class="engine-tab-btn" onclick="showPlanTab('rates',this)">Rates &amp; Tier Schedules</button>
+              <button class="engine-tab-btn" onclick="showPlanTab('qualification',this)">Qualification &amp; Reversal Rules</button>
+              <button class="engine-tab-btn" onclick="showPlanTab('kpis',this)">Operational Performance KPIs</button>
+              <button class="engine-tab-btn" onclick="showPlanTab('versions',this)">Version History &amp; Audit Trail</button>
+            </div>
+          </div>
+
+          <!-- TAB 1: Overview & Components -->
           <div id="ptab-overview" class="panel-body pt-0">
-            <div class="row g-4">
+            <div class="row g-4 mb-4">
+              <!-- Plan Summary Column -->
               <div class="col-lg-4">
                 <div class="section-label">Plan Summary</div>
-                <p class="text-muted small">Doctors are paid based on production using the rates and rules defined
-                  below. A daily floor is paid bi-weekly and reconciled monthly against earned production.</p>
+                ${p.summary ? `<p class="text-muted small mb-3" style="line-height:1.5;">${p.summary}</p>` : ''}
+
                 <div class="icon-row">
-                  <div class="left"><i class="fa-regular fa-calendar"></i>Daily Floor</div>
-                  <div class="val">$650 / day</div>
+                  <div class="left"><i class="fa-regular fa-calendar"></i>Measurement Period</div>
+                  <div class="val" style="font-size:12px;">${p.reconciliation || 'Calendar Month'}</div>
                 </div>
                 <div class="icon-row">
-                  <div class="left"><i class="fa-regular fa-clock"></i>Payment Frequency</div>
-                  <div class="val">Bi-Weekly</div>
+                  <div class="left"><i class="fa-regular fa-clock"></i>Payroll Settlement</div>
+                  <div class="val" style="font-size:12px;">${p.paymentFrequency}</div>
                 </div>
                 <div class="icon-row">
                   <div class="left"><i class="fa-solid fa-scale-balanced"></i>Reconciliation</div>
-                  <div class="val">Monthly</div>
+                  <div class="val" style="font-size:12px;">${p.reconciliation}</div>
                 </div>
                 <div class="icon-row">
-                  <div class="left"><i class="fa-solid fa-id-card"></i>Provider Type</div>
-                  <div class="val">1099 Independent Contractor</div>
+                  <div class="left"><i class="fa-solid fa-id-card"></i>Classification</div>
+                  <div class="val" style="font-size:12px;">${p.providerType}</div>
                 </div>
                 <div class="icon-row">
-                  <div class="left"><i class="fa-solid fa-location-dot"></i>Non-Compete</div>
-                  <div class="val">5 Mile Radius</div>
-                </div>
-                <div class="icon-row">
-                  <div class="left"><i class="fa-regular fa-circle-question"></i>Includes Cancellations / No Shows</div>
-                  <div class="val">Yes</div>
+                  <div class="left"><i class="fa-solid fa-layer-group"></i>Active Components</div>
+                  <div class="val text-success fw-bold">${p.components.length} Attached</div>
                 </div>
               </div>
+
+              <!-- Dynamic Component Cards Column -->
               <div class="col-lg-8">
-                <div class="section-label">Cosmetic Compensation Structure</div>
-                <div class="table-responsive">
-                  <table class="nexa-table">
-                    <thead>
-                      <tr>
-                        <th>Case Type</th>
-                        <th>Details / Rules</th>
-                        <th>Doctor Pay</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Full Veneer Case<br><small class="text-muted">(16 – 20 Units)</small></td>
-                        <td>Same material only<br><small class="text-muted">(Composite / Ceramic /
-                            Porcelain-Zirconia)</small></td>
-                        <td class="text-success fw-semibold">Composite: $700<br>Ceramic: $800<br>Porcelain/Zirconia:
-                          $1,000</td>
-                      </tr>
-                      <tr>
-                        <td>Half Veneer Case<br><small class="text-muted">(Exactly 10 Units)</small></td>
-                        <td>50% of applicable full case rate</td>
-                        <td class="text-success fw-semibold">50% of Full Case Rate</td>
-                      </tr>
-                      <tr>
-                        <td>Per Unit – Veneers</td>
-                        <td>All non-qualified cases</td>
-                        <td class="text-success fw-semibold">Composite: $35<br>Ceramic: $40<br>Porcelain/Zirconia: $50
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Crowns (Per Unit)</td>
-                        <td>Any material</td>
-                        <td class="text-success fw-semibold">$80</td>
-                      </tr>
-                      <tr>
-                        <td>Full Crown Case</td>
-                        <td>Any material<br><small class="text-muted">(Outside of full veneer case rules)</small></td>
-                        <td class="text-success fw-semibold">$1,400 Flat</td>
-                      </tr>
-                      <tr>
-                        <td>Over 20 Units</td>
-                        <td>Additional units paid per unit rate based on material</td>
-                        <td class="text-success fw-semibold">Per Unit Rates Apply</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                  <div class="section-label mb-0">Compensation Components (${p.components.length})</div>
+                  <button type="button" class="btn btn-sm btn-outline-navy py-1" onclick="openAddComponentForCurrentPlan('${p.id}')">
+                    <i class="fa-solid fa-plus me-1 text-success"></i>Add Component
+                  </button>
+                </div>
+
+                <div class="d-flex flex-column gap-2 mb-2">
+                  ${p.components.map((c, idx) => {
+        const calcStr = getCompCalculationString(c);
+        return `
+                    <div class="comp-item-card">
+                      <div class="d-flex align-items-start justify-content-between">
+                        <div style="flex:1;">
+                          <div class="d-flex align-items-center gap-2 mb-1.5">
+                            <span class="comp-type-badge">${c.type}</span>
+                            <strong class="text-dark" style="font-size:13.5px;">${c.name}</strong>
+                          </div>
+
+                          <!-- SEPARATE RATE AND CALCULATION DISPLAY -->
+                          <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+                            <div class="comp-rate-val">
+                              <i class="fa-solid fa-tag me-1" style="font-size:11px;"></i>${c.rate}
+                            </div>
+                            <div class="calc-formula-badge">
+                              <i class="fa-solid fa-calculator text-primary" style="font-size:11px;"></i>
+                              <span class="text-muted fw-normal">Calculation:</span>
+                              <strong class="text-dark">${calcStr}</strong>
+                            </div>
+                          </div>
+
+                          <div class="text-muted small mb-1.5" style="font-size:11.5px;line-height:1.4;">${c.desc || c.qualification || ''}</div>
+                          <div class="d-flex gap-3 text-muted" style="font-size:11px;">
+                            <span><i class="fa-regular fa-clock me-1"></i>Measure: ${c.measure || 'Pay Period'}</span>
+                            <span><i class="fa-solid fa-wallet me-1 text-success"></i>Settlement: ${c.settlement || p.paymentFrequency}</span>
+                          </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-1 ms-2">
+                          <button class="btn btn-sm btn-outline-navy py-1 px-2" style="font-size:11px;" onclick="openEditComponentModal('${p.id}', ${idx})" title="Edit Component">
+                            <i class="fa-solid fa-pen me-1"></i>Edit
+                          </button>
+                          <button class="btn btn-sm btn-outline-navy py-1 px-2" style="font-size:11px;" onclick="duplicateComponent('${p.id}', ${idx})" title="Duplicate Component">
+                            <i class="fa-regular fa-copy me-1"></i>Duplicate
+                          </button>
+                          <button class="btn btn-sm btn-outline-danger py-1 px-2" style="font-size:11px;" onclick="removeComponentFromPlan('${p.id}', ${idx})" title="Delete Component">
+                            <i class="fa-solid fa-trash-can"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  `;
+      }).join('')}
                 </div>
               </div>
             </div>
+
+            <!-- ASSIGNED STAFF SECTION (Section 6 of requirements) -->
+            <div class="border-top pt-3">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <div>
+                  <h6 class="fw-bold text-dark mb-0"><i class="fa-solid fa-users text-primary me-2"></i>Assigned Staff (${p.assignments ? p.assignments.length : 0})</h6>
+                  <div class="text-muted small">Staff-level compensation assignments enrolled in ${p.name} (${p.version}).</div>
+                </div>
+                <button type="button" class="btn btn-sm btn-green" onclick="openAssignStaffModal('${p.id}')">
+                  <i class="fa-solid fa-user-plus me-1"></i>Assign Staff
+                </button>
+              </div>
+
+              <div class="table-responsive border rounded-3 bg-white">
+                <table class="nexa-table mb-0">
+                  <thead>
+                    <tr>
+                      <th>Staff Member</th>
+                      <th>Role</th>
+                      <th>Plan Version</th>
+                      <th>Effective Date</th>
+                      <th>Status</th>
+                      <th class="text-end">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${(p.assignments && p.assignments.length) ? p.assignments.map((a, aIdx) => `
+                      <tr>
+                        <td class="fw-semibold text-dark"><i class="fa-regular fa-user text-muted me-1.5"></i>${a.name}</td>
+                        <td><span class="badge bg-light text-dark border">${a.role}</span></td>
+                        <td><span class="badge bg-primary-subtle text-primary border border-primary font-monospace">${a.version}</span></td>
+                        <td class="text-muted small">${a.effective}</td>
+                        <td><span class="badge-status active">${a.status}</span></td>
+                        <td class="text-end">
+                          <button class="btn btn-link text-danger p-0 small" onclick="removeStaffAssignment('${p.id}', ${aIdx})" title="Unassign">
+                            <i class="fa-solid fa-xmark"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    `).join('') : `
+                      <tr>
+                        <td colspan="6" class="text-center text-muted py-3 small">
+                          No staff assigned to this plan yet. Click "+ Assign Staff" to enroll members.
+                        </td>
+                      </tr>
+                    `}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
           </div>
 
-          <!-- TAB: Cosmetic Compensation -->
-          <div id="ptab-cosmetic" class="panel-body pt-0" style="display:none;">
-            <div class="section-label">Cosmetic Compensation — Full Detail</div>
-            <div class="table-responsive">
-              <table class="nexa-table">
+          <!-- TAB 2: Rates & Tier Schedules -->
+          <div id="ptab-rates" class="panel-body pt-0" style="display:none;">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <div class="section-label mb-0">Rate &amp; Tier Payout Schedule</div>
+              ${p.id === 'luxury-smile-agent' ? '<span class="badge bg-warning-subtle text-warning-emphasis border border-warning px-2 py-1"><i class="fa-solid fa-bolt me-1"></i>Highest Tier Only — Non-Stacking</span>' : ''}
+            </div>
+
+            ${p.id === 'luxury-smile-agent' ? `
+              <div class="alert alert-light border d-flex align-items-center gap-3 p-3 mb-3">
+                <div class="avatar-sm bg-warning text-dark"><i class="fa-solid fa-crown"></i></div>
+                <div>
+                  <strong class="d-block text-dark">Quarterly Excellence Bonus ($1,500.00) — Consecutive Month Benchmark</strong>
+                  <span class="text-muted small">Requires achieving at least 10 qualified bookings in each of 3 consecutive calendar months while satisfying standing/performance rules. (Month 1: ≥10 ✓, Month 2: ≥10 ✓, Month 3: ≥10 ✓ = $1,500 Earned).</span>
+                </div>
+              </div>
+            ` : ''}
+
+            <div class="table-responsive border rounded-3 bg-white">
+              <table class="nexa-table mb-0">
                 <thead>
                   <tr>
-                    <th>Material</th>
-                    <th>Full Case (16–20u)</th>
-                    <th>Half Case (10u)</th>
-                    <th>Per-Unit (&lt;16u)</th>
+                    <th>Tier / Bracket</th>
+                    <th>Threshold / Volume</th>
+                    <th>Payout Rate</th>
+                    <th>Operational Notes</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Composite</td>
-                    <td class="text-success fw-semibold">$700</td>
-                    <td class="text-success fw-semibold">$350</td>
-                    <td class="text-success fw-semibold">$35 / unit</td>
-                  </tr>
-                  <tr>
-                    <td>Ceramic</td>
-                    <td class="text-success fw-semibold">$800</td>
-                    <td class="text-success fw-semibold">$400</td>
-                    <td class="text-success fw-semibold">$40 / unit</td>
-                  </tr>
-                  <tr>
-                    <td>Porcelain / Zirconia</td>
-                    <td class="text-success fw-semibold">$1,000</td>
-                    <td class="text-success fw-semibold">$500</td>
-                    <td class="text-success fw-semibold">$50 / unit</td>
-                  </tr>
-                  <tr>
-                    <td>Crown (any material)</td>
-                    <td colspan="2" class="text-muted">Per-unit only</td>
-                    <td class="text-success fw-semibold">$80 / unit</td>
-                  </tr>
+                  ${(p.tierSchedule && p.tierSchedule.length) ? p.tierSchedule.map(t => `
+                    <tr>
+                      <td class="fw-bold text-dark">${t.tier}</td>
+                      <td class="fw-semibold text-primary">${t.range}</td>
+                      <td class="text-success fw-bold">${t.payout}</td>
+                      <td class="text-muted small">${t.note || ''}</td>
+                    </tr>
+                  `).join('') : `
+                    <tr>
+                      <td colspan="4" class="text-center text-muted py-3 small">Rate schedule configured directly within component parameters.</td>
+                    </tr>
+                  `}
                 </tbody>
               </table>
             </div>
-            <div class="text-muted small mt-2">Mixed-material cases are paid per-unit based on the material of each unit
-              placed.</div>
           </div>
 
-          <!-- TAB: General Dentistry -->
-          <div id="ptab-general" class="panel-body pt-0" style="display:none;">
-            <div class="section-label">General Dentistry Compensation (35% of Production)</div>
-            <table class="nexa-table">
-              <thead>
-                <tr>
-                  <th>Category</th>
-                  <th>Example Procedures</th>
-                  <th>Doctor Pay</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Restorative</td>
-                  <td>Fillings, Bonding</td>
-                  <td class="text-success fw-semibold">35% of Production</td>
-                </tr>
-                <tr>
-                  <td>Endodontics</td>
-                  <td>Root Canals</td>
-                  <td class="text-success fw-semibold">35% of Production</td>
-                </tr>
-                <tr>
-                  <td>Extractions</td>
-                  <td>Simple &amp; Surgical</td>
-                  <td class="text-success fw-semibold">35% of Production</td>
-                </tr>
-                <tr>
-                  <td>Other Procedures</td>
-                  <td>Scaling, Deep Cleaning, Bone Grafts</td>
-                  <td class="text-success fw-semibold">35% of Production</td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="text-muted small mt-2">All general dentistry procedures are paid at 35% of production per the
-              Practice Fee Schedule, regardless of category.</div>
-          </div>
+          <!-- TAB 3: Qualification & Reversal Rules -->
+          <div id="ptab-qualification" class="panel-body pt-0" style="display:none;">
+            <div class="section-label">Strict Qualification Criteria</div>
+            <div class="row g-3 mb-3">
+              ${p.qualificationRules.map(r => `
+                <div class="col-md-6">
+                  <div class="p-3 border rounded-3 bg-white h-100 d-flex gap-2">
+                    <i class="fa-solid fa-circle-check text-success mt-1"></i>
+                    <div class="small text-dark" style="line-height:1.45;">${r}</div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
 
-          <!-- TAB: Adjustments & Rules -->
-          <div id="ptab-adjustments" class="panel-body pt-0" style="display:none;">
-            <div class="section-label">Adjustments &amp; Rules</div>
-            <div class="icon-row">
-              <div class="left"><i class="fa-solid fa-rotate-left"></i>Warranty Repairs</div>
-              <div class="val">Not paid separately to original provider</div>
-            </div>
-            <div class="icon-row">
-              <div class="left"><i class="fa-solid fa-layer-group"></i>Mixed Material Cases</div>
-              <div class="val">Default to per-unit rate by material</div>
-            </div>
-            <div class="icon-row">
-              <div class="left"><i class="fa-solid fa-user-group"></i>Prep / Cement Split</div>
-              <div class="val">Tracked by role, split accordingly</div>
-            </div>
-            <div class="icon-row">
-              <div class="left"><i class="fa-solid fa-ban"></i>Cancellations / No-Shows</div>
-              <div class="val">Included toward daily floor</div>
-            </div>
-            <div class="icon-row">
-              <div class="left"><i class="fa-solid fa-money-bill-transfer"></i>Advance Recoupment</div>
-              <div class="val">Deducted from next reconciliation</div>
+            <div class="p-3 border rounded-3 bg-light">
+              <div class="fw-bold text-dark mb-1"><i class="fa-solid fa-arrows-rotate text-danger me-1"></i>Reversal &amp; Clawback Behavior</div>
+              <div class="small text-muted">When a qualified booking or case experiences a post-cutoff cancellation, deposit refund, or chargeback, NexaTrack generates an audited reversal ledger entry on the subsequent payroll run rather than mutating historical statements.</div>
             </div>
           </div>
 
-          <!-- TAB: Notes -->
-          <div id="ptab-notes" class="panel-body pt-0" style="display:none;">
-            <div class="section-label">Notes</div>
-            <div class="border-bottom pb-3 mb-3">
-              <div class="d-flex justify-content-between"><span class="fw-semibold small">James Johnson</span><span
-                  class="text-muted small">Mar 1, 2026</span></div>
-              <div class="small text-muted mt-1">Plan updated to reflect new $1,400 flat rate for full crown cases,
-                effective this pay period.</div>
+          <!-- TAB 4: Operational Performance KPIs -->
+          <div id="ptab-kpis" class="panel-body pt-0" style="display:none;">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <div class="section-label mb-0">Operational Performance KPIs vs. Compensation Rules</div>
+              <span class="badge bg-light text-muted border">Separation of Concerns</span>
             </div>
-            <div class="small text-muted">No additional notes.</div>
+            <p class="text-muted small mb-3">Performance rules measure whether staff members meet operational coaching expectations (e.g. ramp speed, shifts, booking pacing). They are tracked on staff dashboards without automatically becoming direct payroll calculations.</p>
+
+            <div class="table-responsive border rounded-3 bg-white">
+              <table class="nexa-table mb-0">
+                <thead>
+                  <tr>
+                    <th>Standard / Metric</th>
+                    <th>Benchmark Expectation</th>
+                    <th>Category</th>
+                    <th>Status / Handling</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${(p.operationalKpis && p.operationalKpis.length) ? p.operationalKpis.map(k => `
+                    <tr>
+                      <td class="fw-bold text-dark">${k.metric}</td>
+                      <td class="fw-semibold text-primary">${k.rule}</td>
+                      <td><span class="badge bg-light text-dark border">${k.status}</span></td>
+                      <td class="text-muted small"><i class="fa-regular fa-eye me-1 text-success"></i>${k.tracking}</td>
+                    </tr>
+                  `).join('') : `
+                    <tr>
+                      <td colspan="4" class="text-center text-muted py-3 small">No operational KPIs configured for this plan.</td>
+                    </tr>
+                  `}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- TAB 5: Version History & Audit Trail -->
+          <div id="ptab-versions" class="panel-body pt-0" style="display:none;">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <div class="section-label mb-0">Effective-Dated Plan Versions</div>
+              <button class="btn btn-sm btn-outline-navy" onclick="createNewPlanVersion('${p.id}')">
+                <i class="fa-solid fa-plus me-1"></i>New Version
+              </button>
+            </div>
+            <p class="text-muted small mb-3">A compensation-plan change never rewrites historical earnings. Legacy staff remain on previous versions while new staff are enrolled in updated models.</p>
+
+            <div class="table-responsive border rounded-3 bg-white">
+              <table class="nexa-table mb-0">
+                <thead>
+                  <tr>
+                    <th>Version</th>
+                    <th>Effective Date</th>
+                    <th>Author / Approver</th>
+                    <th>Summary of Modifications</th>
+                    <th>Ledger Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${p.versions.map(v => `
+                    <tr>
+                      <td><span class="badge bg-primary-subtle text-primary border border-primary fw-bold font-monospace">${v.ver}</span></td>
+                      <td class="fw-semibold text-dark">${v.date}</td>
+                      <td class="text-muted small">${v.author}</td>
+                      <td class="text-dark small">${v.summary}</td>
+                      <td><span class="badge-status active">Immutable</span></td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
           </div>
 
         </div>
 
         <div class="panel mt-3 panel-body">
-          <div class="fw-semibold small mb-2"><i class="fa-solid fa-circle-exclamation text-warning me-1"></i>Important
-            Notes</div>
+          <div class="fw-semibold small mb-2"><i class="fa-solid fa-circle-exclamation text-warning me-1"></i>V2.0 Engine Core Guarantees</div>
           <div class="notes-grid small text-muted">
-            <div><i class="fa-solid fa-circle text-success"
-                style="font-size:5px;vertical-align:middle;margin-right:8px;"></i>Smile packages include exam, X-rays,
-              and cleaning.</div>
-            <div><i class="fa-solid fa-circle text-success"
-                style="font-size:5px;vertical-align:middle;margin-right:8px;"></i>Mixed material cases default to
-              per-unit rates based on material.</div>
-            <div><i class="fa-solid fa-circle text-success"
-                style="font-size:5px;vertical-align:middle;margin-right:8px;"></i>All general dentistry procedures are
-              paid at 35% of production per the Practice Fee Schedule.</div>
-            <div><i class="fa-solid fa-circle text-success"
-                style="font-size:5px;vertical-align:middle;margin-right:8px;"></i>Prep, cementation, and lab fees are
-              tracked by role and split accordingly.</div>
-            <div><i class="fa-solid fa-circle text-success"
-                style="font-size:5px;vertical-align:middle;margin-right:8px;"></i>Warranty repairs for original provider
-              are not paid separately.</div>
+            <div><i class="fa-solid fa-circle text-success" style="font-size:5px;vertical-align:middle;margin-right:8px;"></i>Canonical Ledger: Statements read strictly from append-only immutable earning events.</div>
+            <div><i class="fa-solid fa-circle text-success" style="font-size:5px;vertical-align:middle;margin-right:8px;"></i>Idempotent Calculations: Previewing or recalculating runs never duplicates line items.</div>
+            <div><i class="fa-solid fa-circle text-success" style="font-size:5px;vertical-align:middle;margin-right:8px;"></i>Multi-Component Plans: Staff can simultaneously earn hourly, tiered incentives, and bonuses.</div>
           </div>
         </div>
-      </div>
-    </div>
+      `;
+    }
 
-    <div class="modal fade" id="newRuleModal" tabindex="-1">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content" style="border-radius:12px;border:none;">
-          <div class="modal-header">
-            <h5 class="modal-title fw-bold">New Compensation Rule</h5><button type="button" class="btn-close"
-              data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <div class="row g-3">
-              <div class="col-md-6"><label class="form-label">Plan Name</label><input type="text" class="form-control"
-                  placeholder="e.g. ISR (Commission)"></div>
-              <div class="col-md-6"><label class="form-label">Applies To Role</label><select class="form-select">
-                  <option>Doctors</option>
-                  <option>ISR</option>
-                  <option>SDR</option>
-                  <option>CE</option>
-                  <option>Lab</option>
-                  <option>Marketing</option>
-                </select></div>
-              <div class="col-md-6"><label class="form-label">Plan Type</label><select class="form-select">
-                  <option>Production Based</option>
-                  <option>Percentage Commission</option>
-                  <option>Flat Case Pay</option>
-                  <option>Hourly</option>
-                  <option>Salary</option>
-                </select></div>
-              <div class="col-md-6"><label class="form-label">Effective Date</label><input type="date"
-                  class="form-control" value="2026-07-08"></div>
-              <div class="col-md-6"><label class="form-label">Payment Frequency</label><select class="form-select">
-                  <option>Bi-Weekly</option>
-                  <option>Weekly</option>
-                  <option>Monthly</option>
-                </select></div>
-              <div class="col-md-6"><label class="form-label">Non-Compete Radius (optional)</label><input type="text"
-                  class="form-control" placeholder="e.g. 5 Mile Radius"></div>
+    function filterByRole(role, btn) {
+      document.querySelectorAll('.role-tab-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderPlans(role);
+    }
+
+    function searchPlans() {
+      const q = document.getElementById('planSearch').value.toLowerCase();
+      const items = document.querySelectorAll('.plan-item');
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(q) ? 'flex' : 'none';
+      });
+    }
+
+    function showPlanTab(key, btn) {
+      document.querySelectorAll('[id^="ptab-"]').forEach(el => el.style.display = 'none');
+      const target = document.getElementById('ptab-' + key);
+      if (target) target.style.display = 'block';
+      document.querySelectorAll('.engine-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    /* ==========================================================
+       DYNAMIC COMPONENT BUILDER FOR #newRuleModal
+       Supports all 9 component types with separate Rate and Calculation inputs
+       ========================================================== */
+    function getCompCalculationString(c) {
+      if (c.calcRule) return c.calcRule;
+      if (typeof c.calculation === 'string') return c.calculation;
+      if (c.calculation && typeof c.calculation === 'object') {
+        if (c.calculation.metric) {
+          return `${c.calculation.metric} · ${c.calculation.payoutMethod || (c.calculation.trigger ? 'Trigger: ' + c.calculation.trigger : '')}`;
+        }
+        if (c.calculation.hourlyRate) {
+          return `Clocked Regular Hours + Overtime Multiplier (${c.calculation.overtimeMultiplier || '1.5x'})`;
+        }
+        if (c.calculation.commissionPct) {
+          return `${c.calculation.commissionPct}% of ${c.calculation.basis || 'Collected Value'}`;
+        }
+        if (c.calculation.floorAmount) {
+          return `$${c.calculation.floorAmount}/day floor advance; ${c.calculation.reconciliation || 'Reconciled monthly'}`;
+        }
+        if (c.calculation.fullCase) {
+          return `Full Case: $${c.calculation.fullCase.composite}/$${c.calculation.fullCase.ceramic}/$${c.calculation.fullCase.porcelainZirconia} · Half: ${c.calculation.halfCase || '50%'}`;
+        }
+        if (c.calculation.composite) {
+          return `Composite: $${c.calculation.composite} · Ceramic: $${c.calculation.ceramic} · Porcelain: $${c.calculation.porcelain}`;
+        }
+      }
+      return c.desc || 'Standard calculation per pay period.';
+    }
+
+    /* Helper to render dynamic type-specific calculation fields (matching user's design) */
+    function renderTypeSpecificFields(comp, idx, prefix) {
+      if (!comp.details) comp.details = {};
+      const type = comp.type;
+
+      if (type === 'Production Based') {
+        const fullCase = comp.details.fullCase || '$700';
+        const halfCase = comp.details.halfCase || '50%';
+        const perUnit = comp.details.perUnit || '$35';
+        return `
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Full Case Rate</label>
+              <input type="text" class="form-control" value="${fullCase}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.fullCase = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('fullCase', this.value)`}">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Half Case Rule</label>
+              <input type="text" class="form-control" value="${halfCase}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.halfCase = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('halfCase', this.value)`}">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Per Unit Rate</label>
+              <input type="text" class="form-control" value="${perUnit}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.perUnit = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('perUnit', this.value)`}">
             </div>
           </div>
-          <div class="modal-footer"><button class="btn btn-outline-navy" data-bs-dismiss="modal">Cancel</button><button
-              class="btn btn-green">Create Plan</button></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="editPlanModal" tabindex="-1">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content" style="border-radius:12px;border:none;">
-          <div class="modal-header">
-            <h5 class="modal-title fw-bold">Edit Plan — Doctors (Cosmetic & General Dentistry)</h5><button type="button"
-              class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <div class="row g-3 mb-3">
-              <div class="col-md-4"><label class="form-label">Daily Floor</label>
-                <div class="input-group"><span class="input-group-text">$</span><input type="number"
-                    class="form-control" value="650"></div>
-              </div>
-              <div class="col-md-4"><label class="form-label">Full Case — Composite</label>
-                <div class="input-group"><span class="input-group-text">$</span><input type="number"
-                    class="form-control" value="700"></div>
-              </div>
-              <div class="col-md-4"><label class="form-label">Full Case — Ceramic</label>
-                <div class="input-group"><span class="input-group-text">$</span><input type="number"
-                    class="form-control" value="800"></div>
-              </div>
-              <div class="col-md-4"><label class="form-label">Full Case — Porcelain/Zirconia</label>
-                <div class="input-group"><span class="input-group-text">$</span><input type="number"
-                    class="form-control" value="1000"></div>
-              </div>
-              <div class="col-md-4"><label class="form-label">Per-Unit — Composite</label>
-                <div class="input-group"><span class="input-group-text">$</span><input type="number"
-                    class="form-control" value="35"></div>
-              </div>
-              <div class="col-md-4"><label class="form-label">Full Crown Case (Flat)</label>
-                <div class="input-group"><span class="input-group-text">$</span><input type="number"
-                    class="form-control" value="1400"></div>
-              </div>
+        `;
+      } else if (type === 'Hourly') {
+        const rate = comp.details.hourlyRate || '$18.00 / hr';
+        const hours = comp.details.regularHours || '80 hrs';
+        const ot = comp.details.overtime || '1.5x';
+        return `
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Hourly Rate</label>
+              <input type="text" class="form-control" value="${rate}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.hourlyRate = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('hourlyRate', this.value)`}">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Regular Hours</label>
+              <input type="text" class="form-control" value="${hours}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.regularHours = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('regularHours', this.value)`}">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Overtime Multiplier</label>
+              <input type="text" class="form-control" value="${ot}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.overtime = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('overtime', this.value)`}">
             </div>
           </div>
-          <div class="modal-footer"><button class="btn btn-outline-navy" data-bs-dismiss="modal">Cancel</button><button
-              class="btn btn-green">Save Changes</button></div>
-        </div>
-      </div>
-    </div>
+        `;
+      } else if (type === 'Percentage Commission') {
+        const commPct = comp.details.commPct || '6.0%';
+        const basis = comp.details.basis || 'Cleared Collections Value';
+        const override = comp.details.override || '2.0%';
+        return `
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Commission %</label>
+              <input type="text" class="form-control" value="${commPct}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.commPct = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('commPct', this.value)`}">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Commission Basis</label>
+              <select class="form-select" onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.basis = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('basis', this.value)`}">
+                <option value="Cleared Collections Value" ${basis === 'Cleared Collections Value' ? 'selected' : ''}>Cleared Collections Value</option>
+                <option value="Booked Revenue" ${basis === 'Booked Revenue' ? 'selected' : ''}>Booked Revenue</option>
+                <option value="Gross Production" ${basis === 'Gross Production' ? 'selected' : ''}>Gross Production</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Team Lead Override %</label>
+              <input type="text" class="form-control" value="${override}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.override = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('override', this.value)`}">
+            </div>
+          </div>
+        `;
+      } else if (type === 'Flat Case Pay') {
+        const compRate = comp.details.compRate || '$100';
+        const ceramRate = comp.details.ceramRate || '$150';
+        const porcRate = comp.details.porcRate || '$200';
+        const crownRate = comp.details.crownRate || '$200';
+        return `
+          <div class="row g-2">
+            <div class="col-md-3">
+              <label class="form-label small mb-1 fw-semibold">Composite Rate</label>
+              <input type="text" class="form-control" value="${compRate}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.compRate = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('compRate', this.value)`}">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label small mb-1 fw-semibold">Ceramic Rate</label>
+              <input type="text" class="form-control" value="${ceramRate}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.ceramRate = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('ceramRate', this.value)`}">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label small mb-1 fw-semibold">Porcelain Rate</label>
+              <input type="text" class="form-control" value="${porcRate}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.porcRate = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('porcRate', this.value)`}">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label small mb-1 fw-semibold">Full Crown Rate</label>
+              <input type="text" class="form-control" value="${crownRate}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.crownRate = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('crownRate', this.value)`}">
+            </div>
+          </div>
+        `;
+      } else if (type === 'Salary') {
+        const salary = comp.details.salary || '$5,200.00 / mo';
+        const period = comp.details.period || 'Monthly';
+        const split = comp.details.split || 'Semi-Monthly Split';
+        return `
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Salary Amount</label>
+              <input type="text" class="form-control" value="${salary}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.salary = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('salary', this.value)`}">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Payment Period</label>
+              <select class="form-select" onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.period = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('period', this.value)`}">
+                <option value="Monthly" ${period === 'Monthly' ? 'selected' : ''}>Monthly</option>
+                <option value="Annual" ${period === 'Annual' ? 'selected' : ''}>Annual</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Settlement Frequency</label>
+              <input type="text" class="form-control" value="${split}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.split = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('split', this.value)`}">
+            </div>
+          </div>
+        `;
+      } else if (type === 'Per Unit / Activity') {
+        const actName = comp.details.actName || 'Fabricated Unit';
+        const ratePerUnit = comp.details.ratePerUnit || '$35.00 / unit';
+        const dupCheck = comp.details.dupCheck || 'Enabled (Master Check)';
+        return `
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Unit / Activity Name</label>
+              <input type="text" class="form-control" value="${actName}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.actName = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('actName', this.value)`}">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Rate Per Unit</label>
+              <input type="text" class="form-control" value="${ratePerUnit}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.ratePerUnit = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('ratePerUnit', this.value)`}">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Duplicate Prevention</label>
+              <select class="form-select" onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.dupCheck = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('dupCheck', this.value)`}">
+                <option value="Enabled (Master Check)" ${dupCheck === 'Enabled (Master Check)' ? 'selected' : ''}>Enabled (Master Check)</option>
+                <option value="Disabled" ${dupCheck === 'Disabled' ? 'selected' : ''}>Disabled</option>
+              </select>
+            </div>
+          </div>
+        `;
+      } else if (type === 'Tiered Performance') {
+        const baseRate = comp.details.baseRate || '$150';
+        const topRate = comp.details.topRate || '$2,550';
+        const method = comp.details.method || 'Highest Tier Only (Non-Stacking)';
+        return `
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Base Tier Rate</label>
+              <input type="text" class="form-control" value="${baseRate}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.baseRate = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('baseRate', this.value)`}">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Top Tier Ceiling</label>
+              <input type="text" class="form-control" value="${topRate}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.topRate = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('topRate', this.value)`}">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Payout Method</label>
+              <select class="form-select" onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.method = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('method', this.value)`}">
+                <option value="Highest Tier Only (Non-Stacking)" ${method === 'Highest Tier Only (Non-Stacking)' ? 'selected' : ''}>Highest Tier Only (Non-Stacking)</option>
+                <option value="Stacking" ${method === 'Stacking' ? 'selected' : ''}>Cumulative Stacking</option>
+              </select>
+            </div>
+          </div>
+        `;
+      } else if (type === 'Bonus / Spiff') {
+        const bonus = comp.details.bonus || '$1,500.00';
+        const benchmark = comp.details.benchmark || '≥10 Bookings in 3 consecutive months';
+        const period = comp.details.period || 'Quarterly';
+        return `
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Bonus Amount</label>
+              <input type="text" class="form-control" value="${bonus}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.bonus = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('bonus', this.value)`}">
+            </div>
+            <div class="col-md-5">
+              <label class="form-label small mb-1 fw-semibold">Qualification Benchmark</label>
+              <input type="text" class="form-control" value="${benchmark}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.benchmark = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('benchmark', this.value)`}">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label small mb-1 fw-semibold">Measurement Period</label>
+              <select class="form-select" onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.period = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('period', this.value)`}">
+                <option value="Quarterly" ${period === 'Quarterly' ? 'selected' : ''}>Quarterly</option>
+                <option value="Monthly" ${period === 'Monthly' ? 'selected' : ''}>Monthly</option>
+                <option value="Annual" ${period === 'Annual' ? 'selected' : ''}>Annual</option>
+              </select>
+            </div>
+          </div>
+        `;
+      } else if (type === 'Production Floor') {
+        const floor = comp.details.floor || '$650.00 / day';
+        const days = comp.details.days || 'Clinical Provider Days';
+        const reconcile = comp.details.reconcile || 'Reconciled monthly against earned production';
+        return `
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Daily Floor Amount</label>
+              <input type="text" class="form-control" value="${floor}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.floor = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('floor', this.value)`}">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Eligible Days</label>
+              <input type="text" class="form-control" value="${days}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.days = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('days', this.value)`}">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small mb-1 fw-semibold">Reconciliation Rule</label>
+              <input type="text" class="form-control" value="${reconcile}" 
+                onchange="${prefix === 'builder' ? `builderComponents[${idx}].details.reconcile = this.value; syncBuilderComp(${idx})` : `syncEditCompDetails('reconcile', this.value)`}">
+            </div>
+          </div>
+        `;
+      }
+      return '';
+    }
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script>
-      $(function () {
-        $('input[name="date"]').daterangepicker({
-          timePicker: true,
-          startDate: moment().startOf('month'),
-          endDate: moment().endOf('month'),
-          locale: {
-            format: 'MM/DD/YYYY'
+    function syncBuilderComp(idx) {
+      const c = builderComponents[idx];
+      if (!c) return;
+      if (!c.details) c.details = {};
+
+      if (c.type === 'Production Based') {
+        c.rate = `Full Case: ${c.details.fullCase || '$700'} · Half: ${c.details.halfCase || '50%'} · Per-Unit: ${c.details.perUnit || '$35'}`;
+        c.calcRule = c.rate;
+        c.calculation = c.rate;
+        c.measure = 'Bi-Weekly Completed Cases';
+        c.settlement = 'Bi-Weekly Run';
+      } else if (c.type === 'Hourly') {
+        c.rate = c.details.hourlyRate || '$18.00 / hr';
+        c.calcRule = `Clocked Regular Hours * ${c.rate} + ${c.details.overtime || '1.5x'} Overtime after ${c.details.regularHours || '80 hrs'}`;
+        c.calculation = c.calcRule;
+        c.measure = 'Worked Hours in Timecard';
+        c.settlement = 'Bi-Weekly Payroll Run';
+      } else if (c.type === 'Percentage Commission') {
+        c.rate = `${c.details.commPct || '6.0%'} Rep Rate (+ ${c.details.override || '2.0%'} Override)`;
+        c.calcRule = `${c.details.basis || 'Cleared Collections Value'} * ${c.details.commPct || '6.0%'}`;
+        c.calculation = c.calcRule;
+        c.measure = c.details.basis || 'Cleared Collections Value';
+        c.settlement = 'Bi-Weekly Payroll Run';
+      } else if (c.type === 'Flat Case Pay') {
+        c.rate = `Composite: ${c.details.compRate || '$100'} · Ceramic: ${c.details.ceramRate || '$150'} · Porcelain: ${c.details.porcRate || '$200'} · Crown: ${c.details.crownRate || '$200'}`;
+        c.calcRule = c.rate;
+        c.calculation = c.rate;
+        c.measure = 'Completed Case Arches';
+        c.settlement = 'Bi-Weekly Payroll Run';
+      } else if (c.type === 'Salary') {
+        c.rate = c.details.salary || '$5,200.00 / mo';
+        c.calcRule = `${c.details.period || 'Monthly'} base (${c.details.split || 'Semi-Monthly Split'})`;
+        c.calculation = c.calcRule;
+        c.measure = c.details.period || 'Monthly';
+        c.settlement = c.details.split || 'Semi-Monthly Split';
+      } else if (c.type === 'Per Unit / Activity') {
+        c.rate = c.details.ratePerUnit || '$35.00 / unit';
+        c.calcRule = `${c.details.actName || 'Fabricated Unit'} * ${c.rate} (${c.details.dupCheck || 'Duplicate Check'})`;
+        c.calculation = c.calcRule;
+        c.measure = 'Completed Units';
+        c.settlement = 'Bi-Weekly Payroll Run';
+      } else if (c.type === 'Tiered Performance') {
+        c.rate = `${c.details.baseRate || '$150'} – ${c.details.topRate || '$2,550'}`;
+        c.calcRule = c.details.method || 'Highest Tier Only (Non-Stacking)';
+        c.calculation = c.calcRule;
+        c.measure = 'Calendar Month';
+        c.settlement = 'Month-End Run';
+      } else if (c.type === 'Bonus / Spiff') {
+        c.rate = `${c.details.bonus || '$1,500.00'} Flat Bonus`;
+        c.calcRule = `${c.details.benchmark || '≥10 Bookings in 3 consecutive months'} (${c.details.period || 'Quarterly'})`;
+        c.calculation = c.calcRule;
+        c.measure = c.details.period || 'Quarterly';
+        c.settlement = 'Quarterly Payroll Settlement';
+      } else if (c.type === 'Production Floor') {
+        c.rate = `${c.details.floor || '$650.00 / day'}`;
+        c.calcRule = `${c.details.days || 'Clinical Provider Days'} (${c.details.reconcile || 'Reconciled monthly'})`;
+        c.calculation = c.calcRule;
+        c.measure = c.details.days || 'Clinical Provider Days';
+        c.settlement = 'Bi-Weekly Advance / Monthly Reconcile';
+      }
+    }
+
+    function openCreateNewPlanModal() {
+      document.getElementById('newPlanName').value = '';
+      document.getElementById('newPlanVersion').value = 'v1.0';
+      if (document.getElementById('newPlanStatus')) document.getElementById('newPlanStatus').value = 'Active';
+      if (document.getElementById('newPlanRole')) document.getElementById('newPlanRole').value = 'hybrid';
+      document.getElementById('newPlanEffective').value = '2026-04-01';
+      if (document.getElementById('newPlanFrequency')) document.getElementById('newPlanFrequency').value = 'Bi-Weekly';
+      document.getElementById('newPlanQual').value = '';
+      document.getElementById('newPlanAuthor').value = 'James Johnson';
+      builderComponents = [
+        {
+          name: "New Compensation Component",
+          type: "Production Based",
+          details: {
+            fullCase: "$700",
+            halfCase: "50%",
+            perUnit: "$35"
           }
-        });
-      });
-      const plans = [
-        { id: "doctors", icon: "fa-tooth", color: "#4338ca", bg: "#eef2ff", name: "Doctors (Cosmetic & Gen Dent)", sub: "Production Based", members: 8, role: "doctors" },
-        { id: "isr-commission", icon: "fa-percent", color: "#92400e", bg: "#fef3c7", name: "ISR (Commission)", sub: "6% + 2% Team Lead", members: 14, role: "isr-commission" },
-        { id: "isr-flat", icon: "fa-file-invoice-dollar", color: "#9d174d", bg: "#fce7f3", name: "ISR (Flat Pay)", sub: "Flat Fee per Case", members: 6, role: "isr-flat" },
-        { id: "sdr", icon: "fa-headset", color: "#059669", bg: "#ecfdf5", name: "SDR", sub: "$15 / Hour + Bonuses", members: 5, role: "sdr" },
-        { id: "ce", icon: "fa-headset", color: "#92400e", bg: "#fef3c7", name: "CE", sub: "Hourly + Performance Bonuses", members: 4, role: "ce" },
-        { id: "lab", icon: "fa-flask", color: "#1e40af", bg: "#dbeafe", name: "Lab Technicians", sub: "Hourly", members: 4, role: "lab" },
-        { id: "marketing", icon: "fa-bullhorn", color: "#9d174d", bg: "#fce7f3", name: "Marketing", sub: "Monthly Salary + Bonuses", members: 1, role: "marketing" },
+        }
       ];
+      syncBuilderComp(0);
+      renderBuilderComponents();
+    }
 
-      function renderPlans(filterRole) {
-        const list = document.getElementById('planList');
-        const filtered = (!filterRole || filterRole === 'all') ? plans : plans.filter(p => p.role === filterRole);
-        if (filtered.length === 0) {
-          list.innerHTML = '<div class="text-muted small text-center py-4">No plans match this role.</div>';
-          return;
-        }
-        list.innerHTML = filtered.map((p, i) => `
-    <div class="plan-item ${p.id === 'doctors' && (!filterRole || filterRole === 'all') ? 'selected' : ''}" onclick="selectPlan('${p.id}', this)">
-      <div class="plan-icon" style="background:${p.bg};color:${p.color};"><i class="fa-solid ${p.icon}"></i></div>
-      <div>
-        <div class="plan-item-name">${p.name}</div>
-        <div class="plan-item-sub">${p.sub}</div>
-      </div>
-      <div class="plan-item-right">
-        <span class="badge-status active">Active</span>
-        <div class="members">${p.members} Members</div>
-      </div>
-    </div>
-  `).join('');
-      }
-
-      function selectPlan(id, el) {
-        document.querySelectorAll('.plan-item').forEach(x => x.classList.remove('selected'));
-        el.classList.add('selected');
-        const p = plans.find(x => x.id === id);
-        document.getElementById('planTitle').innerHTML = `${p.name} <span class="badge-status active ms-1">Active</span>`;
-        document.getElementById('planSubtitle').textContent = `${p.sub} Compensation Plan`;
-      }
-
-      function filterByRole(role, btn) {
-        document.querySelectorAll('.role-tab-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        renderPlans(role);
-      }
-
-      function searchPlans() {
-        const q = document.getElementById('planSearch').value.toLowerCase();
-        const items = document.querySelectorAll('.plan-item');
-        items.forEach(item => {
-          const text = item.textContent.toLowerCase();
-          item.style.display = text.includes(q) ? 'flex' : 'none';
-        });
-      }
-
-      function showPlanTab(key, btn) {
-        document.querySelectorAll('[id^="ptab-"]').forEach(el => el.style.display = 'none');
-        document.getElementById('ptab-' + key).style.display = 'block';
-        document.querySelectorAll('.engine-tab-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-      }
-
-      renderPlans('all');
-
-
-      const sidebarToggle = document.getElementById('sidebarToggle');
-      const sidebarBackdrop = document.getElementById('sidebarBackdrop');
-
-      function closeSidebar() {
-        document.body.classList.remove('sidebar-open');
-      }
-
-      if (sidebarToggle) {
-        sidebarToggle.addEventListener('click', () => {
-          document.body.classList.toggle('sidebar-open');
-        });
-      }
-
-      if (sidebarBackdrop) {
-        sidebarBackdrop.addEventListener('click', closeSidebar);
-      }
-
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 900) {
-          closeSidebar();
+    function addBuilderComponentRow() {
+      builderComponents.push({
+        name: "New Compensation Component",
+        type: "Production Based",
+        details: {
+          fullCase: "$700",
+          halfCase: "50%",
+          perUnit: "$35"
         }
       });
+      syncBuilderComp(builderComponents.length - 1);
+      renderBuilderComponents();
+    }
 
-      /* ==========================================================
-         KPI CARD DETAIL — Compensation Rules
-         ========================================================== */
-      function editPlanFromDetail(planId) {
-        const detailModal = bootstrap.Modal.getInstance(document.getElementById('compDetailModal'));
-        if (detailModal) detailModal.hide();
-        // Scroll the plan list into view
-        const planList = document.getElementById('planList');
-        if (planList) planList.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        // Open the edit plan modal after a brief delay
-        setTimeout(() => {
-          const editModal = new bootstrap.Modal(document.getElementById('editPlanModal'));
-          editModal.show();
-        }, 350);
+    function removeBuilderComponentRow(idx) {
+      builderComponents.splice(idx, 1);
+      renderBuilderComponents();
+    }
+
+    function updateBuilderCompType(idx, newType) {
+      builderComponents[idx].type = newType;
+      if (newType === 'Production Based') {
+        builderComponents[idx].name = 'Production Based Component';
+        builderComponents[idx].details = { fullCase: "$700", halfCase: "50%", perUnit: "$35" };
+      } else if (newType === 'Hourly') {
+        builderComponents[idx].name = 'Base Hourly Pay';
+        builderComponents[idx].details = { hourlyRate: "$18.00 / hr", regularHours: "80 hrs", overtime: "1.5x" };
+      } else if (newType === 'Salary') {
+        builderComponents[idx].name = 'Base Salary';
+        builderComponents[idx].details = { salary: "$5,200.00 / mo", period: "Monthly", split: "Semi-Monthly Split" };
+      } else if (newType === 'Percentage Commission') {
+        builderComponents[idx].name = 'Sales Commission';
+        builderComponents[idx].details = { commPct: "6.0%", basis: "Cleared Collections Value", override: "2.0%" };
+      } else if (newType === 'Flat Case Pay') {
+        builderComponents[idx].name = 'Flat Case Pay';
+        builderComponents[idx].details = { compRate: "$100", ceramRate: "$150", porcRate: "$200", crownRate: "$200" };
+      } else if (newType === 'Per Unit / Activity') {
+        builderComponents[idx].name = 'Per Unit Craft Fee';
+        builderComponents[idx].details = { actName: "Fabricated Unit", ratePerUnit: "$35.00 / unit", dupCheck: "Enabled (Master Check)" };
+      } else if (newType === 'Tiered Performance') {
+        builderComponents[idx].name = 'Monthly Booking Incentive';
+        builderComponents[idx].details = { baseRate: "$150", topRate: "$2,550", method: "Highest Tier Only (Non-Stacking)" };
+      } else if (newType === 'Bonus / Spiff') {
+        builderComponents[idx].name = 'Excellence Bonus';
+        builderComponents[idx].details = { bonus: "$1,500.00", benchmark: "≥10 Bookings in 3 consecutive months", period: "Quarterly" };
+      } else if (newType === 'Production Floor') {
+        builderComponents[idx].name = 'Guaranteed Daily Floor';
+        builderComponents[idx].details = { floor: "$650.00 / day", days: "Clinical Provider Days", reconcile: "Advance reconciled monthly against earned production" };
+      }
+      syncBuilderComp(idx);
+      renderBuilderComponents();
+    }
+
+    function renderBuilderComponents() {
+      const container = document.getElementById('newComponentsList');
+      if (!container) return;
+
+      if (builderComponents.length === 0) {
+        container.innerHTML = '<div class="text-muted small text-center py-3 border rounded-2 bg-white">No components attached yet. Click "+ Add Compensation Component" above.</div>';
+        return;
       }
 
-      function openCompKpiDetail(idx) {
-        const titles = ['Active Comp Plans', 'Total Team Members', 'Monthly Payout (Est.)', 'Avg Payout / Member'];
-        const icons = ['fa-clipboard-list', 'fa-user-group', 'fa-sack-dollar', 'fa-chart-simple'];
-        const body = document.getElementById('compDetailModalBody');
-        const modalTitle = document.querySelector('#compDetailModal .modal-title');
-        const modalSubtitle = document.querySelector('#compDetailModal .modal-subtitle');
-        if (!body) return;
-        modalTitle.innerHTML = '<i class="fa-solid ' + icons[idx] + ' me-2 text-primary"></i>' + titles[idx];
-        modalSubtitle.innerText = 'Detailed breakdown of ' + titles[idx].toLowerCase();
-
-        const views = [
-          // 0 — Active Comp Plans (clickable rows)
-          `<div class="panel" style="border:none;box-shadow:none;">
-            <h5 class="fw-bold mb-3">Active Comp Plans — 7</h5>
-            <div class="detail-breakdown-box">
-              <div class="detail-breakdown-row" style="cursor:pointer;" onclick="editPlanFromDetail('doctors')" title="Click to edit this plan"><span>👨‍⚕️ Doctors (Cosmetic & Gen)</span><strong style="color:var(--green-600);">1 Plan <i class="fa-solid fa-pen-to-square ms-1" style="font-size:11px;"></i></strong></div>
-              <div class="detail-breakdown-row" style="cursor:pointer;" onclick="editPlanFromDetail('isr-commission')" title="Click to edit this plan"><span>🎧 ISR (Commission)</span><strong style="color:var(--green-600);">1 Plan <i class="fa-solid fa-pen-to-square ms-1" style="font-size:11px;"></i></strong></div>
-              <div class="detail-breakdown-row" style="cursor:pointer;" onclick="editPlanFromDetail('isr-flat')" title="Click to edit this plan"><span>🎧 ISR (Flat Pay)</span><strong style="color:var(--green-600);">1 Plan <i class="fa-solid fa-pen-to-square ms-1" style="font-size:11px;"></i></strong></div>
-              <div class="detail-breakdown-row" style="cursor:pointer;" onclick="editPlanFromDetail('sdr')" title="Click to edit this plan"><span>🎧 SDR</span><strong style="color:var(--green-600);">1 Plan <i class="fa-solid fa-pen-to-square ms-1" style="font-size:11px;"></i></strong></div>
-              <div class="detail-breakdown-row" style="cursor:pointer;" onclick="editPlanFromDetail('ce')" title="Click to edit this plan"><span>🎧 CE</span><strong style="color:var(--green-600);">1 Plan <i class="fa-solid fa-pen-to-square ms-1" style="font-size:11px;"></i></strong></div>
-              <div class="detail-breakdown-row" style="cursor:pointer;" onclick="editPlanFromDetail('lab')" title="Click to edit this plan"><span>🔬 Lab</span><strong style="color:var(--green-600);">1 Plan <i class="fa-solid fa-pen-to-square ms-1" style="font-size:11px;"></i></strong></div>
-              <div class="detail-breakdown-row" style="cursor:pointer;" onclick="editPlanFromDetail('marketing')" title="Click to edit this plan"><span>📢 Marketing</span><strong style="color:var(--green-600);">1 Plan <i class="fa-solid fa-pen-to-square ms-1" style="font-size:11px;"></i></strong></div>
-              <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Total Active Plans</span><strong>7</strong></div>
+      container.innerHTML = builderComponents.map((c, i) => `
+        <div class="builder-comp-block">
+          <div class="d-flex align-items-center justify-content-between mb-3 pb-1 border-bottom">
+            <div class="fw-bold text-dark d-flex align-items-center gap-2" style="font-size:13.5px;">
+              <i class="fa-solid fa-layer-group text-dark"></i> Compensation Component
             </div>
-            <div class="text-muted small mt-2">Click any plan above to open and edit its details</div>
+            <button type="button" class="btn btn-link text-danger p-0" onclick="removeBuilderComponentRow(${i})" title="Remove Component">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label small mb-1 fw-semibold">Component Name</label>
+              <input type="text" class="form-control" value="${c.name}" onchange="builderComponents[${i}].name = this.value" placeholder="e.g. New Compensation Component">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small mb-1 fw-semibold">Component Type</label>
+              <select class="form-select" onchange="updateBuilderCompType(${i}, this.value)">
+                <option value="Production Based" ${c.type === 'Production Based' ? 'selected' : ''}>Production Based</option>
+                <option value="Hourly" ${c.type === 'Hourly' ? 'selected' : ''}>Hourly</option>
+                <option value="Salary" ${c.type === 'Salary' ? 'selected' : ''}>Salary</option>
+                <option value="Percentage Commission" ${c.type === 'Percentage Commission' ? 'selected' : ''}>Percentage Commission</option>
+                <option value="Flat Case Pay" ${c.type === 'Flat Case Pay' ? 'selected' : ''}>Flat Case Pay</option>
+                <option value="Per Unit / Activity" ${c.type === 'Per Unit / Activity' ? 'selected' : ''}>Per Unit / Activity</option>
+                <option value="Tiered Performance" ${c.type === 'Tiered Performance' ? 'selected' : ''}>Tiered Performance</option>
+                <option value="Bonus / Spiff" ${c.type === 'Bonus / Spiff' ? 'selected' : ''}>Bonus / Spiff</option>
+                <option value="Production Floor" ${c.type === 'Production Floor' ? 'selected' : ''}>Production Floor</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- DYNAMIC TYPE-SPECIFIC FIELDS (EXACTLY MATCHING USER SCREENSHOT) -->
+          <div>
+            ${renderTypeSpecificFields(c, i, 'builder')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function createNewPlan() {
+      const name = document.getElementById('newPlanName').value.trim();
+      const ver = document.getElementById('newPlanVersion').value.trim() || 'v1.0';
+      const role = document.getElementById('newPlanRole').value;
+      const status = document.getElementById('newPlanStatus') ? document.getElementById('newPlanStatus').value : 'Active';
+      const effective = document.getElementById('newPlanEffective').value || '2026-04-01';
+      const freq = document.getElementById('newPlanFrequency').value;
+      const qual = document.getElementById('newPlanQual').value.trim();
+      const author = document.getElementById('newPlanAuthor').value.trim() || 'James Johnson';
+
+      if (!name) {
+        alert('Please enter a plan name.');
+        return;
+      }
+
+      if (builderComponents.length === 0) {
+        alert('Please attach at least one compensation component.');
+        return;
+      }
+
+      builderComponents.forEach((c, idx) => syncBuilderComp(idx));
+
+      const newId = 'plan-' + Math.random().toString(36).substring(2, 7);
+      const comps = JSON.parse(JSON.stringify(builderComponents));
+      comps.forEach((c, idx) => {
+        if (!c.id) c.id = newId + '-c' + (idx + 1);
+        if (!c.calcRule) c.calcRule = typeof c.calculation === 'string' ? c.calculation : getCompCalculationString(c);
+      });
+
+      const roleColors = {
+        hybrid: { color: '#b45309', bg: '#fef3c7', icon: 'fa-award' },
+        doctors: { color: '#4338ca', bg: '#eef2ff', icon: 'fa-tooth' },
+        'isr-commission': { color: '#92400e', bg: '#fef3c7', icon: 'fa-percent' },
+        'isr-flat': { color: '#9d174d', bg: '#fce7f3', icon: 'fa-file-invoice-dollar' },
+        sdr: { color: '#059669', bg: '#ecfdf5', icon: 'fa-headset' },
+        ce: { color: '#92400e', bg: '#fef3c7', icon: 'fa-headset' },
+        lab: { color: '#1e40af', bg: '#dbeafe', icon: 'fa-flask' },
+        marketing: { color: '#9d174d', bg: '#fce7f3', icon: 'fa-bullhorn' }
+      };
+      const theme = roleColors[role] || { color: '#059669', bg: '#ecfdf5', icon: 'fa-sliders' };
+      const planArchType = comps.length > 1 ? 'Hybrid Multi-Component' : comps[0].type;
+
+      const newPlanObj = {
+        id: newId,
+        icon: theme.icon,
+        color: theme.color,
+        bg: theme.bg,
+        name: name,
+        sub: `${comps.length} Component${comps.length > 1 ? 's' : ''} (${planArchType})`,
+        members: 0,
+        role: role,
+        version: ver,
+        status: status,
+        effectiveStart: effective,
+        effectiveEnd: 'Present (Open)',
+        type: planArchType,
+        providerType: 'Staff / Configured',
+        paymentFrequency: freq,
+        reconciliation: 'Pay Period Cutoff',
+        summary: `Configured plan created by ${author}. Attached with ${comps.length} concurrent compensation components.`,
+        components: comps,
+        tierSchedule: [
+          { tier: 'Component 1 Base', range: 'Standard Run', payout: comps[0] ? comps[0].rate : '$0', note: 'Primary earning component' }
+        ],
+        qualificationRules: [
+          qual || 'Deposit collected and cleared, CRM ownership verified.',
+          'Duplicate and refund exclusions apply to prevent unearned credit.'
+        ],
+        operationalKpis: [
+          { metric: 'Coaching Standard', rule: 'Operational benchmarks per practice guidelines', status: 'Active', tracking: 'Dashboard KPI' }
+        ],
+        versions: [
+          { ver: ver, date: effective, author: author, summary: 'Initial version creation and activation.' }
+        ],
+        assignments: []
+      };
+
+      plans.unshift(newPlanObj);
+      updateKpis();
+
+      renderPlans();
+      selectPlan(newId, null);
+
+      const modalEl = document.getElementById('newRuleModal');
+      const modal = bootstrap.Modal.getInstance(modalEl);
+      if (modal) modal.hide();
+
+      alert('Compensation Plan Version (' + ver + ') created successfully!');
+    }
+
+    /* ==========================================================
+       NEW VERSION CREATION (Section 12 & 15 of requirements)
+       Creates an immutable new version without overwriting history
+       ========================================================== */
+    function createNewPlanVersion(planId) {
+      const p = plans.find(x => x.id === planId);
+      if (!p) return;
+
+      const verParts = p.version.replace('v', '').split('.');
+      const nextVer = 'v' + verParts[0] + '.' + (parseInt(verParts[1] || 0) + 1);
+
+      const newDate = prompt(`Create New Plan Version for "${p.name}".\nEnter effective start date:`, "2026-05-01");
+      if (!newDate) return;
+
+      const summaryNote = prompt("Enter version summary / reason for change:", "Updated compensation components and rate schedules.");
+      if (!summaryNote) return;
+
+      p.version = nextVer;
+      p.effectiveStart = newDate;
+      p.versions.unshift({
+        ver: nextVer,
+        date: newDate,
+        author: "James Johnson (Office Manager)",
+        summary: summaryNote
+      });
+
+      renderPlanDetail(p);
+      renderPlans();
+      alert(`Plan version successfully incremented to ${nextVer} (Effective: ${newDate}). Previous historical versions remain locked in ledger.`);
+    }
+
+    /* ==========================================================
+       GENERIC EDIT / ADD / DUPLICATE COMPONENT ACTIONS
+       (Section 8, 13, 14 of requirements)
+       ========================================================== */
+    let currentEditPlanId = null;
+    let currentEditCompIdx = -1;
+    let currentEditComp = null;
+
+    function renderEditComponentSpecificFields() {
+      const container = document.getElementById('editCompTypeSpecificContainer');
+      if (!container || !currentEditComp) return;
+      container.innerHTML = renderTypeSpecificFields(currentEditComp, 0, 'edit');
+    }
+
+    function syncEditCompDetails(field, value) {
+      if (!currentEditComp) return;
+      if (!currentEditComp.details) currentEditComp.details = {};
+      if (field && field !== '__init__') {
+        currentEditComp.details[field] = value;
+      }
+
+      const d = currentEditComp.details;
+      if (currentEditComp.type === 'Production Based') {
+        currentEditComp.rate = `Full Case: ${d.fullCase || '$700'} · Half: ${d.halfCase || '50%'} · Per-Unit: ${d.perUnit || '$35'}`;
+        currentEditComp.calcRule = currentEditComp.rate;
+        currentEditComp.calculation = currentEditComp.rate;
+      } else if (currentEditComp.type === 'Hourly') {
+        currentEditComp.rate = d.hourlyRate || '$18.00 / hr';
+        currentEditComp.calcRule = `Clocked Hours * ${currentEditComp.rate} + ${d.overtime || '1.5x'} Overtime after ${d.regularHours || '80 hrs'}`;
+        currentEditComp.calculation = currentEditComp.calcRule;
+      } else if (currentEditComp.type === 'Percentage Commission') {
+        currentEditComp.rate = `${d.commPct || '6.0%'} Rep Rate (+ ${d.override || '2.0%'} Override)`;
+        currentEditComp.calcRule = `${d.basis || 'Cleared Collections Value'} * ${d.commPct || '6.0%'}`;
+        currentEditComp.calculation = currentEditComp.calcRule;
+      } else if (currentEditComp.type === 'Flat Case Pay') {
+        currentEditComp.rate = `Composite: ${d.compRate || '$100'} · Ceramic: ${d.ceramRate || '$150'} · Porcelain: ${d.porcRate || '$200'} · Crown: ${d.crownRate || '$200'}`;
+        currentEditComp.calcRule = currentEditComp.rate;
+        currentEditComp.calculation = currentEditComp.rate;
+      } else if (currentEditComp.type === 'Salary') {
+        currentEditComp.rate = d.salary || '$5,200.00 / mo';
+        currentEditComp.calcRule = `${d.period || 'Monthly'} base (${d.split || 'Semi-Monthly Split'})`;
+        currentEditComp.calculation = currentEditComp.calcRule;
+      } else if (currentEditComp.type === 'Per Unit / Activity') {
+        currentEditComp.rate = d.ratePerUnit || '$35.00 / unit';
+        currentEditComp.calcRule = `${d.actName || 'Fabricated Unit'} * ${currentEditComp.rate}`;
+        currentEditComp.calculation = currentEditComp.calcRule;
+      } else if (currentEditComp.type === 'Tiered Performance') {
+        currentEditComp.rate = `${d.baseRate || '$150'} – ${d.topRate || '$2,550'}`;
+        currentEditComp.calcRule = d.method || 'Highest Tier Only (Non-Stacking)';
+        currentEditComp.calculation = currentEditComp.calcRule;
+      } else if (currentEditComp.type === 'Bonus / Spiff') {
+        currentEditComp.rate = `${d.bonus || '$1,500.00'} Flat Bonus`;
+        currentEditComp.calcRule = `${d.benchmark || '≥10 Bookings in 3 consecutive months'} (${d.period || 'Quarterly'})`;
+        currentEditComp.calculation = currentEditComp.calcRule;
+      } else if (currentEditComp.type === 'Production Floor') {
+        currentEditComp.rate = `${d.floor || '$650.00 / day'}`;
+        currentEditComp.calcRule = `${d.days || 'Clinical Provider Days'} (${d.reconcile || 'Reconciled monthly'})`;
+        currentEditComp.calculation = currentEditComp.calcRule;
+      }
+    }
+
+    function handleEditCompTypeChange(newType) {
+      if (!currentEditComp) return;
+      currentEditComp.type = newType;
+      if (newType === 'Production Based') {
+        currentEditComp.details = { fullCase: "$700", halfCase: "50%", perUnit: "$35" };
+      } else if (newType === 'Hourly') {
+        currentEditComp.details = { hourlyRate: "$18.00 / hr", regularHours: "80 hrs", overtime: "1.5x" };
+      } else if (newType === 'Salary') {
+        currentEditComp.details = { salary: "$5,200.00 / mo", period: "Monthly", split: "Semi-Monthly Split" };
+      } else if (newType === 'Percentage Commission') {
+        currentEditComp.details = { commPct: "6.0%", basis: "Cleared Collections Value", override: "2.0%" };
+      } else if (newType === 'Flat Case Pay') {
+        currentEditComp.details = { compRate: "$100", ceramRate: "$150", porcRate: "$200", crownRate: "$200" };
+      } else if (newType === 'Per Unit / Activity') {
+        currentEditComp.details = { actName: "Fabricated Unit", ratePerUnit: "$35.00 / unit", dupCheck: "Enabled (Master Check)" };
+      } else if (newType === 'Tiered Performance') {
+        currentEditComp.details = { baseRate: "$150", topRate: "$2,550", method: "Highest Tier Only (Non-Stacking)" };
+      } else if (newType === 'Bonus / Spiff') {
+        currentEditComp.details = { bonus: "$1,500.00", benchmark: "≥10 Bookings in 3 consecutive months", period: "Quarterly" };
+      } else if (newType === 'Production Floor') {
+        currentEditComp.details = { floor: "$650.00 / day", days: "Clinical Provider Days", reconcile: "Advance reconciled monthly against earned production" };
+      }
+      syncEditCompDetails('__init__', '');
+      renderEditComponentSpecificFields();
+    }
+
+    function openEditComponentModal(planId, compIdx) {
+      const p = plans.find(x => x.id === planId);
+      if (!p || !p.components[compIdx]) return;
+
+      currentEditPlanId = planId;
+      currentEditCompIdx = compIdx;
+      const c = p.components[compIdx];
+      currentEditComp = JSON.parse(JSON.stringify(c));
+
+      if (!currentEditComp.details) {
+        if (c.type === 'Production Based') {
+          currentEditComp.details = { fullCase: "$700", halfCase: "50%", perUnit: "$35" };
+        } else if (c.type === 'Hourly') {
+          currentEditComp.details = { hourlyRate: c.rate || "$18.00 / hr", regularHours: "80 hrs", overtime: "1.5x" };
+        } else if (c.type === 'Percentage Commission') {
+          currentEditComp.details = { commPct: c.rate || "6.0%", basis: "Cleared Collections Value", override: "2.0%" };
+        } else if (c.type === 'Flat Case Pay') {
+          currentEditComp.details = { compRate: "$100", ceramRate: "$150", porcRate: "$200", crownRate: "$200" };
+        } else if (c.type === 'Salary') {
+          currentEditComp.details = { salary: c.rate || "$5,200.00 / mo", period: "Monthly", split: "Semi-Monthly Split" };
+        } else if (c.type === 'Per Unit / Activity') {
+          currentEditComp.details = { actName: "Fabricated Unit", ratePerUnit: c.rate || "$35.00 / unit", dupCheck: "Enabled (Master Check)" };
+        } else if (c.type === 'Tiered Performance') {
+          currentEditComp.details = { baseRate: "$150", topRate: "$2,550", method: "Highest Tier Only (Non-Stacking)" };
+        } else if (c.type === 'Bonus / Spiff') {
+          currentEditComp.details = { bonus: c.rate || "$1,500.00", benchmark: "≥10 Bookings in 3 consecutive months", period: "Quarterly" };
+        } else if (c.type === 'Production Floor') {
+          currentEditComp.details = { floor: c.rate || "$650.00 / day", days: "Clinical Provider Days", reconcile: "Advance reconciled monthly against earned production" };
+        }
+      }
+
+      document.getElementById('editComponentModalTitle').innerHTML = '<i class="fa-solid fa-pen text-success me-2"></i>Edit Component: ' + c.name;
+
+      const body = document.getElementById('editComponentBody');
+      body.innerHTML = `
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Component Name</label>
+            <input type="text" class="form-control" id="editCompName" value="${c.name}">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Component Type</label>
+            <select class="form-select" id="editCompType" onchange="handleEditCompTypeChange(this.value)">
+              <option value="Production Based" ${c.type === 'Production Based' ? 'selected' : ''}>Production Based</option>
+              <option value="Hourly" ${c.type === 'Hourly' ? 'selected' : ''}>Hourly</option>
+              <option value="Salary" ${c.type === 'Salary' ? 'selected' : ''}>Salary</option>
+              <option value="Percentage Commission" ${c.type === 'Percentage Commission' ? 'selected' : ''}>Percentage Commission</option>
+              <option value="Flat Case Pay" ${c.type === 'Flat Case Pay' ? 'selected' : ''}>Flat Case Pay</option>
+              <option value="Per Unit / Activity" ${c.type === 'Per Unit / Activity' ? 'selected' : ''}>Per Unit / Activity</option>
+              <option value="Tiered Performance" ${c.type === 'Tiered Performance' ? 'selected' : ''}>Tiered Performance</option>
+              <option value="Bonus / Spiff" ${c.type === 'Bonus / Spiff' ? 'selected' : ''}>Bonus / Spiff</option>
+              <option value="Production Floor" ${c.type === 'Production Floor' ? 'selected' : ''}>Production Floor</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- DYNAMIC TYPE-SPECIFIC FIELDS -->
+        <div id="editCompTypeSpecificContainer" class="mb-3">
+          ${renderTypeSpecificFields(currentEditComp, 0, 'edit')}
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-12">
+            <label class="form-label fw-semibold">Qualification / Reversal Rule</label>
+            <textarea class="form-control" rows="2" id="editCompQual" placeholder="Enter qualification and reversal criteria...">${c.qualification || 'Deposit cleared and procedure logged.'}</textarea>
+          </div>
+        </div>
+      `;
+
+      const modal = new bootstrap.Modal(document.getElementById('editComponentModal'));
+      modal.show();
+    }
+
+    function openAddComponentForCurrentPlan(planId) {
+      const p = plans.find(x => x.id === planId);
+      if (!p) return;
+
+      currentEditPlanId = planId;
+      currentEditCompIdx = -1;
+      currentEditComp = {
+        name: "New Compensation Component",
+        type: "Production Based",
+        details: { fullCase: "$700", halfCase: "50%", perUnit: "$35" },
+        qualification: "Requires verified deposit and CRM stage completion."
+      };
+      syncEditCompDetails('__init__', '');
+
+      document.getElementById('editComponentModalTitle').innerHTML = '<i class="fa-solid fa-plus text-success me-2"></i>Add Component to ' + p.name;
+
+      const body = document.getElementById('editComponentBody');
+      body.innerHTML = `
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Component Name</label>
+            <input type="text" class="form-control" id="editCompName" value="${currentEditComp.name}">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Component Type</label>
+            <select class="form-select" id="editCompType" onchange="handleEditCompTypeChange(this.value)">
+              <option value="Production Based" selected>Production Based</option>
+              <option value="Hourly">Hourly</option>
+              <option value="Salary">Salary</option>
+              <option value="Percentage Commission">Percentage Commission</option>
+              <option value="Flat Case Pay">Flat Case Pay</option>
+              <option value="Per Unit / Activity">Per Unit / Activity</option>
+              <option value="Tiered Performance">Tiered Performance</option>
+              <option value="Bonus / Spiff">Bonus / Spiff</option>
+              <option value="Production Floor">Production Floor</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- DYNAMIC TYPE-SPECIFIC FIELDS -->
+        <div id="editCompTypeSpecificContainer" class="mb-3">
+          ${renderTypeSpecificFields(currentEditComp, 0, 'edit')}
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-12">
+            <label class="form-label fw-semibold">Qualification / Reversal Rule</label>
+            <textarea class="form-control" rows="2" id="editCompQual" placeholder="Enter qualification and reversal criteria...">${currentEditComp.qualification}</textarea>
+          </div>
+        </div>
+      `;
+
+      const modal = new bootstrap.Modal(document.getElementById('editComponentModal'));
+      modal.show();
+    }
+
+    function saveComponentEdit() {
+      const p = plans.find(x => x.id === currentEditPlanId);
+      if (!p || !currentEditComp) return;
+
+      currentEditComp.name = document.getElementById('editCompName').value.trim() || 'Component';
+      currentEditComp.type = document.getElementById('editCompType').value;
+      currentEditComp.qualification = document.getElementById('editCompQual') ? document.getElementById('editCompQual').value.trim() : '';
+
+      syncEditCompDetails('__init__', '');
+
+      if (currentEditCompIdx >= 0) {
+        currentEditComp.id = p.components[currentEditCompIdx].id;
+        p.components[currentEditCompIdx] = currentEditComp;
+      } else {
+        currentEditComp.id = 'comp-' + Math.random().toString(36).substring(2, 7);
+        p.components.push(currentEditComp);
+      }
+
+      renderPlanDetail(p);
+      renderPlans();
+
+      const modalEl = document.getElementById('editComponentModal');
+      const modal = bootstrap.Modal.getInstance(modalEl);
+      if (modal) modal.hide();
+    }
+
+    function duplicateComponent(planId, compIdx) {
+      const p = plans.find(x => x.id === planId);
+      if (!p || !p.components[compIdx]) return;
+
+      const copy = JSON.parse(JSON.stringify(p.components[compIdx]));
+      copy.id = 'comp-' + Math.random().toString(36).substring(2, 7);
+      copy.name += " (Copy)";
+
+      p.components.splice(compIdx + 1, 0, copy);
+      renderPlanDetail(p);
+      renderPlans();
+      alert(`Component "${copy.name}" duplicated with unique component ID.`);
+    }
+
+    function removeComponentFromPlan(planId, compIdx) {
+      const p = plans.find(x => x.id === planId);
+      if (!p) return;
+
+      if (confirm(`Are you sure you want to remove this compensation component from ${p.name}?`)) {
+        p.components.splice(compIdx, 1);
+        renderPlanDetail(p);
+        renderPlans();
+      }
+    }
+
+    /* ==========================================================
+       STAFF ASSIGNMENT ACTIONS (Section 6 of requirements)
+       ========================================================== */
+    let currentAssignPlanId = null;
+
+    function openAssignStaffModal(planId) {
+      currentAssignPlanId = planId;
+      const p = plans.find(x => x.id === planId);
+      if (!p) return;
+
+      document.getElementById('assignStaffVersion').value = p.version;
+      document.getElementById('assignStaffDate').value = '2026-04-01';
+
+      const modal = new bootstrap.Modal(document.getElementById('assignStaffModal'));
+      modal.show();
+    }
+
+    function saveStaffAssignment() {
+      const p = plans.find(x => x.id === currentAssignPlanId);
+      if (!p) return;
+
+      if (!p.assignments) p.assignments = [];
+
+      const staffName = document.getElementById('assignStaffSelect').value;
+      const staffRole = document.getElementById('assignStaffRole').value;
+      const version = p.version;
+      const effectiveDate = document.getElementById('assignStaffDate').value;
+      const status = document.getElementById('assignStaffStatus').value;
+
+      // Check if already assigned
+      const existing = p.assignments.find(a => a.name === staffName);
+      if (existing) {
+        existing.role = staffRole;
+        existing.version = version;
+        existing.effective = effectiveDate;
+        existing.status = status;
+      } else {
+        p.assignments.push({
+          name: staffName,
+          role: staffRole,
+          version: version,
+          effective: effectiveDate,
+          status: status
+        });
+      }
+
+      updateKpis();
+      renderPlanDetail(p);
+      renderPlans();
+
+      const modalEl = document.getElementById('assignStaffModal');
+      const modal = bootstrap.Modal.getInstance(modalEl);
+      if (modal) modal.hide();
+
+      alert(`Staff member "${staffName}" successfully assigned to ${p.name} (${version}).`);
+    }
+
+    function removeStaffAssignment(planId, aIdx) {
+      const p = plans.find(x => x.id === planId);
+      if (!p || !p.assignments) return;
+
+      p.assignments.splice(aIdx, 1);
+      updateKpis();
+      renderPlanDetail(p);
+      renderPlans();
+    }
+
+    /* ==========================================================
+       KPI DETAIL MODAL
+       ========================================================== */
+    function openCompKpiDetail(idx) {
+      const titles = ['Active Comp Plans', 'Total Staff Members', 'Monthly Payout (Est.)', 'Avg Payout / Member'];
+      const icons = ['fa-clipboard-list', 'fa-user-group', 'fa-sack-dollar', 'fa-chart-simple'];
+      const body = document.getElementById('compDetailModalBody');
+      const modalTitle = document.querySelector('#compDetailModal .modal-title');
+      const modalSubtitle = document.querySelector('#compDetailModal .modal-subtitle');
+      if (!body) return;
+      modalTitle.innerHTML = '<i class="fa-solid ' + icons[idx] + ' me-2 text-primary"></i>' + titles[idx];
+      modalSubtitle.innerText = 'Detailed breakdown of ' + titles[idx].toLowerCase();
+
+      const activeList = plans.filter(p => p.status === 'Active');
+
+      const views = [
+        // 0 — Active Comp Plans
+        `<div class="panel" style="border:none;box-shadow:none;">
+            <h5 class="fw-bold mb-3">Active Comp Plans — ${activeList.length}</h5>
+            <div class="detail-breakdown-box">
+              ${activeList.map(p => `
+                <div class="detail-breakdown-row" style="cursor:pointer;" onclick="selectPlanFromDetail('${p.id}')" title="Click to view plan">
+                  <span>${p.name} (${p.version})</span>
+                  <strong style="color:var(--green-600);">${p.components.length} Components <i class="fa-solid fa-arrow-right ms-1" style="font-size:11px;"></i></strong>
+                </div>
+              `).join('')}
+              <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Total Active Plans</span><strong>${activeList.length}</strong></div>
+            </div>
+            <div class="text-muted small mt-2">Click any plan above to view details</div>
           </div>`,
-          // 1 — Total Team Members (inline now, KPI card redirects to team-members.html)
-          `<div class="panel" style="border:none;box-shadow:none;">
-            <h5 class="fw-bold mb-3">Total Team Members — 37</h5>
+        // 1 — Staff
+        `<div class="panel" style="border:none;box-shadow:none;">
+            <h5 class="fw-bold mb-3">Total Staff Members — 37</h5>
             <div class="detail-breakdown-box">
               <div class="detail-breakdown-row"><span>👨‍⚕️ Doctors</span><strong>8</strong></div>
               <div class="detail-breakdown-row"><span>🎧 ISR (Commission)</span><strong>14</strong></div>
@@ -700,9 +2427,9 @@
             </div>
             <div class="text-muted small mt-2"><a href="team-members.html" class="text-decoration-none fw-semibold"><i class="fa-solid fa-arrow-right me-1"></i>View all team members</a></div>
           </div>`,
-          // 2 — Monthly Payout
-          `<div class="panel" style="border:none;box-shadow:none;">
-            <h5 class="fw-bold mb-3">Monthly Payout (Est.) — $186,450</h5>
+        // 2 — Monthly Payout
+        `<div class="panel" style="border:none;box-shadow:none;">
+            <h5 class="fw-bold mb-3">Monthly Payout (Est.) — $194,200</h5>
             <div class="detail-breakdown-box">
               <div class="detail-breakdown-row"><span>👨‍⚕️ Doctors</span><strong>$92,400</strong></div>
               <div class="detail-breakdown-row"><span>🎧 ISR (Commission)</span><strong>$44,800</strong></div>
@@ -711,13 +2438,13 @@
               <div class="detail-breakdown-row"><span>🎧 CE</span><strong>$9,500</strong></div>
               <div class="detail-breakdown-row"><span>🔬 Lab</span><strong>$6,000</strong></div>
               <div class="detail-breakdown-row"><span>📢 Marketing</span><strong>$3,000</strong></div>
-              <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Total Estimated Payout</span><strong>$186,450</strong></div>
+              <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Total Estimated Payout</span><strong>$194,200</strong></div>
             </div>
-            <div class="text-muted small mt-2">Based on current production numbers</div>
+            <div class="text-muted small mt-2">Based on current production and plan configuration</div>
           </div>`,
-          // 3 — Avg Payout / Member
-          `<div class="panel" style="border:none;box-shadow:none;">
-            <h5 class="fw-bold mb-3">Average Payout / Member — $5,039</h5>
+        // 3 — Avg Payout
+        `<div class="panel" style="border:none;box-shadow:none;">
+            <h5 class="fw-bold mb-3">Average Payout / Member — $5,248</h5>
             <div class="detail-breakdown-box">
               <div class="detail-breakdown-row"><span>👨‍⚕️ Doctors Avg</span><strong>$11,550</strong></div>
               <div class="detail-breakdown-row"><span>🎧 ISR (Commission) Avg</span><strong>$3,200</strong></div>
@@ -726,37 +2453,55 @@
               <div class="detail-breakdown-row"><span>🎧 CE Avg</span><strong>$2,375</strong></div>
               <div class="detail-breakdown-row"><span>🔬 Lab Avg</span><strong>$1,500</strong></div>
               <div class="detail-breakdown-row"><span>📢 Marketing</span><strong>$3,000</strong></div>
-              <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Overall Average</span><strong>$5,039</strong></div>
+              <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Overall Average</span><strong>$5,248</strong></div>
             </div>
             <div class="text-muted small mt-2">This month estimated average per member</div>
           </div>`
-        ];
-        body.innerHTML = views[idx] || views[0];
-        const modal = new bootstrap.Modal(document.getElementById('compDetailModal'));
-        modal.show();
-      }
-    </script>
+      ];
 
-    <!-- Comp KPI Detail Modal -->
-    <div class="modal fade" id="compDetailModal" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <div>
-              <h5 class="modal-title fw-bold">Compensation Detail</h5>
-              <p class="modal-subtitle text-muted small mb-0" style="margin-top:2px;">Detailed breakdown</p>
-            </div>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body" id="compDetailModalBody">
-            <!-- content inserted by openCompKpiDetail() -->
-          </div>
-          <div class="modal-footer border-0 pt-0">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
+      body.innerHTML = views[idx] || views[0];
+      const modal = new bootstrap.Modal(document.getElementById('compDetailModal'));
+      modal.show();
+    }
+
+    function selectPlanFromDetail(planId) {
+      const detailModal = bootstrap.Modal.getInstance(document.getElementById('compDetailModal'));
+      if (detailModal) detailModal.hide();
+      selectPlan(planId, null);
+    }
+
+    /* ==========================================================
+       SIDEBAR & STARTUP
+       ========================================================== */
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebarBackdrop = document.querySelector('.sidebar-backdrop');
+
+    function closeSidebar() {
+      document.body.classList.remove('sidebar-open');
+    }
+
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener('click', () => {
+        document.body.classList.toggle('sidebar-open');
+      });
+    }
+
+    if (sidebarBackdrop) {
+      sidebarBackdrop.addEventListener('click', closeSidebar);
+    }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) {
+        closeSidebar();
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateKpis();
+      renderPlans('all');
+      selectPlan('luxury-smile-agent', null);
+    });
+  </script>
 
 </body>
 

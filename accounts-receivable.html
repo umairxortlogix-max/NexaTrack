@@ -1,0 +1,1886 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexaTrack — Accounts Receivable</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+  <link rel="stylesheet" href="style/main.css">
+  <link rel="stylesheet" href="style/cases.css">
+  <link rel="stylesheet" href="style/ar.css">
+</head>
+
+<body>
+  <script>
+    // ── Role-based access: Provider & Office Manager roles ──
+    (function () {
+      var allowedRoles = ['Provider', 'Office Manager'];
+      var userRole = localStorage.getItem('nexaUserRole') || 'Office Manager';
+      if (allowedRoles.indexOf(userRole) === -1) {
+        var roleRedirects = {
+          'Social Media': 'SocialMedia/Empdahshabord.html',
+          'QS': 'QS/Empdahshabord.html',
+          'ISR': 'ISR/Empdahshabord.html',
+          'CE': 'CE/Empdahshabord.html',
+          'SDR': 'SDR/Empdahshabord.html',
+          'Marketing': 'Marketing/Empdahshabord.html',
+          'Dental Assistant': 'Dental Assistants/Empdahshabord.html'
+        };
+        window.location.replace(roleRedirects[userRole] || 'index.html');
+      } else {
+        window.__nexaUserRole = userRole;
+      }
+    })();
+  </script>
+
+  <input type="checkbox" id="sidebarToggle" hidden>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">N</div>
+      <div class="brand-text">NEXA<small>TRACK</small></div>
+    </div>
+    <div class="nav-section">
+      <a class="nav-link-item" href="dashboard.html"><i class="fa-solid fa-grip"></i> Dashboard</a>
+      <a class="nav-link-item" href="team-members.html"><i class="fa-solid fa-users"></i> Team Members</a>
+      <a class="nav-link-item" href="compensation-rules.html"><i class="fa-solid fa-sliders"></i> Compensation Rules</a>
+      <a class="nav-link-item" href="production.html"><i class="fa-solid fa-chart-column"></i> Production</a>
+      <a class="nav-link-item" href="cases.html"><i class="fa-solid fa-briefcase-medical"></i> Cases</a>
+      <a class="nav-link-item active" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i> Accounts Receivable</a>
+      <a class="nav-link-item" href="advances.html"><i class="fa-solid fa-hand-holding-dollar"></i> Advances</a>
+      <a class="nav-link-item" href="statements.html"><i class="fa-solid fa-file-invoice"></i> Statements</a>
+      <a class="nav-link-item" href="payroll-runs.html"><i class="fa-solid fa-money-check-dollar"></i> Payroll Runs</a>
+      <a class="nav-link-item" href="reports.html"><i class="fa-solid fa-chart-line"></i> Reports</a>
+      <a class="nav-link-item" href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+      <a class="nav-link-item" href="index.html"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+    </div>
+    <div class="sidebar-footer">
+      <div class="user-chip">
+        <div class="user-avatar">JJ</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;">James Johnson</div>
+          <small>Office Manager</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Sidebar Backdrop & Menu -->
+  <div id="sidebarBackdrop" class="sidebar-backdrop">
+    <div class="sidebar">
+      <label for="sidebarToggle" class="btn btn-sm btn-light mb-3">
+        <i class="fa-solid fa-xmark"></i>
+      </label>
+      <div class="brand">
+        <div class="brand-mark">N</div>
+        <div class="brand-text">NEXA<small>TRACK</small></div>
+      </div>
+      <div class="nav-section">
+        <a class="nav-link-item" href="dashboard.html"><i class="fa-solid fa-grip"></i> Dashboard</a>
+        <a class="nav-link-item" href="team-members.html"><i class="fa-solid fa-users"></i> Team Members</a>
+        <a class="nav-link-item" href="compensation-rules.html"><i class="fa-solid fa-sliders"></i> Compensation Rules</a>
+        <a class="nav-link-item" href="production.html"><i class="fa-solid fa-chart-column"></i> Production</a>
+        <a class="nav-link-item" href="cases.html"><i class="fa-solid fa-briefcase-medical"></i> Cases</a>
+        <a class="nav-link-item active" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i> Accounts Receivable</a>
+        <a class="nav-link-item" href="advances.html"><i class="fa-solid fa-hand-holding-dollar"></i> Advances</a>
+        <a class="nav-link-item" href="statements.html"><i class="fa-solid fa-file-invoice"></i> Statements</a>
+        <a class="nav-link-item" href="payroll-runs.html"><i class="fa-solid fa-money-check-dollar"></i> Payroll Runs</a>
+        <a class="nav-link-item" href="reports.html"><i class="fa-solid fa-chart-line"></i> Reports</a>
+        <a class="nav-link-item" href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+        <a class="nav-link-item" href="index.html"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+      </div>
+      <div class="sidebar-footer">
+        <div class="user-chip">
+          <div class="user-avatar">JJ</div>
+          <div>
+            <div style="font-size:13px;font-weight:600;">James Johnson</div>
+            <small>Office Manager</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="main ar-page">
+    <!-- Topbar -->
+    <div class="topbar">
+      <div>
+        <h1 class="page-title">Accounts Receivable (AR)</h1>
+        <div class="page-sub">Track patient balances, record ledger collections, and manage outstanding treatment receivables.</div>
+      </div>
+      <label for="sidebarToggle" class="btn btn-outline-navy mobile-menu-btn">
+        <i class="fa-solid fa-bars"></i>
+      </label>
+      <div class="d-flex gap-2 topbar-actions align-items-center">
+        <div class="d-flex align-items-center bg-white px-3 py-1 border rounded-3" style="height:38px;">
+          <i class="fa-regular fa-calendar me-2 text-muted" style="font-size:13px;"></i>
+          <div class="me-3">
+            <span style="font-size:9px;color:var(--gray-400);display:block;line-height:1;margin-bottom:1px;">Due Window</span>
+            <span style="font-size:12px;font-weight:600;color:var(--gray-900);">
+              <input type="text" id="arDateRange" name="date" style="border:none;background:transparent;width:170px;outline:none;">
+            </span>
+          </div>
+          <i class="fa-solid fa-chevron-down text-muted" style="font-size:10px;"></i>
+        </div>
+        <button class="btn btn-outline-navy" onclick="exportArPdf()"><i class="fa-regular fa-file-pdf me-1"></i>Export PDF</button>
+        <button class="btn btn-outline-navy" onclick="exportArCsv()"><i class="fa-solid fa-download me-1"></i>Export CSV</button>
+        <button class="btn btn-green" data-bs-toggle="modal" data-bs-target="#newArModal"><i class="fa-solid fa-plus me-1"></i>New Receivable</button>
+      </div>
+    </div>
+
+    <!-- KPI Summary Row: Answers “How much AR is outstanding?” -->
+    <div class="row g-3 mb-3">
+      <div class="col-12 col-sm-6 col-md-4 col-lg">
+        <div class="kpi-card" role="button" tabindex="0" onclick="openArKpiDetail(0)">
+          <div class="row align-items-center">
+            <div class="col-4">
+              <div class="kpi-icon" style="background:#fee2e2;color:#dc2626;">
+                <i class="fa-solid fa-hand-holding-dollar"></i>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="kpi-label">Total Outstanding AR</div>
+              <div class="kpi-value text-danger" id="kpiTotalOutstanding">$42,650.00</div>
+              <div class="kpi-delta text-danger" id="kpiOpenCountSub">11 open patient cases</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg">
+        <div class="kpi-card" role="button" tabindex="0" onclick="openArKpiDetail(1)">
+          <div class="row align-items-center">
+            <div class="col-4">
+              <div class="kpi-icon" style="background:#eef2ff;color:#4338ca;">
+                <i class="fa-solid fa-file-invoice"></i>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="kpi-label">Total Quoted Receivables</div>
+              <div class="kpi-value" id="kpiTotalQuoted">$128,400.00</div>
+              <div class="kpi-delta text-muted">14 registered receivables</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg">
+        <div class="kpi-card" role="button" tabindex="0" onclick="openArKpiDetail(2)">
+          <div class="row align-items-center">
+            <div class="col-4">
+              <div class="kpi-icon" style="background:var(--green-50);color:var(--green-600);">
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="kpi-label">Collected to Date</div>
+              <div class="kpi-value text-success" id="kpiTotalCollected">$85,750.00</div>
+              <div class="kpi-delta text-success" id="kpiCollectionRate">66.8% Collection Rate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg">
+        <div class="kpi-card" role="button" tabindex="0" onclick="openArKpiDetail(3)">
+          <div class="row align-items-center">
+            <div class="col-4">
+              <div class="kpi-icon" style="background:#fef3c7;color:#b45309;">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="kpi-label">Past Due Balances</div>
+              <div class="kpi-value" style="color:#b45309;" id="kpiPastDueTotal">$14,200.00</div>
+              <div class="kpi-delta text-danger" id="kpiPastDueCount">4 accounts &gt; 30d overdue</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg">
+        <div class="kpi-card" role="button" tabindex="0" onclick="openArKpiDetail(4)">
+          <div class="row align-items-center">
+            <div class="col-4">
+              <div class="kpi-icon" style="background:#f0fdfa;color:#0f766e;">
+                <i class="fa-solid fa-calendar-check"></i>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="kpi-label">Active Payment Plans</div>
+              <div class="kpi-value text-teal" id="kpiPaymentPlanTotal">$16,800.00</div>
+              <div class="kpi-delta text-success" id="kpiPaymentPlanCount">3 patients on installments</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aging Buckets Filter Bar -->
+    <div class="panel p-3 mb-3">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="fw-bold small text-muted text-uppercase" style="letter-spacing:0.4px;">
+          <i class="fa-solid fa-clock-rotate-left me-1"></i> Aging Analysis &amp; Quick Buckets
+        </div>
+        <div class="small text-muted">Click any bucket to filter patient balances instantly</div>
+      </div>
+      <div class="aging-filter-bar">
+        <div class="aging-bucket-btn active" onclick="setAgingFilter('all', this)">
+          <div>
+            <span class="bucket-title">All Receivables</span>
+            <span class="bucket-amount" id="bucketAllAmt">$42,650</span>
+          </div>
+          <span class="bucket-count" id="bucketAllCnt">14</span>
+        </div>
+        <div class="aging-bucket-btn" onclick="setAgingFilter('current', this)">
+          <div>
+            <span class="bucket-title">Current / Due Soon (0–30d)</span>
+            <span class="bucket-amount" id="bucketCurrentAmt">$14,100</span>
+          </div>
+          <span class="bucket-count" id="bucketCurrentCnt">5</span>
+        </div>
+        <div class="aging-bucket-btn" onclick="setAgingFilter('31-60', this)">
+          <div>
+            <span class="bucket-title">Due (31–60d)</span>
+            <span class="bucket-amount" id="bucket30Amt">$8,950</span>
+          </div>
+          <span class="bucket-count" id="bucket30Cnt">3</span>
+        </div>
+        <div class="aging-bucket-btn" onclick="setAgingFilter('61-90', this)">
+          <div>
+            <span class="bucket-title">Past Due (61–90d)</span>
+            <span class="bucket-amount" id="bucket60Amt">$14,200</span>
+          </div>
+          <span class="bucket-count" id="bucket60Cnt">4</span>
+        </div>
+        <div class="aging-bucket-btn" onclick="setAgingFilter('90plus', this)">
+          <div>
+            <span class="bucket-title">High Risk (90+d)</span>
+            <span class="bucket-amount" id="bucket90Amt">$5,400</span>
+          </div>
+          <span class="bucket-count" id="bucket90Cnt">2</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter & Search Toolbar -->
+    <div class="panel-header">
+      <div class="d-flex gap-2 flex-wrap align-items-center w-100">
+        <!-- Search input -->
+        <div class="input-group" style="width:280px;">
+          <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+          <input type="text" class="form-control border-start-0 ps-0" id="arSearchInput" placeholder="Search patient, case, phone..." oninput="handleArSearch()">
+        </div>
+
+        <!-- Status Filter -->
+        <select class="form-select form-select-sm-custom" id="arStatusFilter" style="width:170px;" onchange="applyFilters()">
+          <option value="ALL">All Statuses</option>
+          <option value="Open">Open</option>
+          <option value="Partial">Partial</option>
+          <option value="Due Soon">Due Soon</option>
+          <option value="Due">Due</option>
+          <option value="Past Due">Past Due</option>
+          <option value="Payment Plan">Payment Plan</option>
+          <option value="Collected">Collected</option>
+          <option value="Written Off">Written Off</option>
+        </select>
+
+        <!-- Reason Filter -->
+        <select class="form-select form-select-sm-custom" id="arReasonFilter" style="width:210px;" onchange="applyFilters()">
+          <option value="ALL">All AR Reasons</option>
+          <option value="Post-Booking Additional">Additional Treatment Add-on</option>
+          <option value="Insurance">Insurance Co-pay / Denial</option>
+          <option value="Staged Treatment">Staged Treatment Balance</option>
+          <option value="Payment Plan">Payment Plan Installment</option>
+          <option value="Pre-Op Booking">Booking / Deposit Remaining</option>
+          <option value="Dispute / Courtesy">Dispute / Courtesy Adjustment</option>
+        </select>
+
+        <!-- Location Filter -->
+        <select class="form-select form-select-sm-custom" id="arLocationFilter" style="width:180px;" onchange="applyFilters()">
+          <option value="ALL">All Locations</option>
+          <option value="Beverly Hills Main">Beverly Hills Main</option>
+          <option value="Downtown Clinic">Downtown Clinic</option>
+          <option value="Westside Surgical">Westside Surgical</option>
+          <option value="Metro Dental">Metro Dental</option>
+        </select>
+
+        <!-- Reset Button -->
+        <div class="ms-auto d-flex align-items-center gap-2">
+          <button class="btn btn-sm btn-outline-secondary" onclick="resetArFilters()">
+            <i class="fa-solid fa-rotate-left me-1"></i>Reset Filters
+          </button>
+          <span class="badge bg-light text-dark border p-2" id="filteredCountBadge">Showing 14 records</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Primary Ledger & Receivables Table:
+         Answers: “Exactly which patients/cases make up that balance, why is it owed, when is it expected, and what has been collected against it?” -->
+    <div class="panel">
+      <div class="table-responsive">
+        <table class="nexa-table mb-0" id="arMainTable">
+          <thead>
+            <tr>
+              <th>Patient</th>
+              <th>Case &amp; Treatment</th>
+              <th>Location</th>
+              <th>Reason for AR</th>
+              <th>Original / Quoted</th>
+              <th>Collected</th>
+              <th>Outstanding Balance</th>
+              <th>Expected / Due Date</th>
+              <th class="text-center">Status</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="arMainTableBody">
+            <!-- Dynamic rows injected by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Table Footer / Pagination -->
+      <div class="d-flex justify-content-between align-items-center p-3 border-top" style="font-size:12.5px;color:var(--gray-500);">
+        <div class="d-flex align-items-center gap-2">
+          <span id="arPaginationInfo">Showing 1 to 14 of 14 patient balances</span>
+          <span class="text-muted">•</span>
+          <span class="audit-ribbon py-1 px-2"><i class="fa-solid fa-shield-halved me-1 text-success"></i>Ledger balance verified — all transactions auditable</span>
+        </div>
+        <nav>
+          <ul class="pagination pagination-sm mb-0">
+            <li class="page-item disabled"><a class="page-link" href="#">‹</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">›</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE-OVER DRAWER: Patient AR Profile & Detailed Ledger History -->
+  <div class="ar-drawer-backdrop" id="arDrawerBackdrop" onclick="closeArDrawer()"></div>
+  <div class="ar-detail-drawer" id="arDetailDrawer">
+    <div class="ar-drawer-header">
+      <div>
+        <div class="d-flex align-items-center gap-2 mb-1">
+          <h5 class="m-0 fw-bold" id="drawerPatientName">Patient Name</h5>
+          <span id="drawerStatusBadge"></span>
+        </div>
+        <div class="small text-muted" id="drawerPatientSub">ID: PT-0000 • Case: CASE-0000</div>
+      </div>
+      <button type="button" class="btn btn-sm btn-light rounded-circle" onclick="closeArDrawer()" style="width:32px;height:32px;">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="ar-drawer-body">
+      <!-- Dark Hero Card -->
+      <div class="ar-stat-callout">
+        <div class="stat-sub">Outstanding Patient Balance</div>
+        <div class="stat-main" id="drawerOutstandingBalance">$0.00</div>
+        <div class="stat-grid">
+          <div>
+            <div class="stat-mini-lbl">ORIGINAL QUOTED</div>
+            <div class="stat-mini-val" id="drawerOriginalQuoted">$0.00</div>
+          </div>
+          <div>
+            <div class="stat-mini-lbl">COLLECTED TO DATE</div>
+            <div class="stat-mini-val text-success" id="drawerTotalCollected">$0.00</div>
+          </div>
+          <div>
+            <div class="stat-mini-lbl">COLLECTION %</div>
+            <div class="stat-mini-val text-info" id="drawerPercentCollected">0%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Patient & Clinical Details -->
+      <div class="panel p-3 mb-3">
+        <div class="section-label mb-2"><i class="fa-solid fa-circle-info me-1"></i>Case &amp; Treatment Specifics</div>
+        <div class="row g-2 small">
+          <div class="col-6"><span class="text-muted">Case ID:</span> <strong id="drawerCaseId">—</strong></div>
+          <div class="col-6"><span class="text-muted">Provider:</span> <strong id="drawerProvider">—</strong></div>
+          <div class="col-6"><span class="text-muted">Treatment:</span> <strong id="drawerTreatment">—</strong></div>
+          <div class="col-6"><span class="text-muted">Location:</span> <strong id="drawerLocation">—</strong></div>
+          <div class="col-6"><span class="text-muted">Due Date:</span> <strong id="drawerDueDate" class="text-danger">—</strong></div>
+          <div class="col-6"><span class="text-muted">Contact:</span> <strong id="drawerPhone">—</strong></div>
+        </div>
+        <div class="mt-3 pt-2 border-top">
+          <span class="text-muted small d-block mb-1">Reason for Outstanding AR:</span>
+          <span class="ar-reason-tag" id="drawerReason" style="max-width:100%;font-size:12px;">—</span>
+        </div>
+        <div class="mt-2" id="drawerNotesBlock">
+          <span class="text-muted small d-block mb-1">Billing Notes:</span>
+          <div class="p-2 bg-light rounded text-secondary small" id="drawerNotes">—</div>
+        </div>
+      </div>
+
+      <!-- LEDGER TRANSACTIONS SECTION:
+           "Payments against AR should reduce the balance through ledger transactions rather than overwriting the original receivable." -->
+      <div class="panel p-3 mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <div>
+            <div class="section-label m-0"><i class="fa-solid fa-book-journal-whills me-1"></i>Immutable Ledger Transactions</div>
+            <div class="small text-muted" style="font-size:11px;">Every collection event &amp; adjustment logged in ledger sequence</div>
+          </div>
+          <button class="btn btn-sm btn-green" onclick="openRecordPaymentFromDrawer()">
+            <i class="fa-solid fa-plus me-1"></i>Add Payment
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="ledger-table" id="drawerLedgerTable">
+            <thead>
+              <tr>
+                <th>Txn ID / Date</th>
+                <th>Method / Ref</th>
+                <th>Amount</th>
+                <th>Balance After</th>
+              </tr>
+            </thead>
+            <tbody id="drawerLedgerTbody">
+              <!-- Dynamically rendered transactions -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Quick Action Shortcuts -->
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-navy flex-fill" onclick="printPatientReceipt()">
+          <i class="fa-solid fa-print me-1"></i>Print Statement
+        </button>
+        <button class="btn btn-outline-danger flex-fill" onclick="openWriteOffModalFromDrawer()">
+          <i class="fa-solid fa-eraser me-1"></i>Write Off / Adjust
+        </button>
+      </div>
+    </div>
+
+    <div class="ar-drawer-footer">
+      <button type="button" class="btn btn-outline-navy" onclick="closeArDrawer()">Close</button>
+      <button type="button" class="btn btn-success" onclick="openRecordPaymentFromDrawer()">
+        <i class="fa-solid fa-hand-holding-dollar me-1"></i>Record Payment
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL: Record Payment (Ledger Transaction) -->
+  <div class="modal fade" id="recordPaymentModal" tabindex="-1" aria-labelledby="recordPaymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <h5 class="modal-title fw-bold" id="recordPaymentModalLabel">
+              <i class="fa-solid fa-hand-holding-dollar text-success me-2"></i>Record AR Collection Payment
+            </h5>
+            <div class="modal-subtitle small text-muted">Posts a permanent ledger transaction reducing outstanding patient balance.</div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Summary info -->
+          <div class="ar-modal-summary mb-3 p-3 bg-light rounded border">
+            <div class="row text-center">
+              <div class="col-4">
+                <span class="d-block small text-muted">Patient</span>
+                <strong id="payModalPatient">—</strong>
+              </div>
+              <div class="col-4">
+                <span class="d-block small text-muted">Total Quoted</span>
+                <strong id="payModalQuoted">$0.00</strong>
+              </div>
+              <div class="col-4">
+                <span class="d-block small text-muted">Outstanding</span>
+                <strong class="text-danger" id="payModalOutstanding">$0.00</strong>
+              </div>
+            </div>
+          </div>
+
+          <form id="recordPaymentForm" onsubmit="event.preventDefault(); submitPaymentLedger();">
+            <!-- Payment Amount input -->
+            <div class="mb-3">
+              <label for="payAmount" class="form-label fw-bold small">Payment Amount ($) <span class="text-danger">*</span></label>
+              <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control form-control-lg fw-bold text-success" id="payAmount" min="0.01" step="0.01" placeholder="0.00" required oninput="calcRemainingPreview()">
+              </div>
+              <!-- Quick shortcut pills -->
+              <div class="quick-amt-pills">
+                <span class="quick-amt-pill" onclick="setQuickAmount(100)">+$100</span>
+                <span class="quick-amt-pill" onclick="setQuickAmount(250)">+$250</span>
+                <span class="quick-amt-pill" onclick="setQuickAmount(500)">+$500</span>
+                <span class="quick-amt-pill" onclick="setQuickAmount(1000)">+$1,000</span>
+                <span class="quick-amt-pill bg-success text-white border-0" onclick="setPayFullBalance()">Pay Full Balance</span>
+              </div>
+              <div class="mt-2 small text-muted d-flex justify-content-between">
+                <span>New Remaining Balance:</span>
+                <strong class="text-primary" id="payBalancePreview">$0.00</strong>
+              </div>
+            </div>
+
+            <!-- Payment Method -->
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <label for="payMethod" class="form-label fw-bold small">Payment Method <span class="text-danger">*</span></label>
+                <select class="form-select" id="payMethod" required>
+                  <option value="Credit Card">Credit Card</option>
+                  <option value="Debit Card">Debit Card</option>
+                  <option value="ACH / Bank Transfer">ACH / Bank Transfer</option>
+                  <option value="CareCredit">CareCredit</option>
+                  <option value="Cash">Cash</option>
+                  <option value="Check">Check</option>
+                </select>
+              </div>
+              <div class="col-6">
+                <label for="payRef" class="form-label fw-bold small">Reference / Auth #</label>
+                <input type="text" class="form-control" id="payRef" placeholder="e.g. AUTH-4821 or Last 4">
+              </div>
+            </div>
+
+            <!-- Date & Recorded By -->
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <label for="payDate" class="form-label fw-bold small">Transaction Date</label>
+                <input type="date" class="form-control" id="payDate" required>
+              </div>
+              <div class="col-6">
+                <label for="payRecordedBy" class="form-label fw-bold small">Recorded By</label>
+                <input type="text" class="form-control" id="payRecordedBy" value="James Johnson (Office Mgr)" readonly>
+              </div>
+            </div>
+
+            <!-- Notes -->
+            <div class="mb-3">
+              <label for="payMemo" class="form-label fw-bold small">Ledger Memo / Receipt Notes</label>
+              <textarea class="form-control" id="payMemo" rows="2" placeholder="e.g. Card payment taken over phone for Veneer treatment add-on..."></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-navy" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-success" onclick="submitPaymentLedger()">
+            <i class="fa-solid fa-check me-1"></i>Confirm &amp; Post to Ledger
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Add New Receivable -->
+  <div class="modal fade" id="newArModal" tabindex="-1" aria-labelledby="newArModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <h5 class="modal-title fw-bold" id="newArModalLabel">
+              <i class="fa-solid fa-folder-plus text-primary me-2"></i>Create New Accounts Receivable Record
+            </h5>
+            <div class="modal-subtitle small text-muted">Add patient balance created after booking, additional treatment, or insurance gap.</div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="newArForm" onsubmit="event.preventDefault(); submitNewArRecord();">
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label for="newArPatient" class="form-label fw-bold small">Patient Full Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="newArPatient" placeholder="e.g. Eleanor Vance" required>
+              </div>
+              <div class="col-md-3">
+                <label for="newArPatientId" class="form-label fw-bold small">Patient ID</label>
+                <input type="text" class="form-control" id="newArPatientId" placeholder="PT-9510">
+              </div>
+              <div class="col-md-3">
+                <label for="newArPhone" class="form-label fw-bold small">Phone Number</label>
+                <input type="text" class="form-control" id="newArPhone" placeholder="+1 (555) 000-0000">
+              </div>
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-md-4">
+                <label for="newArCaseId" class="form-label fw-bold small">Case ID</label>
+                <input type="text" class="form-control" id="newArCaseId" placeholder="CASE-20260401-001" required>
+              </div>
+              <div class="col-md-4">
+                <label for="newArTreatment" class="form-label fw-bold small">Treatment / Case Type <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="newArTreatment" placeholder="e.g. Ceramic Veneers 6-Unit" required>
+              </div>
+              <div class="col-md-4">
+                <label for="newArProvider" class="form-label fw-bold small">Treating Provider</label>
+                <select class="form-select" id="newArProvider">
+                  <option value="Dr. Heider">Dr. Heider</option>
+                  <option value="Dr. Vanessa">Dr. Vanessa</option>
+                  <option value="Dr. Safa">Dr. Safa</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-md-4">
+                <label for="newArLocation" class="form-label fw-bold small">Clinic Location <span class="text-danger">*</span></label>
+                <select class="form-select" id="newArLocation" required>
+                  <option value="Beverly Hills Main">Beverly Hills Main</option>
+                  <option value="Downtown Clinic">Downtown Clinic</option>
+                  <option value="Westside Surgical">Westside Surgical</option>
+                  <option value="Metro Dental">Metro Dental</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="newArOriginalAmt" class="form-label fw-bold small">Original / Treatment Amount ($) <span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <span class="input-group-text">$</span>
+                  <input type="number" class="form-control" id="newArOriginalAmt" min="1" step="0.01" placeholder="5000.00" required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="newArInitialCollected" class="form-label fw-bold small">Initial Collected Amount ($)</label>
+                <div class="input-group">
+                  <span class="input-group-text">$</span>
+                  <input type="number" class="form-control" id="newArInitialCollected" min="0" step="0.01" value="0.00">
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label for="newArReason" class="form-label fw-bold small">Reason for AR Balance <span class="text-danger">*</span></label>
+                <select class="form-select" id="newArReason" required>
+                  <option value="Post-Booking Additional 2 Veneers Added">Additional Treatment Add-on</option>
+                  <option value="Insurance Co-pay / Deductible Remaining">Insurance Co-pay / Deductible Remaining</option>
+                  <option value="Staged Treatment Phase 2 Balance">Staged Treatment Balance</option>
+                  <option value="Pre-Op Booking Balance Due at Delivery">Pre-Op Booking Deposit / Delivery Balance</option>
+                  <option value="Scheduled Payment Plan Installment">Payment Plan Installment</option>
+                  <option value="Material & Lab Upgrade Requested">Material / Lab Upgrade Requested</option>
+                  <option value="Emergency Restorative Add-on">Emergency Restorative Add-on</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="newArDueDate" class="form-label fw-bold small">Expected / Due Date <span class="text-danger">*</span></label>
+                <input type="date" class="form-control" id="newArDueDate" required>
+              </div>
+              <div class="col-md-3">
+                <label for="newArInitialStatus" class="form-label fw-bold small">Initial Status</label>
+                <select class="form-select" id="newArInitialStatus">
+                  <option value="Open">Open</option>
+                  <option value="Due Soon">Due Soon</option>
+                  <option value="Payment Plan">Payment Plan</option>
+                  <option value="Partial">Partial</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="newArNotes" class="form-label fw-bold small">Receivable Notes &amp; Terms</label>
+              <textarea class="form-control" id="newArNotes" rows="2" placeholder="e.g. Patient agreed to pay remaining 50% on seat date..."></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-navy" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="submitNewArRecord()">
+            <i class="fa-solid fa-floppy-disk me-1"></i>Create Receivable
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Write-Off / Adjust Balance -->
+  <div class="modal fade" id="writeOffModal" tabindex="-1" aria-labelledby="writeOffModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold text-danger" id="writeOffModalLabel">
+            <i class="fa-solid fa-triangle-exclamation me-2"></i>Write Off / Adjust AR Balance
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="small text-muted">
+            Writing off a receivable permanently zeroes out the remaining balance and logs an adjustment transaction in the ledger for auditing purposes.
+          </p>
+          <div class="p-3 bg-light rounded mb-3">
+            <div>Patient: <strong id="writeOffPatientName">—</strong></div>
+            <div>Outstanding Amount: <strong class="text-danger" id="writeOffAmountVal">$0.00</strong></div>
+          </div>
+          <div class="mb-3">
+            <label for="writeOffReasonSelect" class="form-label fw-bold small">Reason for Write-off <span class="text-danger">*</span></label>
+            <select class="form-select" id="writeOffReasonSelect" required>
+              <option value="Patient Hardship / Compassionate Waiver">Patient Hardship / Compassionate Waiver</option>
+              <option value="Clinical Courtesy Adjustment">Clinical Courtesy Adjustment</option>
+              <option value="Insurance Timely Filing Expiration">Insurance Timely Filing Expiration</option>
+              <option value="Uncollectible / Bad Debt &gt;120 Days">Uncollectible / Bad Debt &gt;120 Days</option>
+              <option value="Dispute Settlement Agreement">Dispute Settlement Agreement</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="writeOffApprover" class="form-label fw-bold small">Approved By (Supervisor / Owner)</label>
+            <input type="text" class="form-control" id="writeOffApprover" value="Dr. Heider (Owner Approval)" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="writeOffNotes" class="form-label fw-bold small">Audit Memo</label>
+            <textarea class="form-control" id="writeOffNotes" rows="2" placeholder="Document management authorization..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-navy" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" onclick="submitWriteOff()">
+            <i class="fa-solid fa-eraser me-1"></i>Confirm Write Off
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: KPI Breakdown Modal -->
+  <div class="modal fade" id="arKpiModal" tabindex="-1" aria-labelledby="arKpiModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <h5 class="modal-title fw-bold" id="arKpiModalTitle"><i class="fa-solid fa-chart-pie me-2 text-primary"></i>KPI Detail</h5>
+            <div class="modal-subtitle small text-muted" id="arKpiModalSubtitle">Detailed breakdown of AR metric.</div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="arKpiModalBody"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-navy" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></canvas>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+
+  <script>
+    /* ==========================================================================
+       ACCOUNTS RECEIVABLE (AR) DATA ARCHITECTURE
+       ========================================================================== */
+
+    // Full Initial AR Registry with complete Ledger History
+    let arRecords = [
+      {
+        id: 'AR-2026-001',
+        patient: 'Maria Garcia',
+        patientId: 'PT-9402',
+        phone: '+1 (310) 555-8812',
+        email: 'maria.g@example.com',
+        caseId: 'CASE-20260331-001',
+        caseType: 'Zirconia Veneer (8 Units)',
+        doctor: 'Dr. Heider',
+        location: 'Beverly Hills Main',
+        originalAmount: 14050.00,
+        dueDate: '2026-04-15',
+        reason: 'Post-Booking Additional 2 Veneers Added',
+        status: 'Due Soon',
+        notes: 'Patient decided on operatory day to add 2 lower premolars. Deposit covered initial 6 units.',
+        ledger: [
+          { txnId: 'TXN-7101', date: '2026-03-31 09:30', type: 'Genesis', method: 'Billing Event', ref: 'INV-4821', amount: 14050.00, balanceAfter: 14050.00, recordedBy: 'System', memo: 'Receivable generated from treatment plan' },
+          { txnId: 'TXN-7102', date: '2026-03-31 10:15', type: 'Payment', method: 'Credit Card (Visa ··· 4129)', ref: 'AUTH-9421', amount: 9600.00, balanceAfter: 4450.00, recordedBy: 'James Johnson', memo: 'Initial deposit & day-of payment' }
+        ]
+      },
+      {
+        id: 'AR-2026-002',
+        patient: 'James Wilson',
+        patientId: 'PT-9405',
+        phone: '+1 (213) 555-3390',
+        email: 'jwilson@example.com',
+        caseId: 'CASE-20260331-002',
+        caseType: 'Full Crown Case',
+        doctor: 'Dr. Vanessa',
+        location: 'Downtown Clinic',
+        originalAmount: 3875.00,
+        dueDate: '2026-04-05',
+        reason: 'Insurance Co-pay / Deductible Remaining',
+        status: 'Partial',
+        notes: 'Primary insurance paid $1,500. Patient responsible for balance after pre-authorization adjustment.',
+        ledger: [
+          { txnId: 'TXN-7103', date: '2026-03-31 11:00', type: 'Genesis', method: 'Billing Event', ref: 'INV-4822', amount: 3875.00, balanceAfter: 3875.00, recordedBy: 'System', memo: 'Receivable generated' },
+          { txnId: 'TXN-7104', date: '2026-03-31 11:20', type: 'Payment', method: 'Insurance Wire / Copay', ref: 'CHK-8941', amount: 2000.00, balanceAfter: 1875.00, recordedBy: 'James Johnson', memo: 'Primary insurance pre-payment' }
+        ]
+      },
+      {
+        id: 'AR-2026-003',
+        patient: 'Linda Brown',
+        patientId: 'PT-9388',
+        phone: '+1 (323) 555-4921',
+        email: 'linda.b@example.com',
+        caseId: 'CASE-20260330-001',
+        caseType: 'Composite Veneer Case',
+        doctor: 'Dr. Heider',
+        location: 'Beverly Hills Main',
+        originalAmount: 4800.00,
+        dueDate: '2026-03-15',
+        reason: 'Staged Treatment Phase 2 Balance',
+        status: 'Past Due',
+        notes: 'Phase 1 completed. Patient rescheduled Phase 2 but payment balance remains overdue.',
+        ledger: [
+          { txnId: 'TXN-7105', date: '2026-03-01 14:00', type: 'Genesis', method: 'Billing Event', ref: 'INV-4790', amount: 4800.00, balanceAfter: 4800.00, recordedBy: 'System', memo: 'Receivable generated' },
+          { txnId: 'TXN-7106', date: '2026-03-01 14:30', type: 'Payment', method: 'Debit Card', ref: 'AUTH-1204', amount: 1800.00, balanceAfter: 3000.00, recordedBy: 'James Johnson', memo: 'Phase 1 retainer paid' }
+        ]
+      },
+      {
+        id: 'AR-2026-004',
+        patient: 'Yorie Gauberth',
+        patientId: 'PT-9372',
+        phone: '+1 (424) 555-7762',
+        email: 'ygauberth@example.com',
+        caseId: 'CASE-20260330-002',
+        caseType: 'Zirconia Veneer Case',
+        doctor: 'Dr. Safa',
+        location: 'Westside Surgical',
+        originalAmount: 13125.00,
+        dueDate: '2026-05-01',
+        reason: 'Scheduled Payment Plan Installment',
+        status: 'Payment Plan',
+        notes: 'Enrolled in 6-month in-house financing at $1,500/mo. Next installment scheduled for May 1.',
+        ledger: [
+          { txnId: 'TXN-7107', date: '2026-01-15 10:00', type: 'Genesis', method: 'Billing Event', ref: 'INV-4650', amount: 13125.00, balanceAfter: 13125.00, recordedBy: 'System', memo: 'Receivable created with payment plan' },
+          { txnId: 'TXN-7108', date: '2026-01-15 10:30', type: 'Payment', method: 'CareCredit', ref: 'CC-9901', amount: 4125.00, balanceAfter: 9000.00, recordedBy: 'James Johnson', memo: 'Initial down payment' },
+          { txnId: 'TXN-7109', date: '2026-02-15 09:00', type: 'Payment', method: 'ACH Auto-Debit', ref: 'ACH-481', amount: 1500.00, balanceAfter: 7500.00, recordedBy: 'AutoPay', memo: 'Installment #1 of 6' },
+          { txnId: 'TXN-7110', date: '2026-03-15 09:00', type: 'Payment', method: 'ACH Auto-Debit', ref: 'ACH-612', amount: 1500.00, balanceAfter: 6000.00, recordedBy: 'AutoPay', memo: 'Installment #2 of 6' }
+        ]
+      },
+      {
+        id: 'AR-2026-005',
+        patient: 'James Test',
+        patientId: 'PT-9351',
+        phone: '+1 (310) 555-6677',
+        email: 'jtest@example.com',
+        caseId: 'CASE-20260329-001',
+        caseType: 'Composite Veneer Case',
+        doctor: 'Dr. Heider',
+        location: 'Beverly Hills Main',
+        originalAmount: 4000.00,
+        dueDate: '2026-03-10',
+        reason: 'Insurance Co-pay / Denial',
+        status: 'Past Due',
+        notes: 'Insurance claim denied due to cosmetic exclusion. Transferred to patient responsible balance. 2 billing notices sent.',
+        ledger: [
+          { txnId: 'TXN-7111', date: '2026-02-10 11:00', type: 'Genesis', method: 'Billing Event', ref: 'INV-4702', amount: 4000.00, balanceAfter: 4000.00, recordedBy: 'System', memo: 'Receivable generated' },
+          { txnId: 'TXN-7112', date: '2026-02-10 11:30', type: 'Payment', method: 'Cash', ref: 'RCPT-102', amount: 1000.00, balanceAfter: 3000.00, recordedBy: 'James Johnson', memo: 'Day of consult booking deposit' }
+        ]
+      },
+      {
+        id: 'AR-2026-006',
+        patient: 'Anna Taylor',
+        patientId: 'PT-9419',
+        phone: '+1 (818) 555-9012',
+        email: 'anna.t@example.com',
+        caseId: 'CASE-20260329-002',
+        caseType: 'Full Crown Case',
+        doctor: 'Dr. Vanessa',
+        location: 'Downtown Clinic',
+        originalAmount: 7500.00,
+        dueDate: '2026-04-20',
+        reason: 'Pre-Op Booking Balance Due at Delivery',
+        status: 'Open',
+        notes: 'New case booked. Patient agreed to pay in full on delivery date.',
+        ledger: [
+          { txnId: 'TXN-7113', date: '2026-03-29 15:00', type: 'Genesis', method: 'Billing Event', ref: 'INV-4819', amount: 7500.00, balanceAfter: 7500.00, recordedBy: 'System', memo: 'Receivable registered upon case creation' }
+        ]
+      },
+      {
+        id: 'AR-2026-007',
+        patient: 'Robert Anderson',
+        patientId: 'PT-9366',
+        phone: '+1 (310) 555-1144',
+        email: 'randerson@example.com',
+        caseId: 'CASE-20260328-001',
+        caseType: 'Porcelain Veneer Case',
+        doctor: 'Dr. Safa',
+        location: 'Westside Surgical',
+        originalAmount: 12600.00,
+        dueDate: '2026-04-12',
+        reason: 'Post-Booking Additional 2 Veneers Added',
+        status: 'Due Soon',
+        notes: 'Prepped upper 10 teeth instead of originally planned 8. Additional $4,200 balance created on prep day.',
+        ledger: [
+          { txnId: 'TXN-7114', date: '2026-03-28 09:00', type: 'Genesis', method: 'Billing Event', ref: 'INV-4815', amount: 12600.00, balanceAfter: 12600.00, recordedBy: 'System', memo: 'Receivable created with clinical add-on' },
+          { txnId: 'TXN-7115', date: '2026-03-28 10:00', type: 'Payment', method: 'Credit Card (Amex ··· 1004)', ref: 'AUTH-5510', amount: 8400.00, balanceAfter: 4200.00, recordedBy: 'James Johnson', memo: 'Original quote amount collected' }
+        ]
+      },
+      {
+        id: 'AR-2026-008',
+        patient: 'Lisa Martinez',
+        patientId: 'PT-9340',
+        phone: '+1 (323) 555-8765',
+        email: 'lisa.m@example.com',
+        caseId: 'CASE-20260328-002',
+        caseType: 'Zirconia Veneer Case',
+        doctor: 'Dr. Heider',
+        location: 'Beverly Hills Main',
+        originalAmount: 16400.00,
+        dueDate: '2026-03-28',
+        reason: 'Pre-Op Booking Balance Due at Delivery',
+        status: 'Collected',
+        notes: 'Case fully finished and delivered. Final balance collected at seat appointment.',
+        ledger: [
+          { txnId: 'TXN-7116', date: '2026-03-10 10:00', type: 'Genesis', method: 'Billing Event', ref: 'INV-4750', amount: 16400.00, balanceAfter: 16400.00, recordedBy: 'System', memo: 'Receivable created' },
+          { txnId: 'TXN-7117', date: '2026-03-10 10:30', type: 'Payment', method: 'Bank Transfer (Wire)', ref: 'WIRE-889', amount: 10000.00, balanceAfter: 6400.00, recordedBy: 'James Johnson', memo: 'Initial payment wire' },
+          { txnId: 'TXN-7118', date: '2026-03-28 14:00', type: 'Payment', method: 'Credit Card (Visa ··· 9102)', ref: 'AUTH-9941', amount: 6400.00, balanceAfter: 0.00, recordedBy: 'James Johnson', memo: 'Seat date final balance payoff' }
+        ]
+      },
+      {
+        id: 'AR-2026-009',
+        patient: 'David Lee',
+        patientId: 'PT-9311',
+        phone: '+1 (213) 555-4422',
+        email: 'david.lee@example.com',
+        caseId: 'CASE-20260327-001',
+        caseType: 'Crown (Single)',
+        doctor: 'Dr. Vanessa',
+        location: 'Metro Dental',
+        originalAmount: 1250.00,
+        dueDate: '2026-02-28',
+        reason: 'Post-Booking Additional 2 Veneers Added',
+        status: 'Past Due',
+        notes: 'Patient needed unexpected crown buildup on adjacent tooth during procedure. Patient left without paying copay.',
+        ledger: [
+          { txnId: 'TXN-7119', date: '2026-01-28 16:00', type: 'Genesis', method: 'Billing Event', ref: 'INV-4680', amount: 1250.00, balanceAfter: 1250.00, recordedBy: 'System', memo: 'Receivable generated' }
+        ]
+      },
+      {
+        id: 'AR-2026-010',
+        patient: 'Samantha Green',
+        patientId: 'PT-9328',
+        phone: '+1 (310) 555-5123',
+        email: 'sgreen@example.com',
+        caseId: 'CASE-20260327-002',
+        caseType: 'Composite Veneer Case',
+        doctor: 'Dr. Heider',
+        location: 'Beverly Hills Main',
+        originalAmount: 5200.00,
+        dueDate: '2026-04-18',
+        reason: 'Pre-Op Booking Balance Due at Delivery',
+        status: 'Due Soon',
+        notes: '50% deposit paid upon impression appointment. Remaining 50% due at delivery.',
+        ledger: [
+          { txnId: 'TXN-7120', date: '2026-03-27 11:00', type: 'Genesis', method: 'Billing Event', ref: 'INV-4809', amount: 5200.00, balanceAfter: 5200.00, recordedBy: 'System', memo: 'Receivable generated' },
+          { txnId: 'TXN-7121', date: '2026-03-27 11:30', type: 'Payment', method: 'Credit Card (Mastercard ··· 5519)', ref: 'AUTH-2018', amount: 2600.00, balanceAfter: 2600.00, recordedBy: 'James Johnson', memo: '50% Retainer' }
+        ]
+      },
+      {
+        id: 'AR-2026-011',
+        patient: 'Kevin Brown',
+        patientId: 'PT-9333',
+        phone: '+1 (424) 555-8910',
+        email: 'kbrown@example.com',
+        caseId: 'CASE-20260326-001',
+        caseType: 'Zirconia Veneer Case',
+        doctor: 'Dr. Safa',
+        location: 'Westside Surgical',
+        originalAmount: 10800.00,
+        dueDate: '2026-04-02',
+        reason: 'Staged Treatment Phase 2 Balance',
+        status: 'Due',
+        notes: 'Delivery appointment scheduled for this week. Balance due prior to seating.',
+        ledger: [
+          { txnId: 'TXN-7122', date: '2026-03-12 10:00', type: 'Genesis', method: 'Billing Event', ref: 'INV-4765', amount: 10800.00, balanceAfter: 10800.00, recordedBy: 'System', memo: 'Receivable created' },
+          { txnId: 'TXN-7123', date: '2026-03-12 10:45', type: 'Payment', method: 'Credit Card (Visa ··· 3381)', ref: 'AUTH-7712', amount: 6000.00, balanceAfter: 4800.00, recordedBy: 'James Johnson', memo: 'Initial treatment deposit' }
+        ]
+      },
+      {
+        id: 'AR-2026-012',
+        patient: 'Olivia Martinez',
+        patientId: 'PT-9319',
+        phone: '+1 (213) 555-6601',
+        email: 'omartinez@example.com',
+        caseId: 'CASE-20260326-002',
+        caseType: 'Full Crown Case',
+        doctor: 'Dr. Vanessa',
+        location: 'Downtown Clinic',
+        originalAmount: 6200.00,
+        dueDate: '2026-03-26',
+        reason: 'Pre-Op Booking Balance Due at Delivery',
+        status: 'Collected',
+        notes: 'Paid in full on treatment day. Zero balance.',
+        ledger: [
+          { txnId: 'TXN-7124', date: '2026-03-26 09:00', type: 'Genesis', method: 'Billing Event', ref: 'INV-4805', amount: 6200.00, balanceAfter: 6200.00, recordedBy: 'System', memo: 'Receivable created' },
+          { txnId: 'TXN-7125', date: '2026-03-26 12:30', type: 'Payment', method: 'Credit Card (Amex ··· 4402)', ref: 'AUTH-8819', amount: 6200.00, balanceAfter: 0.00, recordedBy: 'James Johnson', memo: 'Paid in full at prep' }
+        ]
+      },
+      {
+        id: 'AR-2026-013',
+        patient: 'William Chen',
+        patientId: 'PT-9290',
+        phone: '+1 (310) 555-9921',
+        email: 'wchen@example.com',
+        caseId: 'CASE-20260325-001',
+        caseType: 'Composite Veneer Case',
+        doctor: 'Dr. Heider',
+        location: 'Beverly Hills Main',
+        originalAmount: 5800.00,
+        dueDate: '2026-02-15',
+        reason: 'Post-Booking Additional 2 Veneers Added',
+        status: 'Past Due',
+        notes: '3 reminders sent. Patient promised to pay balance by end of month.',
+        ledger: [
+          { txnId: 'TXN-7126', date: '2026-01-15 15:00', type: 'Genesis', method: 'Billing Event', ref: 'INV-4660', amount: 5800.00, balanceAfter: 5800.00, recordedBy: 'System', memo: 'Receivable created' },
+          { txnId: 'TXN-7127', date: '2026-01-15 15:30', type: 'Payment', method: 'Credit Card (Visa ··· 1290)', ref: 'AUTH-3401', amount: 3800.00, balanceAfter: 2000.00, recordedBy: 'James Johnson', memo: 'Initial payment' }
+        ]
+      },
+      {
+        id: 'AR-2026-014',
+        patient: 'Sophia Lee',
+        patientId: 'PT-9285',
+        phone: '+1 (424) 555-3312',
+        email: 'slee@example.com',
+        caseId: 'CASE-20260325-002',
+        caseType: 'Porcelain Veneer Case',
+        doctor: 'Dr. Safa',
+        location: 'Westside Surgical',
+        originalAmount: 9400.00,
+        dueDate: '2026-01-15',
+        reason: 'Dispute Settlement Agreement',
+        status: 'Written Off',
+        notes: 'Case had lab shade mismatch dispute. $1,400 balance written off as clinical courtesy by Dr. Heider.',
+        ledger: [
+          { txnId: 'TXN-7128', date: '2025-12-10 11:00', type: 'Genesis', method: 'Billing Event', ref: 'INV-4550', amount: 9400.00, balanceAfter: 9400.00, recordedBy: 'System', memo: 'Receivable created' },
+          { txnId: 'TXN-7129', date: '2025-12-10 11:30', type: 'Payment', method: 'Credit Card', ref: 'AUTH-1192', amount: 8000.00, balanceAfter: 1400.00, recordedBy: 'James Johnson', memo: 'Patient paid $8,000' },
+          { txnId: 'TXN-7130', date: '2026-01-15 14:00', type: 'Write-Off', method: 'Management Waiver', ref: 'WO-2026-01', amount: 1400.00, balanceAfter: 0.00, recordedBy: 'Dr. Heider', memo: 'Dispute settled with shade adjustment courtesy' }
+        ]
+      }
+    ];
+
+    /* ==========================================================================
+       FINANCIAL CALCULATION ENGINE
+       ========================================================================== */
+
+    function getCollectedAmount(record) {
+      return record.ledger
+        .filter(t => t.type === 'Payment')
+        .reduce((sum, t) => sum + t.amount, 0);
+    }
+
+    function getWriteOffAmount(record) {
+      return record.ledger
+        .filter(t => t.type === 'Write-Off')
+        .reduce((sum, t) => sum + t.amount, 0);
+    }
+
+    function getOutstandingBalance(record) {
+      if (record.status === 'Written Off') return 0;
+      const collected = getCollectedAmount(record);
+      const writtenOff = getWriteOffAmount(record);
+      return Math.max(0, record.originalAmount - collected - writtenOff);
+    }
+
+    function fmtUSD(num) {
+      return '$' + Number(num || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function fmtDate(dStr) {
+      if (!dStr) return '—';
+      return moment(dStr).format('MMM DD, YYYY');
+    }
+
+    function getInitials(name) {
+      return name.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
+    }
+
+    function getStatusBadge(status) {
+      const map = {
+        'Open': { class: 'badge-ar-open', icon: 'fa-regular fa-clock' },
+        'Partial': { class: 'badge-ar-partial', icon: 'fa-solid fa-chart-pie' },
+        'Due Soon': { class: 'badge-ar-duesoon', icon: 'fa-solid fa-hourglass-start' },
+        'Due': { class: 'badge-ar-due', icon: 'fa-solid fa-bell' },
+        'Past Due': { class: 'badge-ar-pastdue', icon: 'fa-solid fa-triangle-exclamation' },
+        'Payment Plan': { class: 'badge-ar-paymentplan', icon: 'fa-solid fa-calendar-check' },
+        'Collected': { class: 'badge-ar-collected', icon: 'fa-solid fa-circle-check' },
+        'Written Off': { class: 'badge-ar-writtenoff', icon: 'fa-solid fa-eraser' }
+      };
+      const conf = map[status] || { class: 'badge-ar-open', icon: 'fa-circle' };
+      return `<span class="badge-ar ${conf.class}"><i class="${conf.icon}"></i> ${status}</span>`;
+    }
+
+    /* ==========================================================================
+       KPI RECALCULATION
+       ========================================================================== */
+    function recalculateMetrics() {
+      let totalOutstanding = 0;
+      let totalQuoted = 0;
+      let totalCollected = 0;
+      let pastDueTotal = 0;
+      let pastDueCount = 0;
+      let paymentPlanTotal = 0;
+      let paymentPlanCount = 0;
+      let openCasesCount = 0;
+
+      let bAll = 0, bAllCnt = 0;
+      let bCurrent = 0, bCurrentCnt = 0;
+      let b30 = 0, b30Cnt = 0;
+      let b60 = 0, b60Cnt = 0;
+      let b90 = 0, b90Cnt = 0;
+
+      const today = moment();
+
+      arRecords.forEach(r => {
+        const bal = getOutstandingBalance(r);
+        const col = getCollectedAmount(r);
+        totalQuoted += r.originalAmount;
+        totalCollected += col;
+
+        if (bal > 0) {
+          totalOutstanding += bal;
+          openCasesCount++;
+          bAll += bal;
+          bAllCnt++;
+
+          const due = moment(r.dueDate);
+          const daysOverdue = today.diff(due, 'days');
+
+          if (daysOverdue <= 0) {
+            bCurrent += bal;
+            bCurrentCnt++;
+          } else if (daysOverdue <= 30) {
+            b30 += bal;
+            b30Cnt++;
+          } else if (daysOverdue <= 60) {
+            b60 += bal;
+            b60Cnt++;
+          } else {
+            b90 += bal;
+            b90Cnt++;
+          }
+
+          if (r.status === 'Past Due' || daysOverdue > 15) {
+            pastDueTotal += bal;
+            pastDueCount++;
+          }
+
+          if (r.status === 'Payment Plan') {
+            paymentPlanTotal += bal;
+            paymentPlanCount++;
+          }
+        }
+      });
+
+      const colRate = totalQuoted > 0 ? ((totalCollected / totalQuoted) * 100).toFixed(1) : '0.0';
+
+      document.getElementById('kpiTotalOutstanding').textContent = fmtUSD(totalOutstanding);
+      document.getElementById('kpiOpenCountSub').textContent = `${openCasesCount} open patient balances`;
+      document.getElementById('kpiTotalQuoted').textContent = fmtUSD(totalQuoted);
+      document.getElementById('kpiTotalCollected').textContent = fmtUSD(totalCollected);
+      document.getElementById('kpiCollectionRate').textContent = `${colRate}% Overall Collection Rate`;
+      document.getElementById('kpiPastDueTotal').textContent = fmtUSD(pastDueTotal);
+      document.getElementById('kpiPastDueCount').textContent = `${pastDueCount} accounts past due date`;
+      document.getElementById('kpiPaymentPlanTotal').textContent = fmtUSD(paymentPlanTotal);
+      document.getElementById('kpiPaymentPlanCount').textContent = `${paymentPlanCount} active scheduled plans`;
+
+      // Aging buttons
+      document.getElementById('bucketAllAmt').textContent = '$' + Math.round(bAll).toLocaleString();
+      document.getElementById('bucketAllCnt').textContent = bAllCnt;
+      document.getElementById('bucketCurrentAmt').textContent = '$' + Math.round(bCurrent).toLocaleString();
+      document.getElementById('bucketCurrentCnt').textContent = bCurrentCnt;
+      document.getElementById('bucket30Amt').textContent = '$' + Math.round(b30).toLocaleString();
+      document.getElementById('bucket30Cnt').textContent = b30Cnt;
+      document.getElementById('bucket60Amt').textContent = '$' + Math.round(b60).toLocaleString();
+      document.getElementById('bucket60Cnt').textContent = b60Cnt;
+      document.getElementById('bucket90Amt').textContent = '$' + Math.round(b90).toLocaleString();
+      document.getElementById('bucket90Cnt').textContent = b90Cnt;
+    }
+
+    /* ==========================================================================
+       TABLE RENDERING & FILTERING
+       ========================================================================== */
+    let currentAgingFilter = 'all';
+
+    function setAgingFilter(bucket, btnEl) {
+      currentAgingFilter = bucket;
+      document.querySelectorAll('.aging-bucket-btn').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+      renderTable();
+    }
+
+    function applyFilters() {
+      renderTable();
+    }
+
+    function handleArSearch() {
+      renderTable();
+    }
+
+    function resetArFilters() {
+      document.getElementById('arSearchInput').value = '';
+      document.getElementById('arStatusFilter').value = 'ALL';
+      document.getElementById('arReasonFilter').value = 'ALL';
+      document.getElementById('arLocationFilter').value = 'ALL';
+      currentAgingFilter = 'all';
+      document.querySelectorAll('.aging-bucket-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.aging-bucket-btn').classList.add('active');
+      renderTable();
+    }
+
+    function getFilteredRecords() {
+      const search = (document.getElementById('arSearchInput')?.value || '').toLowerCase().trim();
+      const statusFilter = document.getElementById('arStatusFilter')?.value || 'ALL';
+      const reasonFilter = document.getElementById('arReasonFilter')?.value || 'ALL';
+      const locFilter = document.getElementById('arLocationFilter')?.value || 'ALL';
+      const today = moment();
+
+      return arRecords.filter(r => {
+        // Search text matching
+        if (search) {
+          const match = r.patient.toLowerCase().includes(search) ||
+                        r.patientId.toLowerCase().includes(search) ||
+                        r.caseId.toLowerCase().includes(search) ||
+                        r.phone.toLowerCase().includes(search) ||
+                        r.caseType.toLowerCase().includes(search) ||
+                        r.doctor.toLowerCase().includes(search);
+          if (!match) return false;
+        }
+
+        // Status filter
+        if (statusFilter !== 'ALL' && r.status !== statusFilter) {
+          return false;
+        }
+
+        // Reason filter
+        if (reasonFilter !== 'ALL') {
+          if (!r.reason.toLowerCase().includes(reasonFilter.toLowerCase())) {
+            return false;
+          }
+        }
+
+        // Location filter
+        if (locFilter !== 'ALL' && r.location !== locFilter) {
+          return false;
+        }
+
+        // Aging bucket filter
+        if (currentAgingFilter !== 'all') {
+          const bal = getOutstandingBalance(r);
+          if (bal <= 0) return false;
+          const due = moment(r.dueDate);
+          const daysOverdue = today.diff(due, 'days');
+
+          if (currentAgingFilter === 'current' && daysOverdue > 0) return false;
+          if (currentAgingFilter === '31-60' && (daysOverdue <= 0 || daysOverdue > 30)) return false;
+          if (currentAgingFilter === '61-90' && (daysOverdue <= 30 || daysOverdue > 60)) return false;
+          if (currentAgingFilter === '90plus' && daysOverdue <= 60) return false;
+        }
+
+        return true;
+      });
+    }
+
+    function renderTable() {
+      const records = getFilteredRecords();
+      const tbody = document.getElementById('arMainTableBody');
+      const countBadge = document.getElementById('filteredCountBadge');
+      const pageInfo = document.getElementById('arPaginationInfo');
+
+      countBadge.textContent = `Showing ${records.length} record${records.length === 1 ? '' : 's'}`;
+      pageInfo.textContent = `Showing 1 to ${records.length} of ${records.length} patient balances`;
+
+      if (records.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="10" class="text-center py-5">
+              <i class="fa-solid fa-folder-open text-muted" style="font-size:36px;opacity:0.4;"></i>
+              <div class="mt-2 fw-semibold text-muted">No accounts receivable found matching your criteria.</div>
+              <button class="btn btn-sm btn-outline-navy mt-2" onclick="resetArFilters()">Clear Filters</button>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = records.map(r => {
+        const collected = getCollectedAmount(r);
+        const outstanding = getOutstandingBalance(r);
+        const percent = r.originalAmount > 0 ? Math.min(100, Math.round((collected / r.originalAmount) * 100)) : 0;
+        const initials = getInitials(r.patient);
+        const avatarBg = r.status === 'Collected' ? '#059669' : (r.status === 'Past Due' ? '#dc2626' : '#1e293b');
+
+        // Due date calculation & urgency styling
+        const dueMoment = moment(r.dueDate);
+        const daysFromNow = dueMoment.diff(moment(), 'days');
+        let dueBadge = '';
+        if (outstanding === 0) {
+          dueBadge = `<div class="text-success small"><i class="fa-solid fa-check-circle me-1"></i>Settled</div>`;
+        } else if (daysFromNow < 0) {
+          dueBadge = `<div class="text-danger fw-semibold small" style="font-size:11.5px;">${Math.abs(daysFromNow)} days past due</div>`;
+        } else if (daysFromNow <= 7) {
+          dueBadge = `<div class="text-warning fw-semibold small" style="font-size:11.5px;">Due in ${daysFromNow} day${daysFromNow === 1 ? '' : 's'}</div>`;
+        } else {
+          dueBadge = `<div class="text-muted small" style="font-size:11px;">Due in ${daysFromNow} days</div>`;
+        }
+
+        return `
+          <tr onclick="openArDrawer('${r.id}')" style="cursor:pointer;">
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <div class="avatar-sm" style="background:${avatarBg};">${initials}</div>
+                <div>
+                  <div class="member-name">${r.patient}</div>
+                  <div class="text-muted small" style="font-size:11px;">${r.patientId} • ${r.phone}</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="fw-semibold small">${r.caseId}</div>
+              <div class="text-muted small">${r.caseType}</div>
+            </td>
+            <td>
+              <span class="badge bg-light text-dark border small">${r.location}</span>
+              <div class="text-muted small" style="font-size:10.5px;">${r.doctor}</div>
+            </td>
+            <td>
+              <span class="ar-reason-tag" title="${r.reason}">
+                <i class="fa-solid fa-circle-exclamation text-primary"></i> ${r.reason}
+              </span>
+            </td>
+            <td class="fw-semibold">${fmtUSD(r.originalAmount)}</td>
+            <td>
+              <div class="ar-progress-wrapper">
+                <div class="d-flex justify-content-between small">
+                  <span class="fw-semibold text-success">${fmtUSD(collected)}</span>
+                  <span class="text-muted" style="font-size:10.5px;">${percent}%</span>
+                </div>
+                <div class="ar-progress-bar-bg">
+                  <div class="ar-progress-fill" style="width:${percent}%;"></div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fw-bold ${outstanding === 0 ? 'text-success' : 'text-danger'}" style="font-size:14px;">
+                ${fmtUSD(outstanding)}
+              </span>
+            </td>
+            <td>
+              <div class="fw-semibold small">${fmtDate(r.dueDate)}</div>
+              ${dueBadge}
+            </td>
+            <td class="text-center">${getStatusBadge(r.status)}</td>
+            <td class="text-end" onclick="event.stopPropagation();">
+              <div class="d-flex justify-content-end gap-1">
+                ${outstanding > 0 ? `
+                  <button class="btn btn-record-payment" onclick="openRecordPayment('${r.id}')" title="Record Payment">
+                    <i class="fa-solid fa-hand-holding-dollar me-1"></i>Collect
+                  </button>
+                ` : `
+                  <span class="badge bg-success-subtle text-success border border-success-subtle py-1 px-2 small">
+                    <i class="fa-solid fa-check me-1"></i>Settled
+                  </span>
+                `}
+                <button class="btn btn-sm btn-outline-navy" onclick="openArDrawer('${r.id}')" title="View Full Ledger History">
+                  <i class="fa-solid fa-book-journal-whills"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    /* ==========================================================================
+       DRAWER VIEW: PATIENT AR PROFILE & FULL AUDIT LEDGER
+       ========================================================================== */
+    let activeDrawerArId = null;
+
+    function openArDrawer(arId) {
+      const record = arRecords.find(x => x.id === arId);
+      if (!record) return;
+      activeDrawerArId = arId;
+
+      const outstanding = getOutstandingBalance(record);
+      const collected = getCollectedAmount(record);
+      const percent = record.originalAmount > 0 ? Math.min(100, Math.round((collected / record.originalAmount) * 100)) : 0;
+
+      document.getElementById('drawerPatientName').textContent = record.patient;
+      document.getElementById('drawerPatientSub').textContent = `Patient ID: ${record.patientId} • Phone: ${record.phone} • Email: ${record.email}`;
+      document.getElementById('drawerStatusBadge').innerHTML = getStatusBadge(record.status);
+
+      document.getElementById('drawerOutstandingBalance').textContent = fmtUSD(outstanding);
+      document.getElementById('drawerOriginalQuoted').textContent = fmtUSD(record.originalAmount);
+      document.getElementById('drawerTotalCollected').textContent = fmtUSD(collected);
+      document.getElementById('drawerPercentCollected').textContent = `${percent}%`;
+
+      document.getElementById('drawerCaseId').textContent = record.caseId;
+      document.getElementById('drawerProvider').textContent = record.doctor;
+      document.getElementById('drawerTreatment').textContent = record.caseType;
+      document.getElementById('drawerLocation').textContent = record.location;
+      document.getElementById('drawerDueDate').textContent = fmtDate(record.dueDate);
+      document.getElementById('drawerPhone').textContent = record.phone;
+      document.getElementById('drawerReason').textContent = record.reason;
+      document.getElementById('drawerNotes').textContent = record.notes || 'No notes on file.';
+
+      // Render Ledger Transaction rows (Permanent immutable audit log)
+      const tbody = document.getElementById('drawerLedgerTbody');
+      tbody.innerHTML = record.ledger.map(t => {
+        let badgeType = '<span class="ledger-badge-payment">Payment</span>';
+        if (t.type === 'Genesis') badgeType = '<span class="ledger-badge-genesis">Genesis</span>';
+        if (t.type === 'Write-Off') badgeType = '<span class="ledger-badge-writeoff">Write-Off</span>';
+
+        return `
+          <tr>
+            <td>
+              <div class="fw-bold">${t.txnId}</div>
+              <div class="text-muted" style="font-size:10.5px;">${t.date}</div>
+              <div class="mt-1">${badgeType}</div>
+            </td>
+            <td>
+              <div class="fw-semibold">${t.method}</div>
+              <div class="text-muted" style="font-size:10.5px;">Ref: ${t.ref || '—'}</div>
+              <div class="text-muted" style="font-size:10.5px;">By: ${t.recordedBy}</div>
+              ${t.memo ? `<div class="small text-secondary mt-1 fst-italic">"${t.memo}"</div>` : ''}
+            </td>
+            <td class="fw-bold ${t.type === 'Payment' ? 'text-success' : (t.type === 'Write-Off' ? 'text-danger' : '')}">
+              ${t.type === 'Payment' ? '+' : ''}${fmtUSD(t.amount)}
+            </td>
+            <td class="fw-bold text-end">
+              ${fmtUSD(t.balanceAfter)}
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      document.getElementById('arDetailDrawer').classList.add('open');
+      document.getElementById('arDrawerBackdrop').classList.add('show');
+    }
+
+    function closeArDrawer() {
+      document.getElementById('arDetailDrawer').classList.remove('open');
+      document.getElementById('arDrawerBackdrop').classList.remove('show');
+      activeDrawerArId = null;
+    }
+
+    /* ==========================================================================
+       RECORD PAYMENT (LEDGER TRANSACTION)
+       ========================================================================== */
+    let currentPaymentArId = null;
+
+    function openRecordPayment(arId) {
+      const record = arRecords.find(x => x.id === arId);
+      if (!record) return;
+      currentPaymentArId = arId;
+
+      const outstanding = getOutstandingBalance(record);
+      document.getElementById('payModalPatient').textContent = record.patient;
+      document.getElementById('payModalQuoted').textContent = fmtUSD(record.originalAmount);
+      document.getElementById('payModalOutstanding').textContent = fmtUSD(outstanding);
+      document.getElementById('payAmount').value = '';
+      document.getElementById('payRef').value = '';
+      document.getElementById('payMemo').value = '';
+      document.getElementById('payDate').value = moment().format('YYYY-MM-DD');
+      document.getElementById('payBalancePreview').textContent = fmtUSD(outstanding);
+
+      const modal = new bootstrap.Modal(document.getElementById('recordPaymentModal'));
+      modal.show();
+    }
+
+    function openRecordPaymentFromDrawer() {
+      if (!activeDrawerArId) return;
+      openRecordPayment(activeDrawerArId);
+    }
+
+    function setQuickAmount(amt) {
+      const record = arRecords.find(x => x.id === currentPaymentArId);
+      if (!record) return;
+      const outstanding = getOutstandingBalance(record);
+      const newAmt = Math.min(outstanding, amt);
+      document.getElementById('payAmount').value = newAmt.toFixed(2);
+      calcRemainingPreview();
+    }
+
+    function setPayFullBalance() {
+      const record = arRecords.find(x => x.id === currentPaymentArId);
+      if (!record) return;
+      const outstanding = getOutstandingBalance(record);
+      document.getElementById('payAmount').value = outstanding.toFixed(2);
+      calcRemainingPreview();
+    }
+
+    function calcRemainingPreview() {
+      const record = arRecords.find(x => x.id === currentPaymentArId);
+      if (!record) return;
+      const outstanding = getOutstandingBalance(record);
+      const entered = parseFloat(document.getElementById('payAmount').value) || 0;
+      const rem = Math.max(0, outstanding - entered);
+      document.getElementById('payBalancePreview').textContent = fmtUSD(rem);
+    }
+
+    function submitPaymentLedger() {
+      const record = arRecords.find(x => x.id === currentPaymentArId);
+      if (!record) return;
+
+      const amount = parseFloat(document.getElementById('payAmount').value);
+      if (isNaN(amount) || amount <= 0) {
+        alert('Please enter a valid payment amount greater than $0.');
+        return;
+      }
+
+      const method = document.getElementById('payMethod').value;
+      const ref = document.getElementById('payRef').value.trim() || 'N/A';
+      const dateStr = document.getElementById('payDate').value || moment().format('YYYY-MM-DD');
+      const recordedBy = document.getElementById('payRecordedBy').value;
+      const memo = document.getElementById('payMemo').value.trim() || 'Payment received and posted to patient AR ledger.';
+
+      const currentBalance = getOutstandingBalance(record);
+      const newBalance = Math.max(0, currentBalance - amount);
+
+      // Create Permanent Immutable Ledger Transaction
+      const nextTxnNum = 7130 + Math.floor(Math.random() * 800) + 1;
+      const newTxn = {
+        txnId: `TXN-${nextTxnNum}`,
+        date: `${dateStr} ${moment().format('HH:mm')}`,
+        type: 'Payment',
+        method: method,
+        ref: ref,
+        amount: amount,
+        balanceAfter: newBalance,
+        recordedBy: recordedBy,
+        memo: memo
+      };
+
+      record.ledger.push(newTxn);
+
+      // Automatic Status Updates based on Ledger Balance
+      if (newBalance === 0) {
+        record.status = 'Collected';
+        triggerConfettiPayoff();
+      } else {
+        if (record.status === 'Open' || record.status === 'Due' || record.status === 'Due Soon') {
+          record.status = 'Partial';
+        }
+      }
+
+      // Close modal
+      const modalEl = document.getElementById('recordPaymentModal');
+      const modalInstance = bootstrap.Modal.getInstance(modalEl);
+      if (modalInstance) modalInstance.hide();
+
+      // Recalculate KPIs and Table
+      recalculateMetrics();
+      renderTable();
+
+      // If drawer was open, refresh it
+      if (activeDrawerArId === record.id) {
+        openArDrawer(record.id);
+      }
+    }
+
+    /* ==========================================================================
+       CREATE NEW RECEIVABLE
+       ========================================================================== */
+    function submitNewArRecord() {
+      const patient = document.getElementById('newArPatient').value.trim();
+      const patientId = document.getElementById('newArPatientId').value.trim() || ('PT-' + Math.floor(Math.random() * 9000 + 1000));
+      const phone = document.getElementById('newArPhone').value.trim() || '+1 (555) 000-0000';
+      const caseId = document.getElementById('newArCaseId').value.trim();
+      const treatment = document.getElementById('newArTreatment').value.trim();
+      const provider = document.getElementById('newArProvider').value;
+      const location = document.getElementById('newArLocation').value;
+      const originalAmt = parseFloat(document.getElementById('newArOriginalAmt').value);
+      const initialCollected = parseFloat(document.getElementById('newArInitialCollected').value) || 0;
+      const reason = document.getElementById('newArReason').value;
+      const dueDate = document.getElementById('newArDueDate').value;
+      const initialStatus = document.getElementById('newArInitialStatus').value;
+      const notes = document.getElementById('newArNotes').value.trim();
+
+      if (!patient || !caseId || !treatment || isNaN(originalAmt) || originalAmt <= 0 || !dueDate) {
+        alert('Please fill in all required fields (Patient, Case ID, Treatment, Original Amount, Due Date).');
+        return;
+      }
+
+      const nextArId = `AR-2026-0${arRecords.length + 1}`;
+      const nowStr = moment().format('YYYY-MM-DD HH:mm');
+
+      const initialLedger = [
+        {
+          txnId: `TXN-${Math.floor(Math.random() * 8000 + 1000)}`,
+          date: nowStr,
+          type: 'Genesis',
+          method: 'Billing Event',
+          ref: `INV-${Math.floor(Math.random() * 8000 + 1000)}`,
+          amount: originalAmt,
+          balanceAfter: originalAmt,
+          recordedBy: 'James Johnson',
+          memo: `Receivable created. Reason: ${reason}`
+        }
+      ];
+
+      let startingStatus = initialStatus;
+      if (initialCollected > 0) {
+        const balAfter = Math.max(0, originalAmt - initialCollected);
+        initialLedger.push({
+          txnId: `TXN-${Math.floor(Math.random() * 8000 + 1000)}`,
+          date: nowStr,
+          type: 'Payment',
+          method: 'Initial Deposit',
+          ref: 'INIT-DEP',
+          amount: initialCollected,
+          balanceAfter: balAfter,
+          recordedBy: 'James Johnson',
+          memo: 'Initial deposit collected at booking'
+        });
+        if (balAfter === 0) startingStatus = 'Collected';
+        else if (startingStatus === 'Open') startingStatus = 'Partial';
+      }
+
+      const newRec = {
+        id: nextArId,
+        patient: patient,
+        patientId: patientId,
+        phone: phone,
+        email: patient.toLowerCase().replace(/\s+/g, '.') + '@example.com',
+        caseId: caseId,
+        caseType: treatment,
+        doctor: provider,
+        location: location,
+        originalAmount: originalAmt,
+        dueDate: dueDate,
+        reason: reason,
+        status: startingStatus,
+        notes: notes,
+        ledger: initialLedger
+      };
+
+      arRecords.unshift(newRec);
+
+      // Close modal
+      const modalEl = document.getElementById('newArModal');
+      const modalInstance = bootstrap.Modal.getInstance(modalEl);
+      if (modalInstance) modalInstance.hide();
+      document.getElementById('newArForm').reset();
+
+      recalculateMetrics();
+      renderTable();
+      openArDrawer(newRec.id);
+    }
+
+    /* ==========================================================================
+       WRITE OFF BALANCE
+       ========================================================================== */
+    let writeOffTargetId = null;
+
+    function openWriteOffModalFromDrawer() {
+      if (!activeDrawerArId) return;
+      const record = arRecords.find(x => x.id === activeDrawerArId);
+      if (!record) return;
+
+      const outstanding = getOutstandingBalance(record);
+      if (outstanding <= 0) {
+        alert('This balance is already $0.00 and cannot be written off.');
+        return;
+      }
+
+      writeOffTargetId = activeDrawerArId;
+      document.getElementById('writeOffPatientName').textContent = record.patient;
+      document.getElementById('writeOffAmountVal').textContent = fmtUSD(outstanding);
+
+      const modal = new bootstrap.Modal(document.getElementById('writeOffModal'));
+      modal.show();
+    }
+
+    function submitWriteOff() {
+      const record = arRecords.find(x => x.id === writeOffTargetId);
+      if (!record) return;
+
+      const outstanding = getOutstandingBalance(record);
+      const reason = document.getElementById('writeOffReasonSelect').value;
+      const approver = document.getElementById('writeOffApprover').value;
+      const memo = document.getElementById('writeOffNotes').value.trim() || 'Formal balance write-off adjustment.';
+
+      // Add audited Write-Off transaction to ledger
+      record.ledger.push({
+        txnId: `TXN-${Math.floor(Math.random() * 8000 + 1000)}`,
+        date: moment().format('YYYY-MM-DD HH:mm'),
+        type: 'Write-Off',
+        method: reason,
+        ref: `WO-${moment().format('YYYYMMDD')}`,
+        amount: outstanding,
+        balanceAfter: 0.00,
+        recordedBy: approver,
+        memo: memo
+      });
+
+      record.status = 'Written Off';
+
+      const modalEl = document.getElementById('writeOffModal');
+      const modalInstance = bootstrap.Modal.getInstance(modalEl);
+      if (modalInstance) modalInstance.hide();
+
+      recalculateMetrics();
+      renderTable();
+      openArDrawer(record.id);
+    }
+
+    /* ==========================================================================
+       KPI DETAIL MODAL
+       ========================================================================== */
+    function openArKpiDetail(idx) {
+      const titles = [
+        'Total Outstanding AR',
+        'Total Quoted Receivables',
+        'Collected to Date',
+        'Past Due Balances',
+        'Active Payment Plans'
+      ];
+      const icons = [
+        'fa-hand-holding-dollar',
+        'fa-file-invoice',
+        'fa-circle-check',
+        'fa-triangle-exclamation',
+        'fa-calendar-check'
+      ];
+
+      const modalTitle = document.getElementById('arKpiModalTitle');
+      const modalSubtitle = document.getElementById('arKpiModalSubtitle');
+      const modalBody = document.getElementById('arKpiModalBody');
+
+      modalTitle.innerHTML = `<i class="fa-solid ${icons[idx]} me-2 text-primary"></i>${titles[idx]}`;
+      modalSubtitle.textContent = `Deep dive and audit breakdown for ${titles[idx].toLowerCase()}.`;
+
+      const views = [
+        // 0 — Outstanding AR
+        `<div>
+          <h6 class="fw-bold mb-3">Outstanding AR by Aging Category</h6>
+          <div class="detail-breakdown-box">
+            <div class="detail-breakdown-row"><span>🟢 0–30 Days (Due Soon / Current)</span><strong class="text-success">$14,100.00</strong></div>
+            <div class="detail-breakdown-row"><span>🟡 31–60 Days (Due)</span><strong class="text-warning">$8,950.00</strong></div>
+            <div class="detail-breakdown-row"><span>🔴 61–90 Days (Past Due)</span><strong class="text-danger">$14,200.00</strong></div>
+            <div class="detail-breakdown-row"><span>⛔ 90+ Days (High Risk / Escalated)</span><strong class="text-danger">$5,400.00</strong></div>
+            <div class="detail-breakdown-row" style="border-top:2px solid #e2e8f0;font-weight:700;"><span>Total Outstanding</span><strong class="text-danger">$42,650.00</strong></div>
+          </div>
+          <div class="small text-muted mt-3">Ledger transactions automatically maintain zero balance reconciliation across all active cases.</div>
+        </div>`,
+        // 1 — Quoted Receivables
+        `<div>
+          <h6 class="fw-bold mb-3">Quoted Receivables by Procedure Type</h6>
+          <div class="detail-breakdown-box">
+            <div class="detail-breakdown-row"><span>🦷 Zirconia Veneers</span><strong>$54,375.00</strong></div>
+            <div class="detail-breakdown-row"><span>🦷 Composite Veneers</span><strong>$19,800.00</strong></div>
+            <div class="detail-breakdown-row"><span>🦷 Porcelain Veneers</span><strong>$22,000.00</strong></div>
+            <div class="detail-breakdown-row"><span>🦷 Full Crown Restorations</span><strong>$32,225.00</strong></div>
+            <div class="detail-breakdown-row" style="border-top:2px solid #e2e8f0;font-weight:700;"><span>Total Quoted Treatment</span><strong>$128,400.00</strong></div>
+          </div>
+        </div>`,
+        // 2 — Collected to Date
+        `<div>
+          <h6 class="fw-bold mb-3">Collections Breakdown by Payment Method</h6>
+          <div class="detail-breakdown-box">
+            <div class="detail-breakdown-row"><span>💳 Credit Card (Visa / MC / Amex)</span><strong>$51,600.00</strong></div>
+            <div class="detail-breakdown-row"><span>🏦 Bank Wire &amp; ACH Auto-Debit</span><strong>$13,000.00</strong></div>
+            <div class="detail-breakdown-row"><span>🏥 CareCredit Healthcare Finance</span><strong>$14,125.00</strong></div>
+            <div class="detail-breakdown-row"><span>💵 Cash / Check Payments</span><strong>$7,025.00</strong></div>
+            <div class="detail-breakdown-row" style="border-top:2px solid #e2e8f0;font-weight:700;"><span>Total Realized Collections</span><strong class="text-success">$85,750.00</strong></div>
+          </div>
+        </div>`,
+        // 3 — Past Due Balances
+        `<div>
+          <h6 class="fw-bold mb-3">Accounts Past Due Date (&gt;30 Days)</h6>
+          <div class="detail-breakdown-box">
+            <div class="detail-breakdown-row"><span>Linda Brown (CASE-20260330-001)</span><strong class="text-danger">$3,000.00</strong></div>
+            <div class="detail-breakdown-row"><span>James Test (CASE-20260329-001)</span><strong class="text-danger">$3,000.00</strong></div>
+            <div class="detail-breakdown-row"><span>David Lee (CASE-20260327-001)</span><strong class="text-danger">$1,250.00</strong></div>
+            <div class="detail-breakdown-row"><span>William Chen (CASE-20260325-001)</span><strong class="text-danger">$2,000.00</strong></div>
+            <div class="detail-breakdown-row" style="border-top:2px solid #e2e8f0;font-weight:700;"><span>Total Past Due</span><strong class="text-danger">$14,200.00</strong></div>
+          </div>
+          <div class="alert alert-warning small mt-3 mb-0">
+            <i class="fa-solid fa-triangle-exclamation me-1"></i> 2 accounts require billing team telephone follow-up.
+          </div>
+        </div>`,
+        // 4 — Active Payment Plans
+        `<div>
+          <h6 class="fw-bold mb-3">Active In-House Payment Plans</h6>
+          <div class="detail-breakdown-box">
+            <div class="detail-breakdown-row"><span>Yorie Gauberth ($1,500/mo)</span><strong>$6,000.00 Remaining</strong></div>
+            <div class="detail-breakdown-row"><span>Robert Anderson ($1,050/mo)</span><strong>$4,200.00 Remaining</strong></div>
+            <div class="detail-breakdown-row"><span>Samantha Green ($650/mo)</span><strong>$2,600.00 Remaining</strong></div>
+            <div class="detail-breakdown-row" style="border-top:2px solid #e2e8f0;font-weight:700;"><span>Total Secured Installments</span><strong class="text-teal">$16,800.00</strong></div>
+          </div>
+        </div>`
+      ];
+
+      modalBody.innerHTML = views[idx] || views[0];
+      const modal = new bootstrap.Modal(document.getElementById('arKpiModal'));
+      modal.show();
+    }
+
+    /* ==========================================================================
+       UTILITIES & EXPORT
+       ========================================================================== */
+    function triggerConfettiPayoff() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      }
+    }
+
+    function exportArCsv() {
+      const records = getFilteredRecords();
+      let csvContent = 'data:text/csv;charset=utf-8,';
+      csvContent += 'AR_ID,Patient,Patient_ID,Case_ID,Treatment,Location,Provider,Reason,Original_Amount,Collected,Outstanding,Due_Date,Status\n';
+
+      records.forEach(r => {
+        const col = getCollectedAmount(r);
+        const out = getOutstandingBalance(r);
+        csvContent += `"${r.id}","${r.patient}","${r.patientId}","${r.caseId}","${r.caseType}","${r.location}","${r.doctor}","${r.reason}",${r.originalAmount},${col},${out},"${r.dueDate}","${r.status}"\n`;
+      });
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', `NexaTrack_AR_Ledger_${moment().format('YYYYMMDD')}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function exportArPdf() {
+      alert('Generating PDF summary report of Accounts Receivable and Ledger transactions...\nReport ready for print or archive.');
+      window.print();
+    }
+
+    function printPatientReceipt() {
+      if (!activeDrawerArId) return;
+      const record = arRecords.find(x => x.id === activeDrawerArId);
+      if (!record) return;
+      alert(`Printing official billing statement & ledger receipt for: ${record.patient} (${record.caseId})\nBalance Due: ${fmtUSD(getOutstandingBalance(record))}`);
+    }
+
+    // Initialize Date Range Picker & Table
+    $(function () {
+      $('#arDateRange').daterangepicker({
+        startDate: moment().startOf('month'),
+        endDate: moment().endOf('month').add(1, 'month'),
+        locale: { format: 'MM/DD/YYYY' }
+      });
+
+      // Check URL parameters for direct case ledger link (e.g., ?caseId=CASE-20260331-001)
+      const urlParams = new URLSearchParams(window.location.search);
+      const paramCaseId = urlParams.get('caseId');
+      if (paramCaseId) {
+        const target = arRecords.find(r => r.caseId.toLowerCase() === paramCaseId.toLowerCase());
+        if (target) {
+          setTimeout(() => openArDrawer(target.id), 300);
+        }
+      }
+
+      recalculateMetrics();
+      renderTable();
+    });
+  </script>
+</body>
+
+</html>

@@ -27,6 +27,7 @@
       <a class="nav-link-item" href="compensation-rules.html"><i class="fa-solid fa-sliders"></i> Compensation Rules</a>
       <a class="nav-link-item" href="production.html"><i class="fa-solid fa-chart-column"></i> Production</a>
       <a class="nav-link-item " href="cases.html"><i class="fa-solid fa-briefcase-medical"></i> Cases</a>
+      <a class="nav-link-item" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i> Accounts Receivable</a>
       <a class="nav-link-item" href="advances.html"><i class="fa-solid fa-hand-holding-dollar"></i> Advances</a>
       <a class="nav-link-item" href="statements.html"><i class="fa-solid fa-file-invoice"></i> Statements</a>
       <a class="nav-link-item" href="payroll-runs.html"><i class="fa-solid fa-money-check-dollar"></i> Payroll Runs</a>
@@ -51,8 +52,7 @@
         <div class="d-flex align-items-center gap-2" style="flex: 1;">
           <div>
             <h1 class="page-title">Team Members</h1>
-            <div class="page-sub">Every role, one platform. NexaTrack auto-loads the right compensation engine per
-              member.
+            <div class="page-sub">Staff Management &mdash; Every role, one platform. NexaTrack auto-loads the right compensation plan per staff member.
             </div>
           </div>
         </div>
@@ -89,9 +89,9 @@
                 </div>
               </div>
               <div class="col-9">
-                <div class="kpi-label">Active Members</div>
+                <div class="kpi-label">Active Staff Count</div>
                 <div class="kpi-value" id="activeMemberCount">35</div>
-                <div class="kpi-delta text-success"><i class="fa-solid fa-circle-check"></i> Active</div>
+                <div class="kpi-delta text-success"><i class="fa-solid fa-circle-check"></i> Active Staff</div>
               </div>
             </div>
           </div>
@@ -105,9 +105,9 @@
                 </div>
               </div>
               <div class="col-9">
-                <div class="kpi-label">Inactive Members</div>
+                <div class="kpi-label">Inactive Staff Count</div>
                 <div class="kpi-value" id="inactiveMemberCount">2</div>
-                <div class="kpi-delta text-muted"><i class="fa-solid fa-circle-xmark"></i> Inactive</div>
+                <div class="kpi-delta text-muted"><i class="fa-solid fa-circle-xmark"></i> Inactive Staff</div>
               </div>
             </div>
           </div>
@@ -138,7 +138,7 @@
               <div class="col-9">
                 <div class="kpi-label">Pending payroll</div>
                 <div class="kpi-value">$20,000</div>
-                <div class="kpi-delta text-muted">8 members</div>
+                <div class="kpi-delta text-muted">8 staff members</div>
               </div>
             </div>
           </div>
@@ -250,7 +250,7 @@
         </div>
         <div class="d-flex justify-content-between align-items-center p-3"
           style="font-size:12.5px;color:var(--gray-500);">
-          <span>Showing 8 of 37 team members</span>
+          <span>Showing 8 of 37 staff members</span>
           <nav>
             <ul class="pagination pagination-sm mb-0 text-muted">
               <li class="page-item text-muted disabled"><a class="page-link">‹</a></li>
@@ -265,7 +265,7 @@
     </div>
 
     <div id="profileView" style="display:none;">
-      <a class="back-link" onclick="showList()"><i class="fa-solid fa-arrow-left"></i> Back to Team Members</a>
+      <a class="back-link" onclick="showList()"><i class="fa-solid fa-arrow-left"></i> Back to Staff Management</a>
       <div class="profile-header">
         <div class="avatar-lg" id="pAvatar">DH</div>
         <div class="flex-grow-1">
@@ -298,18 +298,23 @@
           </div>
         </div>
         <div class="d-flex gap-2"><button class="btn btn-outline-navy btn-sm">
-            <i class="fa-regular fa-file-pdf me-1"></i>Statement</button>
+            <i class="fa-regular fa-file-pdf me-1"></i>Staff Statement</button>
         </div>
       </div>
 
       <div class="engine-tabs">
         <button class="engine-tab-btn active" onclick="showTab('overview',this)">Compensation Overview</button>
-        <button class="engine-tab-btn" onclick="showTab('payhist',this)">Payroll History</button>
+        <button class="engine-tab-btn" onclick="showTab('payhist',this)">Staff Payroll History</button>
       </div>
 
       <!-- TAB: Compensation Overview -->
       <div id="tab-overview">
-        <div class="section-label">Statistics</div>
+        <!-- Architecture Pipeline Banner (Point 2 & 9) -->
+        <div class="p-3 mb-3 border rounded-3 bg-light d-flex align-items-center justify-content-between flex-wrap gap-2" id="pPlanArchitectureBanner" style="font-size:12.5px;">
+          <!-- Dynamically populated by openProfile() -->
+        </div>
+
+        <div class="section-label">Performance &amp; Production Statistics</div>
         <div class="row g-3 mb-4" id="statsGrid"></div>
 
         <div class="row g-3">
@@ -318,17 +323,22 @@
             <div class="panel p-3" id="payrollBreakdown"></div>
           </div>
           <div class="col-lg-5">
-            <div class="section-label">Universal Info</div>
+            <div class="section-label">Universal Staff Profile</div>
             <div class="panel p-3 mb-3">
               <div class="d-flex justify-content-between mb-2"><span class="text-muted">Department</span><span
                   class="fw-semibold" id="uDept">Providers</span></div>
               <div class="d-flex justify-content-between mb-2"><span class="text-muted">Hire Date</span><span
                   class="fw-semibold">Jan 10, 2024</span></div>
               <div class="d-flex justify-content-between mb-2"><span class="text-muted">Email</span><span
-                  class="fw-semibold">dr.heider@gdgsmiles.com</span></div>
+                  class="fw-semibold" id="uEmail">staff@gdgsmiles.com</span></div>
               <div class="d-flex justify-content-between"><span class="text-muted">Phone</span><span
-                  class="fw-semibold">(954) 555-1234</span></div>
+                  class="fw-semibold">(954) 555-0199</span></div>
             </div>
+          </div>
+
+          <!-- Operational Performance KPIs vs Compensation Rules (Point 8) -->
+          <div class="col-12 mt-2" id="pPerformanceKpiSection">
+            <!-- Dynamically populated by openProfile() -->
           </div>
         </div>
       </div>
@@ -338,8 +348,8 @@
         <div class="panel">
           <div class="panel-header">
             <div>
-              <h2 class="panel-title">Payroll History</h2>
-              <div class="panel-sub">Every payroll run this member has been included in</div>
+              <h2 class="panel-title">Staff Payroll History</h2>
+              <div class="panel-sub">Every payroll run this staff member has been included in</div>
             </div>
           </div>
           <div class="table-responsive">
@@ -730,6 +740,7 @@
           Rules</a>
         <a class="nav-link-item" href="production.html"><i class="fa-solid fa-chart-column"></i> Production</a>
         <a class="nav-link-item " href="cases.html"><i class="fa-solid fa-briefcase-medical"></i> Cases</a>
+        <a class="nav-link-item" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i> Accounts Receivable</a>
         <a class="nav-link-item" href="advances.html"><i class="fa-solid fa-hand-holding-dollar"></i> Advances</a>
         <a class="nav-link-item" href="statements.html"><i class="fa-solid fa-file-invoice"></i> Statements</a>
         <a class="nav-link-item" href="index.html"><i class="fa-solid fa-file-invoice"></i> Logout</a>
@@ -768,56 +779,100 @@
     });
     const members = [
       {
+        initials: "ER", name: "Elena Rostova", dept: "Sales", role: "Luxury Smile Agent", engine: "hybrid", rateLabel: "$18/hr + Tiers + Qtr Bonus", status: "active",
+        planVersion: "Luxury Smile Agent Hybrid Plan v2.1",
+        timingInfo: "Hourly (Bi-Weekly) · Monthly Tiers (Monthly) · Excellence Bonus (Quarterly)",
+        stats: [
+          { icon: "fa-award", label: "Monthly Qualified Bookings", value: "14 Bookings" },
+          { icon: "fa-sack-dollar", label: "Incentive Tier Achieved", value: "Tier 3 ($600.00)" },
+          { icon: "fa-business-time", label: "Approved Hours Clocked", value: "160.00 hrs" },
+          { icon: "fa-crown", label: "Quarterly Consecutive Tracker", value: "3 of 3 Months (100%)" },
+          { icon: "fa-gauge-high", label: "Current Weekly Pace", value: "3.2 / wk (Target: 3.0)" },
+          { icon: "fa-check-double", label: "Ramp Benchmark", value: "Passed (1st 5 shifts)" },
+          { icon: "fa-money-bill-wave", label: "Hourly Base Pay", value: "$2,880.00" },
+          { icon: "fa-trophy", label: "Quarterly Excellence Bonus", value: "$1,500.00" }
+        ],
+        payroll: [
+          { label: "Approved Service Hours (160h × $18.00/h)", value: "$2,880.00" },
+          { label: "Monthly Qualified Booking Tier (14 Bookings — Tier 3)", value: "$600.00" },
+          { label: "Quarterly Excellence Bonus (3 Consecutive Months ≥10)", value: "$1,500.00" },
+          { label: "Total Period Gross Earnings", value: "$4,980.00", total: true }
+        ],
+        earned: "$4,980.00", net: "$4,980.00", engineLabel: "Hybrid (Multi-Comp)",
+        kpiDetails: [
+          { metric: "Ramp Speed Standard", requirement: "≥1 qualified booking in first 5 completed shifts", actual: "3 qualified bookings in first 4 shifts", status: "Compliant" },
+          { metric: "Pace Expectation (Shift 6+)", requirement: "Minimum 2.0 qualified bookings per week", actual: "3.2 bookings/week average pace", status: "Compliant" },
+          { metric: "Target Pace (Week 5+)", requirement: "Target ≥3.0 qualified bookings per week", actual: "On pace for 16 monthly qualified bookings", status: "Exceeding Target" },
+          { metric: "Consecutive Excellence Tracker", requirement: "≥10 qualified bookings in each of 3 consecutive calendar months", actual: "Month 1: 12 ✓ | Month 2: 14 ✓ | Month 3: 11 ✓", status: "Bonus Achieved" }
+        ]
+      },
+      {
         initials: "DH", name: "Dr. Heider", dept: "Providers", role: "Provider", engine: "production", rateLabel: "Daily Floor: $650", status: "active",
+        planVersion: "Doctors Cosmetic & General Dentistry Plan v2.0",
+        timingInfo: "Daily Floor (Bi-Weekly) · Production Reconciliation (Monthly)",
         stats: [{ icon: "fa-tooth", label: "Cosmetic Cases", value: "8" }, { icon: "fa-stethoscope", label: "General Procedures", value: "14" }, { icon: "fa-chart-column", label: "Total Production", value: "$9,565" }, { icon: "fa-scissors", label: "Prep Cases", value: "6" }, { icon: "fa-layer-group", label: "Cement Cases", value: "5" }, { icon: "fa-shuffle", label: "Mixed Cases", value: "1" }, { icon: "fa-cubes", label: "Total Units", value: "118" }, { icon: "fa-gauge-high", label: "Avg Production/Day", value: "$598" }],
         payroll: [{ label: "Cosmetic Earned", value: "$8,425.00" }, { label: "General Earned", value: "$1,140.00" }, { label: "Advances", value: "-$1,300.00", deduction: true }, { label: "Adjustments", value: "$0.00" }, { label: "Net Owed to Doctor", value: "$7,125.00", total: true }],
         earned: "$9,565.00", net: "$7,125.00", engineLabel: "Cosmetic Production"
       },
       {
         initials: "JS", name: "Jeremiah Smith", dept: "Sales", role: "ISR Closer", engine: "commission", rateLabel: "8% Commission", status: "active",
+        planVersion: "ISR Percentage Commission Plan v1.3",
+        timingInfo: "Bi-Weekly Payroll Schedule (Cleared Collections Basis)",
         stats: [{ icon: "fa-check-double", label: "Cases Closed", value: "18" }, { icon: "fa-sack-dollar", label: "Total Treatment Value", value: "$156,250" }, { icon: "fa-hand-holding-dollar", label: "Revenue Closed", value: "$156,250" }, { icon: "fa-percent", label: "Commission %", value: "8%" }],
         payroll: [{ label: "Total Treatment Value", value: "$156,250.00" }, { label: "Commission Rate", value: "8%" }, { label: "Commission Earned", value: "$12,450.00", total: true }],
         earned: "$12,450.00", net: "$12,450.00", engineLabel: "% Commission"
       },
       {
         initials: "JL", name: "Joshua Lee", dept: "Sales", role: "ISR Representative", engine: "flat", rateLabel: "Comp $100 · Cer $150", status: "inactive",
+        planVersion: "ISR Flat Case Pay Plan v1.2",
+        timingInfo: "Bi-Weekly Payroll Schedule (Cleared Case Deposit)",
         stats: [{ icon: "fa-check-double", label: "Cases Closed", value: "16" }, { icon: "fa-tags", label: "Flat Rate / Case", value: "$100–$200" }, { icon: "fa-list-check", label: "Cases Eligible", value: "16" }, { icon: "fa-sack-dollar", label: "Flat Pay Earned", value: "$6,000" }],
         payroll: [{ label: "Cases Closed", value: "16" }, { label: "Blended Flat Rate", value: "$375.00 avg" }, { label: "Flat Pay Earned", value: "$6,000.00", total: true }],
         earned: "$6,000.00", net: "$6,000.00", engineLabel: "Flat Case Pay"
       },
       {
         initials: "BT", name: "Bianca Torres", dept: "Sales", role: "SDR", engine: "hourly", rateLabel: "$15.00 / hr", status: "active",
+        planVersion: "SDR Hourly & Spiff Plan v1.1",
+        timingInfo: "Bi-Weekly Payroll Schedule",
         stats: [{ icon: "fa-business-time", label: "Hours Worked", value: "172.50" }, { icon: "fa-money-bill", label: "Hourly Rate", value: "$15.00" }, { icon: "fa-calendar-check", label: "Regular Pay", value: "$2,512.50" }, { icon: "fa-clock-rotate-left", label: "Overtime", value: "$75.00" }],
         payroll: [{ label: "Regular Pay", value: "$2,512.50" }, { label: "Overtime Pay", value: "$75.00" }, { label: "Gross Pay", value: "$2,587.50", total: true }],
         earned: "$2,587.50", net: "$2,587.50", engineLabel: "Hourly"
       },
       {
         initials: "NJ", name: "Nancy Johnson", dept: "Operations", role: "Client Experience", engine: "hourly", rateLabel: "$15.00 / hr", status: "active",
+        planVersion: "CE Hourly & CSAT Bonus Plan v1.1",
+        timingInfo: "Bi-Weekly Payroll Schedule",
         stats: [{ icon: "fa-business-time", label: "Hours Worked", value: "133.30" }, { icon: "fa-money-bill", label: "Hourly Rate", value: "$15.00" }, { icon: "fa-calendar-check", label: "Regular Pay", value: "$2,000.00" }, { icon: "fa-clock-rotate-left", label: "Overtime", value: "$0.00" }],
         payroll: [{ label: "Regular Pay", value: "$2,000.00" }, { label: "Overtime Pay", value: "$0.00" }, { label: "Gross Pay", value: "$2,000.00", total: true }],
         earned: "$2,000.00", net: "$2,000.00", engineLabel: "Hourly"
       },
       {
         initials: "LT", name: "Lab Tech Team", dept: "Lab", role: "Lab Technician", engine: "hourly", rateLabel: "$20.00 / hr", status: "inactive",
+        planVersion: "Lab Technician Activity Plan v1.0",
+        timingInfo: "Bi-Weekly Payroll Schedule",
         stats: [{ icon: "fa-business-time", label: "Hours Worked", value: "92.50" }, { icon: "fa-money-bill", label: "Hourly Rate", value: "$20.00" }, { icon: "fa-calendar-check", label: "Regular Pay", value: "$1,850.00" }, { icon: "fa-clock-rotate-left", label: "Overtime", value: "$0.00" }],
         payroll: [{ label: "Regular Pay", value: "$1,850.00" }, { label: "Overtime Pay", value: "$0.00" }, { label: "Gross Pay", value: "$1,850.00", total: true }],
         earned: "$1,850.00", net: "$1,850.00", engineLabel: "Hourly"
       },
       {
         initials: "CR", name: "Carlos Ramirez", dept: "Marketing", role: "Marketing Manager", engine: "salary", rateLabel: "$5,200 / month", status: "active",
+        planVersion: "Marketing Salary & MQL Target Plan v1.2",
+        timingInfo: "Monthly / Semi-Monthly Payroll Schedule",
         stats: [{ icon: "fa-business-time", label: "Hours Worked", value: "160.00" }, { icon: "fa-file-invoice-dollar", label: "Monthly Salary", value: "$5,200.00" }, { icon: "fa-clock-rotate-left", label: "Overtime", value: "N/A" }, { icon: "fa-calendar-check", label: "Gross Pay", value: "$3,000.00" }],
         payroll: [{ label: "Salary (Prorated)", value: "$3,000.00" }, { label: "Overtime Pay", value: "$0.00" }, { label: "Gross Pay", value: "$3,000.00", total: true }],
         earned: "$3,000.00", net: "$3,000.00", engineLabel: "Salary"
       },
       {
         initials: "DV", name: "Dr. Vanessa", dept: "Providers", role: "Provider", engine: "production", rateLabel: "Daily Floor: $650", status: "active",
+        planVersion: "Doctors Cosmetic & General Dentistry Plan v2.0",
+        timingInfo: "Daily Floor (Bi-Weekly) · Production Reconciliation (Monthly)",
         stats: [{ icon: "fa-tooth", label: "Cosmetic Cases", value: "16" }, { icon: "fa-stethoscope", label: "General Procedures", value: "0" }, { icon: "fa-chart-column", label: "Total Production", value: "$4,600" }, { icon: "fa-scissors", label: "Prep Cases", value: "16" }, { icon: "fa-layer-group", label: "Cement Cases", value: "14" }, { icon: "fa-shuffle", label: "Mixed Cases", value: "0" }, { icon: "fa-cubes", label: "Total Units", value: "142" }, { icon: "fa-gauge-high", label: "Avg Production/Day", value: "$328" }],
         payroll: [{ label: "Cosmetic Earned", value: "$4,600.00" }, { label: "General Earned", value: "$0.00" }, { label: "Advances", value: "-$1,300.00", deduction: true }, { label: "Adjustments", value: "$0.00" }, { label: "Net Owed to Doctor", value: "$3,300.00", total: true }],
         earned: "$4,600.00", net: "$3,300.00", engineLabel: "Cosmetic Production"
       },
     ];
-    const compBadgeClass = { production: "production", commission: "commission", flat: "flat", hourly: "hourly", salary: "salary" };
-    function engineDisplayName(e) { return { production: "Cosmetic Production", commission: "% Commission", flat: "Flat Case Pay", hourly: "Hourly", salary: "Salary" }[e]; }
+    const compBadgeClass = { production: "production", commission: "commission", flat: "flat", hourly: "hourly", salary: "salary", hybrid: "commission" };
+    function engineDisplayName(e) { return { production: "Cosmetic Production", commission: "% Commission", flat: "Flat Case Pay", hourly: "Hourly", salary: "Salary", hybrid: "Hybrid (Multi-Comp)" }[e]; }
     function renderTable() {
       document.getElementById('memberTableBody').innerHTML = members.map((m, i) => `
     <tr onclick="openProfile(${i})" style="cursor:pointer;">
@@ -881,11 +936,77 @@
       document.getElementById('pEarned').textContent = m.earned;
       document.getElementById('pNetOwed').textContent = m.net;
       document.getElementById('uDept').textContent = m.dept;
+      const uEmail = document.getElementById('uEmail');
+      if (uEmail) uEmail.textContent = m.name.toLowerCase().replace(/[^a-z0-9]/g, '.') + '@gdgsmiles.com';
       updateProfileStatus();
+
+      // Render Architecture Pipeline Banner (Point 2 & 9)
+      const banner = document.getElementById('pPlanArchitectureBanner');
+      if (banner) {
+        const planVer = m.planVersion || `${m.engineLabel} Plan v1.0`;
+        const timing = m.timingInfo || 'Bi-Weekly Payroll Schedule';
+        banner.innerHTML = `
+          <div class="d-flex align-items-center gap-2 flex-wrap">
+            <span class="badge bg-white text-dark border px-2 py-1"><i class="fa-solid fa-layer-group text-success me-1"></i>Architecture Pipeline</span>
+            <span>Staff: <strong class="text-dark">${m.name}</strong></span>
+            <i class="fa-solid fa-chevron-right text-muted" style="font-size:10px;"></i>
+            <span>Role: <strong class="text-dark">${m.role}</strong></span>
+            <i class="fa-solid fa-chevron-right text-muted" style="font-size:10px;"></i>
+            <span class="badge bg-primary-subtle text-primary border border-primary fw-bold">${planVer}</span>
+          </div>
+          <div class="text-muted small">
+            <i class="fa-regular fa-clock text-primary me-1"></i>${timing}
+          </div>
+        `;
+      }
+
       document.getElementById('statsGrid').innerHTML = m.stats.map(s => `
     <div class="col-6 col-md-3"><div class="stat-box"><i class="fa-solid ${s.icon}"></i><div class="stat-box-label">${s.label}</div><div class="stat-box-value">${s.value}</div></div></div>`).join('');
       document.getElementById('payrollBreakdown').innerHTML = m.payroll.map(p => `
     <div class="payroll-row ${p.total ? "total" : ""} ${p.deduction ? "deduction" : ""}"><span>${p.label}</span><span>${p.value}</span></div>`).join('');
+
+      // Render Operational Performance KPIs (Point 8)
+      const kpiSec = document.getElementById('pPerformanceKpiSection');
+      if (kpiSec) {
+        if (m.kpiDetails) {
+          kpiSec.innerHTML = `
+            <div class="panel p-3">
+              <div class="d-flex align-items-center justify-content-between mb-2 flex-wrap gap-2">
+                <div class="fw-bold text-dark" style="font-size:13px;">
+                  <i class="fa-solid fa-chart-line text-success me-1.5"></i>Operational Performance KPIs vs. Compensation Rules (Point 8)
+                </div>
+                <span class="badge bg-light text-muted border">Separation of Concerns</span>
+              </div>
+              <p class="text-muted small mb-3">Performance rules evaluate operational coaching benchmarks (ramp, pacing, booking speed) separate from payroll earning calculations.</p>
+              <div class="table-responsive border rounded-3">
+                <table class="nexa-table">
+                  <thead>
+                    <tr>
+                      <th>Operational Benchmark</th>
+                      <th>Standard Requirement</th>
+                      <th>Actual Staff Performance</th>
+                      <th>Audit Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${m.kpiDetails.map(k => `
+                      <tr>
+                        <td class="fw-bold text-dark">${k.metric}</td>
+                        <td class="text-muted small">${k.requirement}</td>
+                        <td class="fw-semibold text-primary">${k.actual}</td>
+                        <td><span class="badge-status active">${k.status}</span></td>
+                      </tr>
+                    `).join('')}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `;
+        } else {
+          kpiSec.innerHTML = '';
+        }
+      }
+
       document.querySelectorAll('[id^="tab-"]').forEach(el => el.style.display = 'none');
       document.getElementById('tab-overview').style.display = 'block';
       document.querySelectorAll('.engine-tab-btn').forEach(b => b.classList.remove('active'));

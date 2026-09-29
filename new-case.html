@@ -8,574 +8,9 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style/main.css">
+  <link rel="stylesheet" href="style/cases.css">
   <style>
-    :root {
-      --navy-900: #0a1628;
-      --navy-800: #0f1f38;
-      --navy-700: #152847;
-      --green-500: #10b981;
-      --green-600: #059669;
-      --green-50: #ecfdf5;
-      --gold-500: #c9a227;
-      --gray-50: #f7f8fa;
-      --gray-100: #eef1f5;
-      --gray-200: #e2e6ed;
-      --gray-500: #6b7280;
-      --gray-700: #374151;
-      --gray-900: #111827;
-      --radius: 10px;
-    }
-
-    * {
-      font-family: 'Inter', sans-serif;
-    }
-
-    body {
-      background: var(--gray-50);
-      color: var(--gray-900);
-      font-size: 14px;
-    }
-
-    .sidebar {
-      width: 236px;
-      background: var(--navy-900);
-      min-height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-      display: flex;
-      flex-direction: column;
-      padding: 20px 14px;
-      z-index: 100;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 8px 22px 8px;
-    }
-
-    .brand-mark {
-      width: 34px;
-      height: 34px;
-      border-radius: 9px;
-      background: linear-gradient(135deg, var(--green-500), #0d9488);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      color: #fff;
-      font-size: 15px;
-    }
-
-    .brand-text {
-      font-weight: 800;
-      color: #fff;
-      font-size: 16px;
-      letter-spacing: 1px;
-      line-height: 1;
-    }
-
-    .brand-text small {
-      display: block;
-      font-size: 9px;
-      color: var(--green-500);
-      letter-spacing: 3px;
-      font-weight: 700;
-      margin-top: 2px;
-    }
-
-    .nav-section {
-      margin-top: 6px;
-    }
-
-    .nav-link-item {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      color: #93a2bd;
-      padding: 9px 12px;
-      border-radius: 8px;
-      font-size: 13.5px;
-      font-weight: 500;
-      margin-bottom: 2px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: .15s;
-    }
-
-    .nav-link-item i {
-      width: 16px;
-      text-align: center;
-      font-size: 13px;
-    }
-
-    .nav-link-item:hover {
-      background: var(--navy-700);
-      color: #fff;
-    }
-
-    .nav-link-item.active {
-      background: var(--green-500);
-      color: #fff;
-      font-weight: 600;
-    }
-
-    .sidebar-footer {
-      margin-top: auto;
-      padding-top: 14px;
-      border-top: 1px solid var(--navy-700);
-    }
-
-    .user-chip {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px;
-      border-radius: 8px;
-      color: #fff;
-    }
-
-    .user-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--green-500);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 12px;
-    }
-
-    .user-chip small {
-      color: #93a2bd;
-      display: block;
-      font-size: 11px;
-    }
-
-    .main {
-      margin-left: 236px;
-      padding: 26px 30px 50px 30px;
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 22px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .page-title {
-      font-weight: 800;
-      font-size: 22px;
-      margin: 0;
-      color: var(--gray-900);
-    }
-
-    .page-sub {
-      color: var(--gray-500);
-      font-size: 13px;
-      margin-top: 2px;
-    }
-
-    .btn-green {
-      background: var(--green-500);
-      border-color: var(--green-500);
-      color: #fff;
-      font-weight: 600;
-      font-size: 13px;
-    }
-
-    .btn-green:hover {
-      background: var(--green-600);
-      border-color: var(--green-600);
-      color: #fff;
-    }
-
-    .btn-outline-navy {
-      border-color: var(--gray-200);
-      color: var(--gray-700);
-      font-weight: 600;
-      font-size: 13px;
-      background: #fff;
-    }
-
-    .btn-outline-navy:hover {
-      background: var(--gray-100);
-    }
-
-    .kpi-card {
-      background: #fff;
-      border: 1px solid var(--gray-200);
-      border-radius: var(--radius);
-      padding: 16px 18px;
-      height: 100%;
-    }
-
-    .kpi-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 9px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      margin-bottom: 10px;
-    }
-
-    .kpi-label {
-      font-size: 11.5px;
-      color: var(--gray-500);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: .4px;
-    }
-
-    .kpi-value {
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--gray-900);
-      margin-top: 2px;
-    }
-
-    .kpi-delta {
-      font-size: 11.5px;
-      font-weight: 600;
-      margin-top: 4px;
-    }
-
-    .panel {
-      background: #fff;
-      border: 1px solid var(--gray-200);
-      border-radius: var(--radius);
-    }
-
-    .panel-header {
-      padding: 16px 18px;
-      border-bottom: 1px solid var(--gray-200);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .panel-title {
-      font-weight: 700;
-      font-size: 15px;
-      margin: 0;
-    }
-
-    .panel-sub {
-      font-size: 12px;
-      color: var(--gray-500);
-      margin-top: 2px;
-    }
-
-    .panel-body {
-      padding: 18px;
-    }
-
-    table.nexa-table {
-      width: 100%;
-      margin: 0;
-      font-size: 13px;
-    }
-
-    table.nexa-table thead th {
-      background: var(--gray-50);
-      color: var(--gray-500);
-      font-weight: 700;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: .4px;
-      border-bottom: 1px solid var(--gray-200);
-      padding: 11px 14px;
-      white-space: nowrap;
-    }
-
-    table.nexa-table tbody td {
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--gray-100);
-      vertical-align: middle;
-    }
-
-    table.nexa-table tbody tr {
-      transition: .12s;
-    }
-
-    table.nexa-table tbody tr:hover {
-      background: var(--green-50);
-    }
-
-    table.nexa-table tbody tr:last-child td {
-      border-bottom: none;
-    }
-
-    .avatar-sm {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--navy-700);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    .member-name {
-      font-weight: 600;
-      color: var(--gray-900);
-    }
-
-    .member-email {
-      font-size: 11.5px;
-      color: var(--gray-500);
-    }
-
-    .badge-dept {
-      background: #eef1f5;
-      color: var(--gray-700);
-      font-weight: 600;
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: 6px;
-    }
-
-    .badge-comp {
-      font-weight: 600;
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: 6px;
-    }
-
-    .badge-comp.production {
-      background: #eef2ff;
-      color: #4338ca;
-    }
-
-    .badge-comp.commission {
-      background: #fef3c7;
-      color: #92400e;
-    }
-
-    .badge-comp.flat {
-      background: #fce7f3;
-      color: #9d174d;
-    }
-
-    .badge-comp.hourly {
-      background: #dbeafe;
-      color: #1e40af;
-    }
-
-    .badge-comp.salary {
-      background: #e0e7ff;
-      color: #3730a3;
-    }
-
-    .badge-status {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 20px;
-    }
-
-    .badge-status.active {
-      background: var(--green-50);
-      color: var(--green-600);
-    }
-
-    .badge-status.inactive {
-      background: #f3f4f6;
-      color: var(--gray-500);
-    }
-
-    .badge-status.warn {
-      background: #fef3c7;
-      color: #92400e;
-    }
-
-    .badge-status.danger {
-      background: #fee2e2;
-      color: #991b1b;
-    }
-
-    .search-input {
-      border-radius: 8px;
-      border: 1px solid var(--gray-200);
-      font-size: 13px;
-    }
-
-    .form-select-sm-custom {
-      border-radius: 8px;
-      border: 1px solid var(--gray-200);
-      font-size: 13px;
-    }
-
-    .form-label {
-      font-size: 12.5px;
-      font-weight: 600;
-      color: var(--gray-700);
-    }
-
-    .form-control,
-    .form-select {
-      font-size: 13px;
-      border-radius: 8px;
-      border-color: var(--gray-200);
-    }
-
-    .section-label {
-      font-weight: 700;
-      font-size: 13px;
-      color: var(--gray-500);
-      text-transform: uppercase;
-      letter-spacing: .5px;
-      margin-bottom: 10px;
-      margin-top: 6px;
-    }
-
-    .payroll-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 11px 0;
-      border-bottom: 1px solid var(--gray-100);
-      font-size: 13.5px;
-    }
-
-    .payroll-row:last-child {
-      border-bottom: none;
-    }
-
-    .payroll-row span:first-child {
-      color: var(--gray-500);
-    }
-
-    .payroll-row.total {
-      font-weight: 800;
-      font-size: 15px;
-      padding-top: 14px;
-    }
-
-    .payroll-row.total span:last-child {
-      color: var(--green-600);
-    }
-
-    .payroll-row.deduction span:last-child {
-      color: #dc2626;
-    }
-
-    .stat-box {
-      background: #fff;
-      border: 1px solid var(--gray-200);
-      border-radius: var(--radius);
-      padding: 15px 16px;
-      height: 100%;
-    }
-
-    .stat-box-label {
-      font-size: 11.5px;
-      color: var(--gray-500);
-      font-weight: 600;
-    }
-
-    .stat-box-value {
-      font-size: 19px;
-      font-weight: 800;
-      margin-top: 4px;
-    }
-
-    .stat-box i {
-      color: var(--green-500);
-      font-size: 16px;
-      margin-bottom: 8px;
-      display: block;
-    }
-
-    .profile-header {
-      background: #fff;
-      border: 1px solid var(--gray-200);
-      border-radius: var(--radius);
-      padding: 20px 22px;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
-    }
-
-    .avatar-lg {
-      width: 62px;
-      height: 62px;
-      border-radius: 50%;
-      background: var(--navy-800);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      font-weight: 700;
-    }
-
-    .profile-name {
-      font-weight: 800;
-      font-size: 19px;
-      margin: 0;
-    }
-
-    .profile-role {
-      color: var(--gray-500);
-      font-size: 13px;
-    }
-
-    .profile-stat {
-      text-align: center;
-      padding: 0 18px;
-      border-left: 1px solid var(--gray-200);
-    }
-
-    .profile-stat-label {
-      font-size: 11px;
-      color: var(--gray-500);
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    .profile-stat-value {
-      font-size: 18px;
-      font-weight: 800;
-      margin-top: 2px;
-    }
-
-    .engine-tab-btn {
-      border: none;
-      background: none;
-      padding: 10px 4px;
-      margin-right: 24px;
-      font-weight: 600;
-      font-size: 13.5px;
-      color: var(--gray-500);
-      border-bottom: 2px solid transparent;
-    }
-
-    .engine-tab-btn.active {
-      color: var(--green-600);
-      border-bottom-color: var(--green-500);
-    }
-
-    .engine-tabs {
-      border-bottom: 1px solid var(--gray-200);
-      margin-bottom: 18px;
-      padding: 0 4px;
-    }
 
     .comp-type-card {
       border: 1.5px solid var(--gray-200);
@@ -858,7 +293,7 @@
       gap: 10px 28px;
     }
 
-    .ar-callout-grid > div {
+    .ar-callout-grid>div {
       min-width: 120px;
     }
 
@@ -910,20 +345,12 @@
       color: #92400e;
     }
 
-    @media(max-width:900px) {
-      .sidebar {
-        transform: translateX(-100%);
-      }
-
-      .main {
-        margin-left: 0;
-      }
-    }
   </style>
 
 </head>
 
 <body>
+  <input type="checkbox" id="sidebarToggle" hidden>
 
   <div class="sidebar">
     <div class="brand">
@@ -931,35 +358,93 @@
       <div class="brand-text">NEXA<small>TRACK</small></div>
     </div>
     <div class="nav-section">
-      <a class="nav-link-item" href="dashboard.html"><i class="fa-solid fa-grip"></i> Dashboard</a>
+      <a class="nav-link-item " href="dashboard.html"><i class="fa-solid fa-grip"></i> Dashboard</a>
       <a class="nav-link-item" href="team-members.html"><i class="fa-solid fa-users"></i> Team Members</a>
       <a class="nav-link-item" href="compensation-rules.html"><i class="fa-solid fa-sliders"></i> Compensation Rules</a>
       <a class="nav-link-item" href="production.html"><i class="fa-solid fa-chart-column"></i> Production</a>
-      <a class="nav-link-item" href="cases.html"><i class="fa-solid fa-briefcase-medical"></i> Cases</a>
+      <a class="nav-link-item active" href="cases.html"><i class="fa-solid fa-briefcase-medical"></i> Cases</a>
+      <a class="nav-link-item" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i> Accounts
+        Receivable</a>
       <a class="nav-link-item" href="advances.html"><i class="fa-solid fa-hand-holding-dollar"></i> Advances</a>
       <a class="nav-link-item" href="statements.html"><i class="fa-solid fa-file-invoice"></i> Statements</a>
+
       <a class="nav-link-item" href="payroll-runs.html"><i class="fa-solid fa-money-check-dollar"></i> Payroll Runs</a>
       <a class="nav-link-item" href="reports.html"><i class="fa-solid fa-chart-line"></i> Reports</a>
       <a class="nav-link-item" href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+      <a class="nav-link-item" href="index.html"><i class="fa-solid fa-file-invoice"></i> Logout</a>
 
     </div>
     <div class="sidebar-footer">
       <div class="user-chip">
         <div class="user-avatar">JJ</div>
+        <div class="flex-grow-1">
+          <div style="font-size:13px;font-weight:600;">James Johnson</div>
+          <small>Office Manager</small>
+        </div>
+        <i class="fa-solid fa-chevron-down" style="color:#93a2bd;font-size:11px;"></i>
+      </div>
+      <div class="support-chip">
+        <i class="fa-solid fa-headset"></i>
         <div>
-          <div style="font-size:13px;font-weight:600;">James Johnson</div><small>Office Manager</small>
+          <span>Need help?</span>
+          Contact Support
         </div>
       </div>
     </div>
   </div>
-  <div class="main">
-    <a class="back-link" href="cases.html"><i class="fa-solid fa-arrow-left"></i> Back to Cases</a>
+  <div id="sidebarBackdrop" class="sidebar-backdrop">
+    <div class="sidebar">
+      <label for="sidebarToggle" class="btn btn-sm btn-light mb-3">
+        <i class="fa-solid fa-xmark"></i>
+      </label>
+      <div class="brand">
+        <div class="brand-mark">N</div>
+        <div class="brand-text">NEXA<small>TRACK</small></div>
+      </div>
+      <div class="nav-section">
+        <a class="nav-link-item " href="dashboard.html"><i class="fa-solid fa-grip"></i> Dashboard</a>
+        <a class="nav-link-item" href="team-members.html"><i class="fa-solid fa-users"></i> Team Members</a>
+        <a class="nav-link-item" href="compensation-rules.html"><i class="fa-solid fa-sliders"></i> Compensation
+          Rules</a>
+        <a class="nav-link-item" href="production.html"><i class="fa-solid fa-chart-column"></i> Production</a>
+        <a class="nav-link-item active " href="cases.html"><i class="fa-solid fa-briefcase-medical"></i> Cases</a>
+        <a class="nav-link-item" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i>
+          Accounts Receivable</a>
+        <a class="nav-link-item" href="advances.html"><i class="fa-solid fa-hand-holding-dollar"></i> Advances</a>
+        <a class="nav-link-item" href="statements.html"><i class="fa-solid fa-file-invoice"></i> Statements</a>
+        <a class="nav-link-item" href="index.html"><i class="fa-solid fa-file-invoice"></i> Logout</a>
+        <a class="nav-link-item" href="payroll-runs.html"><i class="fa-solid fa-money-check-dollar"></i> Payroll
+          Runs</a>
+        <a class="nav-link-item" href="reports.html"><i class="fa-solid fa-chart-line"></i> Reports</a>
+        <a class="nav-link-item" href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
 
+      </div>
+      <div class="sidebar-footer">
+        <div class="user-chip">
+          <div class="user-avatar">JJ</div>
+          <div>
+            <div style="font-size:13px;font-weight:600;">James Johnson</div><small>Office Manager</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="main">
     <div class="topbar">
       <div>
         <h1 class="page-title">New Case Entry</h1>
         <div class="page-sub">Enter the treatment facts — NexaTrack calculates compensation, production, and payroll
           automatically.</div>
+      </div>
+      <label for="sidebarToggle" class="btn btn-outline-navy mobile-menu-btn">
+        <i class="fa-solid fa-bars"></i>
+      </label>
+      <div class="d-flex gap-2 topbar-actions align-items-center">
+        <a href="cases.html" class="btn btn-outline-navy">
+          <i class="fa-solid fa-arrow-left me-1"></i>Back to Cases
+        </a>
       </div>
     </div>
 
@@ -1027,7 +512,8 @@
                   <option value="Prep Doctor">Prep Doctor (60%)</option>
                   <option value="Cement Doctor">Cement Doctor (40%)</option>
                 </select>
-                <div class="rate-note"><i class="fa-solid fa-circle-info me-1"></i>Doctor pay isn't shown here — it depends on the material and unit count entered in the Treatment step.</div>
+                <div class="rate-note"><i class="fa-solid fa-circle-info me-1"></i>Doctor pay isn't shown here — it
+                  depends on the material and unit count entered in the Treatment step.</div>
               </div>
               <div class="col-md-6">
                 <label class="form-label">ISR</label>
@@ -1080,7 +566,8 @@
               </div>
             </div>
             <div class="rate-note mb-3">
-              <i class="fa-solid fa-circle-info me-1"></i>Flat case pay applies only when all units are the same material and the count falls in the 16–20 flat-rate range.
+              <i class="fa-solid fa-circle-info me-1"></i>Flat case pay applies only when all units are the same
+              material and the count falls in the 16–20 flat-rate range.
               <span id="payBasisBadge" class="basis-badge flat">FLAT RATE</span>
             </div>
 
@@ -1107,15 +594,20 @@
             <div id="mixedFields" style="display:none;" class="dynamic-fields mb-3">
               <div class="row g-3">
                 <div class="col-6 col-md-3"><label class="form-label">Composite Units</label><input type="number"
-                    class="form-control mixed-unit-input" data-material="composite" value="0" oninput="updateCompensation()"></div>
+                    class="form-control mixed-unit-input" data-material="composite" value="0"
+                    oninput="updateCompensation()"></div>
                 <div class="col-6 col-md-3"><label class="form-label">Ceramic Units</label><input type="number"
-                    class="form-control mixed-unit-input" data-material="ceramic" value="0" oninput="updateCompensation()"></div>
+                    class="form-control mixed-unit-input" data-material="ceramic" value="0"
+                    oninput="updateCompensation()"></div>
                 <div class="col-6 col-md-3"><label class="form-label">Porcelain Units</label><input type="number"
-                    class="form-control mixed-unit-input" data-material="porcelain" value="0" oninput="updateCompensation()"></div>
+                    class="form-control mixed-unit-input" data-material="porcelain" value="0"
+                    oninput="updateCompensation()"></div>
                 <div class="col-6 col-md-3"><label class="form-label">Crown Units</label><input type="number"
-                    class="form-control mixed-unit-input" data-material="crown" value="0" oninput="updateCompensation()"></div>
+                    class="form-control mixed-unit-input" data-material="crown" value="0"
+                    oninput="updateCompensation()"></div>
               </div>
-              <div class="rate-note mb-0"><i class="fa-solid fa-circle-info me-1"></i>Mixed case: each unit is paid at its own material's per-unit rate — the flat rate does not apply.</div>
+              <div class="rate-note mb-0"><i class="fa-solid fa-circle-info me-1"></i>Mixed case: each unit is paid at
+                its own material's per-unit rate — the flat rate does not apply.</div>
             </div>
 
             <div class="row g-3 mb-4">
@@ -1127,7 +619,8 @@
                   <option>Dr. Safa</option>
                   <option>Dr. Silvina</option>
                 </select>
-                <small class="text-muted" style="font-size:11px;">Prep Pay (60%): <strong id="prepPayDisplay">$0.00</strong></small>
+                <small class="text-muted" style="font-size:11px;">Prep Pay (60%): <strong
+                    id="prepPayDisplay">$0.00</strong></small>
               </div>
               <div class="col-md-6">
                 <label class="form-label d-block">Cement Doctor</label>
@@ -1138,7 +631,8 @@
                   <option>Dr. Heider</option>
                   <option>Dr. Vanessa</option>
                 </select>
-                <small class="text-muted" style="font-size:11px;">Cement Pay (40%): <strong id="cementPayDisplay">$0.00</strong></small>
+                <small class="text-muted" style="font-size:11px;">Cement Pay (40%): <strong
+                    id="cementPayDisplay">$0.00</strong></small>
               </div>
             </div>
 
@@ -1167,8 +661,10 @@
 
               <div class="col-12">
                 <div class="d-flex justify-content-between align-items-center">
-                  <label class="form-label mb-2">Payment Types <span class="text-muted fw-normal">— Collected Amount</span></label>
-                  <button type="button" class="btn btn-sm btn-outline-navy" onclick="addPaymentType()"><i class="fa-solid fa-plus me-1"></i>Add Another</button>
+                  <label class="form-label mb-2">Payment Types <span class="text-muted fw-normal">— Collected
+                      Amount</span></label>
+                  <button type="button" class="btn btn-sm btn-outline-navy" onclick="addPaymentType()"><i
+                      class="fa-solid fa-plus me-1"></i>Add Another</button>
                 </div>
                 <div id="paymentTypeList"></div>
                 <div class="rate-note mb-0">Collected Amount = sum of all payment type entries below.</div>
@@ -1176,33 +672,41 @@
 
               <div class="col-12">
                 <div class="ar-callout" id="arCallout">
-                  <div class="ar-callout-head"><i class="fa-solid fa-file-invoice-dollar"></i> Accounts Receivable (AR) Difference</div>
+                  <div class="ar-callout-head"><i class="fa-solid fa-file-invoice-dollar"></i> Accounts Receivable (AR)
+                    Difference</div>
                   <div class="ar-callout-grid">
                     <div><span class="ar-label">Quoted</span><span class="ar-value" id="arQuoted">$0.00</span></div>
-                    <div><span class="ar-label">Collected</span><span class="ar-value" id="arCollected">$0.00</span></div>
-                    <div><span class="ar-label">AR Difference</span><span class="ar-value" id="arDiff">$0.00</span></div>
+                    <div><span class="ar-label">Collected</span><span class="ar-value" id="arCollected">$0.00</span>
+                    </div>
+                    <div><span class="ar-label">AR Difference</span><span class="ar-value" id="arDiff">$0.00</span>
+                    </div>
                   </div>
                   <div class="ar-note" id="arNote">Fully collected — no outstanding balance.</div>
+                  <div class="small mt-2 pt-2 border-top text-muted" style="font-size:11px;">
+                    <i class="fa-solid fa-shield-halved me-1 text-primary"></i>Any remaining balance automatically
+                    initiates an audited record in the <a href="accounts-receivable.html" target="_blank"
+                      class="fw-bold text-decoration-none">Accounts Receivable Ledger</a>.
+                  </div>
                 </div>
               </div>
 
-              <div class="col-md-6"><label class="form-label">Lab Cost <span
-                    class="text-muted"></span></label>
+              <div class="col-md-6"><label class="form-label">Lab Cost <span class="text-muted"></span></label>
                 <div class="input-group"><span class="input-group-text">$</span><input type="number"
                     class="form-control" value="0" oninput="updateSummary()" id="labCost"></div>
               </div>
 
               <div class="col-12">
                 <div class="d-flex justify-content-between align-items-center">
-                  <label class="form-label mb-2">Fees <span class="text-muted fw-normal">— Merchant / Financing</span></label>
-                  <button type="button" class="btn btn-sm btn-outline-navy" onclick="addFeeEntry()"><i class="fa-solid fa-plus me-1"></i>Add Another</button>
+                  <label class="form-label mb-2">Fees <span class="text-muted fw-normal">— Merchant /
+                      Financing</span></label>
+                  <button type="button" class="btn btn-sm btn-outline-navy" onclick="addFeeEntry()"><i
+                      class="fa-solid fa-plus me-1"></i>Add Another</button>
                 </div>
                 <div id="feeList"></div>
               </div>
 
-              <div class="col-md-12"><label class="form-label">Notes <span
-                    class="text-muted"></span></label><input type="text" class="form-control"
-                  placeholder="Add any case notes..."></div>
+              <div class="col-md-12"><label class="form-label">Notes <span class="text-muted"></span></label><input
+                  type="text" class="form-control" placeholder="Add any case notes..."></div>
             </div>
           </div>
 
@@ -1212,12 +716,14 @@
             <p class="text-muted small">This is exactly how the case affects payroll. Confirm before saving.</p>
             <div class="panel p-3 mb-3">
               <div class="section-label">Providers</div>
-              <div class="impact-row" id="reviewProviderPay"><span>Dr. Heider <small class="text-muted">(Full Doctor · 100%)</small></span><span class="impact-amt">+$5,000.00</span></div>
+              <div class="impact-row" id="reviewProviderPay"><span>Dr. Heider <small class="text-muted">(Full Doctor ·
+                    100%)</small></span><span class="impact-amt">+$5,000.00</span></div>
               <div class="section-label mt-3">General Dentistry</div>
               <div class="impact-row"><span>Dr. Heider — Deep Cleaning</span><span class="impact-amt">+$280.00</span>
               </div>
               <div class="section-label mt-3">ISR Commission</div>
-              <div class="impact-row"><span>Jeremiah Smith</span><span class="impact-amt" id="reviewIsrComm"></span></div>
+              <div class="impact-row"><span>Jeremiah Smith</span><span class="impact-amt" id="reviewIsrComm"></span>
+              </div>
               <!-- <div class="section-label mt-3">Flat ISR</div>
               <div class="impact-row"><span>Joshua Lee</span><span class="impact-amt">+$200.00</span></div> -->
             </div>

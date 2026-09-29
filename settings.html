@@ -27,6 +27,7 @@
         Rules</a>
       <a class="nav-link-item" href="production.html"><i class="fa-solid fa-chart-column"></i> Production</a>
       <a class="nav-link-item " href="cases.html"><i class="fa-solid fa-briefcase-medical"></i> Cases</a>
+      <a class="nav-link-item" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i> Accounts Receivable</a>
       <a class="nav-link-item" href="advances.html"><i class="fa-solid fa-hand-holding-dollar"></i> Advances</a>
       <a class="nav-link-item " href="statements.html"><i class="fa-solid fa-file-invoice"></i> Statements</a>
       <a class="nav-link-item" href="payroll-runs.html"><i class="fa-solid fa-money-check-dollar"></i> Payroll Runs</a>
@@ -66,6 +67,7 @@
           Rules</a>
         <a class="nav-link-item" href="production.html"><i class="fa-solid fa-chart-column"></i> Production</a>
         <a class="nav-link-item " href="cases.html"><i class="fa-solid fa-briefcase-medical"></i> Cases</a>
+        <a class="nav-link-item" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i> Accounts Receivable</a>
         <a class="nav-link-item" href="advances.html"><i class="fa-solid fa-hand-holding-dollar"></i> Advances</a>
         <a class="nav-link-item" href="statements.html"><i class="fa-solid fa-file-invoice"></i> Statements</a>
 
@@ -527,6 +529,23 @@
           </div>
           <div class="pr-custom" id="permission-matrix-body"></div>
         </div>
+
+        <!-- Granular Payroll Authority & Permissions (Point 11) -->
+        <div class="panel mt-4">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title mb-0"><i class="fa-solid fa-shield-halved text-success me-2"></i>Granular Payroll Authority (V2.0 Specification — Point 11)</h2>
+              <div class="panel-sub">Fine-grained operational permissions governing the Canonical Ledger, Review Center, Staff Confirmations, and Financial Disclosures.</div>
+            </div>
+            <span class="badge bg-light text-dark border px-2.5 py-1.5"><i class="fa-solid fa-lock me-1 text-primary"></i>Configurable per Role</span>
+          </div>
+          <div class="panel-body">
+            <p class="text-muted small mb-3">Roles do not have blanket access. Super Admin assigns specific operational permissions to manage reviews, audited adjustments, approvals, and immutable locks.</p>
+            <div class="row g-3" id="payroll-permissions-grid">
+              <!-- Populated by loadRolePermissions() -->
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- ============= SIMPLE PLACEHOLDER TABS ============= -->
@@ -726,17 +745,64 @@
     }
 
     /* -------- Permissions matrix -------- */
-    const modules = ['Dashboard', 'Team Members', 'Production', 'Cases', 'Advances', 'Statements', 'Payroll Runs', 'Reports', 'Compensation Rules', 'Settings'];
+    const modules = ['Dashboard', 'Team Members', 'Production', 'Cases', 'Accounts Receivable', 'Advances', 'Statements', 'Payroll Runs', 'Reports', 'Compensation Rules', 'Settings'];
+
+    const payrollPermissionsList = [
+      { key: 'view_payroll', label: 'View Payroll', desc: 'Allows viewing payroll runs, previews, and staff lists.' },
+      { key: 'generate_payroll', label: 'Generate Payroll', desc: 'Allows triggering new payroll calculation drafts for an open period.' },
+      { key: 'review_payroll', label: 'Review Payroll', desc: 'Allows inspecting individual calculations in the Review Center.' },
+      { key: 'correct_adjust_payroll', label: 'Correct/Adjust Payroll', desc: 'Allows modifying hours/production with audited correction log entry.' },
+      { key: 'confirm_staff', label: 'Confirm Staff', desc: 'Allows marking staff members as confirmed in Screen 2.' },
+      { key: 'approve_final_summary', label: 'Approve Final Summary', desc: 'Allows formal sign-off on aggregated totals in Screen 3.' },
+      { key: 'lock_finalize_payroll', label: 'Lock/Finalize Payroll', desc: 'Allows executing irreversible immutable ledger lock & pay stub generation.' },
+      { key: 'resolve_payroll_flags', label: 'Resolve Payroll Flags', desc: 'Allows resolving and clearing staff compensation flags or disputes.' },
+      { key: 'create_post_lock_adjustment', label: 'Create Post-Lock Adjustment', desc: 'Allows generating downstream compensating ledger transactions for past locked runs.' },
+      { key: 'view_confidential_comp', label: 'View Confidential Compensation', desc: 'Allows viewing executive salaries, owner draws, and private fee schedules.' }
+    ];
+
+    const defaultPayrollPerms = {
+      office_manager: {
+        view_payroll: true, generate_payroll: true, review_payroll: true, correct_adjust_payroll: true,
+        confirm_staff: true, approve_final_summary: true, lock_finalize_payroll: false, resolve_payroll_flags: true,
+        create_post_lock_adjustment: false, view_confidential_comp: true
+      },
+      provider: {
+        view_payroll: false, generate_payroll: false, review_payroll: false, correct_adjust_payroll: false,
+        confirm_staff: false, approve_final_summary: false, lock_finalize_payroll: false, resolve_payroll_flags: false,
+        create_post_lock_adjustment: false, view_confidential_comp: false
+      },
+      isr_commission: {
+        view_payroll: false, generate_payroll: false, review_payroll: false, correct_adjust_payroll: false,
+        confirm_staff: false, approve_final_summary: false, lock_finalize_payroll: false, resolve_payroll_flags: false,
+        create_post_lock_adjustment: false, view_confidential_comp: false
+      },
+      isr_flat: {
+        view_payroll: false, generate_payroll: false, review_payroll: false, correct_adjust_payroll: false,
+        confirm_staff: false, approve_final_summary: false, lock_finalize_payroll: false, resolve_payroll_flags: false,
+        create_post_lock_adjustment: false, view_confidential_comp: false
+      },
+      sdr: {
+        view_payroll: false, generate_payroll: false, review_payroll: false, correct_adjust_payroll: false,
+        confirm_staff: false, approve_final_summary: false, lock_finalize_payroll: false, resolve_payroll_flags: false,
+        create_post_lock_adjustment: false, view_confidential_comp: false
+      },
+      ce: {
+        view_payroll: false, generate_payroll: false, review_payroll: false, correct_adjust_payroll: false,
+        confirm_staff: false, approve_final_summary: false, lock_finalize_payroll: false, resolve_payroll_flags: false,
+        create_post_lock_adjustment: false, view_confidential_comp: false
+      }
+    };
 
     const defaultPerms = {
       office_manager: modules.reduce((a, m) => (a[m] = [true, true, true, true], a), {}),
-      provider: { 'Dashboard': [true, false, false, false], 'Team Members': [false, false, false, false], 'Production': [true, false, false, false], 'Cases': [true, false, false, false], 'Advances': [true, false, false, false], 'Statements': [true, false, false, false], 'Payroll Runs': [false, false, false, false], 'Reports': [false, false, false, false], 'Compensation Rules': [false, false, false, false], 'Settings': [false, false, false, false] },
-      isr_commission: { 'Dashboard': [true, false, false, false], 'Team Members': [false, false, false, false], 'Production': [false, false, false, false], 'Cases': [true, true, true, false], 'Advances': [true, false, false, false], 'Statements': [true, false, false, false], 'Payroll Runs': [false, false, false, false], 'Reports': [false, false, false, false], 'Compensation Rules': [false, false, false, false], 'Settings': [false, false, false, false] },
-      isr_flat: { 'Dashboard': [true, false, false, false], 'Team Members': [false, false, false, false], 'Production': [false, false, false, false], 'Cases': [true, true, false, false], 'Advances': [true, false, false, false], 'Statements': [true, false, false, false], 'Payroll Runs': [false, false, false, false], 'Reports': [false, false, false, false], 'Compensation Rules': [false, false, false, false], 'Settings': [false, false, false, false] },
-      sdr: { 'Dashboard': [true, false, false, false], 'Team Members': [false, false, false, false], 'Production': [false, false, false, false], 'Cases': [false, false, false, false], 'Advances': [true, false, false, false], 'Statements': [true, false, false, false], 'Payroll Runs': [false, false, false, false], 'Reports': [false, false, false, false], 'Compensation Rules': [false, false, false, false], 'Settings': [false, false, false, false] },
-      ce: { 'Dashboard': [true, false, false, false], 'Team Members': [false, false, false, false], 'Production': [false, false, false, false], 'Cases': [true, false, true, false], 'Advances': [false, false, false, false], 'Statements': [true, false, false, false], 'Payroll Runs': [false, false, false, false], 'Reports': [false, false, false, false], 'Compensation Rules': [false, false, false, false], 'Settings': [false, false, false, false] }
+      provider: { 'Dashboard': [true, false, false, false], 'Team Members': [false, false, false, false], 'Production': [true, false, false, false], 'Cases': [true, false, false, false], 'Accounts Receivable': [false, false, false, false], 'Advances': [true, false, false, false], 'Statements': [true, false, false, false], 'Payroll Runs': [false, false, false, false], 'Reports': [false, false, false, false], 'Compensation Rules': [false, false, false, false], 'Settings': [false, false, false, false] },
+      isr_commission: { 'Dashboard': [true, false, false, false], 'Team Members': [false, false, false, false], 'Production': [false, false, false, false], 'Cases': [true, true, true, false], 'Accounts Receivable': [true, false, false, false], 'Advances': [true, false, false, false], 'Statements': [true, false, false, false], 'Payroll Runs': [false, false, false, false], 'Reports': [false, false, false, false], 'Compensation Rules': [false, false, false, false], 'Settings': [false, false, false, false] },
+      isr_flat: { 'Dashboard': [true, false, false, false], 'Team Members': [false, false, false, false], 'Production': [false, false, false, false], 'Cases': [true, true, false, false], 'Accounts Receivable': [true, false, false, false], 'Advances': [true, false, false, false], 'Statements': [true, false, false, false], 'Payroll Runs': [false, false, false, false], 'Reports': [false, false, false, false], 'Compensation Rules': [false, false, false, false], 'Settings': [false, false, false, false] },
+      sdr: { 'Dashboard': [true, false, false, false], 'Team Members': [false, false, false, false], 'Production': [false, false, false, false], 'Cases': [false, false, false, false], 'Accounts Receivable': [false, false, false, false], 'Advances': [true, false, false, false], 'Statements': [true, false, false, false], 'Payroll Runs': [false, false, false, false], 'Reports': [false, false, false, false], 'Compensation Rules': [false, false, false, false], 'Settings': [false, false, false, false] },
+      ce: { 'Dashboard': [true, false, false, false], 'Team Members': [false, false, false, false], 'Production': [false, false, false, false], 'Cases': [true, false, true, false], 'Accounts Receivable': [false, false, false, false], 'Advances': [false, false, false, false], 'Statements': [true, false, false, false], 'Payroll Runs': [false, false, false, false], 'Reports': [false, false, false, false], 'Compensation Rules': [false, false, false, false], 'Settings': [false, false, false, false] }
     };
     const savedPerms = {};
+    const savedPayrollPerms = {};
 
     function loadRolePermissions() {
       const roleKey = document.getElementById('permRoleSelect').value;
@@ -755,6 +821,31 @@
           </div>
         </div>`;
       }).join('');
+
+      // Render 10 Granular Payroll Permissions
+      const pGrid = document.getElementById('payroll-permissions-grid');
+      if (pGrid) {
+        const currentPayPerms = savedPayrollPerms[roleKey] || defaultPayrollPerms[roleKey] || {};
+        pGrid.innerHTML = payrollPermissionsList.map(item => {
+          const isChecked = !!currentPayPerms[item.key];
+          return `
+          <div class="col-md-6">
+            <div class="p-3 border rounded-3 bg-white h-100 d-flex align-items-start gap-2.5">
+              <div class="form-check form-switch pt-1">
+                <input class="form-check-input payroll-perm-check" type="checkbox" data-perm-key="${item.key}" ${isChecked ? 'checked' : ''} id="pay_perm_${item.key}">
+              </div>
+              <div>
+                <label class="form-check-label fw-bold text-dark mb-0" for="pay_perm_${item.key}" style="font-size:13px; cursor:pointer;">
+                  ${item.label}
+                </label>
+                <div class="text-muted" style="font-size:11.5px; line-height:1.35; margin-top:2px;">
+                  ${item.desc}
+                </div>
+              </div>
+            </div>
+          </div>`;
+        }).join('');
+      }
     }
 
     function savePermissions() {
@@ -765,8 +856,16 @@
         perms[chk.dataset.module][parseInt(chk.dataset.idx)] = chk.checked;
       });
       savedPerms[roleKey] = perms;
+
+      // Save granular payroll permissions
+      const payPerms = {};
+      document.querySelectorAll('.payroll-perm-check').forEach(chk => {
+        payPerms[chk.dataset.permKey] = chk.checked;
+      });
+      savedPayrollPerms[roleKey] = payPerms;
+
       const roleName = document.getElementById('permRoleSelect').selectedOptions[0].innerText;
-      alert('Permissions saved for ' + roleName + '.');
+      alert('Module and Granular Payroll Permissions saved for ' + roleName + '.');
     }
 
     loadRolePermissions();

@@ -459,6 +459,7 @@
       <a class="nav-link-item" href="compensation-rules.html"><i class="fa-solid fa-sliders"></i> Compensation Rules</a>
       <a class="nav-link-item " href="production.html"><i class="fa-solid fa-chart-column"></i> Production</a>
       <a class="nav-link-item" href="cases.html"><i class="fa-solid fa-briefcase-medical"></i> Cases</a>
+      <a class="nav-link-item" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i> Accounts Receivable</a>
       <a class="nav-link-item" href="advances.html"><i class="fa-solid fa-hand-holding-dollar"></i> Advances</a>
       <a class="nav-link-item" href="statements.html"><i class="fa-solid fa-file-invoice"></i> Statements</a>
       <a class="nav-link-item active" href="payroll-runs.html"><i class="fa-solid fa-money-check-dollar"></i> Payroll
@@ -489,6 +490,7 @@
           Rules</a>
         <a class="nav-link-item " href="production.html"><i class="fa-solid fa-chart-column"></i> Production</a>
         <a class="nav-link-item " href="cases.html"><i class="fa-solid fa-briefcase-medical"></i> Cases</a>
+        <a class="nav-link-item" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i> Accounts Receivable</a>
         <a class="nav-link-item" href="advances.html"><i class="fa-solid fa-hand-holding-dollar"></i> Advances</a>
         <a class="nav-link-item" href="statements.html"><i class="fa-solid fa-file-invoice"></i> Statements</a>
         <a class="nav-link-item" href="index.html"><i class="fa-solid fa-file-invoice"></i> Logout</a>
@@ -1680,6 +1682,10 @@
     /* ==========================================================
        SCREEN 2 — CONFIRM STAFF
        ========================================================== */
+    function confirmStaff(rowId, statusId) {
+      return confirmEmployee(rowId, statusId);
+    }
+
     function confirmEmployee(rowId, statusId) {
       const row = document.getElementById(rowId);
       const statusEl = document.getElementById(statusId);
@@ -1706,11 +1712,26 @@
     }
 
     let currentPayrollDetail = null;
+    const payrollAuditEvents = [
+      {
+        eventId: 'AUD-EVT-718204',
+        staffName: 'Bianca Torres',
+        role: 'Operations',
+        originalValue: '$2,512.50',
+        correctedValue: '$2,587.50',
+        diff: '+$75.00',
+        reason: 'Timesheet correction — Approved 2.5h overtime after schedule verification',
+        editor: 'James Johnson (Office Manager)',
+        timestamp: 'May 16, 2026, 10:14 AM',
+        sourceRecord: 'PR-2026-06 · Hourly attendance',
+        recalculation: 'Overtime hours updated 0 -> 2.5h'
+      }
+    ];
 
     /* ==========================================================
        CATEGORY BREAKDOWN — ONE-BY-ONE NAVIGATION
        ========================================================== */
-    const categoryEmployees = {
+    const categoryStaff = {
       provider: {
         title: 'Providers',
         badge: '8 Providers',
@@ -1765,6 +1786,7 @@
         ]
       }
     };
+    const categoryEmployees = categoryStaff;
     let categoryNavIndex = 0;
     let categoryNavData = null;
 
@@ -2148,6 +2170,33 @@
                   </div>
                 `).join('')}
               </div>
+
+              <!-- Mandatory Audited Correction Fields (Point 10) -->
+              <div class="p-3 mt-3 border rounded-3" style="background:#f8fafc; border-color:#e2e8f0;">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                  <div class="fw-bold text-dark" style="font-size:12px;">
+                    <i class="fa-solid fa-clipboard-check text-success me-1"></i>Audited Correction Event (V2.0 Point 10)
+                  </div>
+                  <span class="badge bg-white text-muted border px-2 py-0.5" style="font-size:10px;">Canonical Ledger Traceable</span>
+                </div>
+                <div class="row g-2">
+                  <div class="col-md-6">
+                    <label class="form-label mb-1" style="font-size:11px;color:#475569;">Adjustment Reason</label>
+                    <select class="form-select form-select-sm" id="auditCorrectionReason">
+                      <option value="Timesheet correction - schedule discrepancy">Timesheet correction - schedule discrepancy</option>
+                      <option value="Production reconciliation adjustment">Production reconciliation adjustment</option>
+                      <option value="Manager authorized discretionary adjustment">Manager authorized discretionary adjustment</option>
+                      <option value="Approved advance recoupment deduction">Approved advance recoupment deduction</option>
+                      <option value="Dispute resolution confirmation">Dispute resolution confirmation</option>
+                      <option value="Fee schedule rate correction">Fee schedule rate correction</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label mb-1" style="font-size:11px;color:#475569;">Audit Note / Authorizing Source</label>
+                    <input type="text" class="form-control form-control-sm" id="auditCorrectionNote" placeholder="e.g. Authorized by James Johnson per clinic logs">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -2166,7 +2215,7 @@
         for (let n = 0; n < names.length; n++) {
           const list = pools[p][names[n]];
           for (let i = 0; i < list.length; i++) {
-            if (list[i].id === caseId) return { list: list, index: i, employee: names[n] };
+            if (list[i].id === caseId) return { list: list, index: i, staffMember: names[n], employee: names[n] };
           }
         }
       }
@@ -2181,7 +2230,7 @@
       const modalTitle = document.querySelector('#caseBreakdownDetailModal .modal-title');
       if (modalTitle) modalTitle.innerHTML = '<i class="fa-solid fa-folder-open me-2 text-primary"></i>' + c.id;
       document.getElementById('cbdCaseId').value = c.id;
-      document.getElementById('cbdOwner').value = rec.employee;
+      document.getElementById('cbdOwner').value = rec.staffMember || rec.employee;
       document.getElementById('cbdPatient').value = c.patient;
       document.getElementById('cbdType').value = c.type;
       document.getElementById('cbdStatus').value = c.status;
@@ -2480,7 +2529,9 @@
         acc[input.getAttribute('data-field')] = Number(input.value) || 0;
         return acc;
       }, {});
-      let updatedPay = Number(currentPayrollDetail.profile.totalPay) || 0;
+
+      const originalPay = Number(currentPayrollDetail.profile.totalPay) || 0;
+      let updatedPay = originalPay;
       if (currentPayrollDetail.profile.editFields.some(field => field.key === 'hours')) {
         updatedPay = values.hours * values.rate + values.overtime * values.rate * 1.5;
       } else if (currentPayrollDetail.profile.editFields.some(field => field.key === 'cosmeticCases')) {
@@ -2496,12 +2547,50 @@
         row.setAttribute('data-pay', updatedPay);
       }
       currentPayrollDetail.profile.totalPay = updatedPay;
+
+      // Point 10: Create an audited correction/adjustment event
+      const reasonEl = document.getElementById('auditCorrectionReason');
+      const noteEl = document.getElementById('auditCorrectionNote');
+      const reasonStr = (reasonEl ? reasonEl.value : 'Review adjustment') + (noteEl && noteEl.value.trim() ? ` (${noteEl.value.trim()})` : '');
+      const eventId = 'AUD-EVT-' + Math.floor(100000 + Math.random() * 900000);
+      const nowFormatted = new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+      const auditEntry = {
+        eventId: eventId,
+        staffName: currentPayrollDetail.name,
+        role: currentPayrollDetail.profile.department,
+        originalValue: formatCurrency(originalPay),
+        correctedValue: formatCurrency(updatedPay),
+        diff: (updatedPay >= originalPay ? '+' : '-') + formatCurrency(Math.abs(updatedPay - originalPay)),
+        reason: reasonStr,
+        editor: 'James Johnson (Office Manager)',
+        timestamp: nowFormatted,
+        sourceRecord: `PR-2026-06 · ${currentPayrollDetail.profile.paymentMethod}`,
+        recalculation: `Gross recalculated: ${formatCurrency(originalPay)} → ${formatCurrency(updatedPay)}`
+      };
+      payrollAuditEvents.unshift(auditEntry);
+
       document.getElementById('payrollDetailModalBody').innerHTML = `
-        <div class="detail-success-box">
-          <i class="fa-solid fa-circle-check"></i>
-          <div>
-            <div class="detail-success-title">Changes saved</div>
-            <div class="detail-success-text">The new pay amount is ${formatCurrency(updatedPay)}. You can continue editing or approve it now.</div>
+        <div class="p-3 mb-3 border rounded-3" style="background:#f0fdf4; border-color:#86efac;">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <div class="d-flex align-items-center gap-2 text-success fw-bold" style="font-size:14px;">
+              <i class="fa-solid fa-circle-check fs-5"></i> Audited Correction Event Recorded (Point 10)
+            </div>
+            <span class="badge bg-white text-dark border px-2 py-1" style="font-family:monospace;font-size:11px;">#${eventId}</span>
+          </div>
+          <p class="text-muted small mb-3">Traceable canonical ledger correction event created. Direct edits in the Review Center never overwrite history without an audited source event.</p>
+          <div class="bg-white border rounded-2 p-3" style="font-size:12.5px;">
+            <div class="d-flex justify-content-between py-1 border-bottom"><span>Staff Member:</span><strong>${currentPayrollDetail.name}</strong></div>
+            <div class="d-flex justify-content-between py-1 border-bottom"><span>Original Value:</span><span class="text-decoration-line-through text-muted">${auditEntry.originalValue}</span></div>
+            <div class="d-flex justify-content-between py-1 border-bottom"><span>Corrected Value:</span><strong class="text-success">${auditEntry.correctedValue} (${auditEntry.diff})</strong></div>
+            <div class="d-flex justify-content-between py-1 border-bottom"><span>Reason:</span><span class="text-dark fw-semibold">${auditEntry.reason}</span></div>
+            <div class="d-flex justify-content-between py-1 border-bottom"><span>Authorizing Reviewer:</span><span>${auditEntry.editor}</span></div>
+            <div class="d-flex justify-content-between py-1 border-bottom"><span>Source Record:</span><span class="font-monospace text-muted">${auditEntry.sourceRecord}</span></div>
+            <div class="d-flex justify-content-between py-1"><span>Timestamp:</span><span class="text-muted">${auditEntry.timestamp}</span></div>
+          </div>
+          <div class="d-flex gap-2 mt-3">
+            <button class="btn btn-green btn-sm" onclick="approveFromModal()"><i class="fa-solid fa-check me-1"></i>Confirm Staff With Audit</button>
+            <button class="btn btn-outline-navy btn-sm" onclick="openPayrollDetail('${currentPayrollDetail.name}', '${currentPayrollDetail.rowId}', '${currentPayrollDetail.statusId}', '${currentPayrollDetail.employeeType}', ${updatedPay}, '${currentPayrollDetail.profileKey || 'provider'}')">Continue Review</button>
           </div>
         </div>
       `;
@@ -2839,7 +2928,7 @@
     /* ==========================================================
        PAYROLL PACKET — VIEW FROM LOCKED RUNS
        ========================================================== */
-    const packetEmployeeDetails = {
+    const packetStaffDetails = {
       'Dr. Nancy Rose': {
         name: 'Dr. Nancy Rose',
         department: 'Provider',
@@ -3011,6 +3100,7 @@
         ]
       }
     };
+    const packetEmployeeDetails = packetStaffDetails;
 
     const packetAvatarUrls = {
       'Dr. Nancy Rose': 'https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=80&q=80',
