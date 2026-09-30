@@ -153,7 +153,8 @@
         </div>
 
         <div class="kpi-row">
-            <div class="kpi-card d-flex align-items-center gap-3" onclick="openStatementModal('gross')" style="cursor:pointer;">
+            <div class="kpi-card d-flex align-items-center gap-3" onclick="openStatementModal('gross')"
+                style="cursor:pointer;">
                 <div class="kpi-icon" style="background:var(--green-50);color:var(--green-600);"><i
                         class="fa-solid fa-wallet"></i></div>
                 <div>
@@ -161,7 +162,8 @@
                     <div class="kpi-value" id="grossKpi">$1,185.00</div>
                 </div>
             </div>
-            <div class="kpi-card d-flex align-items-center gap-3" onclick="openStatementModal('hours')" style="cursor:pointer;">
+            <div class="kpi-card d-flex align-items-center gap-3" onclick="openStatementModal('hours')"
+                style="cursor:pointer;">
                 <div class="kpi-icon" style="background:#dbeafe;color:#1e40af;"><i class="fa-regular fa-clock"></i>
                 </div>
                 <div>
@@ -169,7 +171,8 @@
                     <div class="kpi-value" id="hoursKpi">78.00</div>
                 </div>
             </div>
-            <div class="kpi-card d-flex align-items-center gap-3" onclick="openStatementModal('overtime')" style="cursor:pointer;">
+            <div class="kpi-card d-flex align-items-center gap-3" onclick="openStatementModal('overtime')"
+                style="cursor:pointer;">
                 <div class="kpi-icon" style="background:#ede9fe;color:#6d28d9;"><i class="fa-solid fa-chart-line"></i>
                 </div>
                 <div>
@@ -177,7 +180,8 @@
                     <div class="kpi-value" id="otKpi">2.00</div>
                 </div>
             </div>
-            <div class="kpi-card d-flex align-items-center gap-3" onclick="openStatementModal('deductions')" style="cursor:pointer;">
+            <div class="kpi-card d-flex align-items-center gap-3" onclick="openStatementModal('deductions')"
+                style="cursor:pointer;">
                 <div class="kpi-icon" style="background:#ffedd5;color:#c2410c;"><i class="fa-solid fa-circle-minus"></i>
                 </div>
                 <div>
@@ -190,6 +194,8 @@
         <div class="statement-toggle-tabs">
             <button class="toggle-tab-btn active" onclick="showPane('statement', this)">Statement View</button>
             <button class="toggle-tab-btn" onclick="showPane('review', this)">Review &amp; Edit</button>
+            <button class="toggle-tab-btn" onclick="showPane('assigned-plan', this)"><i
+                    class="fa-solid fa-file-contract text-success me-1.5"></i>Assigned Plan &amp; Rules</button>
         </div>
 
         <!-- ================= STATEMENT VIEW ================= -->
@@ -219,10 +225,11 @@
                                 <div class="text-muted"
                                     style="font-size:11px;text-transform:uppercase;font-weight:700;"> Staff members
                                 </div>
-                                <div class="fw-bold" style="font-size:15px;">M.Ahsan</div>
-                                <div class="text-muted" style="font-size:12px;">Social Media</div>
-                                <div class="text-muted" style="font-size:11.5px;">Staff members ID: DA001 &middot;
-                                    Compensation Type: Hourly</div>
+                                <div class="fw-bold" style="font-size:15px;">Mahsan</div>
+                                <div class="text-muted" style="font-size:12px;">Social Media &amp; Content Strategist
+                                </div>
+                                <div class="text-muted" style="font-size:11.5px;">Staff members ID: SOC001 &middot;
+                                    Compensation Type: Salary ($4,200/mo) + Viral Reach Spiff</div>
                             </div>
 
                             <div class="check-preview mb-3">
@@ -494,6 +501,171 @@
                 </div>
             </div>
         </div>
+
+        <!-- ================= ASSIGNED PLAN & RULES ================= -->
+        <div class="payroll-pane" id="pane-assigned-plan">
+            <!-- Plan Header Card -->
+            <div class="panel p-4 mb-3 border-start border-4 border-primary">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="rounded-circle text-white d-flex align-items-center justify-content-center"
+                            style="width:42px;height:42px;background:var(--navy-900);font-size:17px;">
+                            <i class="fa-solid fa-share-nodes text-success"></i>
+                        </div>
+                        <div>
+                            <div class="d-flex align-items-center gap-2">
+                                <h5 class="fw-bold text-dark mb-0">Social Media &amp; Brand Growth Plan</h5>
+                                <span
+                                    class="badge bg-primary-subtle text-primary border border-primary-subtle font-monospace">v1.1</span>
+                                <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:11px;">Base
+                                    Creative Salary &amp; Reach Spiff</span>
+                            </div>
+                            <div class="text-muted small mt-0.5">Assigned to: <strong class="text-dark">Mahsan</strong>
+                                <span class="badge bg-secondary-subtle text-secondary font-monospace"
+                                    style="font-size:10px;">@mahsan</span> · Role: <strong>Social Media</strong> ·
+                                Department: <span class="badge-dept"
+                                    style="background:#f1f5f9;padding:2px 8px;border-radius:4px;font-size:11px;">SocialMedia</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span
+                            class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5 fw-semibold"
+                            style="font-size:12px;">
+                            <i class="fa-solid fa-circle-check me-1"></i>Active Assignment
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row g-2 pt-2 border-top">
+                    <div class="col-md-4">
+                        <div class="p-2 rounded bg-light border" style="font-size:12px;">
+                            <div class="text-muted fw-semibold"
+                                style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;">
+                                <i class="fa-solid fa-camera-retro text-success me-1"></i>Guaranteed Base Salary
+                            </div>
+                            <div class="fw-bold text-dark mt-0.5">$4,200.00 / mo ($2,100 / cycle)</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-2 rounded bg-light border" style="font-size:12px;">
+                            <div class="text-muted fw-semibold"
+                                style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;">
+                                <i class="fa-solid fa-chart-line text-primary me-1"></i>Viral Reach &amp; Growth Spiff
+                            </div>
+                            <div class="fw-bold text-dark mt-0.5">$350.00 / mo (≥100k Reach)</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-2 rounded bg-light border" style="font-size:12px;">
+                            <div class="text-muted fw-semibold"
+                                style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;">
+                                <i class="fa-regular fa-calendar-check text-success me-1"></i>Settlement &amp; Payout
+                                Cycle
+                            </div>
+                            <div class="fw-semibold text-dark mt-0.5">Bi-Weekly Salary · Monthly Growth Review</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Plan Components -->
+            <div class="fw-bold text-dark mb-2" style="font-size:13px;text-transform:uppercase;letter-spacing:0.4px;">
+                <i class="fa-solid fa-layer-group text-primary me-1.5"></i>Attached Compensation Plan Components
+            </div>
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border bg-white h-100 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:10.5px;">Creative
+                                Salary</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle"
+                                style="font-size:10px;">Active</span>
+                        </div>
+                        <div class="fw-bold text-dark mb-1" style="font-size:13.5px;">Content Creation &amp; Management
+                        </div>
+                        <div class="fw-bold text-success mb-2" style="font-size:16px;">$4,200.00 <small
+                                class="text-muted fw-normal" style="font-size:11px;">/ month</small></div>
+                        <div class="pt-2 border-top text-muted small" style="font-size:11.5px;">
+                            <div><i class="fa-regular fa-calendar me-1 text-primary"></i>Paid in equal bi-weekly
+                                installments ($2,100)</div>
+                            <div class="mt-1"><i class="fa-solid fa-film me-1 text-success"></i>Covers reels, carousel
+                                production &amp; stories</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border bg-white h-100 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:10.5px;">Monthly
+                                Milestone</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle"
+                                style="font-size:10px;">Active</span>
+                        </div>
+                        <div class="fw-bold text-dark mb-1" style="font-size:13.5px;">Viral Reach Benchmark Spiff</div>
+                        <div class="fw-bold text-success mb-2" style="font-size:16px;">$350.00 <small
+                                class="text-muted fw-normal" style="font-size:11px;">/ month</small></div>
+                        <div class="pt-2 border-top text-muted small" style="font-size:11.5px;">
+                            <div><i class="fa-solid fa-users-viewfinder me-1 text-primary"></i>Earned upon reaching ≥
+                                100k total organic reach</div>
+                            <div class="mt-1"><i class="fa-brands fa-instagram text-danger me-1"></i>Combined across IG,
+                                TikTok &amp; YouTube shorts</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border bg-white h-100 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:10.5px;">Delivery
+                                Standards</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle"
+                                style="font-size:10px;">Active</span>
+                        </div>
+                        <div class="fw-bold text-dark mb-1" style="font-size:13.5px;">Content Cadence Governance</div>
+                        <div class="fw-bold text-success mb-2" style="font-size:16px;">100% Protected <small
+                                class="text-muted fw-normal" style="font-size:11px;">base floor</small></div>
+                        <div class="pt-2 border-top text-muted small" style="font-size:11.5px;">
+                            <div><i class="fa-solid fa-calendar-check me-1 text-primary"></i>Target: 16+ high-retention
+                                video assets/mo</div>
+                            <div class="mt-1"><i class="fa-solid fa-shield-halved me-1 text-success"></i>Zero penalty on
+                                algorithm reach dips</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Qualification & Timing Rules -->
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="panel p-3 h-100">
+                        <div class="fw-bold text-dark mb-1" style="font-size:12.5px;">
+                            <i class="fa-solid fa-chart-simple text-primary me-1.5"></i>Reach Verification Rules
+                        </div>
+                        <p class="text-muted small mb-0" style="font-size:11.5px;line-height:1.5;">Reach figures are
+                            verified using native platform analytics exports submitted by the 1st of each month.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel p-3 h-100">
+                        <div class="fw-bold text-dark mb-1" style="font-size:12.5px;">
+                            <i class="fa-regular fa-calendar-check text-success me-1.5"></i>Disbursement Timing
+                        </div>
+                        <p class="text-muted small mb-0" style="font-size:11.5px;line-height:1.5;">Reach bonus attaches
+                            to the first statement of the following month after approval by Practice Leadership.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel p-3 h-100">
+                        <div class="fw-bold text-dark mb-1" style="font-size:12.5px;">
+                            <i class="fa-solid fa-lock text-success me-1.5"></i>Version Lock Policy
+                        </div>
+                        <p class="text-muted small mb-0" style="font-size:11.5px;line-height:1.5;">Your compensation
+                            structure is locked under version <strong>v1.1</strong>. Any platform metric updates apply
+                            prospectively.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- FLAG PAYROLL MODAL -->
@@ -538,11 +710,13 @@
             <div class="modal-content" style="border-radius:14px;border:none;box-shadow:0 20px 60px rgba(0,0,0,.15);">
                 <div class="modal-header" style="border-bottom:1px solid var(--gray-100);padding:20px 24px;">
                     <div class="d-flex align-items-center gap-3">
-                        <div class="kpi-icon" id="stmtModalIcon" style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;">
+                        <div class="kpi-icon" id="stmtModalIcon"
+                            style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;">
                             <i class="fa-solid" id="stmtModalIconTag" style="font-size:18px;"></i>
                         </div>
                         <div>
-                            <h5 class="modal-title fw-bold" id="stmtModalLabel" style="font-size:16px;margin:0;">Title</h5>
+                            <h5 class="modal-title fw-bold" id="stmtModalLabel" style="font-size:16px;margin:0;">Title
+                            </h5>
                             <div class="text-muted" style="font-size:12px;">Payroll Statement Detail</div>
                         </div>
                     </div>
@@ -554,7 +728,8 @@
                     </div>
                 </div>
                 <div class="modal-footer" style="border-top:1px solid var(--gray-100);padding:16px 24px;">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background:var(--gray-100);color:var(--gray-700);border:none;font-weight:600;padding:8px 20px;border-radius:8px;font-size:13px;">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        style="background:var(--gray-100);color:var(--gray-700);border:none;font-weight:600;padding:8px 20px;border-radius:8px;font-size:13px;">Close</button>
                 </div>
             </div>
         </div>

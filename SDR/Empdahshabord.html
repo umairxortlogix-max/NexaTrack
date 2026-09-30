@@ -65,9 +65,9 @@
     </div>
     <div class="sidebar-footer">
       <div class="user-chip">
-        <div class="user-avatar">JJ</div>
+        <div class="user-avatar" style="background:#2563eb;color:#fff;">MU</div>
         <div class="flex-grow-1">
-          <div style="font-size:13px;font-weight:600;">Umair</div>
+          <div style="font-size:13px;font-weight:600;">Muhammad</div>
           <small>SDR</small>
         </div>
         <i class="fa-solid fa-chevron-down" style="color:#93a2bd;font-size:11px;"></i>
@@ -100,9 +100,9 @@
       </div>
       <div class="sidebar-footer">
         <div class="user-chip">
-          <div class="user-avatar">JJ</div>
+          <div class="user-avatar" style="background:#2563eb;color:#fff;">MU</div>
           <div>
-            <div style="font-size:13px;font-weight:600;">Umair</div><small>SDR</small>
+            <div style="font-size:13px;font-weight:600;">Muhammad</div><small>SDR</small>
           </div>
         </div>
       </div>
@@ -113,8 +113,8 @@
 
       <!-- Left: Title -->
       <div>
-        <h1 class="page-title">Good morning, M.Umair👋</h1>
-        <div class="page-sub">Here's your compensation overview for july 1 – july 31, 2026</div>
+        <h1 class="page-title">Good morning, Muhammad👋</h1>
+        <div class="page-sub">Here's your hybrid compensation overview for July 1 – July 31, 2026</div>
       </div>
 
       <!-- Right: Actions -->
@@ -203,27 +203,16 @@
       <div class="kpi-card" role="button" tabindex="0" onclick="openSdrDashKpiDetail(2)">
         <div class="row">
           <div class="col-3">
-            <div class="kpi-icon" style="background:#ede9fe;color:#6d28d9;"><i class="fa-solid fa-receipt"></i>
+            <div class="kpi-icon" style="background:#ede9fe;color:#6d28d9;"><i class="fa-solid fa-layer-group"></i>
             </div>
           </div>
           <div class="col-9">
-            <div class="kpi-label">Spiffs</div>
-            <div class="kpi-value">$2,880</div>
-            <div class="kpi-delta text-muted">Base hours only</div>
+            <div class="kpi-label">Booking Tier</div>
+            <div class="kpi-value">Tier 3 ($600)</div>
+            <div class="kpi-delta text-success"><i class="fa-solid fa-check"></i> 14 Bookings closed</div>
           </div>
         </div>
       </div>
-      <!-- <div class="kpi-card">
-        <div class="row">
-          <div class="col-3">
-            <div class="kpi-icon" style="background:#ffedd5;color:#c2410c;"><i class="fa-solid fa-bolt"></i></div>
-          </div>
-          <div class="col-9">
-            <div class="kpi-label">Overtime</div>
-            <div class="kpi-value">$0.00</div>
-          </div>
-        </div>
-      </div> -->
       <div class="kpi-card" role="button" tabindex="0" onclick="openSdrDashKpiDetail(3)">
         <div class="row">
           <div class="col-3">
@@ -231,8 +220,8 @@
                 class="fa-solid fa-circle-check"></i></div>
           </div>
           <div class="col-9">
-            <div class="kpi-label">Total Pay</div>
-            <div class="kpi-value">$2,880</div>
+            <div class="kpi-label">Total Period Pay</div>
+            <div class="kpi-value">$4,980</div>
             <div class="progress mt-2" style="height:5px;">
               <div class="progress-bar bg-success" style="width:100%;"></div>
             </div>
@@ -583,8 +572,8 @@
          KPI CARD DETAIL — SDR Dashboard
          ========================================================== */
       function openSdrDashKpiDetail(idx) {
-        const titles = ['Hours Worked', 'Hourly Rate', 'Regular Pay', 'Total Pay'];
-        const icons = ['fa-clock', 'fa-money-bill-wave', 'fa-receipt', 'fa-circle-check'];
+        const titles = ['Hours Worked', 'Hourly Rate', 'Booking Tier Achieved', 'Total Period Earnings'];
+        const icons = ['fa-clock', 'fa-money-bill-wave', 'fa-layer-group', 'fa-circle-check'];
         const body = document.getElementById('sdrDashDetailModalBody');
         const modalTitle = document.querySelector('#sdrDashDetailModal .modal-title');
         const modalSubtitle = document.querySelector('#sdrDashDetailModal .modal-subtitle');
@@ -606,34 +595,34 @@
           </div>`,
           // 1 — Hourly Rate
           `<div class="panel" style="border:none;box-shadow:none;">
-            <h5 class="fw-bold mb-3">Hourly Rate — $18.00</h5>
+            <h5 class="fw-bold mb-3">Base Hourly Rate — $18.00 / hr</h5>
             <div class="detail-breakdown-box">
-              <div class="detail-breakdown-row"><span>💰 Base Rate</span><strong>$18.00/hr</strong></div>
-              
-              <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Current Hourly Rate</span><strong>$18.00</strong></div>
+              <div class="detail-breakdown-row"><span>💰 Base Hourly Rate</span><strong>$18.00 / hr</strong></div>
+              <div class="detail-breakdown-row"><span>⚡ Overtime Multiplier</span><strong>1.5x ($27.00/hr)</strong></div>
+              <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Standard Hourly Rate</span><strong>$18.00 / hr</strong></div>
             </div>
-           
           </div>`,
-          // 2 — Regular Pay
+          // 2 — Booking Tier
           `<div class="panel" style="border:none;box-shadow:none;">
-            <h5 class="fw-bold mb-3">Regular Pay — $2,880</h5>
+            <h5 class="fw-bold mb-3">Monthly Qualified Booking Tier — Tier 3 ($600.00)</h5>
             <div class="detail-breakdown-box">
-              <div class="detail-breakdown-row"><span>⏱ Regular Hours</span><strong>160.00</strong></div>
-              <div class="detail-breakdown-row"><span>💰 Hourly Rate</span><strong>$18.00</strong></div>
-              <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Regular Pay</span><strong>$2,880.00</strong></div>
+              <div class="detail-breakdown-row"><span>🎯 Closed Qualified Bookings</span><strong>14 Bookings</strong></div>
+              <div class="detail-breakdown-row"><span>📊 Tier 3 Bracket</span><strong>12 – 14 Bookings</strong></div>
+              <div class="detail-breakdown-row"><span>💰 Payout Rate</span><strong>Highest Tier Only ($600.00)</strong></div>
+              <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Monthly Incentive Earned</span><strong>$600.00</strong></div>
             </div>
-          
+            <div class="text-muted small mt-2">Non-stacking incentive resets on 1st of each calendar month.</div>
           </div>`,
           // 3 — Total Pay
           `<div class="panel" style="border:none;box-shadow:none;">
-            <h5 class="fw-bold mb-3">Total Pay — $2,880</h5>
+            <h5 class="fw-bold mb-3">Total Period Pay — $4,980.00</h5>
             <div class="detail-breakdown-box">
-              <div class="detail-breakdown-row"><span>💰 Regular Pay</span><strong>$2,880.00</strong></div>
-              <div class="detail-breakdown-row"><span>⚡ Overtime</span><strong>$0.00</strong></div>
-              <div class="detail-breakdown-row"><span>📉 Deductions</span><strong>$0.00</strong></div>
-              <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Total Pay</span><strong>$2,880.00</strong></div>
+              <div class="detail-breakdown-row"><span>💰 Base Hourly Pay (160h × $18)</span><strong>$2,880.00</strong></div>
+              <div class="detail-breakdown-row"><span>🎯 Monthly Booking Tier 3</span><strong>$600.00</strong></div>
+              <div class="detail-breakdown-row"><span>🏆 Quarterly Excellence Bonus</span><strong>$1,500.00</strong></div>
+              <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Total Period Gross</span><strong class="text-success">$4,980.00</strong></div>
             </div>
-            <div class="text-muted small mt-2">100% of base pay achieved this period</div>
+            <div class="text-muted small mt-2">Luxury Smile Agent Hybrid Plan complete compensation.</div>
           </div>`
         ];
         body.innerHTML = views[idx] || views[0];

@@ -50,14 +50,16 @@
     .comp-item-card {
       border: 1px solid #e2e8f0;
       border-radius: 8px;
-      padding: 12px 14px;
+      padding: 10px 14px;
       background: #ffffff;
-      margin-bottom: 10px;
-      transition: border-color 0.15s ease;
+      margin-bottom: 8px;
+      position: relative;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
     .comp-item-card:hover {
       border-color: #cbd5e1;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
     }
 
     .comp-type-badge {
@@ -86,6 +88,84 @@
       border-radius: 6px;
       padding: 3px 8px;
       color: #334155;
+      max-width: 100%;
+    }
+
+    /* Interactive Hover Rules & Settlement Pill */
+    .comp-hover-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .comp-hover-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #0369a1;
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      border-radius: 6px;
+      padding: 3px 9px;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.15s ease;
+      line-height: 1.3;
+      user-select: none;
+    }
+
+    .comp-hover-badge:hover,
+    .comp-hover-wrap:hover .comp-hover-badge,
+    .comp-item-card:hover .comp-hover-badge {
+      background: #e0f2fe;
+      border-color: #7dd3fc;
+      color: #0284c7;
+    }
+
+    /* Floating Popover on Hover */
+    .comp-hover-popover {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      width: 430px;
+      max-width: min(440px, 92vw);
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 9px;
+      box-shadow: 0 14px 30px -4px rgba(15, 23, 42, 0.18), 0 4px 12px -2px rgba(15, 23, 42, 0.08);
+      padding: 12px 14px;
+      z-index: 1060;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(6px);
+      transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1), transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.18s;
+      pointer-events: none;
+    }
+
+    .comp-hover-popover::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      left: 18px;
+      width: 10px;
+      height: 10px;
+      background: #ffffff;
+      border-left: 1px solid #e2e8f0;
+      border-top: 1px solid #e2e8f0;
+      transform: rotate(45deg);
+    }
+
+    /* Open on hover of the wrap/badge OR on card hover */
+    .comp-hover-wrap:hover .comp-hover-popover,
+    .comp-item-card:hover .comp-hover-popover,
+    .comp-hover-popover:hover,
+    .comp-hover-popover.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
     }
 
     .builder-comp-block {
@@ -537,7 +617,7 @@
         bg: "#fef3c7",
         name: "Luxury Smile Agent (Hybrid Plan)",
         sub: "Hourly + Monthly Tiers + Quarterly Bonus",
-        members: 4,
+        members: 5,
         role: "hybrid",
         version: "v2.1",
         status: "Active",
@@ -624,6 +704,7 @@
           { ver: "v2.0", date: "Jan 1, 2026", author: "Finance / Executive", summary: "Initial hybrid compensation structure rollout for Luxury Smile Agents." }
         ],
         assignments: [
+          { name: "Muhammad", role: "SDR", version: "v2.1", effective: "Mar 1, 2026", status: "Active" },
           { name: "Elena Rostova", role: "Luxury Smile Agent", version: "v2.1", effective: "Mar 1, 2026", status: "Active" },
           { name: "Marcus Vance", role: "Closing Specialist", version: "v2.1", effective: "Mar 1, 2026", status: "Active" },
           { name: "Sofia Alverez", role: "Luxury Smile Agent", version: "v2.1", effective: "Mar 1, 2026", status: "Active" },
@@ -650,41 +731,75 @@
         summary: "Doctors are compensated based on clinical production using tiered cosmetic case rates and general dentistry fee schedules. A daily floor of $650 is advanced bi-weekly and reconciled monthly.",
         components: [
           {
-            id: "doc-veneer",
-            name: "Cosmetic Veneer Production",
+            id: "doc-veneer-composite",
+            name: "Composite Veneer Production",
             type: "Production Based",
-            calculation: { fullCase: { composite: 700, ceramic: 800, porcelainZirconia: 1000 }, halfCase: "50%", perUnit: { composite: 35, ceramic: 40, porcelainZirconia: 50 } },
+            calculation: { fullCase: "$700", halfCase: "50% ($350)", perUnit: "$35" },
+            calcRule: "Full Case (16–20u): $700 · Half (10u): $350 · Per-Unit: $35",
+            details: { fullCase: "$700", halfCase: "50%", perUnit: "$35" },
             measure: "Bi-Weekly Completed Cases",
             settlement: "Bi-Weekly Run",
-            rate: "Full Case: $700–$1,000 · Half: 50% · Per-Unit: $35–$50",
+            rate: "$700.00 / Full Case · $35/u",
             qualification: "Clinical completion confirmed in Practice Management software with clinical notes signed.",
             reversal: "Warranty remakes not paid twice; patient refunds reversed against gross production.",
-            desc: "Based on placed unit material (Composite, Ceramic, Porcelain/Zirconia)."
+            desc: "Composite resin placed veneer units (16–20 units full arch, 10 units half arch, or per unit)."
           },
           {
-            id: "doc-gen",
-            name: "General Dentistry",
-            type: "Percentage Commission",
-            calculation: { commissionPct: 35, basis: "Practice Fee Schedule" },
-            measure: "Bi-Weekly Procedures",
+            id: "doc-veneer-ceramic",
+            name: "Ceramic Veneer Production",
+            type: "Production Based",
+            calculation: { fullCase: "$800", halfCase: "50% ($400)", perUnit: "$40" },
+            calcRule: "Full Case (16–20u): $800 · Half (10u): $400 · Per-Unit: $40",
+            details: { fullCase: "$800", halfCase: "50%", perUnit: "$40" },
+            measure: "Bi-Weekly Completed Cases",
             settlement: "Bi-Weekly Run",
-            rate: "35% of Practice Fee Schedule",
-            qualification: "Valid general dentistry procedures with signed treatment chart.",
-            reversal: "Insurance write-offs or uncollected balances reversed accordingly.",
-            desc: "Restorative, Endodontics, Extractions, and Specialty cleanings."
+            rate: "$800.00 / Full Case · $40/u",
+            qualification: "Clinical completion confirmed in Practice Management software with clinical notes signed.",
+            reversal: "Warranty remakes not paid twice; patient refunds reversed against gross production.",
+            desc: "Ceramic placed veneer units (16–20 units full arch, 10 units half arch, or per unit)."
           },
           {
-            id: "doc-floor",
-            name: "Daily Guaranteed Floor",
-            type: "Production Floor",
-            calculation: { floorAmount: 650, eligibleDays: "Clinical Provider Days", reconciliation: "Earned Production - Floor Advance" },
-            measure: "Scheduled Provider Days",
-            settlement: "Bi-Weekly Advance",
-            rate: "$650.00 / Scheduled Day",
-            qualification: "Scheduled clinic hours attended; patient cancellations count toward floor requirement.",
-            reversal: "Reconciled monthly against earned gross production.",
-            desc: "Floor advance reconciled monthly against earned gross production."
-          }
+            id: "doc-veneer-porcelain",
+            name: "Porcelain / Zirconia Veneer Production",
+            type: "Production Based",
+            calculation: { fullCase: "$1,000", halfCase: "50% ($500)", perUnit: "$50" },
+            calcRule: "Full Case (16–20u): $1,000 · Half (10u): $500 · Per-Unit: $50",
+            details: { fullCase: "$1,000", halfCase: "50%", perUnit: "$50" },
+            measure: "Bi-Weekly Completed Cases",
+            settlement: "Bi-Weekly Run",
+            rate: "$1,000.00 / Full Case · $50/u",
+            qualification: "Clinical completion confirmed in Practice Management software with clinical notes signed.",
+            reversal: "Warranty remakes not paid twice; patient refunds reversed against gross production.",
+            desc: "Porcelain & Zirconia placed veneer units (16–20 units full arch, 10 units half arch, or per unit)."
+          },
+          // {
+          //   id: "doc-gen",
+          //   name: "General Dentistry",
+          //   type: "Percentage Commission",
+          //   calculation: { commissionPct: 35, basis: "Practice Fee Schedule" },
+          //   calcRule: "35% of Practice Fee Schedule",
+          //   details: { commPct: "35%", basis: "Practice Fee Schedule" },
+          //   measure: "Bi-Weekly Procedures",
+          //   settlement: "Bi-Weekly Run",
+          //   rate: "35% of Fee Schedule",
+          //   qualification: "Valid general dentistry procedures with signed treatment chart.",
+          //   reversal: "Insurance write-offs or uncollected balances reversed accordingly.",
+          //   desc: "Restorative, Endodontics, Extractions, and Specialty cleanings."
+          // },
+          // {
+          //   id: "doc-floor",
+          //   name: "Daily Guaranteed Floor",
+          //   type: "Production Floor",
+          //   calculation: { floorAmount: 650, eligibleDays: "Clinical Provider Days", reconciliation: "Earned Production - Floor Advance" },
+          //   calcRule: "$650.00 / Provider Day (Reconciled monthly)",
+          //   details: { floor: "$650.00 / day", days: "Clinical Provider Days", reconcile: "Reconciled monthly against earned gross production" },
+          //   measure: "Scheduled Provider Days",
+          //   settlement: "Bi-Weekly Advance",
+          //   rate: "$650.00 / Scheduled Day",
+          //   qualification: "Scheduled clinic hours attended; patient cancellations count toward floor requirement.",
+          //   reversal: "Reconciled monthly against earned gross production.",
+          //   desc: "Floor advance reconciled monthly against earned gross production."
+          // }
         ],
         tierSchedule: [
           { tier: "Full Veneer (16–20u)", range: "Composite: $700", payout: "Ceramic: $800", note: "Porcelain/Zirconia: $1,000" },
@@ -1205,33 +1320,95 @@
                 <div class="d-flex flex-column gap-2 mb-2">
                   ${p.components.map((c, idx) => {
         const calcStr = getCompCalculationString(c);
+        const compKey = `${p.id}_${idx}`;
         return `
-                    <div class="comp-item-card">
+                    <div class="comp-item-card" id="comp_card_${compKey}">
                       <div class="d-flex align-items-start justify-content-between">
-                        <div style="flex:1;">
+                        <div style="flex:1;min-width:0;">
                           <div class="d-flex align-items-center gap-2 mb-1.5">
                             <span class="comp-type-badge">${c.type}</span>
                             <strong class="text-dark" style="font-size:13.5px;">${c.name}</strong>
                           </div>
 
-                          <!-- SEPARATE RATE AND CALCULATION DISPLAY -->
-                          <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+                          <!-- RATE, CALCULATION & HOVER DETAILS TRIGGER -->
+                          <div class="d-flex flex-wrap align-items-center gap-2">
                             <div class="comp-rate-val">
                               <i class="fa-solid fa-tag me-1" style="font-size:11px;"></i>${c.rate}
                             </div>
-                            <div class="calc-formula-badge">
+                            <div class="calc-formula-badge" title="${calcStr}">
                               <i class="fa-solid fa-calculator text-primary" style="font-size:11px;"></i>
                               <span class="text-muted fw-normal">Calculation:</span>
-                              <strong class="text-dark">${calcStr}</strong>
+                              <strong class="text-dark text-truncate" style="max-width:380px;">${calcStr}</strong>
+                            </div>
+
+                            <!-- HOVER TRIGGER BADGE & RICH FLOATING POPOVER -->
+                            <div class="comp-hover-wrap">
+                              <button type="button" class="comp-hover-badge" onclick="event.stopPropagation(); toggleCompPopover('${compKey}')" title="Hover or click to view rules & settlement details">
+                                <i class="fa-solid fa-circle-info text-primary"></i>
+                                <span>Rules &amp; Settlement</span>
+                                <i class="fa-solid fa-chevron-down ms-0.5 text-muted" style="font-size:9px;"></i>
+                              </button>
+
+                              <div class="comp-hover-popover shadow-lg" id="comp_popover_${compKey}">
+                                <div class="d-flex align-items-center justify-content-between pb-2 mb-2 border-bottom">
+                                  <div class="d-flex align-items-center gap-1.5">
+                                    <span class="comp-type-badge" style="font-size:9.5px;">${c.type}</span>
+                                    <strong class="text-dark" style="font-size:12.5px;">${c.name}</strong>
+                                  </div>
+                                  <span class="comp-rate-val" style="font-size:12px;">${c.rate}</span>
+                                </div>
+
+                                ${(c.desc || c.qualification) ? `
+                                <div class="mb-2">
+                                  <div class="text-muted fw-bold text-uppercase mb-1" style="font-size:9.5px;letter-spacing:0.5px;">
+                                    <i class="fa-solid fa-clipboard-check me-1 text-success"></i>Qualification &amp; Rule
+                                  </div>
+                                  <div class="text-dark" style="font-size:11.5px;line-height:1.45;background:#f8fafc;padding:7px 10px;border-radius:6px;border:1px solid #edf2f7;">
+                                    ${c.desc || c.qualification}
+                                  </div>
+                                </div>` : ''}
+
+                                <div class="row g-2 mb-2">
+                                  <div class="col-6">
+                                    <div style="background:#f8fafc;border:1px solid #edf2f7;border-radius:6px;padding:6px 9px;">
+                                      <div class="text-muted fw-bold text-uppercase" style="font-size:9.5px;letter-spacing:0.5px;">
+                                        <i class="fa-regular fa-clock me-1 text-primary"></i>Measure
+                                      </div>
+                                      <div class="fw-semibold text-dark text-truncate mt-0.5" style="font-size:11.5px;" title="${c.measure || 'Pay Period'}">
+                                        ${c.measure || 'Pay Period'}
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-6">
+                                    <div style="background:#f8fafc;border:1px solid #edf2f7;border-radius:6px;padding:6px 9px;">
+                                      <div class="text-muted fw-bold text-uppercase" style="font-size:9.5px;letter-spacing:0.5px;">
+                                        <i class="fa-solid fa-wallet me-1 text-success"></i>Settlement
+                                      </div>
+                                      <div class="fw-semibold text-dark text-truncate mt-0.5" style="font-size:11.5px;" title="${c.settlement || p.paymentFrequency}">
+                                        ${c.settlement || p.paymentFrequency}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div style="background:#f8fafc;border:1px solid #edf2f7;border-radius:6px;padding:6px 9px;">
+                                  <div class="text-muted fw-bold text-uppercase mb-0.5" style="font-size:9.5px;letter-spacing:0.5px;">
+                                    <i class="fa-solid fa-calculator me-1 text-primary"></i>Calculation Formula
+                                  </div>
+                                  <div class="fw-semibold text-dark font-monospace" style="font-size:11px;line-height:1.35;">
+                                    ${calcStr}
+                                  </div>
+                                </div>
+
+                                ${c.reversal ? `
+                                <div class="text-muted mt-2 pt-1.5 border-top" style="font-size:10.5px;line-height:1.35;">
+                                  <i class="fa-solid fa-rotate-left me-1 text-danger"></i><strong class="text-dark">Reversal:</strong> ${c.reversal}
+                                </div>` : ''}
+                              </div>
                             </div>
                           </div>
-
-                          <div class="text-muted small mb-1.5" style="font-size:11.5px;line-height:1.4;">${c.desc || c.qualification || ''}</div>
-                          <div class="d-flex gap-3 text-muted" style="font-size:11px;">
-                            <span><i class="fa-regular fa-clock me-1"></i>Measure: ${c.measure || 'Pay Period'}</span>
-                            <span><i class="fa-solid fa-wallet me-1 text-success"></i>Settlement: ${c.settlement || p.paymentFrequency}</span>
-                          </div>
                         </div>
+
                         <div class="d-flex align-items-center gap-1 ms-2">
                           <button class="btn btn-sm btn-outline-navy py-1 px-2" style="font-size:11px;" onclick="openEditComponentModal('${p.id}', ${idx})" title="Edit Component">
                             <i class="fa-solid fa-pen me-1"></i>Edit
@@ -2496,10 +2673,28 @@
       }
     });
 
+    function toggleCompPopover(key) {
+      const popover = document.getElementById('comp_popover_' + key);
+      if (!popover) return;
+      const wasActive = popover.classList.contains('active');
+      document.querySelectorAll('.comp-hover-popover.active').forEach(p => p.classList.remove('active'));
+      if (!wasActive) {
+        popover.classList.add('active');
+      }
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.comp-hover-wrap')) {
+        document.querySelectorAll('.comp-hover-popover.active').forEach(p => p.classList.remove('active'));
+      }
+    });
+
     document.addEventListener('DOMContentLoaded', () => {
       updateKpis();
       renderPlans('all');
-      selectPlan('luxury-smile-agent', null);
+      const urlParams = new URLSearchParams(window.location.search);
+      const targetPlan = urlParams.get('plan') || 'luxury-smile-agent';
+      selectPlan(targetPlan, null);
     });
   </script>
 

@@ -30,7 +30,7 @@
         </div>
         <div class="sidebar-footer">
             <div class="user-chip">
-                <div class="user-avatar" style="background:#3b82f6;">JS</div>
+                <div class="user-avatar" style="background:#2563eb;">MZ</div>
                 <div class="flex-grow-1">
                     <div style="font-size:13px;font-weight:600;">M.Zubair</div>
                     <small>ISR</small>
@@ -75,24 +75,31 @@
                 <div class="kpi-icon" style="background:var(--green-50);color:var(--green-600);"><i
                         class="fa-solid fa-wallet"></i></div>
                 <div>
-                    <div class="kpi-label">Gross Pay</div>
-                    <div class="kpi-value" id="grossKpi">$1,185.00</div>
+                    <div class="kpi-label">Gross Commission</div>
+                    <div class="kpi-value" id="grossKpi">$4,860.00</div>
                 </div>
             </div>
             <div class="kpi-card d-flex align-items-center gap-3">
-                <div class="kpi-icon" style="background:#dbeafe;color:#1e40af;"><i class="fa-regular fa-clock"></i>
+                <div class="kpi-icon" style="background:#dbeafe;color:#1e40af;"><i class="fa-solid fa-clipboard-check"></i>
                 </div>
                 <div>
-                    <div class="kpi-label">Total Cases</div>
-                    <div class="kpi-value" id="hoursKpi">78.00</div>
+                    <div class="kpi-label">Closed Cases</div>
+                    <div class="kpi-value" id="casesKpi">26 Cases</div>
                 </div>
             </div>
-            
+            <div class="kpi-card d-flex align-items-center gap-3">
+                <div class="kpi-icon" style="background:#fef3c7;color:#92400e;"><i class="fa-solid fa-sack-dollar"></i>
+                </div>
+                <div>
+                    <div class="kpi-label">Total Collections</div>
+                    <div class="kpi-value" id="collectionsKpi">$113,000.00</div>
+                </div>
+            </div>
             <div class="kpi-card d-flex align-items-center gap-3">
                 <div class="kpi-icon" style="background:#ffedd5;color:#c2410c;"><i class="fa-solid fa-circle-minus"></i>
                 </div>
                 <div>
-                    <div class="kpi-label">Deductions</div>
+                    <div class="kpi-label">Deductions / Draws</div>
                     <div class="kpi-value" id="adjKpi">$200.00</div>
                 </div>
             </div>
@@ -101,6 +108,8 @@
         <div class="statement-toggle-tabs">
             <button class="toggle-tab-btn active" onclick="showPane('statement', this)">Statement View</button>
             <button class="toggle-tab-btn" onclick="showPane('review', this)">Review &amp; Edit</button>
+            <button class="toggle-tab-btn" onclick="showPane('assigned-plan', this)"><i
+                    class="fa-solid fa-file-contract text-success me-1.5"></i>Assigned Plan &amp; Rules</button>
         </div>
 
         <!-- ================= STATEMENT VIEW ================= -->
@@ -130,9 +139,9 @@
                                 <div class="text-muted"
                                     style="font-size:11px;text-transform:uppercase;font-weight:700;">Staff members</div>
                                 <div class="fw-bold" style="font-size:15px;">M.Zubair</div>
-                                <div class="text-muted" style="font-size:12px;">ISR &middot; Sales Department</div>
+                                <div class="text-muted" style="font-size:12px;">ISR Closer &middot; Inside Sales</div>
                                 <div class="text-muted" style="font-size:11.5px;"> Staff members ID: ISR001 &middot;
-                                    Compensation Type: Case Based</div>
+                                    Compensation Type: Case Commission (6% Direct + 2% Pod Override)</div>
                             </div>
 
                             <div class="check-preview mb-3">
@@ -140,46 +149,56 @@
                                     <div>
                                         <div class="pay-to">Pay To The Order Of</div>
                                         <div class="pay-to-name">M.Zubair</div>
-                                        <div class="memo">Memo: Pay Period May 1 – May 15, 2026</div>
+                                        <div class="memo">Memo: Pay Period May 1 – May 15, 2026 · Case Commission Settlement</div>
                                     </div>
                                     <div class="amount-box">
                                         <div class="lbl">Amount</div>
-                                        <div class="amt" id="stubAmount">$985.00</div>
+                                        <div class="amt" id="stubAmount">$4,660.00</div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row g-3">
-                                <div class="col-md-6">
+                                <div class="col-md-7">
                                     <div class="fw-bold mb-2"
                                         style="font-size:11.5px;text-transform:uppercase;color:var(--gray-500);">
-                                        Earnings</div>
+                                        Case Commission Earnings</div>
                                     <table class="earnings-table">
                                         <thead>
                                             <tr>
-                                                <th>Description</th>
-                                                <th class="text-end">Units</th>
-                                                <th class="text-end">Cases</th>
+                                                <th>Category</th>
+                                                <th class="text-center">Cases</th>
+                                                <th class="text-end">Collections</th>
+                                                <th class="text-end">Rate</th>
+                                                <th class="text-end">Amount</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Cosmetic Production</td>
-                                                <td class="text-end" id="stubRegHrs">76.00</td>
-                                                <td class="text-end">$15.00</td>
+                                                <td>Direct Closed Cases</td>
+                                                <td class="text-center" id="stubDirectCases">14</td>
+                                                <td class="text-end" id="stubDirectVol">$65,000.00</td>
+                                                <td class="text-end">6.00%</td>
+                                                <td class="text-end" id="stubDirectAmt">$3,900.00</td>
                                             </tr>
-                                            
+                                            <tr>
+                                                <td>Team Pod Override</td>
+                                                <td class="text-center" id="stubPodCases">12</td>
+                                                <td class="text-end" id="stubPodVol">$48,000.00</td>
+                                                <td class="text-end">2.00%</td>
+                                                <td class="text-end" id="stubPodAmt">$960.00</td>
+                                            </tr>
                                             <tr class="fw-bold">
-                                                <td colspan="2">Total Earnings</td>
-                                                <td class="text-end" id="stubTotalEarnings">$1,185.00</td>
+                                                <td colspan="4">Total Gross Commission</td>
+                                                <td class="text-end" id="stubTotalEarnings">$4,860.00</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class="fw-bold mb-2"
                                         style="font-size:11.5px;text-transform:uppercase;color:var(--gray-500);">
-                                        Deductions / Adjustments</div>
+                                        Deductions / Draws</div>
                                     <table class="earnings-table">
                                         <thead>
                                             <tr>
@@ -189,7 +208,7 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Advance</td>
+                                                <td>Salary Draw / Advance</td>
                                                 <td class="text-end neg-amt" id="stubAdvance">($200.00)</td>
                                             </tr>
                                             <tr>
@@ -205,8 +224,8 @@
                                 </div>
                             </div>
 
-                            <div class="stub-total-bar"><span class="lbl">Total Pay (Net)</span><span class="amt"
-                                    id="stubTotalPay">$985.00</span></div>
+                            <div class="stub-total-bar"><span class="lbl">Total Pay (Net Commission)</span><span class="amt"
+                                    id="stubTotalPay">$4,660.00</span></div>
 
                             <div class="text-center text-muted mt-3" style="font-size:12.5px;">Thank you for your hard
                                 work!</div>
@@ -278,7 +297,7 @@
                     <div class="staff-card">
                         <div class="staff-avatar">MZ</div>
                         <h4 class="text-center mt-1 mb-1">M.Zubair</h4>
-                        <p class="text-center text-muted mb-3">ISR</p>
+                        <p class="text-center text-muted mb-3">ISR Closer</p>
                         <div class="text-center mb-3"><span class="pill-badge" id="reviewStatusPill">Pending
                                 Review</span></div>
                         <hr>
@@ -289,10 +308,10 @@
                             <div class="fw-semibold">Jan 10, 2025</div>
                         </div>
                         <div class="small mb-2"><span class="summary-label">Pay Type</span>
-                            <div class="fw-semibold">Case Based</div>
+                            <div class="fw-semibold">Case Commission</div>
                         </div>
-                        <div class="small mb-2"><span class="summary-label">Cases</span>
-                            <div class="fw-semibold">$15.00/hr</div>
+                        <div class="small mb-2"><span class="summary-label">Commission Base</span>
+                            <div class="fw-semibold">6.0% Direct / 2.0% Override</div>
                         </div>
                         <div class="small mb-3"><span class="summary-label">Pay Period</span>
                             <div class="fw-semibold">May 1 – May 15, 2026</div>
@@ -309,8 +328,8 @@
                     <div class="panel">
                         <div class="panel-header">
                             <div>
-                                <h2 class="panel-title">Earnings Breakdown</h2>
-                                <div class="panel-sub">Adjust hours and deductions — totals recalculate instantly.</div>
+                                <h2 class="panel-title">Case Commission Breakdown</h2>
+                                <div class="panel-sub">Adjust closed cases, collections volume, and deductions — totals recalculate instantly.</div>
                             </div>
                             <button class="btn btn-outline-navy btn-sm"
                                 onclick="showPane('statement', document.querySelectorAll('.toggle-tab-btn')[0])"><i
@@ -321,46 +340,65 @@
                                 <table class="earnings-table">
                                     <thead>
                                         <tr>
-                                            <th>Description</th>
-                                            <th>Units</th>
-                                            <th>Cases</th>
-                                            <th>Amount</th>
+                                            <th>Commission Category</th>
+                                            <th style="width:130px;">Closed Cases</th>
+                                            <th style="width:170px;">Collections ($)</th>
+                                            <th>Rate</th>
+                                            <th class="text-end">Commission Amount</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Cosmetic Production</td>
-                                            <td><input id="reg" type="number" step="0.5" value="76"
+                                            <td>
+                                                <div class="fw-semibold">Direct Closed Cases</div>
+                                                <div class="text-muted small" style="font-size:11px;">Verified closed patient treatment plans</div>
+                                            </td>
+                                            <td><input id="directCases" type="number" min="0" value="14"
                                                     class="form-control"></td>
-                                            <td>$15.00</td>
-                                            <td id="regAmt" class="fw-semibold">$1,140.00</td>
+                                            <td><input id="directVol" type="number" min="0" step="500" value="65000"
+                                                    class="form-control"></td>
+                                            <td class="fw-semibold">6.00%</td>
+                                            <td id="directAmt" class="fw-semibold text-end">$3,900.00</td>
                                         </tr>
                                         <tr>
-                                            <td>General Production</td>
-                                            <td><input id="ot" type="number" step="0.5" value="2" class="form-control">
+                                            <td>
+                                                <div class="fw-semibold">Team Pod Override</div>
+                                                <div class="text-muted small" style="font-size:11px;">Junior SDR / pod team collections</div>
                                             </td>
-                                            <td>$22.50</td>
-                                            <td id="otAmt" class="fw-semibold">$45.00</td>
+                                            <td><input id="podCases" type="number" min="0" value="12"
+                                                    class="form-control"></td>
+                                            <td><input id="podVol" type="number" min="0" step="500" value="48000"
+                                                    class="form-control"></td>
+                                            <td class="fw-semibold">2.00%</td>
+                                            <td id="podAmt" class="fw-semibold text-end">$960.00</td>
                                         </tr>
                                         <tr>
-                                            <td>Advance</td>
+                                            <td>
+                                                <div class="fw-semibold">Salary Draw / Advance</div>
+                                                <div class="text-muted small" style="font-size:11px;">Pre-approved commission draw deduction</div>
+                                            </td>
+                                            <td class="text-muted text-center">—</td>
+                                            <td class="text-muted text-center">—</td>
                                             <td class="text-muted">—</td>
-                                            <td class="text-muted">—</td>
-                                            <td><input id="adv" type="number" step="1" value="200" class="form-control">
+                                            <td><input id="adv" type="number" step="50" value="200" class="form-control text-end">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Other Adjustment</td>
+                                            <td>
+                                                <div class="fw-semibold">Other Adjustment</div>
+                                                <div class="text-muted small" style="font-size:11px;">Approved ledger corrections</div>
+                                            </td>
+                                            <td class="text-muted text-center">—</td>
+                                            <td class="text-muted text-center">—</td>
                                             <td class="text-muted">—</td>
-                                            <td class="text-muted">—</td>
-                                            <td><input id="adj" type="number" step="1" value="0" class="form-control">
+                                            <td><input id="adj" type="number" step="10" value="0" class="form-control text-end">
                                             </td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td colspan="3" class="fw-bold">Total Pay</td>
-                                            <td id="total" class="fw-bold" style="color:var(--green-600);">$985.00</td>
+                                            <td colspan="4" class="fw-bold">Total Net Commission Payout</td>
+                                            <td id="total" class="fw-bold text-end" style="color:var(--green-600);">$4,660.00</td>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -368,18 +406,18 @@
 
                             <div class="row mt-3 g-3">
                                 <div class="col-md-4">
-                                    <label class="form-label">Cosmetic Production</label>
-                                    <input class="form-control" id="regDisplay" value="76.00" disabled
+                                    <label class="form-label">Direct Case Collections</label>
+                                    <input class="form-control" id="directVolDisplay" value="$65,000.00" disabled
                                         style="background:var(--gray-50);">
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label">General Production</label>
-                                    <input class="form-control" id="otDisplay" value="2.00" disabled
+                                    <label class="form-label">Pod Case Collections</label>
+                                    <input class="form-control" id="podVolDisplay" value="$48,000.00" disabled
                                         style="background:var(--gray-50);">
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label">Total Cases</label>
-                                    <input class="form-control" id="th" value="78.00" disabled
+                                    <label class="form-label">Total Closed Cases</label>
+                                    <input class="form-control" id="totalCasesDisplay" value="26 Cases" disabled
                                         style="background:var(--gray-50);">
                                 </div>
                             </div>
@@ -387,7 +425,7 @@
                             <div class="mt-3">
                                 <label class="form-label">Notes for your Office Manager</label>
                                 <textarea class="form-control" rows="3" id="reviewNotes"
-                                    placeholder="e.g. I worked 11.5 hours on Tuesday but only 10.5 hours are showing."></textarea>
+                                    placeholder="e.g. Patient Sarah Jenkins deposit of $4,500 cleared on May 14 and needs to be included in my direct case commission."></textarea>
                             </div>
 
                             <div class="text-end mt-4">
@@ -396,6 +434,176 @@
                                 <button class="btn btn-green" onclick="saveReview()">Save Changes</button>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= ASSIGNED PLAN & RULES ================= -->
+        <div class="payroll-pane" id="pane-assigned-plan">
+            <!-- Plan Header Card -->
+            <div class="panel p-4 mb-3 border-start border-4 border-primary">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="rounded-circle text-white d-flex align-items-center justify-content-center"
+                            style="width:42px;height:42px;background:var(--navy-900);font-size:17px;">
+                            <i class="fa-solid fa-briefcase text-success"></i>
+                        </div>
+                        <div>
+                            <div class="d-flex align-items-center gap-2">
+                                <h5 class="fw-bold text-dark mb-0">ISR (Closed Case Commission Plan)</h5>
+                                <span
+                                    class="badge bg-primary-subtle text-primary border border-primary-subtle font-monospace">v1.3</span>
+                                <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:11px;">Case-Based Direct Commission &amp; Team Override</span>
+                            </div>
+                            <div class="text-muted small mt-0.5">Assigned to: <strong class="text-dark">M.
+                                    Zubair</strong> <span
+                                    class="badge bg-secondary-subtle text-secondary font-monospace"
+                                    style="font-size:10px;">@mzubair</span> · Role: <strong>ISR Closer</strong> ·
+                                Department: <span class="badge-dept"
+                                    style="background:#f1f5f9;padding:2px 8px;border-radius:4px;font-size:11px;">ISR</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span
+                            class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5 fw-semibold"
+                            style="font-size:12px;">
+                            <i class="fa-solid fa-circle-check me-1"></i>Active Assignment
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row g-2 pt-2 border-top">
+                    <div class="col-md-4">
+                        <div class="p-2 rounded bg-light border" style="font-size:12px;">
+                            <div class="text-muted fw-semibold"
+                                style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;">
+                                <i class="fa-solid fa-percent text-success me-1"></i>Direct Closed Case Commission
+                            </div>
+                            <div class="fw-bold text-dark mt-0.5">6.00% of Closed Case Collections</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-2 rounded bg-light border" style="font-size:12px;">
+                            <div class="text-muted fw-semibold"
+                                style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;">
+                                <i class="fa-solid fa-users-gear text-primary me-1"></i>Sales Pod Team Override
+                            </div>
+                            <div class="fw-bold text-dark mt-0.5">2.00% of Team Case Collections</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-2 rounded bg-light border" style="font-size:12px;">
+                            <div class="text-muted fw-semibold"
+                                style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;">
+                                <i class="fa-regular fa-calendar-check text-success me-1"></i>Settlement &amp; Payout
+                                Cycle
+                            </div>
+                            <div class="fw-semibold text-dark mt-0.5">Bi-Weekly Settlement on Cleared Case Funds</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Plan Components -->
+            <div class="fw-bold text-dark mb-2" style="font-size:13px;text-transform:uppercase;letter-spacing:0.4px;">
+                <i class="fa-solid fa-layer-group text-primary me-1.5"></i>Attached Compensation Plan Components
+            </div>
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border bg-white h-100 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:10.5px;">Primary
+                                Commission</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle"
+                                style="font-size:10px;">Active</span>
+                        </div>
+                        <div class="fw-bold text-dark mb-1" style="font-size:13.5px;">Direct Closed Case Collections
+                        </div>
+                        <div class="fw-bold text-success mb-2" style="font-size:16px;">6.00% <small
+                                class="text-muted fw-normal" style="font-size:11px;">of cleared cash payments</small>
+                        </div>
+                        <div class="pt-2 border-top text-muted small" style="font-size:11.5px;">
+                            <div><i class="fa-solid fa-sack-dollar me-1 text-primary"></i>Applied to direct consultation
+                                conversions</div>
+                            <div class="mt-1"><i class="fa-solid fa-circle-check me-1 text-success"></i>Triggered upon
+                                verified bank clearance</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border bg-white h-100 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge bg-light text-dark border px-2 py-0.5"
+                                style="font-size:10.5px;">Management Override</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle"
+                                style="font-size:10px;">Active</span>
+                        </div>
+                        <div class="fw-bold text-dark mb-1" style="font-size:13.5px;">Assigned Pod Team Override</div>
+                        <div class="fw-bold text-success mb-2" style="font-size:16px;">2.00% <small
+                                class="text-muted fw-normal" style="font-size:11px;">of team collected volume</small>
+                        </div>
+                        <div class="pt-2 border-top text-muted small" style="font-size:11.5px;">
+                            <div><i class="fa-solid fa-people-roof me-1 text-primary"></i>Calculated across junior ISR
+                                &amp; booking pod</div>
+                            <div class="mt-1"><i class="fa-solid fa-chart-line me-1 text-success"></i>Incentivizes deal
+                                coaching &amp; close assistance</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border bg-white h-100 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:10.5px;">Payout
+                                Security</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle"
+                                style="font-size:10px;">Active</span>
+                        </div>
+                        <div class="fw-bold text-dark mb-1" style="font-size:13.5px;">Clawback Protection &amp; Cutoff
+                        </div>
+                        <div class="fw-bold text-success mb-2" style="font-size:16px;">Zero Clawback <small
+                                class="text-muted fw-normal" style="font-size:11px;">on verified seats</small></div>
+                        <div class="pt-2 border-top text-muted small" style="font-size:11.5px;">
+                            <div><i class="fa-solid fa-shield-halved me-1 text-success"></i>Only cleared transactions
+                                enter ledger</div>
+                            <div class="mt-1"><i class="fa-solid fa-receipt me-1 text-primary"></i>Refunded transactions
+                                adjust prospectively</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Qualification & Timing Rules -->
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="panel p-3 h-100">
+                        <div class="fw-bold text-dark mb-1" style="font-size:12.5px;">
+                            <i class="fa-solid fa-money-bill-transfer text-primary me-1.5"></i>Cleared Cash Timing
+                        </div>
+                        <p class="text-muted small mb-0" style="font-size:11.5px;line-height:1.5;">Commissions are paid
+                            based on settled payments received in the merchant account by 11:59 PM on the alternate
+                            Sunday closing date.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel p-3 h-100">
+                        <div class="fw-bold text-dark mb-1" style="font-size:12.5px;">
+                            <i class="fa-solid fa-hand-holding-dollar text-warning-emphasis me-1.5"></i>Draws &amp;
+                            Advances
+                        </div>
+                        <p class="text-muted small mb-0" style="font-size:11.5px;line-height:1.5;">Pre-approved salary
+                            draws are balanced against direct commission totals before net payroll issuance.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel p-3 h-100">
+                        <div class="fw-bold text-dark mb-1" style="font-size:12.5px;">
+                            <i class="fa-solid fa-lock text-success me-1.5"></i>Version Lock Policy
+                        </div>
+                        <p class="text-muted small mb-0" style="font-size:11.5px;line-height:1.5;">Your compensation
+                            structure is locked under version <strong>v1.3</strong>. Re-indexing of commission splits or
+                            override pools applies to future cycles.</p>
                     </div>
                 </div>
             </div>
@@ -452,55 +660,83 @@
             btn.classList.add('active');
         }
 
-        /* ---------- Live recalculation ---------- */
+        /* ---------- Live recalculation (Case Commission Engine) ---------- */
         function calc() {
-            const r = parseFloat(document.getElementById('reg').value) || 0;
-            const o = parseFloat(document.getElementById('ot').value) || 0;
+            const dc = parseFloat(document.getElementById('directCases').value) || 0;
+            const dv = parseFloat(document.getElementById('directVol').value) || 0;
+            const pc = parseFloat(document.getElementById('podCases').value) || 0;
+            const pv = parseFloat(document.getElementById('podVol').value) || 0;
             const a = parseFloat(document.getElementById('adv').value) || 0;
             const d = parseFloat(document.getElementById('adj').value) || 0;
 
-            const ra = r * 15;
-            const oa = o * 22.5;
-            const totalEarnings = ra + oa;
+            const directCommission = dv * 0.06;
+            const podCommission = pv * 0.02;
+            const totalGross = directCommission + podCommission;
             const totalDeductions = a + d;
-            const total = totalEarnings - totalDeductions;
+            const netCommission = totalGross - totalDeductions;
+            const totalCases = dc + pc;
+            const totalCollections = dv + pv;
 
-            document.getElementById('regAmt').innerText = '$' + ra.toLocaleString(undefined, { minimumFractionDigits: 2 });
-            document.getElementById('otAmt').innerText = '$' + oa.toLocaleString(undefined, { minimumFractionDigits: 2 });
-            document.getElementById('total').innerText = '$' + total.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            // Update Breakdown Table
+            document.getElementById('directAmt').innerText = '$' + directCommission.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('podAmt').innerText = '$' + podCommission.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('total').innerText = '$' + netCommission.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-            document.getElementById('regDisplay').value = r.toFixed(2);
-            document.getElementById('otDisplay').value = o.toFixed(2);
-            document.getElementById('th').value = (r + o).toFixed(2);
+            // Update Summary Inputs
+            document.getElementById('directVolDisplay').value = '$' + dv.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('podVolDisplay').value = '$' + pv.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('totalCasesDisplay').value = totalCases + ' Cases';
 
-            document.getElementById('grossKpi').innerText = '$' + totalEarnings.toLocaleString(undefined, { minimumFractionDigits: 2 });
-            document.getElementById('hoursKpi').innerText = (r + o).toFixed(2);
-            document.getElementById('adjKpi').innerText = '$' + totalDeductions.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            // Update Top KPIs
+            document.getElementById('grossKpi').innerText = '$' + totalGross.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('casesKpi').innerText = totalCases + ' Cases';
+            document.getElementById('collectionsKpi').innerText = '$' + totalCollections.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('adjKpi').innerText = '$' + totalDeductions.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
-        ['reg', 'ot', 'adv', 'adj'].forEach(id => document.getElementById(id).addEventListener('input', calc));
+        ['directCases', 'directVol', 'podCases', 'podVol', 'adv', 'adj'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('input', calc);
+        });
         calc();
 
         function confirmPayroll() {
             document.getElementById('reviewStatusPill').innerText = 'Confirmed';
             document.getElementById('reviewStatusPill').style.background = '#ecfdf5';
             document.getElementById('reviewStatusPill').style.color = '#059669';
-            alert('Payroll confirmed. Your Office Manager will see this reflected in the Review Center.');
+            alert('Payroll statement confirmed. Your Office Manager will see this reflected in the Settlement Ledger.');
         }
 
         function saveReview() {
-            // push edited numbers into the read-only statement view
-            document.getElementById('stubRegHrs').innerText = document.getElementById('regDisplay').value;
-            document.getElementById('stubOtHrs').innerText = document.getElementById('otDisplay').value;
-            document.getElementById('stubTotalEarnings').innerText = document.getElementById('grossKpi').innerText;
+            // Push edited case commission numbers into the read-only statement stub
+            const dc = parseFloat(document.getElementById('directCases').value) || 0;
+            const dv = parseFloat(document.getElementById('directVol').value) || 0;
+            const pc = parseFloat(document.getElementById('podCases').value) || 0;
+            const pv = parseFloat(document.getElementById('podVol').value) || 0;
             const adv = parseFloat(document.getElementById('adv').value) || 0;
             const adj = parseFloat(document.getElementById('adj').value) || 0;
+
+            const directCommission = dv * 0.06;
+            const podCommission = pv * 0.02;
+            const totalGross = directCommission + podCommission;
+            const totalDeductions = adv + adj;
+            const netCommission = totalGross - totalDeductions;
+
+            document.getElementById('stubDirectCases').innerText = dc;
+            document.getElementById('stubDirectVol').innerText = '$' + dv.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('stubDirectAmt').innerText = '$' + directCommission.toLocaleString(undefined, { minimumFractionDigits: 2 });
+
+            document.getElementById('stubPodCases').innerText = pc;
+            document.getElementById('stubPodVol').innerText = '$' + pv.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('stubPodAmt').innerText = '$' + podCommission.toLocaleString(undefined, { minimumFractionDigits: 2 });
+
+            document.getElementById('stubTotalEarnings').innerText = '$' + totalGross.toLocaleString(undefined, { minimumFractionDigits: 2 });
             document.getElementById('stubAdvance').innerText = '($' + adv.toLocaleString(undefined, { minimumFractionDigits: 2 }) + ')';
             document.getElementById('stubOtherAdj').innerText = '$' + adj.toLocaleString(undefined, { minimumFractionDigits: 2 });
-            document.getElementById('stubTotalDeductions').innerText = '($' + (adv + adj).toLocaleString(undefined, { minimumFractionDigits: 2 }) + ')';
-            document.getElementById('stubTotalPay').innerText = document.getElementById('total').innerText;
-            document.getElementById('stubAmount').innerText = document.getElementById('total').innerText;
+            document.getElementById('stubTotalDeductions').innerText = '($' + totalDeductions.toLocaleString(undefined, { minimumFractionDigits: 2 }) + ')';
+            document.getElementById('stubTotalPay').innerText = '$' + netCommission.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('stubAmount').innerText = '$' + netCommission.toLocaleString(undefined, { minimumFractionDigits: 2 });
 
-            alert('Changes saved and submitted for review.');
+            alert('Case commission changes saved and submitted for review.');
             showPane('statement', document.querySelectorAll('.toggle-tab-btn')[0]);
         }
 

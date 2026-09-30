@@ -158,6 +158,8 @@
         <div class="statement-toggle-tabs">
             <button class="toggle-tab-btn active" onclick="showPane('statement', this)">Statement View</button>
             <button class="toggle-tab-btn" onclick="showPane('review', this)">Review &amp; Edit</button>
+            <button class="toggle-tab-btn" onclick="showPane('assigned-plan', this)"><i
+                    class="fa-solid fa-file-contract text-success me-1.5"></i>Assigned Plan &amp; Rules</button>
         </div>
 
         <!-- ================= STATEMENT VIEW ================= -->
@@ -187,9 +189,10 @@
                                 <div class="text-muted"
                                     style="font-size:11px;text-transform:uppercase;font-weight:700;">Staff members</div>
                                 <div class="fw-bold" style="font-size:15px;">M.Asghar</div>
-                                <div class="text-muted" style="font-size:12px;">Quote Specialist (QS)</div>
-                                <div class="text-muted" style="font-size:11.5px;">Staff members ID: DA001 &middot;
-                                    Compensation Type: Commission</div>
+                                <div class="text-muted" style="font-size:12px;">Quote Specialist &amp; Quality Auditor
+                                </div>
+                                <div class="text-muted" style="font-size:11.5px;">Staff members ID: QS001 &middot;
+                                    Compensation Type: Hourly ($22/hr) + Audit Accuracy Spiff</div>
                             </div>
 
                             <div class="check-preview mb-3">
@@ -275,7 +278,8 @@
                             <div class="text-center mt-3 d-flex justify-content-center gap-2">
                                 <button class="btn btn-outline-navy"
                                     onclick="showPane('review', document.querySelectorAll('.toggle-tab-btn')[1])"><i
-                                        class="fa-regular fa-pen-to-square me-1"></i>Review &amp; Edit My Commissions</button>
+                                        class="fa-regular fa-pen-to-square me-1"></i>Review &amp; Edit My
+                                    Commissions</button>
                                 <button class="btn btn-red-outline" data-bs-toggle="modal"
                                     data-bs-target="#flagPayrollModal"><i class="fa-solid fa-flag me-1"></i>Flag
                                     Payroll</button>
@@ -371,7 +375,8 @@
                         <div class="panel-header">
                             <div>
                                 <h2 class="panel-title">Commission Breakdown</h2>
-                                <div class="panel-sub">Adjust quotes and deductions — totals recalculate instantly.</div>
+                                <div class="panel-sub">Adjust quotes and deductions — totals recalculate instantly.
+                                </div>
                             </div>
                             <button class="btn btn-outline-navy btn-sm"
                                 onclick="showPane('statement', document.querySelectorAll('.toggle-tab-btn')[0])"><i
@@ -457,6 +462,175 @@
                                 <button class="btn btn-green" onclick="saveReview()">Save Changes</button>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= ASSIGNED PLAN & RULES ================= -->
+        <div class="payroll-pane" id="pane-assigned-plan">
+            <!-- Plan Header Card -->
+            <div class="panel p-4 mb-3 border-start border-4 border-primary">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="rounded-circle text-white d-flex align-items-center justify-content-center"
+                            style="width:42px;height:42px;background:var(--navy-900);font-size:17px;">
+                            <i class="fa-solid fa-list-check text-success"></i>
+                        </div>
+                        <div>
+                            <div class="d-flex align-items-center gap-2">
+                                <h5 class="fw-bold text-dark mb-0">Quality Standards &amp; Compliance Review</h5>
+                                <span
+                                    class="badge bg-primary-subtle text-primary border border-primary-subtle font-monospace">v1.0</span>
+                                <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:11px;">Hourly
+                                    &amp; Audit Accuracy Spiff</span>
+                            </div>
+                            <div class="text-muted small mt-0.5">Assigned to: <strong class="text-dark">Masghar</strong>
+                                <span class="badge bg-secondary-subtle text-secondary font-monospace"
+                                    style="font-size:10px;">@masghar</span> · Role: <strong>Quote Specialist</strong> ·
+                                Department: <span class="badge-dept"
+                                    style="background:#f1f5f9;padding:2px 8px;border-radius:4px;font-size:11px;">QS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span
+                            class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5 fw-semibold"
+                            style="font-size:12px;">
+                            <i class="fa-solid fa-circle-check me-1"></i>Active Assignment
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row g-2 pt-2 border-top">
+                    <div class="col-md-4">
+                        <div class="p-2 rounded bg-light border" style="font-size:12px;">
+                            <div class="text-muted fw-semibold"
+                                style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;">
+                                <i class="fa-regular fa-clock text-success me-1"></i>Base Hourly Pay
+                            </div>
+                            <div class="fw-bold text-dark mt-0.5">$22.00 / hr (1.5x Overtime)</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-2 rounded bg-light border" style="font-size:12px;">
+                            <div class="text-muted fw-semibold"
+                                style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;">
+                                <i class="fa-solid fa-bullseye text-primary me-1"></i>Monthly Accuracy Spiff
+                            </div>
+                            <div class="fw-bold text-dark mt-0.5">$300.00 / mo (≥99% Accuracy)</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-2 rounded bg-light border" style="font-size:12px;">
+                            <div class="text-muted fw-semibold"
+                                style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;">
+                                <i class="fa-regular fa-calendar-check text-success me-1"></i>Settlement &amp; Payout
+                                Cycle
+                            </div>
+                            <div class="fw-semibold text-dark mt-0.5">Bi-Weekly Hourly · Monthly Audit Close</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Plan Components -->
+            <div class="fw-bold text-dark mb-2" style="font-size:13px;text-transform:uppercase;letter-spacing:0.4px;">
+                <i class="fa-solid fa-layer-group text-primary me-1.5"></i>Attached Compensation Plan Components
+            </div>
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border bg-white h-100 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:10.5px;">Core
+                                Rate</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle"
+                                style="font-size:10px;">Active</span>
+                        </div>
+                        <div class="fw-bold text-dark mb-1" style="font-size:13.5px;">Treatment Quotation Hourly Pay
+                        </div>
+                        <div class="fw-bold text-success mb-2" style="font-size:16px;">$22.00 / hr <small
+                                class="text-muted fw-normal" style="font-size:11px;">(1.5x Overtime)</small></div>
+                        <div class="pt-2 border-top text-muted small" style="font-size:11.5px;">
+                            <div><i class="fa-regular fa-clock me-1 text-primary"></i>Punched through electronic
+                                time-clock</div>
+                            <div class="mt-1"><i class="fa-solid fa-check-double me-1 text-success"></i>1.5× for weekly
+                                hours &gt; 40.00 ($33.00/hr)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border bg-white h-100 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:10.5px;">Monthly
+                                Spiff</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle"
+                                style="font-size:10px;">Active</span>
+                        </div>
+                        <div class="fw-bold text-dark mb-1" style="font-size:13.5px;">Quote Quality &amp; Accuracy Bonus
+                        </div>
+                        <div class="fw-bold text-success mb-2" style="font-size:16px;">$300.00 <small
+                                class="text-muted fw-normal" style="font-size:11px;">/ month</small></div>
+                        <div class="pt-2 border-top text-muted small" style="font-size:11.5px;">
+                            <div><i class="fa-solid fa-clipboard-check me-1 text-primary"></i>Requires ≥ 99.0% pricing
+                                &amp; code accuracy</div>
+                            <div class="mt-1"><i class="fa-solid fa-receipt me-1 text-success"></i>Disbursed on first
+                                statement of each month</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border bg-white h-100 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:10.5px;">Audit
+                                Protection</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle"
+                                style="font-size:10px;">Active</span>
+                        </div>
+                        <div class="fw-bold text-dark mb-1" style="font-size:13.5px;">Compliance Review Standard</div>
+                        <div class="fw-bold text-success mb-2" style="font-size:16px;">100% Floor <small
+                                class="text-muted fw-normal" style="font-size:11px;">guaranteed</small></div>
+                        <div class="pt-2 border-top text-muted small" style="font-size:11.5px;">
+                            <div><i class="fa-solid fa-shield-halved me-1 text-success"></i>Base pay protected from
+                                audit variances</div>
+                            <div class="mt-1"><i class="fa-solid fa-file-circle-check me-1 text-primary"></i>Disputes
+                                reviewed by clinical management</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Qualification & Timing Rules -->
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="panel p-3 h-100">
+                        <div class="fw-bold text-dark mb-1" style="font-size:12.5px;">
+                            <i class="fa-solid fa-magnifying-glass-chart text-primary me-1.5"></i>Audit Sampling
+                            Methodology
+                        </div>
+                        <p class="text-muted small mb-0" style="font-size:11.5px;line-height:1.5;">A minimum random
+                            sample of 50 patient quotes is cross-checked against physician notes and master fee schedule
+                            to calculate the score.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel p-3 h-100">
+                        <div class="fw-bold text-dark mb-1" style="font-size:12.5px;">
+                            <i class="fa-regular fa-clock text-success me-1.5"></i>Pay Cycle &amp; Cutoff
+                        </div>
+                        <p class="text-muted small mb-0" style="font-size:11.5px;line-height:1.5;">Electronic time cards
+                            finalize alternate Sundays at 11:59 PM. Discrepancy notices must be filed within 48 hours.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel p-3 h-100">
+                        <div class="fw-bold text-dark mb-1" style="font-size:12.5px;">
+                            <i class="fa-solid fa-lock text-success me-1.5"></i>Version Lock Policy
+                        </div>
+                        <p class="text-muted small mb-0" style="font-size:11.5px;line-height:1.5;">Your compensation
+                            structure is locked under version <strong>v1.0</strong>. Any modifications to accuracy
+                            benchmarks or audit samples take effect in subsequent periods.</p>
                     </div>
                 </div>
             </div>

@@ -25,14 +25,14 @@
             <a class="nav-link-item" href="my-cases.html"><i class="fa-solid fa-users"></i>My Cases</a>
             <a class="nav-link-item active" href="my-statements.html"><i class="fa-solid fa-file-invoice"></i>My
                 Statements</a>
-                    <a class="nav-link-item" href="./../index.html"><i class="fa-solid fa-file-invoice"></i> Logout</a>
+            <a class="nav-link-item" href="./../index.html"><i class="fa-solid fa-file-invoice"></i> Logout</a>
         </div>
         <div class="sidebar-footer">
             <div class="user-chip">
-                <div class="user-avatar" style="background:#3b82f6;">JS</div>
+                <div class="user-avatar" style="background:#0284c7;">DJ</div>
                 <div class="flex-grow-1">
-                    <div style="font-size:13px;font-weight:600;">John Smith</div>
-                    <small>Office Provider</small>
+                    <div style="font-size:13px;font-weight:600;">Dr. James</div>
+                    <small>Provider</small>
                 </div>
                 <i class="fa-solid fa-chevron-down" style="color:#93a2bd;font-size:11px;"></i>
             </div>
@@ -64,20 +64,48 @@
                     </div>
                     <i class="fa-solid fa-chevron-down text-muted" style="font-size:10px;"></i>
                 </div>
-                <button class="btn btn-green" onclick="downloadPDF()"><i class="fa-solid fa-download me-1"></i>Download PDF</button>
+                <button class="btn btn-green" onclick="downloadPDF()"><i class="fa-solid fa-download me-1"></i>Download
+                    PDF</button>
             </div>
         </div>
 
         <style>
-            .kpi-card[role="button"] { cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }
-            .kpi-card[role="button"]:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.10); }
-            .detail-breakdown-box { border:1px solid #eef2f6; border-radius:10px; overflow:hidden; }
-            .detail-breakdown-row { display:flex; justify-content:space-between; align-items:center; padding:10px 14px; border-bottom:1px solid #f3f5f9; font-size:14px; }
-            .detail-breakdown-row:last-child { border-bottom:none; }
-            .detail-breakdown-row span { color:#6b7280; }
+            .kpi-card[role="button"] {
+                cursor: pointer;
+                transition: transform 0.15s, box-shadow 0.15s;
+            }
+
+            .kpi-card[role="button"]:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.10);
+            }
+
+            .detail-breakdown-box {
+                border: 1px solid #eef2f6;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+
+            .detail-breakdown-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 14px;
+                border-bottom: 1px solid #f3f5f9;
+                font-size: 14px;
+            }
+
+            .detail-breakdown-row:last-child {
+                border-bottom: none;
+            }
+
+            .detail-breakdown-row span {
+                color: #6b7280;
+            }
         </style>
         <div class="kpi-row">
-            <div class="kpi-card d-flex align-items-center gap-3" role="button" tabindex="0" onclick="openStatementKpiDetail(0)">
+            <div class="kpi-card d-flex align-items-center gap-3" role="button" tabindex="0"
+                onclick="openStatementKpiDetail(0)">
                 <div class="kpi-icon" style="background:var(--green-50);color:var(--green-600);"><i
                         class="fa-solid fa-wallet"></i></div>
                 <div>
@@ -85,8 +113,9 @@
                     <div class="kpi-value" id="grossKpi">$1,185.00</div>
                 </div>
             </div>
-           
-            <div class="kpi-card d-flex align-items-center gap-3" role="button" tabindex="0" onclick="openStatementKpiDetail(1)">
+
+            <div class="kpi-card d-flex align-items-center gap-3" role="button" tabindex="0"
+                onclick="openStatementKpiDetail(1)">
                 <div class="kpi-icon" style="background:#ede9fe;color:#6d28d9;"><i class="fa-solid fa-chart-line"></i>
                 </div>
                 <div>
@@ -94,7 +123,8 @@
                     <div class="kpi-value" id="otKpi">2.00</div>
                 </div>
             </div>
-             <div class="kpi-card d-flex align-items-center gap-3" role="button" tabindex="0" onclick="openStatementKpiDetail(2)">
+            <div class="kpi-card d-flex align-items-center gap-3" role="button" tabindex="0"
+                onclick="openStatementKpiDetail(2)">
                 <div class="kpi-icon" style="background:#dbeafe;color:#1e40af;"><i class="fa-regular fa-clock"></i>
                 </div>
                 <div>
@@ -102,7 +132,8 @@
                     <div class="kpi-value" id="hoursKpi">$7,833.00</div>
                 </div>
             </div>
-            <div class="kpi-card d-flex align-items-center gap-3" role="button" tabindex="0" onclick="openStatementKpiDetail(3)">
+            <div class="kpi-card d-flex align-items-center gap-3" role="button" tabindex="0"
+                onclick="openStatementKpiDetail(3)">
                 <div class="kpi-icon" style="background:#ffedd5;color:#c2410c;"><i class="fa-solid fa-circle-minus"></i>
                 </div>
                 <div>
@@ -115,6 +146,8 @@
         <div class="statement-toggle-tabs">
             <button class="toggle-tab-btn active" onclick="showPane('statement', this)">Statement View</button>
             <button class="toggle-tab-btn" onclick="showPane('review', this)">Review &amp; Edit</button>
+            <button class="toggle-tab-btn" onclick="showPane('assigned-plan', this)"><i
+                    class="fa-solid fa-file-contract text-success me-1.5"></i>Assigned Plan &amp; Rules</button>
         </div>
 
         <!-- ================= STATEMENT VIEW ================= -->
@@ -142,18 +175,20 @@
 
                             <div class="mb-3">
                                 <div class="text-muted"
-                                    style="font-size:11px;text-transform:uppercase;font-weight:700;"> Staff members</div>
-                                <div class="fw-bold" style="font-size:15px;">John Smith</div>
-                                <div class="text-muted" style="font-size:12px;">SDR &middot; Sales Department</div>
-                                <div class="text-muted" style="font-size:11.5px;">Staff members ID: SDR001 &middot;
-                                    Compensation Type: Case Based</div>
+                                    style="font-size:11px;text-transform:uppercase;font-weight:700;"> Staff members
+                                </div>
+                                <div class="fw-bold" style="font-size:15px;">Dr. James</div>
+                                <div class="text-muted" style="font-size:12px;">Provider &middot; Clinical Dentistry
+                                </div>
+                                <div class="text-muted" style="font-size:11.5px;">Staff members ID: DOC001 &middot;
+                                    Compensation Type: Tiered Veneer Materials + Daily Floor</div>
                             </div>
 
                             <div class="check-preview mb-3">
                                 <div class="brand-row">
                                     <div>
                                         <div class="pay-to">Pay To The Order Of</div>
-                                        <div class="pay-to-name">John Smith</div>
+                                        <div class="pay-to-name">Dr. James</div>
                                         <div class="memo">Memo: Pay Period May 1 – May 15, 2026</div>
                                     </div>
                                     <div class="amount-box">
@@ -414,6 +449,174 @@
                                 <button class="btn btn-green" onclick="saveReview()">Save Changes</button>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= ASSIGNED PLAN & RULES ================= -->
+        <div class="payroll-pane" id="pane-assigned-plan">
+            <!-- Plan Header Card -->
+            <div class="panel p-4 mb-3 border-start border-4 border-primary">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="rounded-circle text-white d-flex align-items-center justify-content-center"
+                            style="width:42px;height:42px;background:var(--navy-900);font-size:17px;">
+                            <i class="fa-solid fa-user-doctor text-success"></i>
+                        </div>
+                        <div>
+                            <div class="d-flex align-items-center gap-2">
+                                <h5 class="fw-bold text-dark mb-0">Doctors (Cosmetic &amp; Gen Dent)</h5>
+                                <span
+                                    class="badge bg-primary-subtle text-primary border border-primary-subtle font-monospace">v2.0</span>
+                                <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:11px;">Tiered
+                                    Materials &amp; Daily Floor</span>
+                            </div>
+                            <div class="text-muted small mt-0.5">Assigned to: <strong class="text-dark">Dr.
+                                    James</strong> <span class="badge bg-secondary-subtle text-secondary font-monospace"
+                                    style="font-size:10px;">@James</span> · Role: <strong>Provider</strong> ·
+                                Department: <span class="badge-dept"
+                                    style="background:#f1f5f9;padding:2px 8px;border-radius:4px;font-size:11px;">Providers</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span
+                            class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5 fw-semibold"
+                            style="font-size:12px;">
+                            <i class="fa-solid fa-circle-check me-1"></i>Active Assignment
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row g-2 pt-2 border-top">
+                    <div class="col-md-4">
+                        <div class="p-2 rounded bg-light border" style="font-size:12px;">
+                            <div class="text-muted fw-semibold"
+                                style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;">
+                                <i class="fa-solid fa-tooth text-success me-1"></i>Veneer Material Payout Rates
+                            </div>
+                            <div class="fw-bold text-dark mt-0.5">Full Case: $700 / $800 / $1,000 · Half: 50%</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-2 rounded bg-light border" style="font-size:12px;">
+                            <div class="text-muted fw-semibold"
+                                style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;">
+                                <i class="fa-solid fa-shield-halved text-primary me-1"></i>Daily Minimum Floor Guarantee
+                            </div>
+                            <div class="fw-bold text-dark mt-0.5">$650.00 / Scheduled Clinic Day</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-2 rounded bg-light border" style="font-size:12px;">
+                            <div class="text-muted fw-semibold"
+                                style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;">
+                                <i class="fa-solid fa-calendar-check text-success me-1"></i>Settlement &amp; Payout
+                                Cycle
+                            </div>
+                            <div class="fw-semibold text-dark mt-0.5">Bi-Weekly Ledger Close · Auto-Finalized</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Plan Components -->
+            <div class="fw-bold text-dark mb-2" style="font-size:13px;text-transform:uppercase;letter-spacing:0.4px;">
+                <i class="fa-solid fa-layer-group text-primary me-1.5"></i>Attached Compensation Plan Components
+            </div>
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border bg-white h-100 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:10.5px;">Material
+                                Tier 1</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle"
+                                style="font-size:10px;">Active</span>
+                        </div>
+                        <div class="fw-bold text-dark mb-1" style="font-size:13.5px;">Composite Resin Veneers</div>
+                        <div class="fw-bold text-success mb-2" style="font-size:16px;">$700.00 <small
+                                class="text-muted fw-normal" style="font-size:11px;">/ Full Case</small></div>
+                        <div class="pt-2 border-top text-muted small" style="font-size:11.5px;">
+                            <div><i class="fa-solid fa-circle-notch me-1 text-primary"></i><strong>Half Case (1
+                                    Arch):</strong> $350.00 (50%)</div>
+                            <div class="mt-1"><i class="fa-regular fa-calendar-check me-1 text-success"></i>Requires
+                                completed seat &amp; chart close</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border bg-white h-100 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:10.5px;">Material
+                                Tier 2</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle"
+                                style="font-size:10px;">Active</span>
+                        </div>
+                        <div class="fw-bold text-dark mb-1" style="font-size:13.5px;">Ceramic / Hybrid Veneers</div>
+                        <div class="fw-bold text-success mb-2" style="font-size:16px;">$800.00 <small
+                                class="text-muted fw-normal" style="font-size:11px;">/ Full Case</small></div>
+                        <div class="pt-2 border-top text-muted small" style="font-size:11.5px;">
+                            <div><i class="fa-solid fa-circle-notch me-1 text-primary"></i><strong>Half Case (1
+                                    Arch):</strong> $400.00 (50%)</div>
+                            <div class="mt-1"><i class="fa-solid fa-microscope me-1 text-info"></i>Lab seat verification
+                                logged in EMR</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border bg-white h-100 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:10.5px;">Material
+                                Tier 3 &amp; Floor</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle"
+                                style="font-size:10px;">Active</span>
+                        </div>
+                        <div class="fw-bold text-dark mb-1" style="font-size:13.5px;">Porcelain Veneers &amp; Daily
+                            Floor</div>
+                        <div class="fw-bold text-success mb-2" style="font-size:16px;">$1,000.00 <small
+                                class="text-muted fw-normal" style="font-size:11px;">/ Full Case</small></div>
+                        <div class="pt-2 border-top text-muted small" style="font-size:11.5px;">
+                            <div><i class="fa-solid fa-circle-notch me-1 text-primary"></i><strong>Half Case (1
+                                    Arch):</strong> $500.00 (50%)</div>
+                            <div class="mt-1"><i class="fa-solid fa-shield-halved me-1 text-success"></i><strong>Daily
+                                    Floor:</strong> $650.00 / scheduled clinic day</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Qualification & Timing Rules -->
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="panel p-3 h-100">
+                        <div class="fw-bold text-dark mb-1" style="font-size:12.5px;">
+                            <i class="fa-solid fa-scale-balanced text-primary me-1.5"></i>Floor Guarantee Computation
+                        </div>
+                        <p class="text-muted small mb-0" style="font-size:11.5px;line-height:1.5;">If completed
+                            procedure compensation for a scheduled clinical day falls below $650.00, an automatic ledger
+                            supplement brings the day's base compensation to $650.00.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel p-3 h-100">
+                        <div class="fw-bold text-dark mb-1" style="font-size:12.5px;">
+                            <i class="fa-solid fa-hand-holding-dollar text-warning-emphasis me-1.5"></i>Lab Fee
+                            Adjustments
+                        </div>
+                        <p class="text-muted small mb-0" style="font-size:11.5px;line-height:1.5;">Direct custom lab
+                            fees or rework remakes outside standard warranty guidelines are documented and cleared prior
+                            to payroll closing lock date.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel p-3 h-100">
+                        <div class="fw-bold text-dark mb-1" style="font-size:12.5px;">
+                            <i class="fa-solid fa-lock text-success me-1.5"></i>Version Lock Policy
+                        </div>
+                        <p class="text-muted small mb-0" style="font-size:11.5px;line-height:1.5;">Your compensation
+                            structure is locked under version <strong>v2.0</strong>. Any material pricing adjustments or
+                            tier changes apply on prospective pay periods.</p>
                     </div>
                 </div>
             </div>

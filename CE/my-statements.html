@@ -184,6 +184,7 @@
         <div class="statement-toggle-tabs">
             <button class="toggle-tab-btn active" onclick="showPane('statement', this)">Statement View</button>
             <button class="toggle-tab-btn" onclick="showPane('review', this)">Review &amp; Edit</button>
+            <button class="toggle-tab-btn" onclick="showPane('assigned-plan', this)"><i class="fa-solid fa-file-contract text-success me-1.5"></i>Assigned Plan &amp; Rules</button>
         </div>
 
         <!-- ================= STATEMENT VIEW ================= -->
@@ -214,9 +215,9 @@
                                     style="font-size:11px;text-transform:uppercase;font-weight:700;"> Staff members
                                 </div>
                                 <div class="fw-bold" style="font-size:15px;">M.Nadeem</div>
-                                <div class="text-muted" style="font-size:12px;">Client Experience</div>
-                                <div class="text-muted" style="font-size:11.5px;">Staff members ID: DA001 &middot;
-                                    Compensation Type: Hourly</div>
+                                <div class="text-muted" style="font-size:12px;">Client Experience Specialist</div>
+                                <div class="text-muted" style="font-size:11.5px;">Staff members ID: CE001 &middot;
+                                    Compensation Type: Hourly ($15/hr) + CSAT Bonus</div>
                             </div>
 
                             <div class="check-preview mb-3">
@@ -484,6 +485,137 @@
                                 <button class="btn btn-green" onclick="saveReview()">Save Changes</button>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= ASSIGNED PLAN & RULES ================= -->
+        <div class="payroll-pane" id="pane-assigned-plan">
+            <!-- Plan Header Card -->
+            <div class="panel p-4 mb-3 border-start border-4 border-primary">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+                    <div class="d-flex align-items-center p-3 gap-10.5">
+                        <div class="rounded-circle text-white d-flex align-items-center justify-content-center" style="width:42px;height:42px;background:var(--navy-900);font-size:17px;">
+                            <i class="fa-solid fa-heart text-success"></i>
+                        </div>
+                        <div>
+                            <div class="d-flex align-items-center gap-2">
+                                <h5 class="fw-bold text-dark mb-0">CE (Client Experience) Plan</h5>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle font-monospace">v1.1</span>
+                                <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:11px;">Hourly &amp; CSAT Bonus</span>
+                            </div>
+                            <div class="text-muted small mt-0.5">Assigned to: <strong class="text-dark">M. Nadeem</strong> <span class="badge bg-secondary-subtle text-secondary font-monospace" style="font-size:10px;">@mnadeem</span> · Role: <strong>Client Experience</strong> · Department: <span class="badge-dept" style="background:#f1f5f9;padding:2px 8px;border-radius:4px;font-size:11px;">CE</span></div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5 fw-semibold" style="font-size:12px;">
+                            <i class="fa-solid fa-circle-check me-1"></i>Active Assignment
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row g-2 pt-2 border-top">
+                    <div class="col-md-4">
+                        <div class="p-2 rounded bg-light border" style="font-size:12px;">
+                            <div class="text-muted fw-semibold" style="font-size:10px;text-transform:uppercase;letter-spacing:2.5px;">
+                                <i class="fa-regular fa-clock text-success me-1"></i>Base Hourly Pay
+                            </div>
+                            <div class="fw-bold text-dark mt-0.5">$15.00 / hr (1.5x Overtime)</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-2 rounded bg-light border" style="font-size:12px;">
+                            <div class="text-muted fw-semibold" style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;">
+                                <i class="fa-solid fa-face-smile text-primary me-1"></i>Monthly CSAT Bonus
+                            </div>
+                            <div class="fw-bold text-dark mt-0.5">$200.00 / mo (≥95% CSAT)</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-2 rounded bg-light border" style="font-size:12px;">
+                            <div class="text-muted fw-semibold" style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;">
+                                <i class="fa-regular fa-calendar-check text-success me-1"></i>Settlement &amp; Payout Cycle
+                            </div>
+                            <div class="fw-semibold text-dark mt-0.5">Bi-Weekly Hourly · Monthly Bonus Close</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Plan Components -->
+            <div class="fw-bold text-dark mb-2" style="font-size:13px;text-transform:uppercase;letter-spacing:0.4px;">
+                <i class="fa-solid fa-layer-group text-primary me-1.5"></i>Attached Compensation Plan Components
+            </div>
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border bg-white h-100 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:10.5px;">Core Rate</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle" style="font-size:10px;">Active</span>
+                        </div>
+                        <div class="fw-bold text-dark mb-1" style="font-size:13.5px;">Client Concierge Hourly Pay</div>
+                        <div class="fw-bold text-success mb-2" style="font-size:16px;">$15.00 / hr <small class="text-muted fw-normal" style="font-size:11px;">(1.5x Overtime)</small></div>
+                        <div class="pt-2 border-top text-muted small" style="font-size:11.5px;">
+                            <div><i class="fa-regular fa-clock me-1 text-primary"></i>Logged via Time Clock punches</div>
+                            <div class="mt-1"><i class="fa-solid fa-check-double me-1 text-success"></i>1.5× for weekly hours &gt; 40.00 ($22.50/hr)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border bg-white h-100 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:10.5px;">Monthly Spiff</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle" style="font-size:10px;">Active</span>
+                        </div>
+                        <div class="fw-bold text-dark mb-1" style="font-size:13.5px;">Customer Delight &amp; CSAT Bonus</div>
+                        <div class="fw-bold text-success mb-2" style="font-size:16px;">$200.00 <small class="text-muted fw-normal" style="font-size:11px;">/ month</small></div>
+                        <div class="pt-2 border-top text-muted small" style="font-size:11.5px;">
+                            <div><i class="fa-solid fa-star me-1 text-warning"></i>Requires ≥ 95% 5-star patient review feedback</div>
+                            <div class="mt-1"><i class="fa-solid fa-file-invoice-dollar me-1 text-success"></i>Disbursed on first statement of each month</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border bg-white h-100 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:10.5px;">Service Quality</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle" style="font-size:10px;">Active</span>
+                        </div>
+                        <div class="fw-bold text-dark mb-1" style="font-size:13.5px;">Support Governance &amp; Resolution</div>
+                        <div class="fw-bold text-success mb-2" style="font-size:16px;">100% Guaranteed <small class="text-muted fw-normal" style="font-size:11px;">base hours</small></div>
+                        <div class="pt-2 border-top text-muted small" style="font-size:11.5px;">
+                            <div><i class="fa-solid fa-shield-halved me-1 text-success"></i>No penalty deductions on open tickets</div>
+                            <div class="mt-1"><i class="fa-solid fa-circle-info me-1 text-primary"></i>Patient resolution log audited by management</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Qualification & Timing Rules -->
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="panel p-3 h-100">
+                        <div class="fw-bold text-dark mb-1" style="font-size:12.5px;">
+                            <i class="fa-solid fa-clock-rotate-left text-primary me-1.5"></i>Time Tracking &amp; Cutoff
+                        </div>
+                        <p class="text-muted small mb-0" style="font-size:11.5px;line-height:1.5;">Clock punches lock every alternate Sunday at 11:59 PM. Any missed punches or manager adjustments must be approved within 48 hours.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel p-3 h-100">
+                        <div class="fw-bold text-dark mb-1" style="font-size:12.5px;">
+                            <i class="fa-solid fa-chart-pie text-success me-1.5"></i>CSAT Score Aggregation
+                        </div>
+                        <p class="text-muted small mb-0" style="font-size:11.5px;line-height:1.5;">Minimum 20 completed patient survey reviews required per calendar month to qualify for the $200 performance spiff.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel p-3 h-100">
+                        <div class="fw-bold text-dark mb-1" style="font-size:12.5px;">
+                            <i class="fa-solid fa-lock text-success me-1.5"></i>Version Lock Policy
+                        </div>
+                        <p class="text-muted small mb-0" style="font-size:11.5px;line-height:1.5;">Your compensation structure is locked under version <strong>v1.1</strong>. Any rate revisions updated by practice management apply starting on subsequent calendar pay periods.</p>
                     </div>
                 </div>
             </div>

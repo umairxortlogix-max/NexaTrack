@@ -27,13 +27,14 @@
         Rules</a>
       <a class="nav-link-item" href="production.html"><i class="fa-solid fa-chart-column"></i> Production</a>
       <a class="nav-link-item " href="cases.html"><i class="fa-solid fa-briefcase-medical"></i> Cases</a>
-      <a class="nav-link-item" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i> Accounts Receivable</a>
+      <a class="nav-link-item" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i> Accounts
+        Receivable</a>
       <a class="nav-link-item" href="advances.html"><i class="fa-solid fa-hand-holding-dollar"></i> Advances</a>
       <a class="nav-link-item " href="statements.html"><i class="fa-solid fa-file-invoice"></i> Statements</a>
       <a class="nav-link-item" href="payroll-runs.html"><i class="fa-solid fa-money-check-dollar"></i> Payroll Runs</a>
       <a class="nav-link-item " href="reports.html"><i class="fa-solid fa-chart-line"></i> Reports</a>
       <a class="nav-link-item active" href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
-       <a class="nav-link-item" href="index.html"><i class="fa-solid fa-file-invoice"></i> Logout</a>
+      <a class="nav-link-item" href="index.html"><i class="fa-solid fa-file-invoice"></i> Logout</a>
 
     </div>
     <div class="sidebar-footer">
@@ -67,7 +68,8 @@
           Rules</a>
         <a class="nav-link-item" href="production.html"><i class="fa-solid fa-chart-column"></i> Production</a>
         <a class="nav-link-item " href="cases.html"><i class="fa-solid fa-briefcase-medical"></i> Cases</a>
-        <a class="nav-link-item" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i> Accounts Receivable</a>
+        <a class="nav-link-item" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i>
+          Accounts Receivable</a>
         <a class="nav-link-item" href="advances.html"><i class="fa-solid fa-hand-holding-dollar"></i> Advances</a>
         <a class="nav-link-item" href="statements.html"><i class="fa-solid fa-file-invoice"></i> Statements</a>
 
@@ -97,7 +99,7 @@
         </label>
       </div>
       <div class="d-flex gap-2">
-        <button class="btn btn-outline-navy"><i class="fa-regular fa-clock me-1"></i>Activity Log</button>
+        <button class="btn btn-outline-navy" onclick="showSettingsTab('audit', document.querySelector('.settings-tab-btn[onclick*=\'audit\']'))"><i class="fa-regular fa-clock me-1"></i>Activity Log</button>
         <button class="btn btn-green"><i class="fa-solid fa-check me-1"></i>Save Changes</button>
       </div>
     </div>
@@ -534,13 +536,17 @@
         <div class="panel mt-4">
           <div class="panel-header">
             <div>
-              <h2 class="panel-title mb-0"><i class="fa-solid fa-shield-halved text-success me-2"></i>Granular Payroll Authority (V2.0 Specification — Point 11)</h2>
-              <div class="panel-sub">Fine-grained operational permissions governing the Canonical Ledger, Review Center, Staff Confirmations, and Financial Disclosures.</div>
+              <h2 class="panel-title mb-0"><i class="fa-solid fa-shield-halved text-success me-2"></i>Granular Payroll
+                Authority (V2.0 Specification — Point 11)</h2>
+              <div class="panel-sub">Fine-grained operational permissions governing the Canonical Ledger, Review Center,
+                Staff Confirmations, and Financial Disclosures.</div>
             </div>
-            <span class="badge bg-light text-dark border px-2.5 py-1.5"><i class="fa-solid fa-lock me-1 text-primary"></i>Configurable per Role</span>
+            <span class="badge bg-light text-dark border px-2.5 py-1.5"><i
+                class="fa-solid fa-lock me-1 text-primary"></i>Configurable per Role</span>
           </div>
           <div class="panel-body">
-            <p class="text-muted small mb-3">Roles do not have blanket access. Super Admin assigns specific operational permissions to manage reviews, audited adjustments, approvals, and immutable locks.</p>
+            <p class="text-muted small mb-3">Roles do not have blanket access. Super Admin assigns specific operational
+              permissions to manage reviews, audited adjustments, approvals, and immutable locks.</p>
             <div class="row g-3" id="payroll-permissions-grid">
               <!-- Populated by loadRolePermissions() -->
             </div>
@@ -574,10 +580,89 @@
             class="fa-solid fa-shield-halved fs-2 mb-2 opacity-50 d-block"></i>Password policy, 2FA enforcement, and
           session timeouts.</div>
       </div>
+      <!-- ============= AUDIT / PAYROLL CORRECTION LOG ============= -->
       <div id="settings-view-audit" class="settings-pane" style="display:none;">
-        <div class="panel panel-body text-center py-5 text-muted"><i
-            class="fa-regular fa-file-lines fs-2 mb-2 opacity-50 d-block"></i>Full history of changes made across the
-          organization.</div>
+        
+        <!-- Header & Action Row -->
+        <!-- <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+          <div>
+            <h5 class="fw-bold mb-1 text-dark">
+              <i class="fa-solid fa-clock-rotate-left text-primary me-2"></i>Payroll Correction Log
+            </h5>
+            <p class="text-muted mb-0" style="font-size:12.5px;">
+              Audit trail of compensation adjustments showing who made the correction (Manager vs Others).
+            </p>
+          </div>
+          <div class="d-flex gap-2">
+            <button class="btn btn-outline-secondary btn-sm" onclick="exportAuditLogCSV()">
+              <i class="fa-solid fa-file-csv me-1"></i>Export CSV
+            </button>
+            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#newCorrectionModal">
+              <i class="fa-solid fa-plus me-1"></i>Record Correction
+            </button>
+          </div>
+        </div> -->
+
+
+        <!-- Clean, Simple Filter & Search Bar -->
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 p-2 px-3 border rounded bg-white mb-3">
+          <div class="d-flex align-items-center gap-2">
+            <span class="text-muted small fw-semibold" style="font-size:11.5px;">Filter:</span>
+            <div class="btn-group btn-group-sm" role="group" id="auditActorButtonGroup">
+              <button type="button" class="btn btn-outline-secondary active fw-semibold" id="filter-btn-all" onclick="setAuditActorFilter('all')">
+                All Records (<span id="count-all">3</span>)
+              </button>
+              <button type="button" class="btn btn-outline-primary fw-semibold" id="filter-btn-manager" onclick="setAuditActorFilter('manager')">
+                <i class="fa-solid fa-user-tie me-1"></i>Manager Only (<span id="count-manager">2</span>)
+              </button>
+              <button type="button" class="btn btn-outline-secondary fw-semibold" id="filter-btn-other" style="color:#7e22ce;" onclick="setAuditActorFilter('other')">
+                <i class="fa-solid fa-users-gear me-1"></i>Others / System (<span id="count-other">1</span>)
+              </button>
+            </div>
+          </div>
+          <div class="d-flex align-items-center gap-2 flex-grow-1 justify-content-end" style="max-width:380px;">
+            <div class="input-group input-group-sm">
+              <span class="input-group-text bg-white text-muted border-end-0"><i class="fa-solid fa-magnifying-glass"></i></span>
+              <input type="text" class="form-control border-start-0" id="auditSearchInput" placeholder="Search record, staff, reason..." oninput="applyAuditFilters()">
+              <button class="btn btn-outline-secondary" type="button" onclick="resetAuditFilters()" title="Reset Filters"><i class="fa-solid fa-rotate-left"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table Panel with Exact Requested Columns -->
+        <div class="border rounded bg-white overflow-hidden mb-3">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0" style="font-size:12.5px;">
+              <thead class="table-light text-muted" style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;">
+                <tr>
+                  <th style="padding:10px 14px;white-space:nowrap;">Date/Time</th>
+                  <th style="padding:10px 14px;white-space:nowrap;">Source Record</th>
+                  <th style="padding:10px 14px;white-space:nowrap;">Who Made the Correction</th>
+                  <th style="padding:10px 14px;white-space:nowrap;">Original Value</th>
+                  <th style="padding:10px 14px;white-space:nowrap;">Corrected Value</th>
+                  <th style="padding:10px 14px;text-align:right;white-space:nowrap;">Resulting Recalculation</th>
+                  <th style="padding:10px 14px;min-width:240px;">Reason</th>
+                </tr>
+              </thead>
+              <tbody id="audit-table-body">
+                <!-- Dynamically populated via JS -->
+              </tbody>
+            </table>
+          </div>
+          <div id="audit-table-empty" class="text-center py-4 text-muted" style="display:none;">
+            <i class="fa-regular fa-folder-open fs-3 mb-2 opacity-50 d-block"></i>
+            No payroll correction records found.
+          </div>
+          <div class="p-2 px-3 bg-light border-top d-flex flex-wrap justify-content-between align-items-center text-muted gap-2" style="font-size:11.5px;">
+            <span id="audit-footer-summary">Showing 10 of 10 entries</span>
+            <div class="d-flex align-items-center gap-3">
+              <span class="text-primary"><i class="fa-solid fa-circle me-1" style="font-size:7px;"></i>Blue = Office Manager</span>
+              <span style="color:#7e22ce;"><i class="fa-solid fa-circle me-1" style="font-size:7px;"></i>Purple/Green/Red = Other Roles / System</span>
+              <span class="badge bg-light text-secondary border"><i class="fa-solid fa-lock me-1"></i>Audit Trail</span>
+            </div>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -674,6 +759,215 @@
     </div>
   </div>
 
+  <!-- PAYROLL CORRECTION AUDIT DETAIL MODAL -->
+  <div class="modal fade" id="payrollCorrectionModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content" style="border-radius:14px;border:none;box-shadow:0 20px 45px rgba(15,23,42,0.2);">
+        <div class="modal-header border-bottom px-4 py-3" style="background:#f8fafc;">
+          <div>
+            <div class="d-flex align-items-center gap-2">
+              <h5 class="modal-title fw-bold text-dark mb-0" id="corrDetailId">#CORR-8921</h5>
+              <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1">
+                <i class="fa-solid fa-lock me-1"></i>Immutable Ledger Verified
+              </span>
+            </div>
+            <small class="text-muted" id="corrDetailTimestamp">Oct 01, 2026 · 10:45 AM EDT</small>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <!-- Actor vs Target Cards -->
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <div class="p-3 rounded-3 border h-100" id="corrDetailActorBox" style="background:#f8fafc;">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                  <span class="text-muted fw-bold" style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;">Correction Done By</span>
+                  <span id="corrDetailActorBadge"></span>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                  <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold shadow-sm" id="corrDetailActorAvatar" style="width:42px;height:42px;font-size:15px;background:#0d6efd;">
+                    JJ
+                  </div>
+                  <div>
+                    <div class="fw-bold text-dark fs-6" id="corrDetailActorName">James Johnson</div>
+                    <div class="text-muted small" id="corrDetailActorRole">Office Manager</div>
+                  </div>
+                </div>
+                <div class="mt-3 pt-2 border-top" style="font-size:11.5px;color:#64748b;">
+                  <div><i class="fa-solid fa-network-wired me-1"></i> Origin: <span id="corrDetailIp">192.168.1.42 (Clinic LAN)</span></div>
+                  <div><i class="fa-solid fa-key me-1"></i> Auth: <span id="corrDetailAuth">Manager Session Pin (JJ-884)</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-3 rounded-3 border h-100" style="background:#f8fafc;">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                  <span class="text-muted fw-bold" style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;">Target Staff Beneficiary</span>
+                  <span class="badge bg-light text-dark border" id="corrDetailStaffDept">Sales &amp; Outbound</span>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                  <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm" id="corrDetailStaffAvatar" style="width:42px;height:42px;font-size:15px;background:#e0e7ff;color:#3730a3;">
+                    M
+                  </div>
+                  <div>
+                    <div class="fw-bold text-dark fs-6" id="corrDetailStaffName">Muhammad</div>
+                    <div class="text-muted small" id="corrDetailStaffRole">SDR (Sales Development Rep)</div>
+                  </div>
+                </div>
+                <div class="mt-3 pt-2 border-top" style="font-size:11.5px;color:#64748b;">
+                  <div><i class="fa-regular fa-calendar-check me-1"></i> Affected Pay Cycle: <span>Sep 16 – Sep 30, 2026</span></div>
+                  <div><i class="fa-solid fa-tag me-1"></i> Category: <span id="corrDetailCategory">Hours &amp; Overtime</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Value Diff Box -->
+          <div class="panel border rounded-3 p-3 mb-4 bg-white">
+            <h6 class="fw-bold text-dark mb-3" style="font-size:13px;text-transform:uppercase;letter-spacing:0.5px;">
+              <i class="fa-solid fa-arrows-split-up-and-left text-primary me-2"></i>Compensation State Delta
+            </h6>
+            <div class="row align-items-center text-center g-2">
+              <div class="col-5">
+                <div class="p-3 rounded-2" style="background:#f1f5f9;">
+                  <small class="text-muted d-block fw-bold mb-1" style="font-size:11px;text-transform:uppercase;">Original Pre-Correction</small>
+                  <span class="text-dark fw-bold" style="font-size:13.5px;" id="corrDetailOriginal">76.0 hrs</span>
+                </div>
+              </div>
+              <div class="col-2">
+                <i class="fa-solid fa-arrow-right text-primary fs-5"></i>
+              </div>
+              <div class="col-5">
+                <div class="p-3 rounded-2" style="background:#ecfdf5;border:1px solid #bbf7d0;">
+                  <small class="text-success d-block fw-bold mb-1" style="font-size:11px;text-transform:uppercase;">Corrected Post-Audit</small>
+                  <span class="text-success fw-bold" style="font-size:13.5px;" id="corrDetailCorrected">80.0 hrs (+4.0 hrs)</span>
+                </div>
+              </div>
+            </div>
+            <div class="mt-3 p-2 rounded-2 text-center" id="corrDetailImpactBox" style="background:#f8fafc;border:1px dashed #cbd5e1;">
+              <span class="text-muted small me-2">Net Financial Adjustment Impact:</span>
+              <span class="fw-bolder fs-5 text-success" id="corrDetailNetImpact">+$72.00</span>
+            </div>
+          </div>
+
+          <!-- Justification & Memo -->
+          <div class="mb-3">
+            <label class="form-label text-muted fw-bold mb-1" style="font-size:11.5px;text-transform:uppercase;">
+              <i class="fa-regular fa-comment-dots me-1"></i>Audit Reason &amp; Justification Memo
+            </label>
+            <div class="p-3 rounded-3 border bg-light text-dark" style="font-size:13px;line-height:1.5;" id="corrDetailReason">
+              Manager approved missing clock-out punch for dental lead qualification shift on Sep 28.
+            </div>
+          </div>
+
+          <!-- Cryptographic Hash -->
+          <div class="d-flex flex-wrap justify-content-between align-items-center p-2 rounded-2 gap-2" style="background:#0f172a;color:#94a3b8;font-size:11px;font-family:monospace;">
+            <div><i class="fa-solid fa-fingerprint me-1 text-info"></i> Ledger Hash: <span id="corrDetailHash" class="text-white">0x8fa372bca489e110b91c49df5820</span></div>
+            <div>STATUS: <span class="text-success fw-bold">VERIFIED_SIGNED</span></div>
+          </div>
+        </div>
+        <div class="modal-footer px-4 py-3 bg-light">
+          <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="alert('Signed Audit Voucher PDF generated for reference record.')">
+            <i class="fa-solid fa-download me-1"></i>Download Signed Voucher
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW MANUAL CORRECTION MODAL -->
+  <div class="modal fade" id="newCorrectionModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="border-radius:14px;border:none;box-shadow:0 20px 45px rgba(15,23,42,0.2);">
+        <div class="modal-header border-bottom px-4 py-3">
+          <h5 class="modal-title fw-bold text-dark mb-0"><i class="fa-solid fa-pen-to-square text-primary me-2"></i>Record Manual Payroll Correction</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form id="newCorrectionForm" onsubmit="event.preventDefault(); submitManualCorrection();">
+            <!-- Correction Made By (Manager vs Other) -->
+            <div class="mb-3">
+              <label class="form-label fw-bold small text-dark mb-1">
+                Correction Done By <span class="text-danger">*</span>
+              </label>
+              <select class="form-select form-select-sm" id="newCorrActor" required>
+                <option value="manager" selected>Office Manager — James Johnson (Manager)</option>
+                <option value="finance">Finance Director — David Cho (Other / Finance)</option>
+                <option value="admin">Super Admin — Sarah Chen (Other / Admin)</option>
+                <option value="coordinator">Clinic Coordinator — Emily Ross (Other / Operations)</option>
+              </select>
+              <div class="text-muted" style="font-size:11px;margin-top:3px;">
+                Selecting this marks whether the entry is corrected by the <strong>Office Manager</strong> or <strong>Other Roles</strong>.
+              </div>
+            </div>
+
+            <!-- Target Staff Member -->
+            <div class="mb-3">
+              <label class="form-label fw-bold small text-dark mb-1">Target Staff Member <span class="text-danger">*</span></label>
+              <select class="form-select form-select-sm" id="newCorrStaff" required>
+                <option value="Muhammad|SDR|Sales & Outbound|M">Muhammad (SDR — Sales Development Rep)</option>
+                <option value="M. Zubair|ISR (Commission)|Inside Sales|MZ">M. Zubair (ISR — Inside Sales Rep)</option>
+                <option value="Dr. Heider|Provider (Associate)|Clinical Operatory|DH">Dr. Heider (Provider — Associate Dentist)</option>
+                <option value="M. Nadeem|CE (Treatment Coordinator)|Patient Experience|MN">M. Nadeem (CE — Clinical Experience)</option>
+                <option value="Elena Rostova|Luxury Smile Agent|VIP Aesthetics|ER">Elena Rostova (Luxury Smile Agent)</option>
+                <option value="Ayesha Tariq|ISR (Commission)|Inside Sales|AT">Ayesha Tariq (ISR — Inside Sales Rep)</option>
+                <option value="Dr. Aris Thorne|Surgical Director|Clinical Surgery|AT">Dr. Aris Thorne (Surgical Director)</option>
+              </select>
+            </div>
+
+            <!-- Category & Net Impact -->
+            <div class="row g-2 mb-3">
+              <div class="col-7">
+                <label class="form-label fw-bold small text-dark mb-1">Category <span class="text-danger">*</span></label>
+                <select class="form-select form-select-sm" id="newCorrCategory" required>
+                  <option value="Hours|Hours & Overtime">Hours &amp; Overtime Adjustment</option>
+                  <option value="Tier|Commission Tier Shift">Commission Tier Shift</option>
+                  <option value="Override|Pod Override Rate %">Pod Override Rate %</option>
+                  <option value="Procedure|Procedure Classification">Procedure Classification</option>
+                  <option value="Deduction|Advance Repayment Relief">Advance Repayment Relief</option>
+                  <option value="Bonus|Performance Bonus / Spiff">Performance Bonus / Spiff</option>
+                </select>
+              </div>
+              <div class="col-5">
+                <label class="form-label fw-bold small text-dark mb-1">Net Impact ($) <span class="text-danger">*</span></label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text">$</span>
+                  <input type="number" step="0.01" class="form-control" id="newCorrAmount" placeholder="150.00" required>
+                </div>
+              </div>
+            </div>
+
+            <!-- Original vs Corrected Display -->
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <label class="form-label fw-bold small text-dark mb-1">Original Value</label>
+                <input type="text" class="form-control form-control-sm" id="newCorrOrigVal" placeholder="e.g. 76.0 hrs / Tier 1" required>
+              </div>
+              <div class="col-6">
+                <label class="form-label fw-bold small text-dark mb-1">Corrected Value</label>
+                <input type="text" class="form-control form-control-sm" id="newCorrNewVal" placeholder="e.g. 80.0 hrs / Tier 2" required>
+              </div>
+            </div>
+
+            <!-- Audit Reason Memo -->
+            <div class="mb-3">
+              <label class="form-label fw-bold small text-dark mb-1">Audit Memo / Reason <span class="text-danger">*</span></label>
+              <textarea class="form-control form-control-sm" id="newCorrReason" rows="2" placeholder="Specify clinical or operational justification for this correction..." required></textarea>
+            </div>
+
+            <div class="modal-footer px-0 pb-0 pt-3 border-top">
+              <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary btn-sm">
+                <i class="fa-solid fa-check me-1"></i>Commit Correction to Audit Log
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
   <script>
     /* -------- Tab switching -------- */
@@ -682,8 +976,14 @@
       const target = document.getElementById('settings-view-' + key);
       if (target) target.style.display = 'block';
       document.querySelectorAll('.settings-tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      if (btn) {
+        btn.classList.add('active');
+      } else {
+        const matchBtn = Array.from(document.querySelectorAll('.settings-tab-btn')).find(b => b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + key + "'"));
+        if (matchBtn) matchBtn.classList.add('active');
+      }
       if (key === 'permissions') loadRolePermissions();
+      if (key === 'audit') renderPayrollCorrections();
     }
 
     /* -------- Add User -------- */
@@ -830,7 +1130,7 @@
           const isChecked = !!currentPayPerms[item.key];
           return `
           <div class="col-md-6">
-            <div class="p-3 border rounded-3 bg-white h-100 d-flex align-items-start gap-2.5">
+            <div class="p-3 border rounded-3 bg-white h-100 d-flex align-items-start gap-2">
               <div class="form-check form-switch pt-1">
                 <input class="form-check-input payroll-perm-check" type="checkbox" data-perm-key="${item.key}" ${isChecked ? 'checked' : ''} id="pay_perm_${item.key}">
               </div>
@@ -868,7 +1168,421 @@
       alert('Module and Granular Payroll Permissions saved for ' + roleName + '.');
     }
 
+    /* ========================================================
+       PAYROLL CORRECTIONS AUDIT LOG ENGINE
+       Requested Columns:
+       1. Date/time
+       2. Source record
+       3. Who made the correction
+       4. Original value
+       5. Corrected value
+       6. Resulting recalculation
+       7. Reason
+       ======================================================== */
+
+    let currentAuditActorFilter = 'all';
+
+    const payrollCorrectionsData = [
+      {
+        id: "CORR-8921",
+        date: "Oct 01, 2026",
+        time: "10:45 AM",
+        sourceRecord: "Timesheet #TS-8921 (Sep 16–30)",
+        actorType: "manager", // Manager
+        actorName: "James Johnson",
+        actorRole: "Office Manager",
+        actorBadgeClass: "bg-primary-subtle text-primary border border-primary-subtle",
+        actorIcon: "fa-solid fa-user-tie",
+        staffName: "Muhammad",
+        staffRole: "SDR",
+        staffDept: "Sales & Outbound",
+        staffAvatar: "M",
+        originalVal: "76.0 hrs ($1,368.00)",
+        correctedVal: "80.0 hrs ($1,440.00)",
+        netImpact: 72.00,
+        reason: "Manager approved missing clock-out punch for dental lead qualification shift on Sep 28.",
+        ipAddress: "192.168.1.42 (Clinic LAN)",
+        authMethod: "Manager Session Pin (JJ-884)",
+        ledgerHash: "0x8fa372bca489e110b91c49df5820"
+      },
+      {
+        id: "CORR-8920",
+        date: "Sep 30, 2026",
+        time: "04:15 PM",
+        sourceRecord: "Commission Model #POD-ZUB-2026",
+        actorType: "manager", // Manager
+        actorName: "James Johnson",
+        actorRole: "Office Manager",
+        actorBadgeClass: "bg-primary-subtle text-primary border border-primary-subtle",
+        actorIcon: "fa-solid fa-user-tie",
+        staffName: "M. Zubair",
+        staffRole: "ISR (Commission)",
+        staffDept: "Inside Sales",
+        staffAvatar: "MZ",
+        originalVal: "1.0% Pod Rate ($420.00)",
+        correctedVal: "2.0% Pod Rate ($840.00)",
+        netImpact: 420.00,
+        reason: "Manager manual tier elevation: Validated monthly team closing surpassed 40 verified cases.",
+        ipAddress: "192.168.1.42 (Clinic LAN)",
+        authMethod: "Manager Admin Override (JJ-884)",
+        ledgerHash: "0x3e17904bbf1677d28c4dc7129031"
+      },
+      {
+        id: "CORR-8919",
+        date: "Sep 29, 2026",
+        time: "02:30 PM",
+        sourceRecord: "Treatment Plan #TX-2740 (Crown D2740)",
+        actorType: "other", // Other: Finance Director
+        actorName: "David Cho",
+        actorRole: "Finance Director",
+        actorBadgeClass: "text-purple",
+        actorCustomStyle: "background:#f3e8ff;color:#7e22ce;border:1px solid #d8b4fe;",
+        actorIcon: "fa-solid fa-building-columns",
+        staffName: "Dr. Heider",
+        staffRole: "Provider (Associate)",
+        staffDept: "Clinical Operatory",
+        staffAvatar: "DH",
+        originalVal: "D2391 Composite ($400.00)",
+        correctedVal: "D2740 Ceramic Crown ($580.00)",
+        netImpact: 180.00,
+        reason: "Finance audit: Treatment plan code D2740 corrected from preliminary D2391 after lab invoice reconciliation.",
+        ipAddress: "10.0.4.18 (HQ Finance VPN)",
+        authMethod: "Finance Two-Factor Token (DC-092)",
+        ledgerHash: "0xaa429188bf2003c49f78cc92810a"
+      }
+    ];
+
+    function renderPayrollCorrections() {
+      // 1. Calculate KPI Metrics
+      const total = payrollCorrectionsData.length;
+      const managerCount = payrollCorrectionsData.filter(d => d.actorType === 'manager').length;
+      const otherCount = payrollCorrectionsData.filter(d => d.actorType !== 'manager').length;
+      const netSum = payrollCorrectionsData.reduce((acc, d) => acc + d.netImpact, 0);
+
+      const elTotal = document.getElementById('stat-total-corrections');
+      const elManager = document.getElementById('stat-manager-corrections');
+      const elOther = document.getElementById('stat-other-corrections');
+      const elNet = document.getElementById('stat-net-impact');
+
+      if (elTotal) elTotal.innerText = total;
+      if (elManager) elManager.innerText = managerCount;
+      if (elOther) elOther.innerText = otherCount;
+      if (elNet) {
+        const sign = netSum >= 0 ? '+' : '-';
+        elNet.innerText = sign + '$' + Math.abs(netSum).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+
+      // 2. Update Filter Button Badges
+      const countAll = document.getElementById('count-all');
+      const countMgr = document.getElementById('count-manager');
+      const countOth = document.getElementById('count-other');
+      if (countAll) countAll.innerText = total;
+      if (countMgr) countMgr.innerText = managerCount;
+      if (countOth) countOth.innerText = otherCount;
+
+      applyAuditFilters();
+    }
+
+    function setAuditActorFilter(actor) {
+      currentAuditActorFilter = actor;
+      
+      const btnAll = document.getElementById('filter-btn-all');
+      const btnMgr = document.getElementById('filter-btn-manager');
+      const btnOth = document.getElementById('filter-btn-other');
+
+      if (btnAll) btnAll.className = 'btn btn-outline-secondary fw-semibold' + (actor === 'all' ? ' active' : '');
+      if (btnMgr) btnMgr.className = 'btn btn-outline-primary fw-semibold' + (actor === 'manager' ? ' active' : '');
+      if (btnOth) btnOth.className = 'btn btn-outline-secondary fw-semibold' + (actor === 'other' ? ' active' : '');
+
+      applyAuditFilters();
+    }
+
+    function applyAuditFilters() {
+      const searchVal = (document.getElementById('auditSearchInput')?.value || '').toLowerCase().trim();
+
+      const filtered = payrollCorrectionsData.filter(item => {
+        // Actor Filter
+        if (currentAuditActorFilter === 'manager' && item.actorType !== 'manager') return false;
+        if (currentAuditActorFilter === 'other' && item.actorType === 'manager') return false;
+
+        // Search Filter (checks all 7 columns)
+        if (searchVal) {
+          const matchTarget = (
+            item.date + ' ' + 
+            item.time + ' ' + 
+            item.staffName + ' ' + 
+            item.staffRole + ' ' + 
+            (item.sourceRecord || '') + ' ' + 
+            item.id + ' ' + 
+            item.actorName + ' ' + 
+            item.actorRole + ' ' + 
+            item.originalVal + ' ' + 
+            item.correctedVal + ' ' + 
+            item.reason
+          ).toLowerCase();
+          if (!matchTarget.includes(searchVal)) return false;
+        }
+
+        return true;
+      });
+
+      renderAuditTable(filtered);
+    }
+
+    function renderAuditTable(items) {
+      const tbody = document.getElementById('audit-table-body');
+      const emptyState = document.getElementById('audit-table-empty');
+      const summaryText = document.getElementById('audit-footer-summary');
+
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      if (items.length === 0) {
+        if (emptyState) emptyState.style.display = 'block';
+        if (summaryText) summaryText.innerText = `Showing 0 of ${payrollCorrectionsData.length} entries`;
+        return;
+      }
+
+      if (emptyState) emptyState.style.display = 'none';
+      if (summaryText) summaryText.innerText = `Showing ${items.length} of ${payrollCorrectionsData.length} entries`;
+
+      items.forEach(item => {
+        const isMgr = item.actorType === 'manager';
+
+        // Who made the correction badge
+        let actorBadgeHtml = '';
+        if (isMgr) {
+          actorBadgeHtml = `
+            <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1" style="font-size:11.5px;">
+              <i class="fa-solid fa-user-tie me-1"></i>Office Manager <span class="fw-normal">(${item.actorName})</span>
+            </span>`;
+        } else {
+          actorBadgeHtml = `
+            <span class="badge px-2 py-1" style="${item.actorCustomStyle || 'background:#f3e8ff;color:#7e22ce;border:1px solid #d8b4fe;'};font-size:11.5px;">
+              <i class="${item.actorIcon || 'fa-solid fa-users-gear'} me-1"></i>${item.actorRole} <span class="fw-normal">(${item.actorName})</span>
+            </span>`;
+        }
+
+        // Resulting recalculation color & format
+        const isPos = item.netImpact >= 0;
+        const impactFormatted = (isPos ? '+' : '-') + '$' + Math.abs(item.netImpact).toFixed(2);
+        const impactColorClass = isPos ? 'text-success' : 'text-danger';
+
+        const row = document.createElement('tr');
+        row.style.cursor = 'pointer';
+        row.title = 'Click to inspect full correction details';
+        row.onclick = () => viewCorrectionDetails(item.id);
+        row.innerHTML = `
+          <!-- 1. Date/time -->
+          <td style="padding:10px 14px;white-space:nowrap;">
+            <div class="fw-semibold text-dark" style="font-size:12.5px;">${item.date}</div>
+            <div class="text-muted" style="font-size:11px;"><i class="fa-regular fa-clock me-1"></i>${item.time}</div>
+          </td>
+
+          <!-- 2. Source record -->
+          <td style="padding:10px 14px;">
+            <div class="fw-semibold text-dark" style="font-size:12.5px;">${item.staffName} <span class="text-muted fw-normal" style="font-size:11px;">(${item.staffRole})</span></div>
+            <div class="text-muted" style="font-size:11px;">${item.sourceRecord || item.id}</div>
+          </td>
+
+          <!-- 3. Who made the correction -->
+          <td style="padding:10px 14px;white-space:nowrap;">
+            ${actorBadgeHtml}
+          </td>
+
+          <!-- 4. Original value -->
+          <td style="padding:10px 14px;white-space:nowrap;">
+            <span class="text-secondary" style="font-size:12.5px;">${item.originalVal}</span>
+          </td>
+
+          <!-- 5. Corrected value -->
+          <td style="padding:10px 14px;white-space:nowrap;">
+            <span class="fw-semibold text-dark" style="font-size:12.5px;">${item.correctedVal}</span>
+          </td>
+
+          <!-- 6. Resulting recalculation -->
+          <td style="padding:10px 14px;text-align:right;white-space:nowrap;">
+            <span class="fw-bold ${impactColorClass}" style="font-size:13px;">${impactFormatted}</span>
+          </td>
+
+          <!-- 7. Reason -->
+          <td style="padding:10px 14px;">
+            <div class="text-dark" style="font-size:12px;line-height:1.4;">${item.reason}</div>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function resetAuditFilters() {
+      currentAuditActorFilter = 'all';
+      const searchInput = document.getElementById('auditSearchInput');
+      if (searchInput) searchInput.value = '';
+      
+      const btnAll = document.getElementById('filter-btn-all');
+      const btnMgr = document.getElementById('filter-btn-manager');
+      const btnOth = document.getElementById('filter-btn-other');
+      if (btnAll) btnAll.className = 'btn btn-outline-secondary active fw-semibold';
+      if (btnMgr) btnMgr.className = 'btn btn-outline-primary fw-semibold';
+      if (btnOth) btnOth.className = 'btn btn-outline-secondary fw-semibold';
+
+      applyAuditFilters();
+    }
+
+    function viewCorrectionDetails(id) {
+      const item = payrollCorrectionsData.find(d => d.id === id);
+      if (!item) return;
+
+      const isMgr = item.actorType === 'manager';
+
+      document.getElementById('corrDetailId').innerText = '#' + item.id;
+      document.getElementById('corrDetailTimestamp').innerText = `${item.date} · ${item.time} EDT`;
+      
+      // Actor Box
+      const actorBadge = document.getElementById('corrDetailActorBadge');
+      if (isMgr) {
+        actorBadge.innerHTML = `<span class="badge bg-primary text-white"><i class="fa-solid fa-user-tie me-1"></i>Office Manager Action</span>`;
+      } else {
+        actorBadge.innerHTML = `<span class="badge text-white" style="background:#7e22ce;"><i class="fa-solid fa-users-gear me-1"></i>Non-Manager / Other Action</span>`;
+      }
+
+      const avatarBox = document.getElementById('corrDetailActorAvatar');
+      avatarBox.style.background = isMgr ? '#0d6efd' : (item.actorCustomStyle?.includes('#fee2e2') ? '#dc2626' : (item.actorCustomStyle?.includes('#ecfdf5') ? '#16a34a' : '#7e22ce'));
+      avatarBox.innerText = isMgr ? 'JJ' : item.actorName.split(' ').map(w => w[0]).join('').slice(0, 2);
+
+      document.getElementById('corrDetailActorName').innerText = item.actorName;
+      document.getElementById('corrDetailActorRole').innerText = item.actorRole;
+      document.getElementById('corrDetailIp').innerText = item.ipAddress || '192.168.1.42 (Clinic LAN)';
+      document.getElementById('corrDetailAuth').innerText = item.authMethod || 'Signed Token (2FA)';
+
+      // Staff Box
+      document.getElementById('corrDetailStaffName').innerText = item.staffName;
+      document.getElementById('corrDetailStaffRole').innerText = item.staffRole;
+      document.getElementById('corrDetailStaffDept').innerText = item.staffDept;
+      document.getElementById('corrDetailStaffAvatar').innerText = item.staffAvatar;
+      document.getElementById('corrDetailCategory').innerText = item.sourceRecord || item.id;
+
+      // Delta
+      document.getElementById('corrDetailOriginal').innerText = item.originalVal;
+      document.getElementById('corrDetailCorrected').innerText = item.correctedVal;
+      
+      const isPos = item.netImpact >= 0;
+      const netBox = document.getElementById('corrDetailNetImpact');
+      netBox.className = 'fw-bolder fs-5 ' + (isPos ? 'text-success' : 'text-danger');
+      netBox.innerText = (isPos ? '+' : '-') + '$' + Math.abs(item.netImpact).toFixed(2);
+
+      // Reason & Hash
+      document.getElementById('corrDetailReason').innerText = item.reason;
+      document.getElementById('corrDetailHash').innerText = item.ledgerHash;
+
+      const modalEl = document.getElementById('payrollCorrectionModal');
+      const modal = new bootstrap.Modal(modalEl);
+      modal.show();
+    }
+
+    function submitManualCorrection() {
+      const actorKey = document.getElementById('newCorrActor').value;
+      const staffRaw = document.getElementById('newCorrStaff').value;
+      const amount = parseFloat(document.getElementById('newCorrAmount').value) || 0;
+      const origVal = document.getElementById('newCorrOrigVal').value.trim();
+      const newVal = document.getElementById('newCorrNewVal').value.trim();
+      const reason = document.getElementById('newCorrReason').value.trim();
+
+      const [staffName, staffRole, staffDept, staffAvatar] = staffRaw.split('|');
+
+      let actorType = 'other';
+      let actorName = 'David Cho';
+      let actorRole = 'Finance Director';
+      let actorCustomStyle = 'background:#f3e8ff;color:#7e22ce;border:1px solid #d8b4fe;';
+      let actorIcon = 'fa-solid fa-building-columns';
+      let authMethod = 'Finance Two-Factor Token (DC-092)';
+
+      if (actorKey === 'manager') {
+        actorType = 'manager';
+        actorName = 'James Johnson';
+        actorRole = 'Office Manager';
+        actorCustomStyle = '';
+        actorIcon = 'fa-solid fa-user-tie';
+        authMethod = 'Manager Session Pin (JJ-884)';
+      } else if (actorKey === 'admin') {
+        actorName = 'Sarah Chen';
+        actorRole = 'Super Admin';
+        actorCustomStyle = 'background:#fee2e2;color:#991b1b;border:1px solid #fca5a5;';
+        actorIcon = 'fa-solid fa-user-shield';
+        authMethod = 'SSO Admin Master Key (SC-001)';
+      } else if (actorKey === 'coordinator') {
+        actorName = 'Emily Ross';
+        actorRole = 'Clinic Coordinator';
+        actorCustomStyle = 'background:#fffbeb;color:#92400e;border:1px solid #fde68a;';
+        actorIcon = 'fa-solid fa-clipboard-check';
+        authMethod = 'Coordinator Auth Code (ER-339)';
+      }
+
+      const nextId = 'CORR-' + (8922 + payrollCorrectionsData.length);
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+      const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+      const newEntry = {
+        id: nextId,
+        date: dateStr,
+        time: timeStr,
+        sourceRecord: `Manual Override #${nextId} (${staffName})`,
+        actorType: actorType,
+        actorName: actorName,
+        actorRole: actorRole,
+        actorBadgeClass: actorType === 'manager' ? 'bg-primary-subtle text-primary border border-primary-subtle' : '',
+        actorCustomStyle: actorCustomStyle,
+        actorIcon: actorIcon,
+        staffName: staffName,
+        staffRole: staffRole,
+        staffDept: staffDept,
+        staffAvatar: staffAvatar,
+        originalVal: origVal,
+        correctedVal: newVal,
+        netImpact: amount,
+        reason: reason,
+        ipAddress: '192.168.1.42 (Active Session)',
+        authMethod: authMethod,
+        ledgerHash: '0x' + Math.random().toString(16).substr(2, 8) + '...live'
+      };
+
+      payrollCorrectionsData.unshift(newEntry);
+
+      // Hide modal & reset form
+      const modalEl = document.getElementById('newCorrectionModal');
+      bootstrap.Modal.getInstance(modalEl).hide();
+      document.getElementById('newCorrectionForm').reset();
+
+      renderPayrollCorrections();
+
+      alert(`Correction ${nextId} committed to ledger.\nLogged under: ${actorRole} (${actorName})\nTarget: ${staffName} (${impactAmountFormatted(amount)})`);
+    }
+
+    function impactAmountFormatted(amt) {
+      return (amt >= 0 ? '+' : '-') + '$' + Math.abs(amt).toFixed(2);
+    }
+
+    function exportAuditLogCSV() {
+      let csv = 'Date/Time,Source Record,Who Made the Correction,Original Value,Corrected Value,Resulting Recalculation,Reason\n';
+      payrollCorrectionsData.forEach(d => {
+        const actorText = d.actorType === 'manager' ? `Office Manager (${d.actorName})` : `${d.actorRole} (${d.actorName})`;
+        const recalcText = (d.netImpact >= 0 ? '+' : '-') + '$' + Math.abs(d.netImpact).toFixed(2);
+        csv += `"${d.date} ${d.time}","${d.staffName} (${d.staffRole}) - ${d.sourceRecord}","${actorText}","${d.originalVal}","${d.correctedVal}","${recalcText}","${d.reason.replace(/"/g, '""')}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `Payroll_Correction_Log_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
     loadRolePermissions();
+    renderPayrollCorrections();
   </script>
 
 </body>

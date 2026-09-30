@@ -30,9 +30,9 @@
         </div>
         <div class="sidebar-footer">
             <div class="user-chip">
-                <div class="user-avatar" style="background:#3b82f6;">JS</div>
+                <div class="user-avatar" style="background:#2563eb;">MU</div>
                 <div class="flex-grow-1">
-                    <div style="font-size:13px;font-weight:600;">Umair</div>
+                    <div style="font-size:13px;font-weight:600;">Muhammad</div>
                     <small>SDR</small>
                 </div>
                 <i class="fa-solid fa-chevron-down" style="color:#93a2bd;font-size:11px;"></i>
@@ -113,7 +113,7 @@
                     <i class="fa-solid fa-chevron-down text-muted" style="font-size:10px;"></i>
                 </div>
 
-                
+
 
             </div>
             <!-- /topbar-actions -->
@@ -160,8 +160,9 @@
                 <div class="kpi-icon" style="background:var(--green-50);color:var(--green-600);"><i
                         class="fa-solid fa-wallet"></i></div>
                 <div>
-                    <div class="kpi-label">Gross Pay</div>
-                    <div class="kpi-value" id="grossKpi">$1,185.00</div>
+                    <div class="kpi-label">Gross Period Pay</div>
+                    <div class="kpi-value" id="grossKpi">$4,980.00</div>
+                    <div class="text-muted" style="font-size:11px;">Base + Tiers + Qtr Bonus</div>
                 </div>
             </div>
             <div class="kpi-card d-flex align-items-center gap-3" role="button" tabindex="0"
@@ -169,26 +170,29 @@
                 <div class="kpi-icon" style="background:#dbeafe;color:#1e40af;"><i class="fa-regular fa-clock"></i>
                 </div>
                 <div>
-                    <div class="kpi-label">Total Hours</div>
-                    <div class="kpi-value" id="hoursKpi">78.00</div>
+                    <div class="kpi-label">Approved Service Hours</div>
+                    <div class="kpi-value" id="hoursKpi">160.00</div>
+                    <div class="text-muted" style="font-size:11px;">160h @ $18.00 = $2,880.00</div>
                 </div>
             </div>
             <div class="kpi-card d-flex align-items-center gap-3" role="button" tabindex="0"
                 onclick="openSdrStmtKpiDetail(2)">
-                <div class="kpi-icon" style="background:#ede9fe;color:#6d28d9;"><i class="fa-solid fa-chart-line"></i>
+                <div class="kpi-icon" style="background:#ede9fe;color:#6d28d9;"><i class="fa-solid fa-layer-group"></i>
                 </div>
                 <div>
-                    <div class="kpi-label">Overtime</div>
-                    <div class="kpi-value" id="otKpi">2.00</div>
+                    <div class="kpi-label">Qualified Booking Tier</div>
+                    <div class="kpi-value" id="tierKpi">Tier 3 ($600)</div>
+                    <div class="text-muted" style="font-size:11px;">14 Bookings Achieved</div>
                 </div>
             </div>
             <div class="kpi-card d-flex align-items-center gap-3" role="button" tabindex="0"
                 onclick="openSdrStmtKpiDetail(3)">
-                <div class="kpi-icon" style="background:#ffedd5;color:#c2410c;"><i class="fa-solid fa-circle-minus"></i>
+                <div class="kpi-icon" style="background:#fef3c7;color:#b45309;"><i class="fa-solid fa-award"></i>
                 </div>
                 <div>
-                    <div class="kpi-label">Deductions</div>
-                    <div class="kpi-value" id="adjKpi">$200.00</div>
+                    <div class="kpi-label">Quarterly Bonus</div>
+                    <div class="kpi-value" id="bonusKpi">$1,500.00</div>
+                    <div class="text-muted" style="font-size:11px;">3/3 Months Qualified (100%)</div>
                 </div>
             </div>
         </div>
@@ -196,6 +200,8 @@
         <div class="statement-toggle-tabs">
             <button class="toggle-tab-btn active" onclick="showPane('statement', this)">Statement View</button>
             <button class="toggle-tab-btn" onclick="showPane('review', this)">Review &amp; Edit</button>
+            <button class="toggle-tab-btn" onclick="showPane('assigned-plan', this)"><i
+                    class="fa-solid fa-file-contract text-success me-1.5"></i>Assigned Plan &amp; Rules</button>
         </div>
 
         <!-- ================= STATEMENT VIEW ================= -->
@@ -205,7 +211,7 @@
                     <div class="panel">
                         <div class="panel-header">
                             <div class="d-flex align-items-center gap-2">
-                                <h2 class="panel-title mb-0">Pay Period: May 1 – May 15, 2026</h2>
+                                <h2 class="panel-title mb-0">Pay Period: May 1 – May 31, 2026</h2>
                                 <span class="status-pill locked">Locked</span>
                             </div>
                         </div>
@@ -216,67 +222,82 @@
                                     <span class="fw-bold" style="letter-spacing:1px;">NEXATRACK</span>
                                 </div>
                                 <div class="text-end">
-                                    <div class="fw-bold" style="font-size:13px;">Spiffs</div>
-                                    <div class="text-muted" style="font-size:11.5px;">Pay Date: May 16, 2026</div>
+                                    <div class="fw-bold" style="font-size:13px;">Luxury Smile Agent Statement</div>
+                                    <div class="text-muted" style="font-size:11.5px;">Pay Date: Jun 2, 2026</div>
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <div class="text-muted"
-                                    style="font-size:11px;text-transform:uppercase;font-weight:700;"> Staff members
+                                    style="font-size:11px;text-transform:uppercase;font-weight:700;"> Staff Member
                                 </div>
-                                <div class="fw-bold" style="font-size:15px;">Umair</div>
-                                <div class="text-muted" style="font-size:12px;">SDR</div>
-                                <div class="text-muted" style="font-size:11.5px;">Staff members ID: SDR001 &middot;
-                                    Compensation Type: Hourly</div>
+                                <div class="fw-bold" style="font-size:15px;">Muhammad</div>
+                                <div class="text-muted" style="font-size:12px;">SDR &middot; Sales Development</div>
+                                <div class="text-muted" style="font-size:11.5px;">Staff ID: SDR001 &middot;
+                                    Compensation Plan: <strong>Luxury Smile Agent (Hybrid Plan) v2.1</strong></div>
                             </div>
 
                             <div class="check-preview mb-3">
                                 <div class="brand-row">
                                     <div>
                                         <div class="pay-to">Pay To The Order Of</div>
-                                        <div class="pay-to-name">Umair</div>
-                                        <div class="memo">Memo: Pay Period May 1 – May 15, 2026</div>
+                                        <div class="pay-to-name">Muhammad</div>
+                                        <div class="memo">Memo: Monthly Hybrid Compensation &middot; May 2026</div>
                                     </div>
                                     <div class="amount-box">
-                                        <div class="lbl">Amount</div>
-                                        <div class="amt" id="stubAmount">$985.00</div>
+                                        <div class="lbl">Net Pay Amount</div>
+                                        <div class="amt" id="stubAmount">$4,780.00</div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row g-3">
-                                <div class="col-md-6">
+                                <div class="col-md-7">
                                     <div class="fw-bold mb-2"
                                         style="font-size:11.5px;text-transform:uppercase;color:var(--gray-500);">
-                                        Earnings</div>
+                                        Earnings Components</div>
                                     <table class="earnings-table">
                                         <thead>
                                             <tr>
-                                                <th>Description</th>
-                                                <th class="text-end">Hrs</th>
-                                                <th class="text-end">Rate</th>
+                                                <th>Component / Description</th>
+                                                <th class="text-end">Qty / Units</th>
+                                                <th class="text-end">Rate / Tier</th>
+                                                <th class="text-end">Total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Regular Hours</td>
-                                                <td class="text-end" id="stubRegHrs">76.00</td>
-                                                <td class="text-end">$15.00</td>
+                                                <td>Approved Service Hours</td>
+                                                <td class="text-end" id="stubRegHrs">160.00 hrs</td>
+                                                <td class="text-end">$18.00 / hr</td>
+                                                <td class="text-end fw-semibold" id="stubRegAmt">$2,880.00</td>
                                             </tr>
                                             <tr>
                                                 <td>Overtime Hours</td>
-                                                <td class="text-end" id="stubOtHrs">2.00</td>
-                                                <td class="text-end">$22.50</td>
+                                                <td class="text-end" id="stubOtHrs">0.00 hrs</td>
+                                                <td class="text-end">$27.00 / hr</td>
+                                                <td class="text-end fw-semibold" id="stubOtAmt">$0.00</td>
                                             </tr>
-                                            <tr class="fw-bold">
-                                                <td colspan="2">Total Earnings</td>
-                                                <td class="text-end" id="stubTotalEarnings">$1,185.00</td>
+                                            <tr>
+                                                <td>Monthly Qualified Booking Incentive</td>
+                                                <td class="text-end" id="stubBookingsCount">14 Bookings</td>
+                                                <td class="text-end"><span class="badge bg-primary-subtle text-primary" id="stubTierTag">Tier 3</span></td>
+                                                <td class="text-end fw-semibold" id="stubTierAmt">$600.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Quarterly Excellence Bonus</td>
+                                                <td class="text-end" id="stubBonusQty">3/3 Months</td>
+                                                <td class="text-end"><span class="badge bg-warning-subtle text-dark">≥10/mo</span></td>
+                                                <td class="text-end fw-semibold" id="stubBonusAmt">$1,500.00</td>
+                                            </tr>
+                                            <tr class="fw-bold table-light">
+                                                <td colspan="3">Gross Total Earnings</td>
+                                                <td class="text-end text-success" id="stubTotalEarnings">$4,980.00</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class="fw-bold mb-2"
                                         style="font-size:11.5px;text-transform:uppercase;color:var(--gray-500);">
                                         Deductions / Adjustments</div>
@@ -289,14 +310,14 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Advance</td>
+                                                <td>Advance Repayment</td>
                                                 <td class="text-end neg-amt" id="stubAdvance">($200.00)</td>
                                             </tr>
                                             <tr>
                                                 <td>Other Adjustment</td>
                                                 <td class="text-end" id="stubOtherAdj">$0.00</td>
                                             </tr>
-                                            <tr class="fw-bold">
+                                            <tr class="fw-bold table-light">
                                                 <td>Total Deductions</td>
                                                 <td class="text-end neg-amt" id="stubTotalDeductions">($200.00)</td>
                                             </tr>
@@ -305,16 +326,15 @@
                                 </div>
                             </div>
 
-                            <div class="stub-total-bar"><span class="lbl">Total Pay (Net)</span><span class="amt"
-                                    id="stubTotalPay">$985.00</span></div>
+                            <div class="stub-total-bar"><span class="lbl">Total Net Take-Home Pay</span><span class="amt"
+                                    id="stubTotalPay">$4,780.00</span></div>
 
-                            <div class="text-center text-muted mt-3" style="font-size:12.5px;">Thank you for your hard
-                                work!</div>
+                            <div class="text-center text-muted mt-3" style="font-size:12.5px;">Thank you for your excellent performance in May 2026!</div>
 
                             <div class="text-center mt-3 d-flex justify-content-center gap-2">
                                 <button class="btn btn-outline-navy"
                                     onclick="showPane('review', document.querySelectorAll('.toggle-tab-btn')[1])"><i
-                                        class="fa-regular fa-pen-to-square me-1"></i>Review &amp; Edit My Hours</button>
+                                        class="fa-regular fa-pen-to-square me-1"></i>Review &amp; Edit My Hybrid Statement</button>
                                 <button class="btn btn-red-outline" data-bs-toggle="modal"
                                     data-bs-target="#flagPayrollModal"><i class="fa-solid fa-flag me-1"></i>Flag
                                     Payroll</button>
@@ -331,39 +351,31 @@
                         <div class="panel-body">
                             <div class="history-row">
                                 <div>
-                                    <div class="period">May 1 – May 15, 2026</div>
-                                    <div class="meta">Paid May 16, 2026</div>
+                                    <div class="period">May 1 – May 31, 2026</div>
+                                    <div class="meta">Paid Jun 2, 2026 &middot; Tier 3 + Qtr Bonus</div>
                                 </div>
-                                <div class="amt">$985.00</div>
+                                <div class="amt">$4,780.00</div>
                             </div>
                             <div class="history-row">
                                 <div>
-                                    <div class="period">Apr 16 – Apr 30, 2026</div>
-                                    <div class="meta">Paid May 2, 2026</div>
+                                    <div class="period">Apr 1 – Apr 30, 2026</div>
+                                    <div class="meta">Paid May 2, 2026 &middot; Tier 4 ($1,050)</div>
                                 </div>
-                                <div class="amt">$1,102.50</div>
+                                <div class="amt">$4,180.00</div>
                             </div>
                             <div class="history-row">
                                 <div>
-                                    <div class="period">Apr 1 – Apr 15, 2026</div>
-                                    <div class="meta">Paid Apr 18, 2026</div>
+                                    <div class="period">Mar 1 – Mar 31, 2026</div>
+                                    <div class="meta">Paid Apr 2, 2026 &middot; Tier 3 + Qtr Bonus</div>
                                 </div>
-                                <div class="amt">$960.00</div>
+                                <div class="amt">$4,980.00</div>
                             </div>
                             <div class="history-row">
                                 <div>
-                                    <div class="period">Mar 16 – Mar 31, 2026</div>
-                                    <div class="meta">Paid Apr 4, 2026</div>
+                                    <div class="period">Feb 1 – Feb 28, 2026</div>
+                                    <div class="meta">Paid Mar 2, 2026 &middot; Tier 3 ($600)</div>
                                 </div>
-                                <div class="amt">$1,045.00</div>
-                            </div>
-                            <div class="history-row">
-                                <div>
-                                    <div class="period">Mar 1 – Mar 15, 2026 <span
-                                            class="status-pill flagged ms-1">Flagged</span></div>
-                                    <div class="meta">Paid Mar 21, 2026</div>
-                                </div>
-                                <div class="amt">$917.50</div>
+                                <div class="amt">$3,480.00</div>
                             </div>
                         </div>
                     </div>
@@ -376,26 +388,26 @@
             <div class="row g-3">
                 <div class="col-lg-3">
                     <div class="staff-card">
-                        <div class="staff-avatar">JS</div>
-                        <h4 class="text-center mt-1 mb-1">Umair</h4>
+                        <div class="staff-avatar" style="background:#2563eb;color:#fff;">MH</div>
+                        <h4 class="text-center mt-1 mb-1">Muhammad</h4>
                         <p class="text-center text-muted mb-3">SDR</p>
                         <div class="text-center mb-3"><span class="pill-badge" id="reviewStatusPill">Pending
                                 Review</span></div>
                         <hr>
-                        <div class="small mb-2"><span class="summary-label">Staff members ID</span>
+                        <div class="small mb-2"><span class="summary-label">Staff ID</span>
                             <div class="fw-semibold">SDR001</div>
                         </div>
                         <div class="small mb-2"><span class="summary-label">Hire Date</span>
                             <div class="fw-semibold">Jan 10, 2025</div>
                         </div>
-                        <div class="small mb-2"><span class="summary-label">Pay Type</span>
-                            <div class="fw-semibold">Hourly</div>
+                        <div class="small mb-2"><span class="summary-label">Compensation Plan</span>
+                            <div class="fw-semibold text-primary">Luxury Smile Agent (Hybrid)</div>
                         </div>
-                        <div class="small mb-2"><span class="summary-label">Rate</span>
-                            <div class="fw-semibold">$15.00/hr</div>
+                        <div class="small mb-2"><span class="summary-label">Pay Structure</span>
+                            <div class="fw-semibold">$18.00/hr + Tiers + Qtr Bonus</div>
                         </div>
                         <div class="small mb-3"><span class="summary-label">Pay Period</span>
-                            <div class="fw-semibold">May 1 – May 15, 2026</div>
+                            <div class="fw-semibold">May 1 – May 31, 2026</div>
                         </div>
                         <button class="btn btn-green w-100 mb-2" onclick="confirmPayroll()"><i
                                 class="fa-solid fa-check me-1"></i>Confirm Payroll</button>
@@ -409,8 +421,8 @@
                     <div class="panel">
                         <div class="panel-header">
                             <div>
-                                <h2 class="panel-title">Earnings Breakdown</h2>
-                                <div class="panel-sub">Adjust hours and deductions — totals recalculate instantly.</div>
+                                <h2 class="panel-title">Hybrid Earnings Breakdown</h2>
+                                <div class="panel-sub">Adjust hours, qualified booking count, or deductions — totals recalculate instantly.</div>
                             </div>
                             <button class="btn btn-outline-navy btn-sm"
                                 onclick="showPane('statement', document.querySelectorAll('.toggle-tab-btn')[0])"><i
@@ -421,46 +433,86 @@
                                 <table class="earnings-table">
                                     <thead>
                                         <tr>
-                                            <th>Description</th>
-                                            <th>Hours</th>
-                                            <th>Rate</th>
-                                            <th>Amount</th>
+                                            <th>Component Description</th>
+                                            <th style="width:140px;">Quantity / Count</th>
+                                            <th>Rate / Specification</th>
+                                            <th class="text-end">Amount</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Regular Hours</td>
-                                            <td><input id="reg" type="number" step="0.5" value="76"
-                                                    class="form-control"></td>
-                                            <td>$15.00</td>
-                                            <td id="regAmt" class="fw-semibold">$1,140.00</td>
+                                            <td>
+                                                <div class="fw-semibold text-dark">Approved Service Hours</div>
+                                                <small class="text-muted">Clocked service timecards</small>
+                                            </td>
+                                            <td><input id="reg" type="number" step="0.5" value="160"
+                                                    class="form-control form-control-sm"></td>
+                                            <td>$18.00 / hr</td>
+                                            <td id="regAmt" class="fw-semibold text-end">$2,880.00</td>
                                         </tr>
                                         <tr>
-                                            <td>Overtime</td>
-                                            <td><input id="ot" type="number" step="0.5" value="2" class="form-control">
+                                            <td>
+                                                <div class="fw-semibold text-dark">Overtime Hours</div>
+                                                <small class="text-muted">1.5x Overtime rate</small>
                                             </td>
-                                            <td>$22.50</td>
-                                            <td id="otAmt" class="fw-semibold">$45.00</td>
+                                            <td><input id="ot" type="number" step="0.5" value="0" class="form-control form-control-sm">
+                                            </td>
+                                            <td>$27.00 / hr</td>
+                                            <td id="otAmt" class="fw-semibold text-end">$0.00</td>
                                         </tr>
                                         <tr>
-                                            <td>Advance</td>
-                                            <td class="text-muted">—</td>
-                                            <td class="text-muted">—</td>
-                                            <td><input id="adv" type="number" step="1" value="200" class="form-control">
+                                            <td>
+                                                <div class="fw-semibold text-dark">Monthly Qualified Bookings</div>
+                                                <small class="text-muted">Highest tier achieved (non-stacking)</small>
                                             </td>
+                                            <td><input id="bookings" type="number" step="1" value="14" class="form-control form-control-sm">
+                                            </td>
+                                            <td><span id="tierTagInput" class="badge bg-primary-subtle text-primary border border-primary-subtle">Tier 3 (12–14) = $600.00</span></td>
+                                            <td id="tierAmt" class="fw-semibold text-end">$600.00</td>
                                         </tr>
                                         <tr>
-                                            <td>Other Adjustment</td>
-                                            <td class="text-muted">—</td>
-                                            <td class="text-muted">—</td>
-                                            <td><input id="adj" type="number" step="1" value="0" class="form-control">
+                                            <td>
+                                                <div class="fw-semibold text-dark">Quarterly Excellence Bonus</div>
+                                                <small class="text-muted">≥10 bookings in 3 consecutive months</small>
                                             </td>
+                                            <td>
+                                                <select id="bonusSelect" class="form-select form-select-sm">
+                                                    <option value="1500" selected>Qualified (3/3 Months)</option>
+                                                    <option value="0">Not Qualified</option>
+                                                </select>
+                                            </td>
+                                            <td>$1,500.00 Flat Bonus</td>
+                                            <td id="bonusAmt" class="fw-semibold text-end">$1,500.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="fw-semibold text-dark">Advance Repayment</div>
+                                                <small class="text-muted">Payroll advance recovery</small>
+                                            </td>
+                                            <td><input id="adv" type="number" step="1" value="200" class="form-control form-control-sm">
+                                            </td>
+                                            <td class="text-muted">Deduction</td>
+                                            <td id="advAmt" class="text-end neg-amt">($200.00)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="fw-semibold text-dark">Other Adjustment</div>
+                                                <small class="text-muted">Special adjustments or credits</small>
+                                            </td>
+                                            <td><input id="adj" type="number" step="1" value="0" class="form-control form-control-sm">
+                                            </td>
+                                            <td class="text-muted">Adjustment</td>
+                                            <td id="adjAmt" class="text-end">$0.00</td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
+                                        <tr class="table-light">
+                                            <td colspan="3" class="fw-bold">Gross Total Earnings</td>
+                                            <td id="grossTotalReview" class="fw-bold text-end text-success">$4,980.00</td>
+                                        </tr>
                                         <tr>
-                                            <td colspan="3" class="fw-bold">Total Pay</td>
-                                            <td id="total" class="fw-bold" style="color:var(--green-600);">$985.00</td>
+                                            <td colspan="3" class="fw-bold fs-6">Net Take-Home Pay</td>
+                                            <td id="total" class="fw-bold text-end fs-6" style="color:var(--green-600);">$4,780.00</td>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -468,18 +520,18 @@
 
                             <div class="row mt-3 g-3">
                                 <div class="col-md-4">
-                                    <label class="form-label">Regular Hours</label>
-                                    <input class="form-control" id="regDisplay" value="76.00" disabled
-                                        style="background:var(--gray-50);">
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">Overtime</label>
-                                    <input class="form-control" id="otDisplay" value="2.00" disabled
-                                        style="background:var(--gray-50);">
-                                </div>
-                                <div class="col-md-4">
                                     <label class="form-label">Total Hours</label>
-                                    <input class="form-control" id="th" value="78.00" disabled
+                                    <input class="form-control" id="th" value="160.00" disabled
+                                        style="background:var(--gray-50);">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Qualified Booking Tier</label>
+                                    <input class="form-control" id="tierDisplay" value="Tier 3 ($600.00)" disabled
+                                        style="background:var(--gray-50);">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Quarterly Bonus Status</label>
+                                    <input class="form-control" id="bonusDisplay" value="Earned ($1,500.00)" disabled
                                         style="background:var(--gray-50);">
                                 </div>
                             </div>
@@ -487,13 +539,287 @@
                             <div class="mt-3">
                                 <label class="form-label">Notes for your Office Manager</label>
                                 <textarea class="form-control" rows="3" id="reviewNotes"
-                                    placeholder="e.g. I worked 11.5 hours on Tuesday but only 10.5 hours are showing."></textarea>
+                                    placeholder="e.g. Booking attribution for case #1042 was assigned on May 29th."></textarea>
                             </div>
 
                             <div class="text-end mt-4">
                                 <button class="btn btn-outline-navy me-2"
                                     onclick="showPane('statement', document.querySelectorAll('.toggle-tab-btn')[0])">Cancel</button>
                                 <button class="btn btn-green" onclick="saveReview()">Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= ASSIGNED PLAN & RULES ================= -->
+        <div class="payroll-pane" id="pane-assigned-plan">
+            <!-- Plan Header Card -->
+            <div class="panel p-4 mb-3 border-start border-4 border-primary">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="rounded-circle text-white d-flex align-items-center justify-content-center"
+                            style="width:44px;height:44px;background:var(--navy-900);font-size:18px;">
+                            <i class="fa-solid fa-award text-warning"></i>
+                        </div>
+                        <div>
+                            <div class="d-flex align-items-center gap-2 flex-wrap">
+                                <h5 class="fw-bold text-dark mb-0">Luxury Smile Agent (Hybrid Plan)</h5>
+                                <span
+                                    class="badge bg-primary-subtle text-primary border border-primary-subtle font-monospace">v2.1</span>
+                                <span class="badge bg-light text-dark border px-2 py-0.5" style="font-size:11px;">Hourly
+                                    + Monthly Tiers + Quarterly Bonus</span>
+                            </div>
+                            <div class="text-muted small mt-1">Assigned to: <strong
+                                    class="text-dark">Muhammad</strong> <span
+                                    class="badge bg-secondary-subtle text-secondary font-monospace"
+                                    style="font-size:10px;">@muhammad</span> · Role: <strong>SDR</strong> · Department:
+                                <span class="badge-dept"
+                                    style="background:#f1f5f9;padding:2px 8px;border-radius:4px;font-size:11px;">Sales / SDR</span>
+                                · Effective: <strong>Mar 1, 2026 – Present (Open)</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span
+                            class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5 fw-semibold"
+                            style="font-size:12px;">
+                            <i class="fa-solid fa-circle-check me-1"></i>Active Assignment
+                        </span>
+                        <a href="../compensation-rules.html?plan=luxury-smile-agent" class="btn btn-sm btn-outline-navy py-1.5 px-3" style="font-size:12px;">
+                            <i class="fa-solid fa-arrow-up-right-from-square me-1"></i>Master Plan Rules
+                        </a>
+                    </div>
+                </div>
+
+                <div class="p-2.5 rounded-2 bg-light border mb-3 text-muted small" style="font-size:12px;line-height:1.5;">
+                    <i class="fa-solid fa-circle-info text-primary me-1"></i><strong>Summary:</strong> New hybrid compensation model for Luxury Smile Agents. Combines base service hourly pay with monthly qualified booking incentive tiers (highest tier achieved only, non-stacking) and a $1,500 consecutive-quarter excellence bonus.
+                </div>
+
+                <div class="row g-2 pt-2 border-top">
+                    <div class="col-md-4">
+                        <div class="p-2.5 rounded bg-light border" style="font-size:12px;">
+                            <div class="text-muted fw-semibold"
+                                style="font-size:10.5px;text-transform:uppercase;letter-spacing:0.5px;">
+                                <i class="fa-regular fa-clock text-success me-1"></i>1. Base Hourly Pay
+                            </div>
+                            <div class="fw-bold text-dark mt-1" style="font-size:13.5px;">$18.00 / hr <span class="fw-normal text-muted" style="font-size:11px;">(1.5x Overtime @ $27.00/hr)</span></div>
+                            <div class="text-muted small mt-0.5">Bi-Weekly payroll run via punch timecards</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-2.5 rounded bg-light border" style="font-size:12px;">
+                            <div class="text-muted fw-semibold"
+                                style="font-size:10.5px;text-transform:uppercase;letter-spacing:0.5px;">
+                                <i class="fa-solid fa-layer-group text-primary me-1"></i>2. Monthly Booking Tiers
+                            </div>
+                            <div class="fw-bold text-dark mt-1" style="font-size:13.5px;">$150 – $2,550 / mo <span class="fw-normal text-muted" style="font-size:11px;">(Highest Tier Only)</span></div>
+                            <div class="text-muted small mt-0.5">Non-stacking incentive · 0 to 6 tiers</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-2.5 rounded bg-light border" style="font-size:12px;">
+                            <div class="text-muted fw-semibold"
+                                style="font-size:10.5px;text-transform:uppercase;letter-spacing:0.5px;">
+                                <i class="fa-solid fa-trophy text-warning me-1"></i>3. Quarterly Excellence Bonus
+                            </div>
+                            <div class="fw-bold text-dark mt-1" style="font-size:13.5px;">$1,500.00 Flat Bonus</div>
+                            <div class="text-muted small mt-0.5">≥10 qualified bookings in 3 consecutive months</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Plan Components -->
+            <div class="fw-bold text-dark mb-2" style="font-size:13px;text-transform:uppercase;letter-spacing:0.4px;">
+                <i class="fa-solid fa-layer-group text-primary me-1.5"></i>Attached Compensation Plan Components (3 Active)
+            </div>
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border bg-white h-100 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge bg-light text-dark border px-2 py-0.5 font-monospace" style="font-size:10px;">ID: lux-hourly</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle"
+                                style="font-size:10px;">Active Component</span>
+                        </div>
+                        <div class="fw-bold text-dark mb-1" style="font-size:13.5px;">Base Hourly Pay</div>
+                        <div class="fw-bold text-success mb-2" style="font-size:16px;">$18.00 / hour <small
+                                class="text-muted fw-normal" style="font-size:11px;">(1.5x OT)</small></div>
+                        <div class="pt-2 border-top text-muted small" style="font-size:11.5px;line-height:1.5;">
+                            <div><strong>Measure:</strong> Worked Hours in Timecard</div>
+                            <div><strong>Settlement:</strong> Bi-Weekly Payroll Run</div>
+                            <div class="mt-1"><strong>Qualification:</strong> Approved service hours clocked and confirmed in timecard.</div>
+                            <div class="mt-1"><strong>Reversal Policy:</strong> Hours adjustment logged on subsequent payroll run if audited.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border bg-white h-100 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge bg-light text-dark border px-2 py-0.5 font-monospace" style="font-size:10px;">ID: lux-tier</span>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle"
+                                style="font-size:10px;">Tiered Performance</span>
+                        </div>
+                        <div class="fw-bold text-dark mb-1" style="font-size:13.5px;">Monthly Qualified Booking Incentive</div>
+                        <div class="fw-bold text-success mb-2" style="font-size:16px;">Highest Tier Only <small
+                                class="text-muted fw-normal" style="font-size:11px;">($150 – $2,550)</small></div>
+                        <div class="pt-2 border-top text-muted small" style="font-size:11.5px;line-height:1.5;">
+                            <div><strong>Measure:</strong> Calendar Month (1st to Last Day)</div>
+                            <div><strong>Settlement:</strong> First Payroll Run After Month-End</div>
+                            <div class="mt-1"><strong>Qualification:</strong> Qualifying deposit collected and cleared, CRM ownership validated.</div>
+                            <div class="mt-1"><strong>Reversal Policy:</strong> Post-cutoff cancellation or refund generates compensating reversal ledger entry.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border bg-white h-100 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="badge bg-light text-dark border px-2 py-0.5 font-monospace" style="font-size:10px;">ID: lux-bonus</span>
+                            <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle"
+                                style="font-size:10px;">Bonus / Spiff</span>
+                        </div>
+                        <div class="fw-bold text-dark mb-1" style="font-size:13.5px;">Quarterly Excellence Bonus</div>
+                        <div class="fw-bold text-success mb-2" style="font-size:16px;">$1,500.00 <small
+                                class="text-muted fw-normal" style="font-size:11px;">Flat Milestone</small></div>
+                        <div class="pt-2 border-top text-muted small" style="font-size:11.5px;line-height:1.5;">
+                            <div><strong>Measure:</strong> 3 Consecutive Calendar Months</div>
+                            <div><strong>Settlement:</strong> Quarterly Payroll Settlement</div>
+                            <div class="mt-1"><strong>Qualification:</strong> Requires ≥10 qualified bookings in each of 3 consecutive calendar months while in good standing.</div>
+                            <div class="mt-1"><strong>Reversal Policy:</strong> Subsequent chargeback during quarter invalidates bonus qualification.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rate & Tier Payout Schedule -->
+            <div class="panel p-3 mb-4 border rounded-3 bg-white">
+                <div class="d-flex align-items-center justify-content-between mb-2 pb-2 border-bottom flex-wrap gap-2">
+                    <div class="fw-bold text-dark" style="font-size:13.5px;">
+                        <i class="fa-solid fa-table-list text-primary me-1.5"></i>Rate &amp; Tier Payout Schedule (Canonical Spec)
+                    </div>
+                    <span class="badge bg-warning-subtle text-warning-emphasis border border-warning px-2.5 py-1">
+                        <i class="fa-solid fa-bolt me-1"></i>Highest Tier Only — Non-Stacking
+                    </span>
+                </div>
+
+                <div class="alert alert-light border d-flex align-items-center gap-3 p-2.5 mb-3">
+                    <div class="avatar-sm bg-warning text-dark d-flex align-items-center justify-content-center rounded" style="width:36px;height:36px;font-size:15px;"><i class="fa-solid fa-crown"></i></div>
+                    <div style="font-size:12.5px;">
+                        <strong class="d-block text-dark">Quarterly Excellence Bonus ($1,500.00) — Consecutive Month Benchmark</strong>
+                        <span class="text-muted">Requires achieving at least 10 qualified bookings in each of 3 consecutive calendar months while satisfying standing/performance rules. (Month 1: 12 ✓, Month 2: 14 ✓, Month 3: 11 ✓ = <strong>$1,500 Earned</strong>).</span>
+                    </div>
+                </div>
+
+                <div class="table-responsive border rounded-2 mb-3">
+                    <table class="nexa-table mb-0" style="font-size:12.5px;">
+                        <thead>
+                            <tr>
+                                <th>Tier / Bracket</th>
+                                <th>Threshold / Volume</th>
+                                <th>Payout Rate</th>
+                                <th>Operational Notes</th>
+                                <th>Muhammad's Current Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fw-bold text-dark">Tier 0</td>
+                                <td class="fw-semibold text-primary">0 – 8 Bookings</td>
+                                <td class="text-muted fw-bold">Hourly Only ($0)</td>
+                                <td class="text-muted small">Base service hourly rate only</td>
+                                <td><span class="badge bg-light text-muted border">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold text-dark">Tier 1</td>
+                                <td class="fw-semibold text-primary">9 Bookings</td>
+                                <td class="text-success fw-bold">$150.00</td>
+                                <td class="text-muted small">Threshold reached (highest tier only)</td>
+                                <td><span class="badge bg-light text-muted border">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold text-dark">Tier 2</td>
+                                <td class="fw-semibold text-primary">10 – 11 Bookings</td>
+                                <td class="text-success fw-bold">$300.00</td>
+                                <td class="text-muted small">Consecutive quarterly tracker qualification starts</td>
+                                <td><span class="badge bg-light text-muted border">Completed</span></td>
+                            </tr>
+                            <tr class="table-success" style="background:#ecfdf5 !important;">
+                                <td class="fw-bold text-success"><i class="fa-solid fa-check-circle me-1 text-success"></i>Tier 3</td>
+                                <td class="fw-bold text-primary">12 – 14 Bookings</td>
+                                <td class="text-success fw-bold">$600.00</td>
+                                <td class="text-dark small">Standard closer pace</td>
+                                <td><span class="badge bg-success text-white fw-bold">Active Earned (14 Bookings · $600)</span></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold text-dark">Tier 4</td>
+                                <td class="fw-semibold text-primary">15 – 19 Bookings</td>
+                                <td class="text-success fw-bold">$1,050.00</td>
+                                <td class="text-muted small">High performer tier</td>
+                                <td><span class="text-muted small">Need 1 more booking</span></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold text-dark">Tier 5</td>
+                                <td class="fw-semibold text-primary">20 – 24 Bookings</td>
+                                <td class="text-success fw-bold">$1,800.00</td>
+                                <td class="text-muted small">Senior specialist pace</td>
+                                <td><span class="text-muted small">Need 6 more bookings</span></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold text-dark">Tier 6</td>
+                                <td class="fw-semibold text-primary">25+ Bookings</td>
+                                <td class="text-success fw-bold">$2,550.00</td>
+                                <td class="text-muted small">Top tier ceiling</td>
+                                <td><span class="text-muted small">Max Top Tier</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Operational KPIs -->
+                <div class="row g-3">
+                    <div class="col-md-7">
+                        <div class="p-3 border rounded-3 bg-light h-100">
+                            <div class="fw-bold text-dark small mb-2"><i class="fa-solid fa-gauge-high text-primary me-1.5"></i>Operational Performance KPIs vs. Compensation Rules</div>
+                            <div class="table-responsive bg-white rounded border">
+                                <table class="table table-sm mb-0" style="font-size:11.5px;">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Metric</th>
+                                            <th>Standard Rule</th>
+                                            <th>Classification</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="fw-bold">Ramp Standard</td>
+                                            <td>Minimum 1 qualified booking in first 5 completed shifts</td>
+                                            <td><span class="badge bg-success-subtle text-success">Compliant</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold">Early Pace Standard</td>
+                                            <td>Minimum pace of 2 qualified bookings per week beginning shift 6</td>
+                                            <td><span class="badge bg-success-subtle text-success">Compliant (3.2/wk)</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold">Sustained Pace Target</td>
+                                            <td>Target ≥3 qualified bookings per week starting in week 5</td>
+                                            <td><span class="badge bg-primary-subtle text-primary">Target Met (Exceeding)</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="p-3 border rounded-3 bg-light h-100">
+                            <div class="fw-bold text-dark small mb-2"><i class="fa-solid fa-shield-halved text-success me-1.5"></i>Strict Qualification &amp; Reversal Policy</div>
+                            <div class="small text-muted" style="font-size:11.5px;line-height:1.6;">
+                                <div><i class="fa-solid fa-check text-success me-1"></i>Qualifying deposit must be collected and cleared prior to cutoff.</div>
+                                <div><i class="fa-solid fa-check text-success me-1"></i>CRM lead stages and staff ownership validated in Master Record.</div>
+                                <div><i class="fa-solid fa-check text-success me-1"></i>Attribution recorded without open co-closer dispute.</div>
+                                <div><i class="fa-solid fa-ban text-danger me-1"></i>Excluded: duplicate entries, internal transfers, cancellations.</div>
+                                <div class="mt-1 pt-1 border-top"><i class="fa-solid fa-arrows-rotate text-danger me-1"></i><strong>Ledger Reversals:</strong> Any post-cutoff refund or chargeback automatically logs a compensating reversal on the subsequent run.</div>
                             </div>
                         </div>
                     </div>
@@ -511,24 +837,23 @@
                         Statement</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-muted" style="font-size:12.5px;">Let us know what looks incorrect on your May 1 – May
-                        15, 2026 statement. Your Office Manager will review and respond.</p>
+                    <p class="text-muted" style="font-size:12.5px;">Let us know what looks incorrect on your May 2026 statement. Your Office Manager will review and respond.</p>
                     <label class="form-label">Reason</label>
                     <div class="flag-modal-reason selected" onclick="selectReason(this)"><input type="radio"
                             name="flagReason" checked>Missing hours</div>
                     <div class="flag-modal-reason" onclick="selectReason(this)"><input type="radio"
-                            name="flagReason">Incorrect compensation</div>
+                            name="flagReason">Incorrect compensation / Tier</div>
                     <div class="flag-modal-reason" onclick="selectReason(this)"><input type="radio"
-                            name="flagReason">Missing case</div>
+                            name="flagReason">Missing qualified booking</div>
                     <div class="flag-modal-reason" onclick="selectReason(this)"><input type="radio"
-                            name="flagReason">Missing production</div>
+                            name="flagReason">Incorrect quarterly bonus</div>
                     <div class="flag-modal-reason" onclick="selectReason(this)"><input type="radio"
                             name="flagReason">Incorrect advance</div>
                     <div class="flag-modal-reason" onclick="selectReason(this)"><input type="radio"
                             name="flagReason">Other</div>
                     <label class="form-label mt-2">Notes</label>
                     <textarea class="form-control" rows="3"
-                        placeholder="e.g. I worked 11.5 hours on Tuesday but only 10.5 hours are showing.">I worked 11.5 hours on Tuesday but only 10.5 hours are showing.</textarea>
+                        placeholder="e.g. Booking attribution for case #1042 was assigned on May 29th.">Booking attribution for case #1042 was assigned on May 29th.</textarea>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-outline-navy" data-bs-dismiss="modal">Cancel</button>
@@ -556,7 +881,7 @@
             const element = document.getElementById('pane-statement');
             const opt = {
                 margin: 10,
-                filename: 'payroll-statement.pdf',
+                filename: 'muhammad-hybrid-statement.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2 },
                 jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
@@ -564,33 +889,58 @@
             html2pdf().set(opt).from(element).save();
         }
 
-        /* ---------- Live recalculation ---------- */
+        /* ---------- Live recalculation for SDR Luxury Smile Agent Hybrid Plan ---------- */
+        function getTierInfo(count) {
+            if (count < 9) return { tier: 'Tier 0', range: '0–8', amount: 0, label: 'Tier 0 (0–8 Bookings) = $0.00' };
+            if (count === 9) return { tier: 'Tier 1', range: '9', amount: 150, label: 'Tier 1 (9 Bookings) = $150.00' };
+            if (count <= 11) return { tier: 'Tier 2', range: '10–11', amount: 300, label: 'Tier 2 (10–11 Bookings) = $300.00' };
+            if (count <= 14) return { tier: 'Tier 3', range: '12–14', amount: 600, label: 'Tier 3 (12–14 Bookings) = $600.00' };
+            if (count <= 19) return { tier: 'Tier 4', range: '15–19', amount: 1050, label: 'Tier 4 (15–19 Bookings) = $1,050.00' };
+            if (count <= 24) return { tier: 'Tier 5', range: '20–24', amount: 1800, label: 'Tier 5 (20–24 Bookings) = $1,800.00' };
+            return { tier: 'Tier 6', range: '25+', amount: 2550, label: 'Tier 6 (25+ Bookings) = $2,550.00' };
+        }
+
         function calc() {
             const r = parseFloat(document.getElementById('reg').value) || 0;
             const o = parseFloat(document.getElementById('ot').value) || 0;
+            const b = parseInt(document.getElementById('bookings').value, 10) || 0;
+            const bonusVal = parseFloat(document.getElementById('bonusSelect').value) || 0;
             const a = parseFloat(document.getElementById('adv').value) || 0;
             const d = parseFloat(document.getElementById('adj').value) || 0;
 
-            const ra = r * 15;
-            const oa = o * 22.5;
-            const totalEarnings = ra + oa;
+            const ra = r * 18.00;
+            const oa = o * 27.00;
+            const tier = getTierInfo(b);
+            const tierAmt = tier.amount;
+            const totalGross = ra + oa + tierAmt + bonusVal;
             const totalDeductions = a + d;
-            const total = totalEarnings - totalDeductions;
+            const netTotal = totalGross - totalDeductions;
 
             document.getElementById('regAmt').innerText = '$' + ra.toLocaleString(undefined, { minimumFractionDigits: 2 });
             document.getElementById('otAmt').innerText = '$' + oa.toLocaleString(undefined, { minimumFractionDigits: 2 });
-            document.getElementById('total').innerText = '$' + total.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('tierAmt').innerText = '$' + tierAmt.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('tierTagInput').innerText = tier.label;
+            document.getElementById('bonusAmt').innerText = '$' + bonusVal.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('advAmt').innerText = '($' + a.toLocaleString(undefined, { minimumFractionDigits: 2 }) + ')';
+            document.getElementById('adjAmt').innerText = '$' + d.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('grossTotalReview').innerText = '$' + totalGross.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('total').innerText = '$' + netTotal.toLocaleString(undefined, { minimumFractionDigits: 2 });
 
-            document.getElementById('regDisplay').value = r.toFixed(2);
-            document.getElementById('otDisplay').value = o.toFixed(2);
             document.getElementById('th').value = (r + o).toFixed(2);
+            document.getElementById('tierDisplay').value = tier.tier + ' ($' + tierAmt.toFixed(2) + ')';
+            document.getElementById('bonusDisplay').value = bonusVal > 0 ? 'Earned ($1,500.00)' : 'Not Qualified ($0.00)';
 
-            document.getElementById('grossKpi').innerText = '$' + totalEarnings.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            // Update top KPIs
+            document.getElementById('grossKpi').innerText = '$' + totalGross.toLocaleString(undefined, { minimumFractionDigits: 2 });
             document.getElementById('hoursKpi').innerText = (r + o).toFixed(2);
-            document.getElementById('otKpi').innerText = o.toFixed(2);
-            document.getElementById('adjKpi').innerText = '$' + totalDeductions.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('tierKpi').innerText = tier.tier + ' ($' + tierAmt.toLocaleString() + ')';
+            document.getElementById('bonusKpi').innerText = '$' + bonusVal.toLocaleString(undefined, { minimumFractionDigits: 2 });
         }
-        ['reg', 'ot', 'adv', 'adj'].forEach(id => document.getElementById(id).addEventListener('input', calc));
+        ['reg', 'ot', 'bookings', 'adv', 'adj'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('input', calc);
+        });
+        document.getElementById('bonusSelect')?.addEventListener('change', calc);
         calc();
 
         function confirmPayroll() {
@@ -601,17 +951,37 @@
         }
 
         function saveReview() {
-            // push edited numbers into the read-only statement view
-            document.getElementById('stubRegHrs').innerText = document.getElementById('regDisplay').value;
-            document.getElementById('stubOtHrs').innerText = document.getElementById('otDisplay').value;
-            document.getElementById('stubTotalEarnings').innerText = document.getElementById('grossKpi').innerText;
+            // Push values into statement stub
+            const r = parseFloat(document.getElementById('reg').value) || 0;
+            const o = parseFloat(document.getElementById('ot').value) || 0;
+            const b = parseInt(document.getElementById('bookings').value, 10) || 0;
+            const bonusVal = parseFloat(document.getElementById('bonusSelect').value) || 0;
             const adv = parseFloat(document.getElementById('adv').value) || 0;
             const adj = parseFloat(document.getElementById('adj').value) || 0;
+
+            const ra = r * 18.00;
+            const oa = o * 27.00;
+            const tier = getTierInfo(b);
+            const totalGross = ra + oa + tier.amount + bonusVal;
+            const totalDeductions = adv + adj;
+            const netTotal = totalGross - totalDeductions;
+
+            document.getElementById('stubRegHrs').innerText = r.toFixed(2) + ' hrs';
+            document.getElementById('stubRegAmt').innerText = '$' + ra.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('stubOtHrs').innerText = o.toFixed(2) + ' hrs';
+            document.getElementById('stubOtAmt').innerText = '$' + oa.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('stubBookingsCount').innerText = b + ' Bookings';
+            document.getElementById('stubTierTag').innerText = tier.tier;
+            document.getElementById('stubTierAmt').innerText = '$' + tier.amount.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('stubBonusAmt').innerText = '$' + bonusVal.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('stubTotalEarnings').innerText = '$' + totalGross.toLocaleString(undefined, { minimumFractionDigits: 2 });
+
             document.getElementById('stubAdvance').innerText = '($' + adv.toLocaleString(undefined, { minimumFractionDigits: 2 }) + ')';
             document.getElementById('stubOtherAdj').innerText = '$' + adj.toLocaleString(undefined, { minimumFractionDigits: 2 });
-            document.getElementById('stubTotalDeductions').innerText = '($' + (adv + adj).toLocaleString(undefined, { minimumFractionDigits: 2 }) + ')';
-            document.getElementById('stubTotalPay').innerText = document.getElementById('total').innerText;
-            document.getElementById('stubAmount').innerText = document.getElementById('total').innerText;
+            document.getElementById('stubTotalDeductions').innerText = '($' + totalDeductions.toLocaleString(undefined, { minimumFractionDigits: 2 }) + ')';
+
+            document.getElementById('stubTotalPay').innerText = '$' + netTotal.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            document.getElementById('stubAmount').innerText = '$' + netTotal.toLocaleString(undefined, { minimumFractionDigits: 2 });
 
             alert('Changes saved and submitted for review.');
             showPane('statement', document.querySelectorAll('.toggle-tab-btn')[0]);
@@ -633,7 +1003,7 @@
             $('input[name="date"]').daterangepicker({
                 timePicker: false,
                 startDate: moment('2026-05-01'),
-                endDate: moment('2026-05-15'),
+                endDate: moment('2026-05-31'),
                 locale: { format: 'MM/DD/YYYY' }
             });
         });
@@ -644,11 +1014,11 @@
         window.addEventListener('resize', () => { if (window.innerWidth > 900) document.body.classList.remove('sidebar-open'); });
 
         /* ==========================================================
-           KPI CARD DETAIL — SDR My Statements
+           KPI CARD DETAIL — SDR Luxury Smile Agent Hybrid Plan
            ========================================================== */
         function openSdrStmtKpiDetail(idx) {
-            const titles = ['Gross Pay', 'Total Hours', 'Overtime', 'Deductions'];
-            const icons = ['fa-wallet', 'fa-clock', 'fa-chart-line', 'fa-circle-minus'];
+            const titles = ['Gross Period Pay', 'Approved Service Hours', 'Qualified Booking Tier', 'Quarterly Excellence Bonus'];
+            const icons = ['fa-wallet', 'fa-clock', 'fa-layer-group', 'fa-award'];
             const body = document.getElementById('sdrStmtDetailModalBody');
             const modalTitle = document.querySelector('#sdrStmtDetailModal .modal-title');
             const modalSubtitle = document.querySelector('#sdrStmtDetailModal .modal-subtitle');
@@ -659,44 +1029,50 @@
             const views = [
                 // 0 — Gross Pay
                 `<div class="panel" style="border:none;box-shadow:none;">
-                    <h5 class="fw-bold mb-3">Gross Pay — $1,185.00</h5>
+                    <h5 class="fw-bold mb-3">Gross Period Pay — $4,980.00</h5>
                     <div class="detail-breakdown-box">
-                        <div class="detail-breakdown-row"><span>⏱ Regular Hours</span><strong>76.00</strong></div>
-                        <div class="detail-breakdown-row"><span>💰 Rate</span><strong>$15.00/hr</strong></div>
-                        <div class="detail-breakdown-row"><span>⚡ Overtime (2.00 hrs × $22.50)</span><strong>$45.00</strong></div>
-                        <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Gross Pay</span><strong>$1,185.00</strong></div>
+                        <div class="detail-breakdown-row"><span>⏱ Base Service Hours (160h × $18.00/h)</span><strong>$2,880.00</strong></div>
+                        <div class="detail-breakdown-row"><span>⚡ Overtime (0.00h × $27.00/h)</span><strong>$0.00</strong></div>
+                        <div class="detail-breakdown-row"><span>🎯 Monthly Booking Tier 3 (14 Bookings)</span><strong>$600.00</strong></div>
+                        <div class="detail-breakdown-row"><span>🏆 Quarterly Excellence Bonus (3/3 Months)</span><strong>$1,500.00</strong></div>
+                        <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Total Gross Earnings</span><strong class="text-success">$4,980.00</strong></div>
                     </div>
-                    <div class="text-muted small mt-2">Regular $1,140.00 + Overtime $45.00</div>
+                    <div class="text-muted small mt-2">Combined multi-component hybrid payout for May 2026. Less $200 advance repayment = $4,780.00 net.</div>
                 </div>`,
-                // 1 — Total Hours
+                // 1 — Approved Hours
                 `<div class="panel" style="border:none;box-shadow:none;">
-                    <h5 class="fw-bold mb-3">Total Hours — 78.00</h5>
+                    <h5 class="fw-bold mb-3">Approved Service Hours — 160.00 hrs</h5>
                     <div class="detail-breakdown-box">
-                        <div class="detail-breakdown-row"><span>📅 Regular Hours</span><strong>76.00</strong></div>
-                        <div class="detail-breakdown-row"><span>⚡ Overtime Hours</span><strong>2.00</strong></div>
-                        <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Total Hours</span><strong>78.00</strong></div>
+                        <div class="detail-breakdown-row"><span>📅 Regular Clocked Hours</span><strong>160.00 hrs</strong></div>
+                        <div class="detail-breakdown-row"><span>💰 Base Hourly Rate</span><strong>$18.00 / hr</strong></div>
+                        <div class="detail-breakdown-row"><span>⚡ Overtime Clocked</span><strong>0.00 hrs</strong></div>
+                        <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Total Hourly Base Pay</span><strong class="text-success">$2,880.00</strong></div>
                     </div>
-                    <div class="text-muted small mt-2">9.75 days avg. over the pay period</div>
+                    <div class="text-muted small mt-2">Clocked via NexaTrack timecards. 20 working days @ 8.0 hrs/day.</div>
                 </div>`,
-                // 2 — Overtime
+                // 2 — Monthly Booking Tier
                 `<div class="panel" style="border:none;box-shadow:none;">
-                    <h5 class="fw-bold mb-3">Overtime — 2.00</h5>
+                    <h5 class="fw-bold mb-3">Qualified Booking Tier — Tier 3 ($600.00)</h5>
                     <div class="detail-breakdown-box">
-                        <div class="detail-breakdown-row"><span>⚡ Overtime Hours</span><strong>2.00</strong></div>
-                        <div class="detail-breakdown-row"><span>💰 Overtime Rate</span><strong>$22.50/hr</strong></div>
-                        <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Overtime Pay</span><strong>$45.00</strong></div>
+                        <div class="detail-breakdown-row"><span>🎯 Qualified Bookings Closed</span><strong>14 Bookings</strong></div>
+                        <div class="detail-breakdown-row"><span>📊 Tier 3 Bracket</span><strong>12 – 14 Bookings</strong></div>
+                        <div class="detail-breakdown-row"><span>💰 Payout Method</span><strong>Highest Tier Only (Non-Stacking)</strong></div>
+                        <div class="detail-breakdown-row"><span>🚀 Next Tier Goal</span><strong>Tier 4 (15 Bookings · $1,050) — Need 1 more</strong></div>
+                        <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Tier Payout Earned</span><strong class="text-success">$600.00</strong></div>
                     </div>
-                    <div class="text-muted small mt-2">Overtime rate is 1.5× base rate ($15.00)</div>
+                    <div class="text-muted small mt-2">Highest tier achieved only, non-stacking. Verified against Master Case Records.</div>
                 </div>`,
-                // 3 — Deductions
+                // 3 — Quarterly Excellence Bonus
                 `<div class="panel" style="border:none;box-shadow:none;">
-                    <h5 class="fw-bold mb-3">Deductions — $200.00</h5>
+                    <h5 class="fw-bold mb-3">Quarterly Excellence Bonus — $1,500.00</h5>
                     <div class="detail-breakdown-box">
-                        <div class="detail-breakdown-row"><span>📉 Advance Deduction</span><strong>$200.00</strong></div>
-                        <div class="detail-breakdown-row"><span>📉 Other Adjustments</span><strong>$0.00</strong></div>
-                        <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Total Deductions</span><strong>$200.00</strong></div>
+                        <div class="detail-breakdown-row"><span>📅 Month 1 (March 2026)</span><strong>12 Qualified Bookings (≥10) ✓</strong></div>
+                        <div class="detail-breakdown-row"><span>📅 Month 2 (April 2026)</span><strong>14 Qualified Bookings (≥10) ✓</strong></div>
+                        <div class="detail-breakdown-row"><span>📅 Month 3 (May 2026)</span><strong>11 Qualified Bookings (≥10) ✓</strong></div>
+                        <div class="detail-breakdown-row"><span>⭐ Benchmark Status</span><strong>3 of 3 Consecutive Months (100%)</strong></div>
+                        <div class="detail-breakdown-row" style="border-top:2px solid #eef2f6;font-weight:700;"><span>Quarterly Bonus Amount</span><strong class="text-success">$1,500.00</strong></div>
                     </div>
-                    <div class="text-muted small mt-2">Advance repayment of $200.00 this period</div>
+                    <div class="text-muted small mt-2">Requires ≥10 qualified bookings in each of 3 consecutive calendar months in good standing.</div>
                 </div>`
             ];
             body.innerHTML = views[idx] || views[0];

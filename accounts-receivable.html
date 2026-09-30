@@ -52,7 +52,8 @@
       <a class="nav-link-item" href="compensation-rules.html"><i class="fa-solid fa-sliders"></i> Compensation Rules</a>
       <a class="nav-link-item" href="production.html"><i class="fa-solid fa-chart-column"></i> Production</a>
       <a class="nav-link-item" href="cases.html"><i class="fa-solid fa-briefcase-medical"></i> Cases</a>
-      <a class="nav-link-item active" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i> Accounts Receivable</a>
+      <a class="nav-link-item active" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i>
+        Accounts Receivable</a>
       <a class="nav-link-item" href="advances.html"><i class="fa-solid fa-hand-holding-dollar"></i> Advances</a>
       <a class="nav-link-item" href="statements.html"><i class="fa-solid fa-file-invoice"></i> Statements</a>
       <a class="nav-link-item" href="payroll-runs.html"><i class="fa-solid fa-money-check-dollar"></i> Payroll Runs</a>
@@ -84,13 +85,16 @@
       <div class="nav-section">
         <a class="nav-link-item" href="dashboard.html"><i class="fa-solid fa-grip"></i> Dashboard</a>
         <a class="nav-link-item" href="team-members.html"><i class="fa-solid fa-users"></i> Team Members</a>
-        <a class="nav-link-item" href="compensation-rules.html"><i class="fa-solid fa-sliders"></i> Compensation Rules</a>
+        <a class="nav-link-item" href="compensation-rules.html"><i class="fa-solid fa-sliders"></i> Compensation
+          Rules</a>
         <a class="nav-link-item" href="production.html"><i class="fa-solid fa-chart-column"></i> Production</a>
         <a class="nav-link-item" href="cases.html"><i class="fa-solid fa-briefcase-medical"></i> Cases</a>
-        <a class="nav-link-item active" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i> Accounts Receivable</a>
+        <a class="nav-link-item active" href="accounts-receivable.html"><i class="fa-solid fa-file-invoice-dollar"></i>
+          Accounts Receivable</a>
         <a class="nav-link-item" href="advances.html"><i class="fa-solid fa-hand-holding-dollar"></i> Advances</a>
         <a class="nav-link-item" href="statements.html"><i class="fa-solid fa-file-invoice"></i> Statements</a>
-        <a class="nav-link-item" href="payroll-runs.html"><i class="fa-solid fa-money-check-dollar"></i> Payroll Runs</a>
+        <a class="nav-link-item" href="payroll-runs.html"><i class="fa-solid fa-money-check-dollar"></i> Payroll
+          Runs</a>
         <a class="nav-link-item" href="reports.html"><i class="fa-solid fa-chart-line"></i> Reports</a>
         <a class="nav-link-item" href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
         <a class="nav-link-item" href="index.html"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
@@ -113,7 +117,8 @@
     <div class="topbar">
       <div>
         <h1 class="page-title">Accounts Receivable (AR)</h1>
-        <div class="page-sub">Track patient balances, record ledger collections, and manage outstanding treatment receivables.</div>
+        <div class="page-sub">Track patient balances, record ledger collections, and manage outstanding treatment
+          receivables.</div>
       </div>
       <label for="sidebarToggle" class="btn btn-outline-navy mobile-menu-btn">
         <i class="fa-solid fa-bars"></i>
@@ -122,16 +127,21 @@
         <div class="d-flex align-items-center bg-white px-3 py-1 border rounded-3" style="height:38px;">
           <i class="fa-regular fa-calendar me-2 text-muted" style="font-size:13px;"></i>
           <div class="me-3">
-            <span style="font-size:9px;color:var(--gray-400);display:block;line-height:1;margin-bottom:1px;">Due Window</span>
+            <span style="font-size:9px;color:var(--gray-400);display:block;line-height:1;margin-bottom:1px;">Due
+              Window</span>
             <span style="font-size:12px;font-weight:600;color:var(--gray-900);">
-              <input type="text" id="arDateRange" name="date" style="border:none;background:transparent;width:170px;outline:none;">
+              <input type="text" id="arDateRange" name="date"
+                style="border:none;background:transparent;width:170px;outline:none;">
             </span>
           </div>
           <i class="fa-solid fa-chevron-down text-muted" style="font-size:10px;"></i>
         </div>
-        <button class="btn btn-outline-navy" onclick="exportArPdf()"><i class="fa-regular fa-file-pdf me-1"></i>Export PDF</button>
-        <button class="btn btn-outline-navy" onclick="exportArCsv()"><i class="fa-solid fa-download me-1"></i>Export CSV</button>
-        <button class="btn btn-green" data-bs-toggle="modal" data-bs-target="#newArModal"><i class="fa-solid fa-plus me-1"></i>New Receivable</button>
+        <button class="btn btn-outline-navy" onclick="exportArPdf()"><i class="fa-regular fa-file-pdf me-1"></i>Export
+          PDF</button>
+        <button class="btn btn-outline-navy" onclick="exportArCsv()"><i class="fa-solid fa-download me-1"></i>Export
+          CSV</button>
+        <button class="btn btn-green" data-bs-toggle="modal" data-bs-target="#newArModal"><i
+            class="fa-solid fa-plus me-1"></i>New Receivable</button>
       </div>
     </div>
 
@@ -271,12 +281,15 @@
       <div class="d-flex gap-2 flex-wrap align-items-center w-100">
         <!-- Search input -->
         <div class="input-group" style="width:280px;">
-          <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
-          <input type="text" class="form-control border-start-0 ps-0" id="arSearchInput" placeholder="Search patient, case, phone..." oninput="handleArSearch()">
+          <span class="input-group-text bg-white border-end-0"><i
+              class="fa-solid fa-magnifying-glass text-muted"></i></span>
+          <input type="text" class="form-control border-start-0 ps-0" id="arSearchInput"
+            placeholder="Search patient, case, phone..." oninput="handleArSearch()">
         </div>
 
         <!-- Status Filter -->
-        <select class="form-select form-select-sm-custom" id="arStatusFilter" style="width:170px;" onchange="applyFilters()">
+        <select class="form-select form-select-sm-custom" id="arStatusFilter" style="width:170px;"
+          onchange="applyFilters()">
           <option value="ALL">All Statuses</option>
           <option value="Open">Open</option>
           <option value="Partial">Partial</option>
@@ -289,7 +302,8 @@
         </select>
 
         <!-- Reason Filter -->
-        <select class="form-select form-select-sm-custom" id="arReasonFilter" style="width:210px;" onchange="applyFilters()">
+        <select class="form-select form-select-sm-custom" id="arReasonFilter" style="width:210px;"
+          onchange="applyFilters()">
           <option value="ALL">All AR Reasons</option>
           <option value="Post-Booking Additional">Additional Treatment Add-on</option>
           <option value="Insurance">Insurance Co-pay / Denial</option>
@@ -300,7 +314,8 @@
         </select>
 
         <!-- Location Filter -->
-        <select class="form-select form-select-sm-custom" id="arLocationFilter" style="width:180px;" onchange="applyFilters()">
+        <select class="form-select form-select-sm-custom" id="arLocationFilter" style="width:180px;"
+          onchange="applyFilters()">
           <option value="ALL">All Locations</option>
           <option value="Beverly Hills Main">Beverly Hills Main</option>
           <option value="Downtown Clinic">Downtown Clinic</option>
@@ -344,11 +359,13 @@
       </div>
 
       <!-- Table Footer / Pagination -->
-      <div class="d-flex justify-content-between align-items-center p-3 border-top" style="font-size:12.5px;color:var(--gray-500);">
+      <div class="d-flex justify-content-between align-items-center p-3 border-top"
+        style="font-size:12.5px;color:var(--gray-500);">
         <div class="d-flex align-items-center gap-2">
           <span id="arPaginationInfo">Showing 1 to 14 of 14 patient balances</span>
           <span class="text-muted">•</span>
-          <span class="audit-ribbon py-1 px-2"><i class="fa-solid fa-shield-halved me-1 text-success"></i>Ledger balance verified — all transactions auditable</span>
+          <span class="audit-ribbon py-1 px-2"><i class="fa-solid fa-shield-halved me-1 text-success"></i>Ledger balance
+            verified — all transactions auditable</span>
         </div>
         <nav>
           <ul class="pagination pagination-sm mb-0">
@@ -373,7 +390,8 @@
         </div>
         <div class="small text-muted" id="drawerPatientSub">ID: PT-0000 • Case: CASE-0000</div>
       </div>
-      <button type="button" class="btn btn-sm btn-light rounded-circle" onclick="closeArDrawer()" style="width:32px;height:32px;">
+      <button type="button" class="btn btn-sm btn-light rounded-circle" onclick="closeArDrawer()"
+        style="width:32px;height:32px;">
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
@@ -407,7 +425,8 @@
           <div class="col-6"><span class="text-muted">Provider:</span> <strong id="drawerProvider">—</strong></div>
           <div class="col-6"><span class="text-muted">Treatment:</span> <strong id="drawerTreatment">—</strong></div>
           <div class="col-6"><span class="text-muted">Location:</span> <strong id="drawerLocation">—</strong></div>
-          <div class="col-6"><span class="text-muted">Due Date:</span> <strong id="drawerDueDate" class="text-danger">—</strong></div>
+          <div class="col-6"><span class="text-muted">Due Date:</span> <strong id="drawerDueDate"
+              class="text-danger">—</strong></div>
           <div class="col-6"><span class="text-muted">Contact:</span> <strong id="drawerPhone">—</strong></div>
         </div>
         <div class="mt-3 pt-2 border-top">
@@ -425,8 +444,10 @@
       <div class="panel p-3 mb-3">
         <div class="d-flex justify-content-between align-items-center mb-2">
           <div>
-            <div class="section-label m-0"><i class="fa-solid fa-book-journal-whills me-1"></i>Immutable Ledger Transactions</div>
-            <div class="small text-muted" style="font-size:11px;">Every collection event &amp; adjustment logged in ledger sequence</div>
+            <div class="section-label m-0"><i class="fa-solid fa-book-journal-whills me-1"></i>Immutable Ledger
+              Transactions</div>
+            <div class="small text-muted" style="font-size:11px;">Every collection event &amp; adjustment logged in
+              ledger sequence</div>
           </div>
           <button class="btn btn-sm btn-green" onclick="openRecordPaymentFromDrawer()">
             <i class="fa-solid fa-plus me-1"></i>Add Payment
@@ -470,7 +491,8 @@
   </div>
 
   <!-- MODAL: Record Payment (Ledger Transaction) -->
-  <div class="modal fade" id="recordPaymentModal" tabindex="-1" aria-labelledby="recordPaymentModalLabel" aria-hidden="true">
+  <div class="modal fade" id="recordPaymentModal" tabindex="-1" aria-labelledby="recordPaymentModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -478,7 +500,8 @@
             <h5 class="modal-title fw-bold" id="recordPaymentModalLabel">
               <i class="fa-solid fa-hand-holding-dollar text-success me-2"></i>Record AR Collection Payment
             </h5>
-            <div class="modal-subtitle small text-muted">Posts a permanent ledger transaction reducing outstanding patient balance.</div>
+            <div class="modal-subtitle small text-muted">Posts a permanent ledger transaction reducing outstanding
+              patient balance.</div>
           </div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -504,10 +527,12 @@
           <form id="recordPaymentForm" onsubmit="event.preventDefault(); submitPaymentLedger();">
             <!-- Payment Amount input -->
             <div class="mb-3">
-              <label for="payAmount" class="form-label fw-bold small">Payment Amount ($) <span class="text-danger">*</span></label>
+              <label for="payAmount" class="form-label fw-bold small">Payment Amount ($) <span
+                  class="text-danger">*</span></label>
               <div class="input-group">
                 <span class="input-group-text">$</span>
-                <input type="number" class="form-control form-control-lg fw-bold text-success" id="payAmount" min="0.01" step="0.01" placeholder="0.00" required oninput="calcRemainingPreview()">
+                <input type="number" class="form-control form-control-lg fw-bold text-success" id="payAmount" min="0.01"
+                  step="0.01" placeholder="0.00" required oninput="calcRemainingPreview()">
               </div>
               <!-- Quick shortcut pills -->
               <div class="quick-amt-pills">
@@ -515,7 +540,8 @@
                 <span class="quick-amt-pill" onclick="setQuickAmount(250)">+$250</span>
                 <span class="quick-amt-pill" onclick="setQuickAmount(500)">+$500</span>
                 <span class="quick-amt-pill" onclick="setQuickAmount(1000)">+$1,000</span>
-                <span class="quick-amt-pill bg-success text-white border-0" onclick="setPayFullBalance()">Pay Full Balance</span>
+                <span class="quick-amt-pill bg-success text-white border-0" onclick="setPayFullBalance()">Pay Full
+                  Balance</span>
               </div>
               <div class="mt-2 small text-muted d-flex justify-content-between">
                 <span>New Remaining Balance:</span>
@@ -526,7 +552,8 @@
             <!-- Payment Method -->
             <div class="row g-2 mb-3">
               <div class="col-6">
-                <label for="payMethod" class="form-label fw-bold small">Payment Method <span class="text-danger">*</span></label>
+                <label for="payMethod" class="form-label fw-bold small">Payment Method <span
+                    class="text-danger">*</span></label>
                 <select class="form-select" id="payMethod" required>
                   <option value="Credit Card">Credit Card</option>
                   <option value="Debit Card">Debit Card</option>
@@ -557,7 +584,8 @@
             <!-- Notes -->
             <div class="mb-3">
               <label for="payMemo" class="form-label fw-bold small">Ledger Memo / Receipt Notes</label>
-              <textarea class="form-control" id="payMemo" rows="2" placeholder="e.g. Card payment taken over phone for Veneer treatment add-on..."></textarea>
+              <textarea class="form-control" id="payMemo" rows="2"
+                placeholder="e.g. Card payment taken over phone for Veneer treatment add-on..."></textarea>
             </div>
           </form>
         </div>
@@ -580,7 +608,8 @@
             <h5 class="modal-title fw-bold" id="newArModalLabel">
               <i class="fa-solid fa-folder-plus text-primary me-2"></i>Create New Accounts Receivable Record
             </h5>
-            <div class="modal-subtitle small text-muted">Add patient balance created after booking, additional treatment, or insurance gap.</div>
+            <div class="modal-subtitle small text-muted">Add patient balance created after booking, additional
+              treatment, or insurance gap.</div>
           </div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -588,7 +617,8 @@
           <form id="newArForm" onsubmit="event.preventDefault(); submitNewArRecord();">
             <div class="row g-3 mb-3">
               <div class="col-md-6">
-                <label for="newArPatient" class="form-label fw-bold small">Patient Full Name <span class="text-danger">*</span></label>
+                <label for="newArPatient" class="form-label fw-bold small">Patient Full Name <span
+                    class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="newArPatient" placeholder="e.g. Eleanor Vance" required>
               </div>
               <div class="col-md-3">
@@ -607,8 +637,10 @@
                 <input type="text" class="form-control" id="newArCaseId" placeholder="CASE-20260401-001" required>
               </div>
               <div class="col-md-4">
-                <label for="newArTreatment" class="form-label fw-bold small">Treatment / Case Type <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="newArTreatment" placeholder="e.g. Ceramic Veneers 6-Unit" required>
+                <label for="newArTreatment" class="form-label fw-bold small">Treatment / Case Type <span
+                    class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="newArTreatment" placeholder="e.g. Ceramic Veneers 6-Unit"
+                  required>
               </div>
               <div class="col-md-4">
                 <label for="newArProvider" class="form-label fw-bold small">Treating Provider</label>
@@ -622,7 +654,8 @@
 
             <div class="row g-3 mb-3">
               <div class="col-md-4">
-                <label for="newArLocation" class="form-label fw-bold small">Clinic Location <span class="text-danger">*</span></label>
+                <label for="newArLocation" class="form-label fw-bold small">Clinic Location <span
+                    class="text-danger">*</span></label>
                 <select class="form-select" id="newArLocation" required>
                   <option value="Beverly Hills Main">Beverly Hills Main</option>
                   <option value="Downtown Clinic">Downtown Clinic</option>
@@ -631,10 +664,12 @@
                 </select>
               </div>
               <div class="col-md-4">
-                <label for="newArOriginalAmt" class="form-label fw-bold small">Original / Treatment Amount ($) <span class="text-danger">*</span></label>
+                <label for="newArOriginalAmt" class="form-label fw-bold small">Original / Treatment Amount ($) <span
+                    class="text-danger">*</span></label>
                 <div class="input-group">
                   <span class="input-group-text">$</span>
-                  <input type="number" class="form-control" id="newArOriginalAmt" min="1" step="0.01" placeholder="5000.00" required>
+                  <input type="number" class="form-control" id="newArOriginalAmt" min="1" step="0.01"
+                    placeholder="5000.00" required>
                 </div>
               </div>
               <div class="col-md-4">
@@ -648,19 +683,23 @@
 
             <div class="row g-3 mb-3">
               <div class="col-md-6">
-                <label for="newArReason" class="form-label fw-bold small">Reason for AR Balance <span class="text-danger">*</span></label>
+                <label for="newArReason" class="form-label fw-bold small">Reason for AR Balance <span
+                    class="text-danger">*</span></label>
                 <select class="form-select" id="newArReason" required>
                   <option value="Post-Booking Additional 2 Veneers Added">Additional Treatment Add-on</option>
-                  <option value="Insurance Co-pay / Deductible Remaining">Insurance Co-pay / Deductible Remaining</option>
+                  <option value="Insurance Co-pay / Deductible Remaining">Insurance Co-pay / Deductible Remaining
+                  </option>
                   <option value="Staged Treatment Phase 2 Balance">Staged Treatment Balance</option>
-                  <option value="Pre-Op Booking Balance Due at Delivery">Pre-Op Booking Deposit / Delivery Balance</option>
+                  <option value="Pre-Op Booking Balance Due at Delivery">Pre-Op Booking Deposit / Delivery Balance
+                  </option>
                   <option value="Scheduled Payment Plan Installment">Payment Plan Installment</option>
                   <option value="Material & Lab Upgrade Requested">Material / Lab Upgrade Requested</option>
                   <option value="Emergency Restorative Add-on">Emergency Restorative Add-on</option>
                 </select>
               </div>
               <div class="col-md-3">
-                <label for="newArDueDate" class="form-label fw-bold small">Expected / Due Date <span class="text-danger">*</span></label>
+                <label for="newArDueDate" class="form-label fw-bold small">Expected / Due Date <span
+                    class="text-danger">*</span></label>
                 <input type="date" class="form-control" id="newArDueDate" required>
               </div>
               <div class="col-md-3">
@@ -676,7 +715,8 @@
 
             <div class="mb-3">
               <label for="newArNotes" class="form-label fw-bold small">Receivable Notes &amp; Terms</label>
-              <textarea class="form-control" id="newArNotes" rows="2" placeholder="e.g. Patient agreed to pay remaining 50% on seat date..."></textarea>
+              <textarea class="form-control" id="newArNotes" rows="2"
+                placeholder="e.g. Patient agreed to pay remaining 50% on seat date..."></textarea>
             </div>
           </form>
         </div>
@@ -702,14 +742,16 @@
         </div>
         <div class="modal-body">
           <p class="small text-muted">
-            Writing off a receivable permanently zeroes out the remaining balance and logs an adjustment transaction in the ledger for auditing purposes.
+            Writing off a receivable permanently zeroes out the remaining balance and logs an adjustment transaction in
+            the ledger for auditing purposes.
           </p>
           <div class="p-3 bg-light rounded mb-3">
             <div>Patient: <strong id="writeOffPatientName">—</strong></div>
             <div>Outstanding Amount: <strong class="text-danger" id="writeOffAmountVal">$0.00</strong></div>
           </div>
           <div class="mb-3">
-            <label for="writeOffReasonSelect" class="form-label fw-bold small">Reason for Write-off <span class="text-danger">*</span></label>
+            <label for="writeOffReasonSelect" class="form-label fw-bold small">Reason for Write-off <span
+                class="text-danger">*</span></label>
             <select class="form-select" id="writeOffReasonSelect" required>
               <option value="Patient Hardship / Compassionate Waiver">Patient Hardship / Compassionate Waiver</option>
               <option value="Clinical Courtesy Adjustment">Clinical Courtesy Adjustment</option>
@@ -724,7 +766,8 @@
           </div>
           <div class="mb-3">
             <label for="writeOffNotes" class="form-label fw-bold small">Audit Memo</label>
-            <textarea class="form-control" id="writeOffNotes" rows="2" placeholder="Document management authorization..."></textarea>
+            <textarea class="form-control" id="writeOffNotes" rows="2"
+              placeholder="Document management authorization..."></textarea>
           </div>
         </div>
         <div class="modal-footer">
@@ -743,7 +786,8 @@
       <div class="modal-content">
         <div class="modal-header">
           <div>
-            <h5 class="modal-title fw-bold" id="arKpiModalTitle"><i class="fa-solid fa-chart-pie me-2 text-primary"></i>KPI Detail</h5>
+            <h5 class="modal-title fw-bold" id="arKpiModalTitle"><i
+                class="fa-solid fa-chart-pie me-2 text-primary"></i>KPI Detail</h5>
             <div class="modal-subtitle small text-muted" id="arKpiModalSubtitle">Detailed breakdown of AR metric.</div>
           </div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -757,7 +801,8 @@
   </div>
 
   <!-- Confetti Canvas -->
-  <canvas id="confetti-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></canvas>
+  <canvas id="confetti-canvas"
+    style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></canvas>
 
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
@@ -1237,11 +1282,11 @@
         // Search text matching
         if (search) {
           const match = r.patient.toLowerCase().includes(search) ||
-                        r.patientId.toLowerCase().includes(search) ||
-                        r.caseId.toLowerCase().includes(search) ||
-                        r.phone.toLowerCase().includes(search) ||
-                        r.caseType.toLowerCase().includes(search) ||
-                        r.doctor.toLowerCase().includes(search);
+            r.patientId.toLowerCase().includes(search) ||
+            r.caseId.toLowerCase().includes(search) ||
+            r.phone.toLowerCase().includes(search) ||
+            r.caseType.toLowerCase().includes(search) ||
+            r.doctor.toLowerCase().includes(search);
           if (!match) return false;
         }
 
